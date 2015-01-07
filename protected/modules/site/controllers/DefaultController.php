@@ -1,10 +1,11 @@
 <?php
 
-class DefaultController extends Controller
-{
-	public function actionIndex()
-	{
-                $this->layout='//layouts/home';
-		$this->render('index');
-	}
+class DefaultController extends Controller {
+
+    public function actionIndex() {
+        Yii::app()->theme = 'site';
+        $this->layout = 'home';
+        $this->render('index');
+    }
+
 }
