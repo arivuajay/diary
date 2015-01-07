@@ -1,0 +1,18 @@
+2015/01/06 11:43:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index.php".' in D:\wamp\www\diary\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\diary\framework\web\CController.php(270): CController->missingAction('index.php')
+#1 D:\wamp\www\diary\framework\web\CWebApplication.php(282): CController->run('index.php')
+#2 D:\wamp\www\diary\framework\web\CWebApplication.php(141): CWebApplication->runController('site/index.php')
+#3 D:\wamp\www\diary\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\diary\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/diary/index.php/site/index.php
+---
+2015/01/06 11:43:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "admin/index".' in D:\wamp\www\diary\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\wamp\www\diary\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/index')
+#1 D:\wamp\www\diary\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\wamp\www\diary\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/diary/index.php/admin/index
+---
