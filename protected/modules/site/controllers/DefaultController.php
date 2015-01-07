@@ -4,6 +4,7 @@ class DefaultController extends Controller
 {
 	public function actionIndex()
 	{
+                $this->layout='//layouts/home';
 		$this->render('index');
 	}
 }
