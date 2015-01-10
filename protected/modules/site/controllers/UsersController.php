@@ -88,6 +88,7 @@ class UsersController extends Controller
 		{ //print_r($_POST['Users']);  exit;
 			$model->attributes=$_POST['Users'];
                         $model->user_activation_key = Myclass::getRandomString();
+                        $model->user_password = Myclass::encrypt($_POST['Users']['user_password']);
                  
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->user_id));

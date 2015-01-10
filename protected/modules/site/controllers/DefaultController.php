@@ -12,19 +12,24 @@ class DefaultController extends Controller {
     }
     public function actionLogin() {
         //echo 'test';
-       // $this->layout = 'login';
+         $this->layout = '//layouts/frontend';
         $model = new LoginForm('login');
       //  $forget = new LoginForm('forgotpassword');
         
         // collect user input data
         if (isset($_POST['sign_in'])) {
-            print_r($_POST['sign_in']);
-              print_r($_POST['LoginForm']);//exit;
+           // print_r($_POST['sign_in']);
+             // print_r($_POST['LoginForm']);//exit;
+            
             $model->attributes = $_POST['LoginForm'];
-
+           
+            
             if ($model->validate() && $model->login()):
-                echo 'test';//exit;
-               //$this->redirect(array('/entry/create'));
+              
+            // Yii::app()->user->logout();  echo "logout()";
+
+               // echo 'test';exit;
+               $this->redirect(array('/site/entry/create'));
             endif;
         }
            $this->render('login', array('model' => $model));

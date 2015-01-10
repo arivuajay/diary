@@ -126,14 +126,14 @@ class Users extends CActiveRecord
 		return parent::model($className);
 	}
         
-         public function beforeSave(){
-        
-        if($_POST['Users']['user_password'])
-        {
-            $this->user_password = Myclass::encrypt($_POST['Users']['user_password']);
-        }
-       
-       
-        return parent::beforeSave();
-    }
+//         public function beforeSave(){
+//        
+//        if($_POST['Users']['user_password'])
+//        {
+//            $this->user_password = Myclass::encrypt($_POST['Users']['user_password']);
+//        }
+//       
+//       
+//        return parent::beforeSave();
+//    }
 }

@@ -28528,3 +28528,239 @@ Stack trace:
 REQUEST_URI=/online_diary/branches/dev/index.php/assets/img/map-marker.png
 HTTP_REFERER=http://localhost/online_diary/branches/dev/index.php/
 ---
+2015/01/10 11:37:11 [error] [php] Undefined index: Users (D:\wamp\www\online_diary\branches\dev\protected\models\Users.php:131)
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\protected\components\UserIdentity.php(48): Users->save()
+#1 D:\wamp\www\online_diary\branches\dev\protected\models\LoginForm.php(52): UserIdentity->authenticate()
+#2 D:\wamp\www\online_diary\branches\dev\framework\validators\CInlineValidator.php(42): LoginForm->authenticate()
+#3 D:\wamp\www\online_diary\branches\dev\framework\validators\CValidator.php(201): CInlineValidator->validateAttribute()
+#4 D:\wamp\www\online_diary\branches\dev\framework\base\CModel.php(159): CInlineValidator->validate()
+#5 D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php(26): LoginForm->validate()
+#6 D:\wamp\www\online_diary\branches\dev\framework\web\actions\CInlineAction.php(49): DefaultController->actionLogin()
+#7 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(286): DefaultController->runAction()
+#9 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(265): DefaultController->runActionWithFilters()
+#10 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(282): DefaultController->run()
+#11 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#13 D:\wamp\www\online_diary\branches\dev\index.php(13): CWebApplication->run()
+REQUEST_URI=/online_diary/branches/dev/index.php/site/default/login
+in D:\wamp\www\online_diary\branches\dev\protected\models\Users.php (131)
+in D:\wamp\www\online_diary\branches\dev\protected\components\UserIdentity.php (48)
+in D:\wamp\www\online_diary\branches\dev\protected\models\LoginForm.php (52)
+2015/01/10 11:38:33 [error] [php] Undefined index: Users (D:\wamp\www\online_diary\branches\dev\protected\models\Users.php:131)
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\protected\components\UserIdentity.php(48): Users->save()
+#1 D:\wamp\www\online_diary\branches\dev\protected\models\LoginForm.php(52): UserIdentity->authenticate()
+#2 D:\wamp\www\online_diary\branches\dev\framework\validators\CInlineValidator.php(42): LoginForm->authenticate()
+#3 D:\wamp\www\online_diary\branches\dev\framework\validators\CValidator.php(201): CInlineValidator->validateAttribute()
+#4 D:\wamp\www\online_diary\branches\dev\framework\base\CModel.php(159): CInlineValidator->validate()
+#5 D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php(26): LoginForm->validate()
+#6 D:\wamp\www\online_diary\branches\dev\framework\web\actions\CInlineAction.php(49): DefaultController->actionLogin()
+#7 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(286): DefaultController->runAction()
+#9 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(265): DefaultController->runActionWithFilters()
+#10 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(282): DefaultController->run()
+#11 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#13 D:\wamp\www\online_diary\branches\dev\index.php(13): CWebApplication->run()
+REQUEST_URI=/online_diary/branches/dev/index.php/site/default/login
+in D:\wamp\www\online_diary\branches\dev\protected\models\Users.php (131)
+in D:\wamp\www\online_diary\branches\dev\protected\components\UserIdentity.php (48)
+in D:\wamp\www\online_diary\branches\dev\protected\models\LoginForm.php (52)
+2015/01/10 11:51:30 [error] [php] Object of class CWebUser could not be converted to string (D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php:25)
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(286): DefaultController->runAction()
+#1 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(265): DefaultController->runActionWithFilters()
+#2 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(282): DefaultController->run()
+#3 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#5 D:\wamp\www\online_diary\branches\dev\index.php(13): CWebApplication->run()
+REQUEST_URI=/online_diary/branches/dev/index.php/site/default/login
+in D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php (25)
+in D:\wamp\www\online_diary\branches\dev\index.php (13)
+2015/01/10 11:51:58 [error] [php] Object of class CWebUser could not be converted to string (D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php:25)
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(286): DefaultController->runAction()
+#1 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(265): DefaultController->runActionWithFilters()
+#2 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(282): DefaultController->run()
+#3 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#5 D:\wamp\www\online_diary\branches\dev\index.php(13): CWebApplication->run()
+REQUEST_URI=/online_diary/branches/dev/index.php/site/default/login
+in D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php (25)
+in D:\wamp\www\online_diary\branches\dev\index.php (13)
+2015/01/10 11:53:05 [error] [php] Object of class CWebUser could not be converted to string (D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php:26)
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(286): DefaultController->runAction()
+#1 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(265): DefaultController->runActionWithFilters()
+#2 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(282): DefaultController->run()
+#3 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#5 D:\wamp\www\online_diary\branches\dev\index.php(13): CWebApplication->run()
+REQUEST_URI=/online_diary/branches/dev/index.php/site/default/login
+in D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php (26)
+in D:\wamp\www\online_diary\branches\dev\index.php (13)
+2015/01/10 11:55:35 [error] [php] Undefined index: Users (D:\wamp\www\online_diary\branches\dev\protected\models\Users.php:131)
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\protected\components\UserIdentity.php(48): Users->save()
+#1 D:\wamp\www\online_diary\branches\dev\protected\models\LoginForm.php(52): UserIdentity->authenticate()
+#2 D:\wamp\www\online_diary\branches\dev\framework\validators\CInlineValidator.php(42): LoginForm->authenticate()
+#3 D:\wamp\www\online_diary\branches\dev\framework\validators\CValidator.php(201): CInlineValidator->validateAttribute()
+#4 D:\wamp\www\online_diary\branches\dev\framework\base\CModel.php(159): CInlineValidator->validate()
+#5 D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php(27): LoginForm->validate()
+#6 D:\wamp\www\online_diary\branches\dev\framework\web\actions\CInlineAction.php(49): DefaultController->actionLogin()
+#7 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(286): DefaultController->runAction()
+#9 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(265): DefaultController->runActionWithFilters()
+#10 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(282): DefaultController->run()
+#11 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#13 D:\wamp\www\online_diary\branches\dev\index.php(13): CWebApplication->run()
+REQUEST_URI=/online_diary/branches/dev/index.php/site/default/login
+in D:\wamp\www\online_diary\branches\dev\protected\models\Users.php (131)
+in D:\wamp\www\online_diary\branches\dev\protected\components\UserIdentity.php (48)
+in D:\wamp\www\online_diary\branches\dev\protected\models\LoginForm.php (52)
+2015/01/10 11:57:21 [error] [php] Undefined index: Users (D:\wamp\www\online_diary\branches\dev\protected\models\Users.php:131)
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\protected\components\UserIdentity.php(48): Users->save()
+#1 D:\wamp\www\online_diary\branches\dev\protected\models\LoginForm.php(52): UserIdentity->authenticate()
+#2 D:\wamp\www\online_diary\branches\dev\framework\validators\CInlineValidator.php(42): LoginForm->authenticate()
+#3 D:\wamp\www\online_diary\branches\dev\framework\validators\CValidator.php(201): CInlineValidator->validateAttribute()
+#4 D:\wamp\www\online_diary\branches\dev\framework\base\CModel.php(159): CInlineValidator->validate()
+#5 D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php(27): LoginForm->validate()
+#6 D:\wamp\www\online_diary\branches\dev\framework\web\actions\CInlineAction.php(49): DefaultController->actionLogin()
+#7 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(286): DefaultController->runAction()
+#9 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(265): DefaultController->runActionWithFilters()
+#10 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(282): DefaultController->run()
+#11 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#13 D:\wamp\www\online_diary\branches\dev\index.php(13): CWebApplication->run()
+REQUEST_URI=/online_diary/branches/dev/index.php/site/default/login
+in D:\wamp\www\online_diary\branches\dev\protected\models\Users.php (131)
+in D:\wamp\www\online_diary\branches\dev\protected\components\UserIdentity.php (48)
+in D:\wamp\www\online_diary\branches\dev\protected\models\LoginForm.php (52)
+2015/01/10 12:09:47 [error] [php] Undefined variable: user (D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php:28)
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(286): DefaultController->runAction()
+#1 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(265): DefaultController->runActionWithFilters()
+#2 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(282): DefaultController->run()
+#3 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#5 D:\wamp\www\online_diary\branches\dev\index.php(13): CWebApplication->run()
+REQUEST_URI=/online_diary/branches/dev/index.php/site/default/login
+in D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php (28)
+in D:\wamp\www\online_diary\branches\dev\index.php (13)
+2015/01/10 12:09:57 [error] [php] Undefined variable: user (D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php:28)
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(286): DefaultController->runAction()
+#1 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(265): DefaultController->runActionWithFilters()
+#2 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(282): DefaultController->run()
+#3 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#5 D:\wamp\www\online_diary\branches\dev\index.php(13): CWebApplication->run()
+REQUEST_URI=/online_diary/branches/dev/index.php/site/default/login
+in D:\wamp\www\online_diary\branches\dev\protected\modules\site\controllers\DefaultController.php (28)
+in D:\wamp\www\online_diary\branches\dev\index.php (13)
+2015/01/10 12:11:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "entry/create".' in D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController('entry/create')
+#1 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\wamp\www\online_diary\branches\dev\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/online_diary/branches/dev/index.php/entry/create
+HTTP_REFERER=http://localhost/online_diary/branches/dev/index.php/site/default/login
+---
+2015/01/10 12:13:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "entry/create".' in D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController('entry/create')
+#1 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\wamp\www\online_diary\branches\dev\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/online_diary/branches/dev/index.php/entry/create
+---
+2015/01/10 12:14:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "entry/create".' in D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController('entry/create')
+#1 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\wamp\www\online_diary\branches\dev\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/online_diary/branches/dev/index.php/entry/create
+HTTP_REFERER=http://localhost/online_diary/branches/dev/index.php/site/default/login
+---
+2015/01/10 12:14:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "site/login".' in D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#1 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\wamp\www\online_diary\branches\dev\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/online_diary/branches/dev/index.php/site/login
+---
+2015/01/10 12:15:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "site/login".' in D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#1 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\wamp\www\online_diary\branches\dev\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/online_diary/branches/dev/index.php/site/login
+---
+2015/01/10 12:15:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "entry/create".' in D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController('entry/create')
+#1 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\wamp\www\online_diary\branches\dev\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/online_diary/branches/dev/index.php/entry/create
+HTTP_REFERER=http://localhost/online_diary/branches/dev/index.php/site/default/login
+---
+2015/01/10 12:15:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "site/login".' in D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#1 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\wamp\www\online_diary\branches\dev\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/online_diary/branches/dev/index.php/site/login
+---
+2015/01/10 12:42:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "site/logout".' in D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController('site/logout')
+#1 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\wamp\www\online_diary\branches\dev\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/online_diary/branches/dev/index.php/site/logout
+HTTP_REFERER=http://localhost/online_diary/branches/dev/index.php/site/default/login
+---
+2015/01/10 12:48:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in D:\wamp\www\online_diary\branches\dev\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(270): CController->missingAction('img')
+#1 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(282): CController->run('img')
+#2 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController('site/default/im...')
+#3 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\online_diary\branches\dev\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/online_diary/branches/dev/index.php/site/default/img/avatars/login.png
+HTTP_REFERER=http://localhost/online_diary/branches/dev/index.php/site/default/login
+---
+2015/01/10 12:48:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in D:\wamp\www\online_diary\branches\dev\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(270): CController->missingAction('img')
+#1 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(282): CController->run('img')
+#2 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController('site/default/im...')
+#3 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\online_diary\branches\dev\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/online_diary/branches/dev/index.php/site/default/img/avatars/login.png
+HTTP_REFERER=http://localhost/online_diary/branches/dev/index.php/site/default/login
+---
+2015/01/10 12:48:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "img".' in D:\wamp\www\online_diary\branches\dev\framework\web\CController.php:483
+Stack trace:
+#0 D:\wamp\www\online_diary\branches\dev\framework\web\CController.php(270): CController->missingAction('img')
+#1 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(282): CController->run('img')
+#2 D:\wamp\www\online_diary\branches\dev\framework\web\CWebApplication.php(141): CWebApplication->runController('site/default/im...')
+#3 D:\wamp\www\online_diary\branches\dev\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 D:\wamp\www\online_diary\branches\dev\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/online_diary/branches/dev/index.php/site/default/img/stock/splash/6.jpg
+HTTP_REFERER=http://localhost/online_diary/branches/dev/index.php/site/default/login
+---
