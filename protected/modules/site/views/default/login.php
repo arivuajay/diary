@@ -52,7 +52,7 @@ if (isset(Yii::app()->request->cookies['altimus_app_username']->value)) {
           </div>
           </div>
           <div class="panel-footer"> <span class="text-muted fs12 lh30"><?php echo $form->checkBox($model, 'rememberMe', array('id' => 'check')); ?><?php echo ' Remember Me'; ?> </span>
-              <?php echo CHtml::button('Login', array("class" => "btn btn-sm bg-purple2 pull-right fa fa-home", "type" => "submit", 'name' => 'sign_in')); ?>
+              <?php echo CHtml::button('Login', array("class" => "btn btn-sm bg-purple2 pull-right", "type" => "submit", 'name' => 'sign_in')); ?>
               <a class="btn btn-sm bg-purple2 pull-right" href="#"><i class="fa fa-home"></i> Login</a>
             <div class="clearfix"></div>
           </div>

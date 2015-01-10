@@ -26,6 +26,18 @@ class Myclass extends CController {
         }
         return $final_rand;
     }
-
+    
+    public static function getMood($key = NULL){
+        $blood_groups = array(
+            '1' => 'smile',
+            '2' => 'sad',
+            '3' => 'cheeky',
+            
+        );
+        if(isset($key) && $key != NULL)
+            return $mood[$key];
+        
+        return $mood;
+    }
    
 }
