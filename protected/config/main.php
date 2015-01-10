@@ -50,23 +50,12 @@ return array(
             'SMTPSecure' => 'tls',
         ),
         //
-        'user' => array(
-            // enable cookie-based authentication
-            // 'loginUrl'=>array('users/login'),
-             'allowAutoLogin' => true,
-        ),
+        'user' => array('allowAutoLogin' => true),
         // uncomment the following to enable URLs in path-format
-        'urlManager' => array(
+         'urlManager' => array(
             'urlFormat' => 'path',
-            'caseSensitive' => false,
-            'rules' => array(
-                'gii'=>'gii',
-                'gii/<controller:\w+>'=>'gii/<controller>',
-                'gii/<controller:\w+>/<action:\w+>'=>'gii/<controller>/<action>',
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-            ),
+            'showScriptName' => false,
+            'rules' => require(dirname(__FILE__) . '/urlManager.php'),
         ),
         // database settings are configured in database.php
         'db' => require(dirname(__FILE__) . '/database.php'),

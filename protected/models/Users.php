@@ -38,9 +38,10 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_name, user_email, user_password,confirm_password', 'required'),
+			array('user_name, user_email, user_password,confirm_password', 'required','on'=>'register'),
+			array('user_name, user_email, user_password', 'required','on'=>'social_register'),
 			array('user_email, user_password, user_activation_key, user_login_ip', 'length', 'max'=>250),
-			array('user_password', 'compare', 'compareAttribute'=>'confirm_password'),
+			array('user_password', 'compare', 'compareAttribute'=>'confirm_password','on'=>'register'),
                         array('user_email','email'),
                         array('user_status', 'length', 'max'=>1),
 			array('user_last_login, created, modified', 'safe'),
