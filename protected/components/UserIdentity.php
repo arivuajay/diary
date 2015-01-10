@@ -22,14 +22,13 @@ class UserIdentity extends CUserIdentity
 	public function authenticate()
 	{
 	 $user = Users::model()->find('user_email = :U', array(':U' => $this->username));
-         print_r($user);//exit;
+        
 
         if ($user === null):
             $this->errorCode = self::ERROR_USERNAME_INVALID;
+
         elseif ($user->user_status == 0):
             $this->errorCode = self::ERROR_ACCOUNT_BLOCKED;
-        elseif ($user->user_status == 2):
-            $this->errorCode = self::ERROR_ACCOUNT_DELETED;
         else:
             $is_correct_password = ($user->user_password !== Myclass::encrypt($this->password)) ? false : true;
 
