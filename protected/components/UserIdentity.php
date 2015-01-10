@@ -7,6 +7,10 @@
  */
 class UserIdentity extends CUserIdentity
 {
+      const ERROR_ACCOUNT_BLOCKED = 3;
+    const ERROR_ACCOUNT_DELETED = 4;
+
+    private $_id;
 	/**
 	 * Authenticates a user.
 	 * The example implementation makes sure if the username and password
@@ -17,17 +21,39 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-		$users=array(
-			// username => password
-			'demo'=>'demo',
-			'admin'=>'admin',
-		);
-		if(!isset($users[$this->username]))
-			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		elseif($users[$this->username]!==$this->password)
-			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-		else
-			$this->errorCode=self::ERROR_NONE;
-		return !$this->errorCode;
-	}
+	 $user = Users::model()->find('user_email = :U', array(':U' => $this->username));
+         print_r($user);//exit;
+
+        if ($user === null):
+            $this->errorCode = self::ERROR_USERNAME_INVALID;
+        elseif ($user->user_status == 0):
+            $this->errorCode = self::ERROR_ACCOUNT_BLOCKED;
+        elseif ($user->user_status == 2):
+            $this->errorCode = self::ERROR_ACCOUNT_DELETED;
+        else:
+            $is_correct_password = ($user->user_password !== Myclass::encrypt($this->password)) ? false : true;
+
+            if ($is_correct_password):
+                $this->errorCode = self::ERROR_NONE;
+            else:
+                $this->errorCode = self::ERROR_USERNAME_INVALID;   // Error Code : 1
+            endif;
+        endif;
+
+        if ($this->errorCode == self::ERROR_NONE):
+            $this->_id = $user->user_id;
+            $this->setState('user_email', $user->user_email);
+            //$this->setState('tenant', $tenant);
+            $user->user_last_login = date('Y-m-d H:i:s');
+            $user->user_login_ip = Yii::app()->request->userHostAddress;
+            $user->save(false);
+        endif;
+        
+        return !$this->errorCode;
+    }
+    
+      public function getId() {
+        return $this->_id;
+    }
+
 }

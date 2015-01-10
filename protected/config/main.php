@@ -38,9 +38,22 @@ return array(
             ),
         ),
         //
+        //local mail components
+        'Smtpmail'=>array(
+            'class'=>'application.extensions.smtpmail.PHPMailer',
+            'Host'=>"smtp.gmail.com",
+            'Username'=>'.com',
+            'Password'=>'',
+            'Mailer'=>'smtp',
+            'Port'=>465,
+            'SMTPAuth'=>true,
+            'SMTPSecure' => 'tls',
+        ),
+        //
         'user' => array(
             // enable cookie-based authentication
-            'allowAutoLogin' => true,
+            // 'loginUrl'=>array('users/login'),
+             'allowAutoLogin' => true,
         ),
         // uncomment the following to enable URLs in path-format
         'urlManager' => array(

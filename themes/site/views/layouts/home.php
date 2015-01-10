@@ -177,16 +177,23 @@
 
                             <div class="container">
 
-                                <form id="hcontact_form" class="hcont_form pad_top13" action="#" method="post">
+                                <!--<form id="hcontact_form" class="hcont_form pad_top13" action="" method="post">-->
+                                    <?php $form=$this->beginWidget('CActiveForm', array(
+    'id'=>'hcontact_form',
+    'enableAjaxValidation'=>false,
+    'action' => array( '/site/entry/create' ), // change depending on your project
+)); ?>
 
                                     <div class="clearfix hcont_form pad_top20"> 
                                         <input type="text" name="email"  class="validate['required','email']  textbox1"
                                                placeholder="* Email : " onFocus="this.placeholder = ''" onBlur="this.placeholder = '* Email :'" /><br>
                                         <input type="text" name="phone" class="validate['required','phone']  textbox1"
                                                placeholder="* Select Your Mood : " onFocus="this.placeholder = ''" onBlur="this.placeholder = '* Select Your Mood :'" /><br>
-                                        <input id="hcontactsubmitBtn1" value="Write an Entry" name="Confirm" type="submit" class="submitBtn">
+                                        <input id="hcontactsubmitBtn1" value="Write an Entry" type="submit" class="submitBtn">
                                     </div>
-                                </form>
+                                    
+                                <?php $this->endWidget(); ?>
+                                <!--</form>-->
 
                             </div>
 
