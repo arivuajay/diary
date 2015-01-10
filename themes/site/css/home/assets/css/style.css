@@ -1461,6 +1461,18 @@ z-index:0;
 	color:#727272;
 	padding-left:10px;
 }
+.hcont_form input[type="email"]{
+	width:100%;
+	height:40px;
+	line-height:40px;
+	border:transparent;
+	background-color:#ffffff;
+	margin-bottom:10px;
+	border-radius:3px;
+	font-size:13px;
+	color:#727272;
+	padding-left:10px;
+}
 .hcont_form input[name="dt"]{
 	width:50%;
 	margin-bottom:0px;
@@ -1518,7 +1530,18 @@ z-index:0;
 	border: transparent;
 	border-radius:3px;
 }
-#hcontact_form input[type="text"], #contact_form textarea {
+#hcontact_form select{
+	width:50%;
+	height: 30px;
+	line-height: 45px;
+	padding-left: 10px;
+	font-size:14px;
+	color:#000;
+	background-color:rgba(245,247,218,245.1);
+	border: transparent;
+	border-radius:3px;
+}
+#hcontact_form input[type="text"],#hcontact_form input[type="email"], #contact_form textarea ,#hcontact_form select {
 	font-family: 'Raleway', sans-serif;
 }
 #hcontact_form textarea  {
