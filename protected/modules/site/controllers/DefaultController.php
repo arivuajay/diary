@@ -5,10 +5,14 @@ class DefaultController extends Controller {
     public function actionIndex() {
         Yii::app()->theme = 'site';
         $this->layout = 'home';
-      //  $moodModel = new MoodType;
-        
-        //print_r($_POST);
-        $this->render('index');
+        $moodModel = new MoodType;
+       //$mood =  Myclass::getMood();
+       
+       // print_r($mood);exit;
+       $this->render('index', array(
+           
+            'moodModel' => $moodModel,
+        ));
         
     }
     public function actionLogin() {

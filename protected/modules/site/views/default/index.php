@@ -91,9 +91,9 @@ You may customize this page by editing <tt><?php echo __FILE__; ?></tt>
                                     <div class="clearfix hcont_form pad_top20"> 
                                         <input type="email" name="email"  class="validate['required','email']  textbox1"
                                                placeholder="* Email : " onFocus="this.placeholder = ''" onBlur="this.placeholder = '* Email :'" required/><br>
-                                        <input type="text" name="phone" class="validate['required','phone']  textbox1"
-                                               placeholder="* Select Your Mood : " onFocus="this.placeholder = ''" onBlur="this.placeholder = '* Select Your Mood :'" /><br>
-                                        <?php //echo $form->dropDownList('mood', CHtml::MoodType(Cities::model()->isActive()->findAll(), 'id', 'city'), array('class' => 'form-control')); ?>
+<!--                                        <input type="text" name="phone" class="validate['required','phone']  textbox1"
+                                               placeholder="* Select Your Mood : " onFocus="this.placeholder = ''" onBlur="this.placeholder = '* Select Your Mood :'" /><br>-->
+                                        <?php  echo $form->dropDownList($moodModel, 'mood_type', Myclass::getMood(), array('type'=>'text','empty'=>'--Select Your Mood--','class' => 'form-control ')); ?><br>
                                         <input id="hcontactsubmitBtn1" value="Write an Entry" type="submit" class="submitBtn">
                                     </div>
                                     

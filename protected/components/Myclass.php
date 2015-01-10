@@ -28,12 +28,8 @@ class Myclass extends CController {
     }
     
     public static function getMood($key = NULL){
-        $blood_groups = array(
-            '1' => 'smile',
-            '2' => 'sad',
-            '3' => 'cheeky',
-            
-        );
+       $mood =  CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_type');
+        
         if(isset($key) && $key != NULL)
             return $mood[$key];
         
