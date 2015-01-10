@@ -2461,7 +2461,7 @@ You may customize this page by editing <tt><?php echo __FILE__; ?></tt>
                 =============================-->
                 <div id="specialmenu" class="toHideTheBubbles hidden-phone">
                     <div class="spcontainer">
-                        <div id="spmenu1"> 	<button class="spmenu spmenu2" onClick="modalshow('#upcomingevent')"  data-toggle="modal" data-target="#lightbox" >
+                        <div id="spmenu1"> 	<button class="spmenu spmenu2" onClick="javascript:location.href='<?php echo $baseUrl;?>/site/users/login'"  data-toggle="modal" data-target="#lllllightbox" >
                                 <span><i class="fa fa-calendar"></i></span>
                                 <span class="sptext">Register / login</span>
                             </button></div>

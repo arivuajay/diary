@@ -67,7 +67,7 @@ class EntryController extends Controller
                 $userModel = Users::model()->findByAttributes(array('user_email' => $_POST['email']));
                Yii::app()->user->setState("temp_user_mail",$_POST['email']);
                Yii::app()->user->setState("temp_user_mood",$_POST['MoodType']['mood_type']);
-               
+              // print_r($_POST);exit;
                 if(empty($userModel))
                     {
                     echo 'auto register process';
@@ -75,7 +75,7 @@ class EntryController extends Controller
                     else
                         {
                        // echo 'login entry page';
-                        $this->redirect(array('default/login'));
+                        $this->redirect(array('users/login'));
                         }
                         
                 }
