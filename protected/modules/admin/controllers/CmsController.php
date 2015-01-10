@@ -47,13 +47,13 @@ class CmsController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreatepage() {
-        $model = new CmsContent;
+        $model = new Cms;
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['CmsContent'])) {
-            $model->attributes = $_POST['CmsContent'];
+        if (isset($_POST['Cms'])) {
+            $model->attributes = $_POST['Cms'];
             if ($model->validate()) {
                 $model->save(false);
                 Yii::app()->user->setFlash('success', 'Page created successfully.');
@@ -75,8 +75,8 @@ class CmsController extends Controller {
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['CmsContent'])) {
-            $model->attributes = $_POST['CmsContent'];
+        if (isset($_POST['Cms'])) {
+            $model->attributes = $_POST['Cms'];
             if ($model->validate()) {
                 $model->save(false);
                 Yii::app()->user->setFlash('success', 'Page updated successfully.');
@@ -104,7 +104,7 @@ class CmsController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $pages = CmsContent::model()->findAll();
+        $pages = Cms::model()->findAll();
         $this->render('index', compact('pages'));
     }
 
@@ -112,11 +112,11 @@ class CmsController extends Controller {
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer $id the ID of the model to be loaded
-     * @return CmsContent the loaded model
+     * @return Cms the loaded model
      * @throws CHttpException
      */
     public function loadModel($id) {
-        $model = CmsContent::model()->findByPk($id);
+        $model = Cms::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;

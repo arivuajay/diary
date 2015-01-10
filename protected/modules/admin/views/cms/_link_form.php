@@ -52,7 +52,7 @@
                         <div class="controls">
                             <?php
                             echo $form->textField($model, 'url', array('class' => 'span6', 'id' => 'UrlBox'));
-                            $cmsPages = CHtml::listData(CmsContent::model()->findAll(), 'id', 'heading');
+                            $cmsPages = CHtml::listData(Cms::model()->findAll(), 'id', 'heading');
                             echo $form->dropDownList($model, 'url', $cmsPages, array('class' => 'span6', 'id' => 'UrlList'));
                             ?>
                         </div>
