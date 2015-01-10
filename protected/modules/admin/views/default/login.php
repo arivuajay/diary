@@ -7,7 +7,6 @@ if (!empty($flashMessages)):
     }
     echo '</div>';
 endif;
-echo Myclass::encrypt('admin');
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'loginform',
     'enableAjaxValidation' => false,
