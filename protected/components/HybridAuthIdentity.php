@@ -29,7 +29,7 @@ class HybridAuthIdentity extends CUserIdentity {
         require_once $path . '/hybridauth-' . self::VERSION . '/hybridauth/Hybrid/Auth.php';  //path to the Auth php file within HybridAuth folder
 
         $this->config = array(
-            "base_url" => Yii::app()->createAbsoluteUrl("/site/default/sociallogin"),
+            "base_url" => Yii::app()->createAbsoluteUrl("/site/users/sociallogin"),
             "providers" => array(
                 "Google" => array(
                     "enabled" => true,
@@ -111,11 +111,14 @@ class HybridAuthIdentity extends CUserIdentity {
                 $model = new Users('social_register');
             endif;
 
-            $result = $this->registerNewUser($model,$newrecord);
+            $result = $this->registerNewUser($model, $newrecord);
 
-            $identity = new UserIdentity($result->user_email);
-            $identity->autoLogin();
-            Yii::app()->user->login($identity,0);
+            $model = new LoginForm('login');
+            $log = array('username' => $result->user_email, 'password' => $result->user_password);
+            $model->attributes = $log;
+            $model->login();
+//            $identity->autoLogin();
+//            Yii::app()->user->login($identity,0);
         }
     }
 
@@ -125,20 +128,21 @@ class HybridAuthIdentity extends CUserIdentity {
             $model->user_email = $this->userProfile->email;
             $password = Myclass::getRandomString('8');
             $model->user_password = $password;
+            $model->user_status = 1;
+        else:
+            $model->user_last_login = date('Y-m-d h:i:s');
         endif;
 
 //        if (!empty($this->userProfile->photoURL) && ($newrecord || empty($patient->profile_picture))):
 //            if ($image = $patient->urlImageSave($this->userProfile->photoURL, rand()))
 //                $model->user_avatar = $image;
 //        endif;
-
 //        if (empty($patient->first_name))
 //            $patient->first_name = $this->userProfile->firstName;
 //        if (empty($patient->last_name))
 //            $patient->last_name = $this->userProfile->lastName;
 //        if (empty($patient->street))
 //            $patient->street = $this->userProfile->address;
-
 //        if (empty($patient->state)):
 //            $state = States::model()->find("stateName = '{$this->userProfile->region}'");
 //            if (!empty($state))
@@ -163,8 +167,9 @@ class HybridAuthIdentity extends CUserIdentity {
 //            endif;
 
             return $model;
-        }else{
-            echo CHtml::errorSummary($model); exit;
+        } else {
+            echo CHtml::errorSummary($model);
+            exit;
         }
     }
 

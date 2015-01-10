@@ -58,6 +58,9 @@ class UsersController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionRegister() {
+        if (!Yii::app()->user->isGuest)
+            $this->redirect(array('/site/entry/create'));
+
         $model = new Users;
 
         // Uncomment the following line if AJAX validation is needed
@@ -206,7 +209,9 @@ class UsersController extends Controller {
     }
 
     public function actionLogin() {
-        $this->layout = '//layouts/frontend';
+        if (!Yii::app()->user->isGuest)
+            $this->redirect(array('/site/entry/create'));
+        
         $model = new LoginForm('login');
         //  $forget = new LoginForm('forgotpassword');
         // collect user input data

@@ -5,24 +5,24 @@
  * It contains the authentication method that checks if the provided
  * data can identity the user.
  */
-class UserIdentity extends CUserIdentity
-{
-      const ERROR_ACCOUNT_BLOCKED = 3;
+class UserIdentity extends CUserIdentity {
+
+    const ERROR_ACCOUNT_BLOCKED = 3;
     const ERROR_ACCOUNT_DELETED = 4;
 
     private $_id;
-	/**
-	 * Authenticates a user.
-	 * The example implementation makes sure if the username and password
-	 * are both 'demo'.
-	 * In practical applications, this should be changed to authenticate
-	 * against some persistent user identity storage (e.g. database).
-	 * @return boolean whether authentication succeeds.
-	 */
-	public function authenticate()
-	{
-	 $user = Users::model()->find('user_email = :U', array(':U' => $this->username));
-        
+
+    /**
+     * Authenticates a user.
+     * The example implementation makes sure if the username and password
+     * are both 'demo'.
+     * In practical applications, this should be changed to authenticate
+     * against some persistent user identity storage (e.g. database).
+     * @return boolean whether authentication succeeds.
+     */
+    public function authenticate() {
+        $user = Users::model()->find('user_email = :U', array(':U' => $this->username));
+
 
         if ($user === null):
             $this->errorCode = self::ERROR_USERNAME_INVALID;
@@ -47,11 +47,11 @@ class UserIdentity extends CUserIdentity
             $user->user_login_ip = Yii::app()->request->userHostAddress;
             $user->save(false);
         endif;
-        
+
         return !$this->errorCode;
     }
-    
-      public function getId() {
+
+    public function getId() {
         return $this->_id;
     }
 

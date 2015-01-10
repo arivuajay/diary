@@ -127,6 +127,17 @@ class Users extends CActiveRecord
 		return parent::model($className);
 	}
         
+        public function beforeSave() {
+            if ($this->isNewRecord):
+                $this->created = date('Y-m-d h:i:s');
+                $this->modified = date('Y-m-d h:i:s');
+                $this->user_login_ip = CHttpRequest::getUserHostAddress();
+                
+                $this->user_password = Myclass::encrypt($this->user_password);
+            endif;
+
+            return parent::beforeSave();
+        }
 //         public function beforeSave(){
 //        
 //        if($_POST['Users']['user_password'])
