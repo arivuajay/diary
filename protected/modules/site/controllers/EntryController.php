@@ -66,7 +66,7 @@ class EntryController extends Controller
                 if(isset($_POST['email'])){
                 $userModel = Users::model()->findByAttributes(array('user_email' => $_POST['email']));
                Yii::app()->user->setState("temp_user_mail",$_POST['email']);
-               Yii::app()->user->setState("temp_user_mood",Myclass::getMood($_POST['MoodType']['mood_type']));
+               Yii::app()->user->setState("temp_user_mood",$_POST['MoodType']['mood_type']);
                
                 if(empty($userModel))
                     {
@@ -82,8 +82,8 @@ class EntryController extends Controller
                // print_r($_POST);exit;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-              echo  Yii::app()->user->getState("temp_user_mail");
-              echo  Yii::app()->user->getState("temp_user_mood");exit;
+//              echo  Yii::app()->user->getState("temp_user_mail");
+//              echo  Yii::app()->user->getState("temp_user_mood");exit;
 		if(isset($_POST['Entry']))
 		{
 			$model->attributes=$_POST['Entry'];
