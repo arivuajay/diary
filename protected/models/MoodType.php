@@ -20,7 +20,7 @@ class MoodType extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'journal_mood_type';
+		return '{{mood_type}}';
 	}
 
 	/**

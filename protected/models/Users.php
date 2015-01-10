@@ -26,7 +26,7 @@ class Users extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'journal_users';
+		return '{{users}}';
 	}
         
          public $confirm_password;

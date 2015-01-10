@@ -28,7 +28,7 @@ class Entry extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'journal_tmp_diary';
+		return '{{tmp_diary}}';
 	}
 
 	/**

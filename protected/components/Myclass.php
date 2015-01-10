@@ -35,5 +35,17 @@ class Myclass extends CController {
         
         return $mood;
     }
+    
+    public static function rememberMeAdmin($username, $check) {
+        if ($check > 0) {
+            $time = time();     // Gets the current server time                                          
+            $cookie = new CHttpCookie('admin_username', $username);
+
+            $cookie->expire = $time + 60 * 60 * 24 * 30;               // 30 days
+            Yii::app()->request->cookies['admin_username'] = $cookie;
+        } else {
+            unset(Yii::app()->request->cookies['admin_username']);
+        }
+    }
    
 }
