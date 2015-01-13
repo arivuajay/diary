@@ -9130,3 +9130,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 .rollOut {
   -webkit-animation-name: rollOut;
   animation-name: rollOut; }
+#Diary_diary_user_mood_id > img {
+    margin-right: 15px;
+}

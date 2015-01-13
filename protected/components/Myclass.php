@@ -35,7 +35,14 @@ class Myclass extends CController {
         
         return $mood;
     }
-    
+    public static function getCategory($key = NULL){
+       $mood =  CHtml::listData(Category::model()->findAll(), 'category_id', 'category_name');
+        
+        if(isset($key) && $key != NULL)
+            return $mood[$key];
+        
+        return $mood;
+    }
     public static function rememberMeAdmin($username, $check) {
         if ($check > 0) {
             $time = time();     // Gets the current server time                                          

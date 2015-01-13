@@ -26,8 +26,13 @@
         ?>
 
 <?php 
+<<<<<<< .mine
+       //$cs->registerScriptFile($themeUrl . '/css/frontend/vendor/jquery/jquery-1.11.1.min.js');
+       //$cs->registerScriptFile($themeUrl . '/css/frontend/vendor/jquery/jquery_ui/jquery-ui.min.js');
+=======
 //       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/jquery/jquery-1.11.1.min.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/jquery/jquery_ui/jquery-ui.min.js');
+>>>>>>> .r41
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/bootstrap/js/bootstrap.min.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/backstretch/jquery.backstretch.min.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/js/utility/spin.min.js');
@@ -37,20 +42,20 @@
        $cs->registerScriptFile($themeUrl . '/css/frontend/js/custom.js');
        
        
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/ckeditor/ckeditor.js');
+       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/ckeditor/ckeditor.js',$cs_pos_end);
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/summernote/summernote.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/markitup/jquery.markitup.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/markitup/sets/default/set.js');
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/globalize/globalize.js');
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/validate/jquery.validate.js');
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/multiselect/bootstrap-multiselect.js');
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/daterange/moment.min.js');
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/daterange/daterangepicker.js');
+      // $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/globalize/globalize.js');
+      // $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/validate/jquery.validate.js');
+       //$cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/multiselect/bootstrap-multiselect.js');
+       //$cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/daterange/moment.min.js');
+      // $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/daterange/daterangepicker.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/colorpicker/bootstrap-colorpicker.js');
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/timepicker/bootstrap-timepicker.min.js');
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/datepicker/bootstrap-datepicker.js');
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/jquerymask/jquery.maskedinput.min.js');
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/tags/tagmanager.js');
+      // $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/timepicker/bootstrap-timepicker.min.js');
+      // $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/datepicker/bootstrap-datepicker.js');
+      // $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/jquerymask/jquery.maskedinput.min.js');
+      // $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/tags/tagmanager.js');
        
 ?>
 
