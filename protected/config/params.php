@@ -3,9 +3,21 @@
 // Custom Params Value
 return array(
     //Global Settings
-    'SMTPAUTH' => true, // Auth : true or false
     'EMAILLAYOUT' => 'file', // file(file concept) or db(db_concept)
     'EMAILTEMPLATE' => '/mailtemplate/',
+    'MAILSENDBY'=>'smtp', 
+    //EMAIL Settings
+    'SMTPHOST'=>'smtp.gmail.com',
+    'SMTPPORT'=>'465',  // Port: 465 or 587 
+    'SMTPUSERNAME'=>'marudhuofficial@gmail.com',
+    'SMTPPASS'=>'ninja12345',
+    'SMTPAUTH'=>true,    // Auth : true or false
+    'SMTPSECURE'=>'ssl', // Secure :tls or ssl
+    
+    'NOREPLYMAIL'=>'test@test.com',
+    'SITENAME'=>'Express 2 Help',
+    
+    //
     //Product Settings
     'LIST_PER_PAGE' => '15',
     'AMOUNT_FORMAT' => 'GBP',
@@ -26,7 +38,7 @@ return array(
     'CLIENT_IMG_PATH' => 'images/client/',
     'REPORT_IMG_PATH' => 'images/report/',
     
-    'COPYRIGHT' => '&copy; 2014 Entirx.',
+    'COPYRIGHT' => '&copy; 2014 Express2Help.',
     'DEVELOPEDBY' => 'Developed by <a target="_blank" href="http://www.creativert.com" alt="Creativert" title="Creativert">Creativert</a>',
     'SMS_GATEWAY_USERNAME' => 'entirx@gmail.com',
     'SMS_GATEWAY_PASSWORD' => 'mrprabha',

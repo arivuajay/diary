@@ -27,7 +27,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
     if (boxtest === 'true') {
         document.body.className += ' boxed-layout';
     }</script> 
-    <a href="dashboard.html" id="return-arrow"> <i class="fa fa-arrow-circle-left fa-3x text-light"></i> <span class="text-light"> Return <br>
+    <a href="<?php echo Yii::app()->baseUrl?>" id="return-arrow"> <i class="fa fa-arrow-circle-left fa-3x text-light"></i> <span class="text-light"> Return <br>
             to Website </span> </a> 
 
     <!-- Start: Main -->

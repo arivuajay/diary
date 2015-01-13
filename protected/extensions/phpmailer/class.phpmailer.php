@@ -208,13 +208,13 @@ class PHPMailer {
    * Sets SMTP username.
    * @var string
    */
-  public $Username      = 'prakash.paramanandam@arkinfotec.com';
+  public $Username      = 'user';
 
   /**
    * Sets SMTP password.
    * @var string
    */
-  public $Password      = 'prakashpp123';
+  public $Password      = 'secret';
 
   /**
    * Sets the SMTP server timeout in seconds.

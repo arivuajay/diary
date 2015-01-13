@@ -1,87 +1,4 @@
 <?php
-/* @var $this UsersController */
-/* @var $model Users */
-/* @var $form CActiveForm */
-?>
-
-<!--<div class="form">
-
-<?php
-$form = $this->beginWidget('CActiveForm', array(
-    'id' => 'users-form',
-    // Please note: When you enable ajax validation, make sure the corresponding
-    // controller action is handling ajax validation correctly.
-    // There is a call to performAjaxValidation() commented in generated controller code.
-    // See class documentation of CActiveForm for details on this.
-    'enableAjaxValidation' => true,
-    'clientOptions' => array(
-        'validateOnSubmit' => true,
-    ),
-    'htmlOptions' => array('class' => 'form-signin cmxform', 'role' => 'form')
-        ));
-?>
-
-        <p class="note">Fields with <span class="required">*</span> are required.</p>
-
-<?php echo $form->errorSummary($model); ?>
-
-        <div class="row">
-<?php echo $form->labelEx($model, 'user_email'); ?>
-<?php echo $form->textField($model, 'user_email', array('size' => 60, 'maxlength' => 250)); ?>
-<?php echo $form->error($model, 'user_email'); ?>
-        </div>
-
-        <div class="row">
-<?php echo $form->labelEx($model, 'user_password'); ?>
-<?php echo $form->textField($model, 'user_password', array('size' => 60, 'maxlength' => 250)); ?>
-<?php echo $form->error($model, 'user_password'); ?>
-        </div>
-
-        <div class="row">
-<?php echo $form->labelEx($model, 'user_status'); ?>
-<?php echo $form->textField($model, 'user_status', array('size' => 1, 'maxlength' => 1)); ?>
-<?php echo $form->error($model, 'user_status'); ?>
-        </div>
-
-        <div class="row">
-<?php echo $form->labelEx($model, 'user_activation_key'); ?>
-<?php echo $form->textField($model, 'user_activation_key', array('size' => 60, 'maxlength' => 250)); ?>
-<?php echo $form->error($model, 'user_activation_key'); ?>
-        </div>
-
-        <div class="row">
-<?php echo $form->labelEx($model, 'user_last_login'); ?>
-<?php echo $form->textField($model, 'user_last_login'); ?>
-<?php echo $form->error($model, 'user_last_login'); ?>
-        </div>
-
-        <div class="row">
-<?php echo $form->labelEx($model, 'user_login_ip'); ?>
-<?php echo $form->textField($model, 'user_login_ip', array('size' => 60, 'maxlength' => 250)); ?>
-<?php echo $form->error($model, 'user_login_ip'); ?>
-        </div>
-
-        <div class="row">
-<?php echo $form->labelEx($model, 'created'); ?>
-<?php echo $form->textField($model, 'created'); ?>
-<?php echo $form->error($model, 'created'); ?>
-        </div>
-
-        <div class="row">
-<?php echo $form->labelEx($model, 'modified'); ?>
-<?php echo $form->textField($model, 'modified'); ?>
-<?php echo $form->error($model, 'modified'); ?>
-        </div>
-
-        <div class="row buttons">
-<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-        </div>
-
-<?php $this->endWidget(); ?>
-
-</div> form -->
-
-<?php
 $baseUrl = Yii::app()->baseUrl;
 $themeUrl = Yii::app()->theme->baseUrl;
 ?>
@@ -112,7 +29,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
 
                     <div class="panel-heading"> <span class="panel-title"> 
                             <span class="glyphicon glyphicon-lock text-purple2"></span> Register </span> 
-                        <span class="panel-header-menu pull-right mr15 text-muted fs12">Express <b>2 Help</b></span> </div>
+                        <span class="panel-header-menu pull-right mr15 text-muted fs12"><?php echo CHtml::link('Login >>', array('/site/users/login'))?></span> </div>
                     <div class="panel-body">
                         <div class="login-avatar"> <img src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/register.png" width="150" height="112" alt="avatar"> </div>
                         <?php echo $form->errorSummary($model); ?>

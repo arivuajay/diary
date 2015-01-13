@@ -74,8 +74,8 @@ class HybridAuthIdentity extends CUserIdentity {
                 "Twitter" => array(
                     "enabled" => true,
                     "keys" => array(
-                        "key" => "X2uXUuARrTUtOByJJiURuunf6 ",
-                        "secret" => "2gSJyspw6N2fxs3mOtoQ96lfHCcNs4AwHKmaCxLEeg90vvgFmL"
+                        "key" => "xpee301A4Sohk0uvZjgyn30Kc",
+                        "secret" => "aisllYXMlL2xI4y2VOs5nm5eXcJyXIdkjb1b4lSFyg59ptPbZu"
                     )
                 )
             ),
@@ -132,6 +132,10 @@ class HybridAuthIdentity extends CUserIdentity {
         else:
             $model->user_last_login = date('Y-m-d h:i:s');
         endif;
+        
+        var_dump($this->userProfile);
+        var_dump($model->attributes);
+        exit;
 
 //        if (!empty($this->userProfile->photoURL) && ($newrecord || empty($patient->profile_picture))):
 //            if ($image = $patient->urlImageSave($this->userProfile->photoURL, rand()))

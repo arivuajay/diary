@@ -29,13 +29,9 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         'htmlOptions' => array('class' => 'form-signin cmxform', 'role' => 'form')
                     ));
 
-                    if (isset(Yii::app()->request->cookies['altimus_app_username']->value)) {
-                        $model->username = Yii::app()->request->cookies['altimus_app_username']->value;
-                        $model->rememberMe = 1;
-                    }
                     ?> 
                     <div class="panel">
-                        <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock text-purple2"></span> Login </span> 
+                        <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock text-purple2"></span> Lost Password </span> 
                             <span class="panel-header-menu pull-right mr15 text-muted fs12"><?php echo CHtml::link('Register >>', array('/site/users/register'))?></span> </div>
                         <div class="panel-body">
                             <?php
@@ -51,24 +47,10 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                     <!--<input type="text" class="form-control" placeholder="User Name">-->
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <span class="text-mute">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>Lost Password?</a></span>
-                                <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span> </span>
-                                    <?php echo $form->passwordField($model, 'password', array('class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => 'Password')); ?>
-                                    <?php echo $form->error($model, 'password', array('class' => 'error')); ?>
-                                    <!--<input type="text" class="form-control" placeholder="Password">-->
-                                </div>
-                            </div>
-                            <div class="panel-footer"> 
-                                <span class="text-muted fs12 lh30">
-                                    <button type="button" data-provider="facebook" class="btn btn-sm bg-blue1 pull-left oAuthLogin">Connect with Facebook &nbsp;<i class="fa fa-facebook"></i></button>
-                                </span> 
-                                <button type="button" data-provider="twitter" class="btn btn-sm bg-blue2 pull-right oAuthLogin">Connect with Twitter &nbsp;<i class="fa fa-twitter"></i></button>
-                                <div class="clearfix"></div>
-                            </div>
+                            
                         </div>
-                        <div class="panel-footer"> <span class="text-muted fs12 lh30"><?php echo $form->checkBox($model, 'rememberMe', array('id' => 'check')); ?><?php echo ' Remember Me'; ?> </span>
-                            <?php echo CHtml::button('Login', array("class" => "btn btn-sm bg-purple2 pull-right", "type" => "submit", 'name' => 'sign_in')); ?>
+                        <div class="panel-footer"> <span class="text-muted fs12 lh30"></span>
+                            <?php echo CHtml::button('Get Password', array("class" => "btn btn-sm bg-purple2 pull-right", "type" => "submit", 'name' => 'forgot')); ?>
               <!--              <a class="btn btn-sm bg-purple2 pull-right" href="#"><i class="fa fa-home"></i> Login</a>-->
                             <div class="clearfix"></div>
                         </div>

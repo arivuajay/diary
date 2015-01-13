@@ -26,7 +26,7 @@ class UsersController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'register', 'signupsocial', 'sociallogin', 'login', 'activation'),
+                'actions' => array('index', 'view', 'register', 'signupsocial', 'sociallogin', 'login', 'activation', 'test', 'forgot'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -68,22 +68,15 @@ class UsersController extends Controller {
             $model->user_activation_key = Myclass::getRandomString();
             $valid = $model->validate();
             if ($valid && $model->save(false)) {
-                //temp smtp mail
-                $mail = Yii::app()->Smtpmail;
-                $mail->SetFrom('noreply@express2help.com', CHtml::encode(Yii::app()->name));
-                $mail->Subject = CHtml::encode(Yii::app()->name) . ': Confirmation you mail';
+                $mail = new Sendmail;
                 $message = '<p>Dear ' . $model->user_name . '</p>';
                 $message .= '<p>Thank you for signing up, we just need to verify your email address</p>';
-                $message .= '<p><a href="' . Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">Click Here to activate</a></p><br />';
+                $message .= '<p><a href="' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">Click Here to activate</a></p><br />';
                 $message .= "<p>If you can't click the button above, you can verify your email address by copying and pasting (or typing) the following address into your browser:</p>";
-                $message .= '<p><a href="' . Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">' . Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '</a></p><br />';
-                $mail->MsgHTML($message);
+                $message .= '<p><a href="' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '</a></p><br />';
+                $Subject = CHtml::encode(Yii::app()->name) . ': Confirmation your email';
+                $mail->send($model->user_email, $Subject, $message);
 
-                $mail->AddAddress($model->user_email, "");
-                if (!$mail->Send()) {
-                    echo "Mailer Error: " . $mail->ErrorInfo;
-                }
-                //end
                 Yii::app()->user->setFlash('success', "Please check your mail for activation");
                 $this->redirect(array('/site/users/login'));
             }
@@ -211,14 +204,14 @@ class UsersController extends Controller {
 
     public function actionLogin() {
         if (!Yii::app()->user->isGuest)
-            $this->redirect(array('/site/entry/create'));
+            $this->redirect(array('/site/journal/create'));
 
         $model = new LoginForm('login');
         $this->performAjaxValidation($model);
         if (isset($_POST['sign_in'])) {
             $model->attributes = $_POST['LoginForm'];
             if ($model->validate() && $model->login()):
-                $this->redirect(array('/site/entry/create'));
+                $this->redirect(array('/site/journal/create'));
             endif;
         }
         $this->render('login', array('model' => $model));
@@ -232,7 +225,7 @@ class UsersController extends Controller {
 
     public function actionActivation($activationkey, $userid) {
         $user = Users::model()->findByAttributes(array(
-            'user_id' => $userid, 
+            'user_id' => $userid,
             'user_activation_key' => $activationkey,
             'user_last_login' => null)
         );
@@ -242,28 +235,79 @@ class UsersController extends Controller {
         $user = $this->loadModel($userid);
         $user->setAttribute('user_status', '1');
         $user->setAttribute('user_last_login', date('Y-m-d H:i:s'));
-        if($user->save(false)){
-            //temp smtp mail
-            $mail = Yii::app()->Smtpmail;
-            $mail->SetFrom('noreply@express2help.com', CHtml::encode(Yii::app()->name));
-            $mail->Subject = CHtml::encode(Yii::app()->name) . ': Email Verfied';
+        if ($user->save(false)) {
+            $mail = new Sendmail;
             $message = '<p>Dear ' . $user->user_name . '</p>';
             $message .= '<p>Your email account verified successfully.</p>';
             $message .= '<p>You can login with your email and password: ';
-            $message .= '<a href="'.Yii::app()->baseUrl.'/site/user/login">Click Here to Login</a></p>';
-            $mail->MsgHTML($message);
-
-            $mail->AddAddress($user->user_email, "");
-            if (!$mail->Send()) {
-                echo "Mailer Error: " . $mail->ErrorInfo;
-            }
+            $message .= '<a href="' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/user/login">Click Here to Login</a></p>';
+            $Subject = CHtml::encode(Yii::app()->name) . ': Email Verfied';
+            $mail->send($user->user_email, $Subject, $message);
+            
             Yii::app()->user->setFlash('success', "Your Email account verified. you can login");
             $this->redirect(array('/site/users/login'));
-            //end
-        }else{
+        } else {
             echo var_dump($user->getErrors());
         }
         exit;
+    }
+    
+    public function actionForgot() {
+        if (!Yii::app()->user->isGuest)
+            $this->redirect(array('/site/journal/create'));
+
+        $model = new LoginForm();
+        $this->performAjaxValidation($model);
+        if (isset($_POST['forgot'])) {
+            $user = Users::model()->findByAttributes(array('user_email' => $_POST['LoginForm']['username']));
+            if(empty($user)){
+                Yii::app()->user->setFlash('error', "This Email Address Not Exists");
+                $this->redirect(array('/site/users/forgot'));
+            }
+            $mail = new Sendmail;
+            $message = '<p>Dear ' . $user->user_name . '</p>';
+            $message .= '<p>We received a request to reset the password for your account.To reset your password, click on the button below (or copy/paste the URL into your browser). </p>';
+            $message .= '<a href="' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/user/reset">Click to Reset Password</a></p>';
+            $Subject = CHtml::encode(Yii::app()->name) . ': Reset Password';
+            $mail->send($user->user_email, $Subject, $message);
+            
+            Yii::app()->user->setFlash('success', "Your Password Reset Link sent to your email address.");
+            $this->redirect(array('/site/users/login'));
+        }
+        $this->render('forgot', array('model' => $model));
+    }
+
+    public function actionTest() {
+        //temp smtp mail
+//        $mail = Yii::app()->Smtpmail;
+//        $mail->SetFrom('noreply@express2help.com', CHtml::encode(Yii::app()->name));
+//        $mail->Subject = CHtml::encode(Yii::app()->name) . ': Confirmation you mail';
+//        $message = '<p>Dear ' . $model->user_name . '</p>';
+//        $message .= '<p>Thank you for signing up, we just need to verify your email address</p>';
+//        $message .= '<p><a href="' . Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">Click Here to activate</a></p><br />';
+//        $message .= "<p>If you can't click the button above, you can verify your email address by copying and pasting (or typing) the following address into your browser:</p>";
+//        $message .= '<p><a href="' . Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">' . Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '</a></p><br />';
+//        $mail->MsgHTML($message);
+//
+//        $mail->AddAddress($model->user_email, "");
+//        if (!$mail->Send()) {
+//            echo "Mailer Error: " . $mail->ErrorInfo;
+//        }
+//        //end
+//        exit;
+        
+        $mail = new Sendmail;
+        try{
+            if($mail->send('prakash.paramanandam@arkinfotec.com', 'test', 'test')){
+            echo 'success';
+            }else{
+                echo 'fail';
+            }
+
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+                exit;
     }
 
 }
