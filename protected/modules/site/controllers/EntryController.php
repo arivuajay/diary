@@ -65,8 +65,8 @@ class EntryController extends Controller
 		$model=new Entry;
                 if(isset($_POST['email'])){
                 $userModel = Users::model()->findByAttributes(array('user_email' => $_POST['email']));
-               Yii::app()->user->setState("temp_user_mail",$_POST['email']);
-               Yii::app()->user->setState("temp_user_mood",$_POST['MoodType']['mood_type']);
+               Yii::app()->session['temp_user_mail'] = $_POST['email'];
+               Yii::app()->session['temp_user_mood'] = $_POST['MoodType']['mood_type'];
               // print_r($_POST);exit;
                 if(empty($userModel))
                     {
