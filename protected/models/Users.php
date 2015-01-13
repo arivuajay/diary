@@ -42,6 +42,8 @@ class Users extends CActiveRecord
 			array('user_name, user_email, user_password', 'required','on'=>'social_register'),
 			array('user_email, user_password, user_activation_key, user_login_ip', 'length', 'max'=>250),
 			array('user_password', 'compare', 'compareAttribute'=>'confirm_password','on'=>'register'),
+                       // array('user_email', 'unique','className'=>'Users','attributeName'=>'user_email','message'=>"user email already exists"),
+
                         array('user_email','email'),
                         array('user_status', 'length', 'max'=>1),
 			array('user_last_login, created, modified', 'safe'),
@@ -52,19 +54,18 @@ class Users extends CActiveRecord
 	}
 
 	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'diaries' => array(self::HAS_MANY, 'Diary', 'diary_user_id'),
-			'moodReports' => array(self::HAS_MANY, 'MoodReport', 'mood_report_user_id'),
-			'tmpDiaries' => array(self::HAS_MANY, 'TmpDiary', 'temp_activation_key'),
-		);
-	}
-
+     * @return array relational rules.
+     */
+    public function relations()
+    {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+            'diaries' => array(self::HAS_MANY, 'Diary', 'diary_user_id'),
+            'moodReports' => array(self::HAS_MANY, 'MoodReport', 'mood_report_user_id'),
+            'tmpDiaries' => array(self::HAS_MANY, 'TmpDiary', 'temp_activation_key'),
+        );
+    }
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -72,6 +73,7 @@ class Users extends CActiveRecord
 	{
 		return array(
 			'user_id' => 'User',
+                        'user_name' => 'User Name',
 			'user_email' => 'User Email',
 			'user_password' => 'User Password',
 			'user_status' => 'User Status',
@@ -131,12 +133,14 @@ class Users extends CActiveRecord
             if ($this->isNewRecord):
                 $this->created = date('Y-m-d h:i:s');
                 $this->modified = date('Y-m-d h:i:s');
-                $this->user_login_ip = CHttpRequest::getUserHostAddress();
+                $this->user_login_ip = Yii::app()->request->getUserHostAddress();
                 
                 $this->user_password = Myclass::encrypt($this->user_password);
             endif;
 
             return parent::beforeSave();
+            
+            
         }
 //         public function beforeSave(){
 //        

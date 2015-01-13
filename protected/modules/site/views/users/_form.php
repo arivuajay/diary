@@ -123,14 +123,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         <div class="form-group">
                             <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span> </span>
 <!--                                    <input type="text" class="form-control" placeholder="Password">-->
-<?php echo $form->textField($model, 'user_password', array('placeholder' => 'Password', 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
+<?php echo $form->passwordField($model, 'user_password', array('placeholder' => 'Password', 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
 <?php echo $form->error($model, 'user_password'); ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span> </span>
 <!--                                    <input type="text" class="form-control" placeholder="Confirm Password">-->
-                        <?php echo $form->textField($model, 'confirm_password', array('placeholder' => 'Confirm Password', 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
+                        <?php echo $form->passwordField($model, 'confirm_password', array('placeholder' => 'Confirm Password', 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
 <?php echo $form->error($model, 'confirm_password'); ?>
                             </div>
                         </div>

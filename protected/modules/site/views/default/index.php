@@ -80,6 +80,12 @@ You may customize this page by editing <tt><?php echo __FILE__; ?></tt>
                             </div>
 
                             <div class="container">
+                                
+                                <?php
+    foreach(Yii::app()->user->getFlashes() as $key => $message) {
+        echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
+    }
+?>
 
                                 <!--<form id="hcontact_form" class="hcont_form pad_top13" action="" method="post">-->
                                     <?php $form=$this->beginWidget('CActiveForm', array(

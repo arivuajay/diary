@@ -61,31 +61,41 @@ class UsersController extends Controller {
         if (!Yii::app()->user->isGuest)
             $this->redirect(array('/site/entry/create'));
 
-        $model = new Users;
+        $model = new Users('register');
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-//                $mail = new Sendmail();
-//                    $nextstep_url = Yii::app()->createAbsoluteUrl('/site/default/login');
-//                    $subject = "Registraion Mail From - " . SITENAME;
-//                    $trans_array = array(
-//                        "{SITENAME}" => SITENAME,
-//                        "{STAFF_NAME}" => $profModel->first_name,
-//                        "{EMAIL_ID}" => $model->useremail,
-//                        "{STAFF_PASSWORD}" => $password,
-//                        "{NEXTSTEPURL}" => $nextstep_url,
-//                    );
-//                    $message = $mail->getMessage('staffregister', $trans_array);
-//                    $mail->send($model->useremail, $subject, $message);    
-        // $this->mailsend('ptrckstnly@gmail.com','ptrckstnly@gmail.com',$subject,$message);
 
-        if (isset($_POST['Users'])) { //print_r($_POST['Users']);  exit;
+
+        if (isset($_POST['Users'])) {
             $model->attributes = $_POST['Users'];
             $model->user_activation_key = Myclass::getRandomString();
-            $model->user_password = Myclass::encrypt($_POST['Users']['user_password']);
+            // $model->user_password = Myclass::encrypt($_POST['Users']['user_password']);
+            //print_r($_POST['Users']);  exit;
+            
+            if ($model->save()) {
 
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->user_id));
+                $mail = new Sendmail;
+                $nextstep_url = Yii::app()->createAbsoluteUrl('/site/default/login');
+                    $subject = "Registration Mail From - " . CHtml::encode(Yii::app()->name);
+                    $trans_array = array(
+                        "{SITENAME}" => CHtml::encode(Yii::app()->name),
+                        "{NEXTSTEPURL}" => $nextstep_url,
+                        "{USER_NAME}" => $model->user_name
+                    );
+                    $message = $mail->getMessage('registration', $trans_array);
+                    $mail->send($model->user_email, $subject, $message);
+               
+              //  mail('ptrckstnly@gmail.com','test','test','ptrckstnly@gmail.com');
+
+
+
+
+                Yii::app()->user->setFlash('success', "Please check your mail for activation");
+
+                $this->redirect(array('/site'));
+                //  $this->redirect(array('view', 'id' => $model->user_id));
+            }
         }
 
         $this->render('register', array(
@@ -210,8 +220,8 @@ class UsersController extends Controller {
 
     public function actionLogin() {
         if (!Yii::app()->user->isGuest)
-            $this->redirect(array('/site/entry/create'));
-        
+            $this->redirect(array('/site/journal/create'));
+
         $model = new LoginForm('login');
         //  $forget = new LoginForm('forgotpassword');
         // collect user input data
@@ -226,11 +236,18 @@ class UsersController extends Controller {
 
                 // Yii::app()->user->logout();  echo "logout()";
                 // echo 'test';exit;
-                $this->redirect(array('/site/entry/create'));
+                $this->redirect(array('/site/journal/create'));
             endif;
         }
         $this->render('login', array('model' => $model));
         // $this->render('login', compact('model' ,'forget'));
     }
 
+     public function actionLogout() {
+        Yii::app()->user->logout();
+       
+        $this->redirect(array('index'));
+    }
+    
+    
 }

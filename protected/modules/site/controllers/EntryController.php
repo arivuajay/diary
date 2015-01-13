@@ -77,8 +77,9 @@ class EntryController extends Controller
                        // echo 'login entry page';
                         $this->redirect(array('users/login'));
                         }
-                        
+                                                                   
                 }
+                // echo 'hi';
                // print_r($_POST);exit;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -87,6 +88,7 @@ class EntryController extends Controller
 		if(isset($_POST['Entry']))
 		{
 			$model->attributes=$_POST['Entry'];
+                        echo 'test';exit;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->temp_id));
 		}

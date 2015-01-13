@@ -39,16 +39,7 @@ return array(
         ),
         //
         //local mail components
-        'Smtpmail'=>array(
-            'class'=>'application.extensions.smtpmail.PHPMailer',
-            'Host'=>"smtp.gmail.com",
-            'Username'=>'.com',
-            'Password'=>'',
-            'Mailer'=>'smtp',
-            'Port'=>465,
-            'SMTPAuth'=>true,
-            'SMTPSecure' => 'tls',
-        ),
+        
         //
         'user' => array('allowAutoLogin' => true),
         // uncomment the following to enable URLs in path-format
@@ -87,7 +78,7 @@ return array(
     ),
     //setting the basic language value
     'defaultController' => 'site/default/index',
-//    'params' => require(dirname(__FILE__) . '/params.php'),
+    'params' => require(dirname(__FILE__) . '/params.php'),
     'timeZone' => 'Asia/Calcutta',
     'theme' => 'site',
     'sourceLanguage' => 'en',

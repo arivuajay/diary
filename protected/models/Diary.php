@@ -40,10 +40,10 @@ class Diary extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('diary_user_id, diary_title, diary_description, diary_category_id, diary_current_date, diary_user_mood_id', 'required'),
+			//array('diary_user_id, diary_title, diary_description, diary_category_id, diary_user_mood_id', 'required'),
 			array('diary_user_id, diary_category_id, diary_user_mood_id', 'length', 'max'=>20),
 			array('diary_title, diary_tags', 'length', 'max'=>250),
-			array('diary_upload, created, modified', 'safe'),
+			array('diary_current_date, diary_upload, created, modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('diary_id, diary_user_id, diary_title, diary_description, diary_category_id, diary_tags, diary_current_date, diary_user_mood_id, diary_upload, created, modified', 'safe', 'on'=>'search'),
@@ -130,4 +130,6 @@ class Diary extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+         
 }
