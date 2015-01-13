@@ -14,6 +14,7 @@
         $baseUrl = Yii::app()->baseUrl;
         $themeUrl = Yii::app()->theme->baseUrl;
         $cs = Yii::app()->getClientScript();
+        $cs_pos_end = CClientScript::POS_END;
 
         $cs->registerCssFile($themeUrl . '/css/frontend/vendor/bootstrap/css/bootstrap.min.css');
         $cs->registerCssFile($themeUrl . '/css/frontend/css/vendor.css');
@@ -25,7 +26,7 @@
         ?>
 
 <?php 
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/jquery/jquery-1.11.1.min.js');
+//       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/jquery/jquery-1.11.1.min.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/jquery/jquery_ui/jquery-ui.min.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/bootstrap/js/bootstrap.min.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/backstretch/jquery.backstretch.min.js');

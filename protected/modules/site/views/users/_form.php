@@ -13,7 +13,11 @@ $form = $this->beginWidget('CActiveForm', array(
     // controller action is handling ajax validation correctly.
     // There is a call to performAjaxValidation() commented in generated controller code.
     // See class documentation of CActiveForm for details on this.
-    'enableAjaxValidation' => false,
+    'enableAjaxValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true,
+    ),
+    'htmlOptions' => array('class' => 'form-signin cmxform', 'role' => 'form')
         ));
 ?>
 
@@ -98,43 +102,49 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         // controller action is handling ajax validation correctly.
                         // There is a call to performAjaxValidation() commented in generated controller code.
                         // See class documentation of CActiveForm for details on this.
-                        'enableAjaxValidation' => false,
+                        'enableAjaxValidation' => true,
+                        'clientOptions' => array(
+                            'validateOnSubmit' => true,
+                        ),
+                        'htmlOptions' => array('class' => 'form-signin cmxform', 'role' => 'form')
                     ));
                     ?>
 
-                    <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock text-purple2"></span> Register </span> <span class="panel-header-menu pull-right mr15 text-muted fs12">Express <b>2 Help</b></span> </div>
+                    <div class="panel-heading"> <span class="panel-title"> 
+                            <span class="glyphicon glyphicon-lock text-purple2"></span> Register </span> 
+                        <span class="panel-header-menu pull-right mr15 text-muted fs12">Express <b>2 Help</b></span> </div>
                     <div class="panel-body">
                         <div class="login-avatar"> <img src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/register.png" width="150" height="112" alt="avatar"> </div>
-                                <?php echo $form->errorSummary($model); ?>
+                        <?php echo $form->errorSummary($model); ?>
                         <div class="form-group">
                             <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span> </span>
                                 <!--<input type="text" class="form-control" placeholder="Name">-->
-<?php echo $form->textField($model, 'user_name', array('placeholder' => 'Name', 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
-<?php echo $form->error($model, 'user_name'); ?>
+                                <?php echo $form->textField($model, 'user_name', array('placeholder' => 'Name', 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
+                                <?php echo $form->error($model, 'user_name'); ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span> </span>
 <!--                                    <input type="text" class="form-control" placeholder="E-mail Address">-->
-<?php echo $form->textField($model, 'user_email', array('placeholder' => 'E-mail Address', 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
-<?php echo $form->error($model, 'user_email'); ?>
+                                <?php echo $form->textField($model, 'user_email', array('placeholder' => 'E-mail Address', 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
+                                <?php echo $form->error($model, 'user_email'); ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span> </span>
 <!--                                    <input type="text" class="form-control" placeholder="Password">-->
-<?php echo $form->passwordField($model, 'user_password', array('placeholder' => 'Password', 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
-<?php echo $form->error($model, 'user_password'); ?>
+                                <?php echo $form->passwordField($model, 'user_password', array('placeholder' => 'Password', 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
+                                <?php echo $form->error($model, 'user_password'); ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span> </span>
 <!--                                    <input type="text" class="form-control" placeholder="Confirm Password">-->
-                        <?php echo $form->passwordField($model, 'confirm_password', array('placeholder' => 'Confirm Password', 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
-<?php echo $form->error($model, 'confirm_password'); ?>
+                                <?php echo $form->passwordField($model, 'confirm_password', array('placeholder' => 'Confirm Password', 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
+                                <?php echo $form->error($model, 'confirm_password'); ?>
                             </div>
                         </div>
-<?php echo $form->hiddenField($model, 'user_activation_key', array('size' => 60, 'maxlength' => 250)); ?>
+                        <?php echo $form->hiddenField($model, 'user_activation_key', array('size' => 60, 'maxlength' => 250)); ?>
                         <div class="panel-footer"> 
                             <span class="text-muted fs12 lh30">
                                 <button type="button" data-provider="facebook" class="btn btn-sm bg-blue1 pull-left oAuthLogin">Connect with Facebook &nbsp;<i class="fa fa-facebook"></i></button>
@@ -147,10 +157,10 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         <?php ?>
                         <!--<a class="btn btn-sm bg-purple2 pull-right" href="#"><i class="fa fa-home"></i>Register</a>-->
                         <!--<i class="fa fa-home"></i>-->
-                            <?php echo CHtml::submitButton($model->isNewRecord ? 'Register' : 'Save', array('class' => 'btn btn-sm bg-purple2 pull-right',)); ?>
+                        <?php echo CHtml::submitButton($model->isNewRecord ? 'Register' : 'Save', array('class' => 'btn btn-sm bg-purple2 pull-right',)); ?>
                         <div class="clearfix"></div>                                                                                                                                                
                     </div>
-<?php $this->endWidget(); ?>
+                    <?php $this->endWidget(); ?>
 
                 </div>
             </div>
@@ -159,14 +169,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function() {
-        
-    $('.oAuthLogin').click(function(e) {
-        var _frameUrl = "<?php echo Yii::app()->createAbsoluteUrl('/site/users/signupsocial'); ?>?provider=" + $(this).data('provider');
-        window.open(_frameUrl, "SignIn", "width=580,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=400,top=150");
-        e.preventDefault();
-        return false;
+    $(document).ready(function () {
+
+        $('.oAuthLogin').click(function (e) {
+            var _frameUrl = "<?php echo Yii::app()->createAbsoluteUrl('/site/users/signupsocial'); ?>?provider=" + $(this).data('provider');
+            window.open(_frameUrl, "SignIn", "width=580,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=400,top=150");
+            e.preventDefault();
+            return false;
+        });
     });
-    });
-    
+
 </script>

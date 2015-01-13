@@ -39,11 +39,10 @@ return array(
         ),
         //
         //local mail components
-        
         //
         'user' => array('allowAutoLogin' => true),
         // uncomment the following to enable URLs in path-format
-         'urlManager' => array(
+        'urlManager' => array(
             'urlFormat' => 'path',
             'showScriptName' => false,
             'rules' => require(dirname(__FILE__) . '/urlManager.php'),
@@ -68,6 +67,16 @@ return array(
               ),
              */
             ),
+        ),
+        'Smtpmail' => array(
+            'class' => 'application.extensions.smtpmail.PHPMailer',
+            'Host' => "smtp.gmail.com",
+            'Username' => 'prakash.paramanandam@arkinfotec.com',
+            'Password' => 'prakashpp123',
+            'Mailer' => 'smtp',
+            'Port' => 587,
+            'SMTPAuth' => true,
+            'SMTPSecure' => 'tls',
         ),
     ),
     // application-level parameters that can be accessed
