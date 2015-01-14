@@ -28,6 +28,7 @@ class Users extends CActiveRecord {
         return '{{users}}';
     }
 
+    public $new_password;
     public $confirm_password;
 
     /**
@@ -37,7 +38,7 @@ class Users extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('user_name, user_email, user_password,confirm_password', 'required', 'on' => 'register'),
+            array('user_name, user_email, user_password, confirm_password', 'required', 'on' => 'register'),
             array('user_name, user_email, user_password', 'required', 'on' => 'social_register'),
             array('user_email, user_password, user_activation_key, user_login_ip', 'length', 'max' => 250),
             array('user_password', 'compare', 'compareAttribute' => 'confirm_password', 'on' => 'register'),
@@ -47,7 +48,9 @@ class Users extends CActiveRecord {
             array('user_last_login, created, modified', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('user_id, user_email, user_password, user_status, user_activation_key, user_last_login, user_login_ip, created, modified', 'safe', 'on' => 'search'),
+            array('user_id, user_email, user_password, user_status, user_activation_key, user_last_login, user_login_ip, created, modified, reset_password_string', 'safe', 'on' => 'search'),
+            array('new_password', 'compare', 'compareAttribute' => 'confirm_password', 'on' => 'reset'),
+            array('new_password, confirm_password', 'required', 'on' => 'reset'),
 //            array('password', 'forgot', 'on' => 'forgot'),
         );
     }
@@ -92,6 +95,9 @@ class Users extends CActiveRecord {
             'user_login_ip' => 'User Login Ip',
             'created' => 'Created',
             'modified' => 'Modified',
+            'confirm_password' => 'Confirm Password',
+            'new_password' => 'New Password',
+            'reset_password_string' => 'Password Reset String'
         );
     }
 
@@ -148,15 +154,4 @@ class Users extends CActiveRecord {
 
         return parent::beforeSave();
     }
-
-//         public function beforeSave(){
-//        
-//        if($_POST['Users']['user_password'])
-//        {
-//            $this->user_password = Myclass::encrypt($_POST['Users']['user_password']);
-//        }
-//       
-//       
-//        return parent::beforeSave();
-//    }
 }

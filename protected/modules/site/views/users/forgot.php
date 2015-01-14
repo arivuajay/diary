@@ -32,25 +32,25 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     ?> 
                     <div class="panel">
                         <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock text-purple2"></span> Lost Password </span> 
-                            <span class="panel-header-menu pull-right mr15 text-muted fs12"><?php echo CHtml::link('Register >>', array('/site/users/register'))?></span> </div>
+                            <span class="panel-header-menu pull-right mr15 text-muted fs12"><?php echo CHtml::link('Login >>', array('/site/users/login'))?></span> </div>
                         <div class="panel-body">
                             <?php
                             foreach (Yii::app()->user->getFlashes() as $key => $message) {
-                                echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
+                                echo '<div class="alert flash-' . $key . '">' . $message . "</div>\n";
                             }
                             ?>
                             <div class="login-avatar"> <img src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/login.png" width="150" height="112" alt="avatar"> </div>
                             <div class="form-group">
                                 <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span> </span>
                                     <?php echo $form->textField($model, 'username', array('class' => 'form-control', 'autocomplete' => 'off', 'autofocus', 'placeholder' => 'User Email')); ?>
-                                    <?php echo $form->error($model, 'username', array('class' => 'error')); ?>
                                     <!--<input type="text" class="form-control" placeholder="User Name">-->
                                 </div>
+                                <?php echo $form->error($model, 'username', array('class' => 'error')); ?>
                             </div>
                             
                         </div>
                         <div class="panel-footer"> <span class="text-muted fs12 lh30"></span>
-                            <?php echo CHtml::button('Get Password', array("class" => "btn btn-sm bg-purple2 pull-right", "type" => "submit", 'name' => 'forgot')); ?>
+                            <?php echo CHtml::button('Get Reset Link', array("class" => "btn btn-sm bg-purple2 pull-right", "type" => "submit", 'name' => 'forgot')); ?>
               <!--              <a class="btn btn-sm bg-purple2 pull-right" href="#"><i class="fa fa-home"></i> Login</a>-->
                             <div class="clearfix"></div>
                         </div>

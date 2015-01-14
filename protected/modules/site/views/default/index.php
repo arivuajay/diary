@@ -83,7 +83,7 @@ You may customize this page by editing <tt><?php echo __FILE__; ?></tt>
                                 
                                 <?php
     foreach(Yii::app()->user->getFlashes() as $key => $message) {
-        echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
+        echo '<div class="alert flash-' . $key . '">' . $message . "</div>\n";
     }
 ?>
 

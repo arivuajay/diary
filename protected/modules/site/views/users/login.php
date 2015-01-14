@@ -40,24 +40,25 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         <div class="panel-body">
                             <?php
                             foreach (Yii::app()->user->getFlashes() as $key => $message) {
-                                echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
+                                echo '<div class="alert flash-' . $key . '">' . $message . "</div>\n";
                             }
                             ?>
                             <div class="login-avatar"> <img src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/login.png" width="150" height="112" alt="avatar"> </div>
                             <div class="form-group">
                                 <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span> </span>
-                                    <?php echo $form->textField($model, 'username', array('class' => 'form-control', 'autocomplete' => 'off', 'autofocus', 'placeholder' => 'User Email')); ?>
-                                    <?php echo $form->error($model, 'username', array('class' => 'error')); ?>
+                                    <?php echo $form->textField($model, 'username', array('class' => 'form-control', 'autocomplete' => 'off', 'autofocus', 'placeholder' => Users::model()->getAttributeLabel('user_name'))); ?>
                                     <!--<input type="text" class="form-control" placeholder="User Name">-->
                                 </div>
+                                    <?php echo $form->error($model, 'username', array('class' => 'error')); ?>
                             </div>
                             <div class="form-group">
-                                <span class="text-mute">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>Lost Password?</a></span>
+                                <span class="text-mute">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <?php echo CHtml::link('Lost password', array('/site/users/forgot'))?></span>
                                 <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span> </span>
-                                    <?php echo $form->passwordField($model, 'password', array('class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => 'Password')); ?>
-                                    <?php echo $form->error($model, 'password', array('class' => 'error')); ?>
+                                    <?php echo $form->passwordField($model, 'password', array('class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => Users::model()->getAttributeLabel('password'))); ?>
                                     <!--<input type="text" class="form-control" placeholder="Password">-->
                                 </div>
+                                    <?php echo $form->error($model, 'password', array('class' => 'error')); ?>
                             </div>
                             <div class="panel-footer"> 
                                 <span class="text-muted fs12 lh30">

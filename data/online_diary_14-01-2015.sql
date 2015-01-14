@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v8.55 
-MySQL - 5.6.17 : Database - online_diary
+MySQL - 5.5.36 : Database - online_diary
 *********************************************************************
 */
 
@@ -217,15 +217,16 @@ CREATE TABLE `journal_users` (
   `user_activation_key` varchar(250) DEFAULT NULL,
   `user_last_login` datetime DEFAULT NULL,
   `user_login_ip` varchar(250) DEFAULT NULL,
+  `reset_password_string` varchar(50) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `NewIndex1` (`user_activation_key`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `journal_users` */
 
-insert  into `journal_users`(`user_id`,`user_name`,`user_email`,`user_password`,`user_status`,`user_activation_key`,`user_last_login`,`user_login_ip`,`created`,`modified`) values (1,'','test','test','0','12345','0000-00-00 00:00:00','','0000-00-00 00:00:00','0000-00-00 00:00:00'),(2,'stanley','testfe@gmail.com','123','0',NULL,NULL,NULL,NULL,NULL),(8,'stanley','ptrckstnly@gmail.com','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79','1','nwBiCBv8n','2015-01-14 10:15:28','::1',NULL,NULL);
+insert  into `journal_users`(`user_id`,`user_name`,`user_email`,`user_password`,`user_status`,`user_activation_key`,`user_last_login`,`user_login_ip`,`reset_password_string`,`created`,`modified`) values (1,'','test','test','0','12345','0000-00-00 00:00:00','',NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(2,'stanley','testfe@gmail.com','123','0',NULL,NULL,NULL,NULL,NULL,NULL),(8,'stanley','ptrckstnly@gmail.com','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79','1','nwBiCBv8n','2015-01-14 10:15:28','::1',NULL,NULL,NULL),(9,'prakash','prakash.paramanandam@arkinfotec.com','263fec58861449aacc1c328a4aff64aff4c62df4a2d50b3f207fa89b6e242c9aa778e7a8baeffef85b6ca6d2e7dc16ff0a760d59c13c238f6bcdc32f8ce9cc62','1','JDGfQKXcu','2015-01-14 13:20:40','127.0.0.1','','2015-01-14 11:31:18','2015-01-14 13:21:49');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -14,12 +14,29 @@
 -----------------------------------------------*/
 /* Header button states - text colors */
 .navbar-menus > div > button:focus {
-  color: #666; }
+    color: #666; }
 
 .navbar-menus > div > button:hover {
-  color: #333; }
+    color: #333; }
 
 /* Place your custom styles or styles which 
  * have been generated with the customization 
  * tool below this line. 
 -----------------------------------------------*/
+
+.flash-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+    font-size: 14px;
+}
+.flash-error {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+    font-size: 14px;
+}
+
+.errorMessage, .error{
+     color: #a94442;
+}
