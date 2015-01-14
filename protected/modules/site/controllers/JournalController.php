@@ -74,14 +74,14 @@ class JournalController extends Controller {
         if (isset($_POST['Diary'])) {
             $model->attributes = $_POST['Diary'];
             //print_r($_POST['Diary']);exit;
-
-            if (@!empty($_FILES['Diary']['name']['diary_upload'])) {
-                $model->diary_upload = $_POST['Diary']['diary_upload'];
                 $model->diary_user_id = Yii::app()->user->id;
                 $curr_timestamp = strtotime($_POST['Diary']['diary_current_date']);
                 $model->diary_current_date = date('Y-m-d H:i:s',$curr_timestamp);
                 $model->created = date('Y-m-d H:i:s');
                 $model->modified = date('Y-m-d H:i:s');
+            if (@!empty($_FILES['Diary']['name']['diary_upload'])) {
+                $model->diary_upload = $_POST['Diary']['diary_upload'];
+                
                 if ($model->validate(array('diary_upload'))) {
                     $model->diary_upload = CUploadedFile::getInstance($model, 'diary_upload');
                 } else {
