@@ -68,13 +68,13 @@ class EntryController extends Controller
 		$model=new Entry;
                 if(isset($_POST['email'])){
                 $userModel = Users::model()->findByAttributes(array('user_email' => $_POST['email']));
-               Yii::app()->session['temp_user_mail'] = $_POST['email'];
-               Yii::app()->session['temp_user_mood'] = $_POST['MoodType']['mood_type'];
+                Yii::app()->session['temp_user_mail'] = $_POST['email'];
+                Yii::app()->session['temp_user_mood'] = $_POST['MoodType']['mood_type'];
               // print_r($_POST);exit;
                 if(empty($userModel))
                     {
                     //auto registration for new user.....
-                    echo 'auto register process';
+                    //echo 'auto register process';
                     $model_register = new Users('register');
                     $string = Yii::app()->session['temp_user_mail'];
                     $result = explode('@', $string);
@@ -109,8 +109,13 @@ class EntryController extends Controller
                        // echo 'login entry page';
                         $this->redirect(array('users/login'));
                         }
-                                                                   
+                            ///////////////////////////// 
+		$this->render('create',array(
+			'model'=>$model,
+		));
+                /////////////////////////////                                        
                 }
+                
                 // echo 'hi';
                // print_r($_POST);exit;
 		// Uncomment the following line if AJAX validation is needed
@@ -121,12 +126,16 @@ class EntryController extends Controller
                         echo 'test';exit;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->temp_id));
-		}
-                ///////////////////////////// 
+		}else{
+                   // $this->redirect(Yii::app()->baseUrl);
+                }
+                
+                 ///////////////////////////// 
 		$this->render('create',array(
 			'model'=>$model,
 		));
-                /////////////////////////////
+                /////////////////////////////       
+                
 	}
 
 	/**
