@@ -63,7 +63,13 @@
         <div class="mobile-link"> <span class="glyphicons glyphicons-show_big_thumbnails"></span> </div>
         <div class="media-body">
           <h5 class="media-heading mt5 mbn fw700 cursor"><?php  if(Yii::app()->user->isGuest){echo 'Welcome Guest'; }else{echo Yii::app()->user->user_name;}?><span class="caret ml5"></span></h5>
-          <div class="media-links fs11"><a href="#">Menu</a><i class="fa fa-circle text-muted fs3 p8 va-m"></i><a href="<?php echo $baseUrl;?>/site/users/logout">Sign Out</a></div>
+          <div class="media-links fs11"><a href="#">Menu</a><i class="fa fa-circle text-muted fs3 p8 va-m"></i>
+           <?php  if(Yii::app()->user->isGuest):?>   
+              <a href="<?php echo $baseUrl;?>/site/users/login">Sign In</a>
+              <?php else:?>
+              <a href="<?php echo $baseUrl;?>/site/users/logout">Sign Out</a>
+          <?php          endif;?>
+              </div>
         </div>
       </div>
     </div>

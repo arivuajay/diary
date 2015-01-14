@@ -59,7 +59,7 @@ class UsersController extends Controller {
      */
     public function actionRegister() {
         if (!Yii::app()->user->isGuest)
-            $this->redirect(array('/site/entry/create'));
+            $this->redirect(array('/site/journal/create'));
 
         $model = new Users('register');
         $this->performAjaxValidation($model);

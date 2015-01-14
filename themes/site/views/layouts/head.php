@@ -27,7 +27,7 @@
 
 <?php 
 //       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/jquery/jquery-1.11.1.min.js');
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/jquery/jquery_ui/jquery-ui.min.js');
+       //$cs->registerScriptFile($themeUrl . '/css/frontend/vendor/jquery/jquery_ui/jquery-ui.min.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/bootstrap/js/bootstrap.min.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/backstretch/jquery.backstretch.min.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/js/utility/spin.min.js');
@@ -37,7 +37,7 @@
        $cs->registerScriptFile($themeUrl . '/css/frontend/js/custom.js');
        
        
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/ckeditor/ckeditor.js',$cs_pos_end);
+       //$cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/ckeditor/ckeditor.js',$cs_pos_end);
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/summernote/summernote.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/markitup/jquery.markitup.js');
        $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/markitup/sets/default/set.js');

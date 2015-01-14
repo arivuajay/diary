@@ -62,6 +62,9 @@ class EntryController extends Controller
 	 */
 	public function actionCreate()
 	{
+                if (!Yii::app()->user->isGuest)
+                $this->redirect(array('/site/journal/create'));
+                
 		$model=new Entry;
                 if(isset($_POST['email'])){
                 $userModel = Users::model()->findByAttributes(array('user_email' => $_POST['email']));
@@ -70,7 +73,36 @@ class EntryController extends Controller
               // print_r($_POST);exit;
                 if(empty($userModel))
                     {
+                    //auto registration for new user.....
                     echo 'auto register process';
+                    $model_register = new Users('register');
+                    $string = Yii::app()->session['temp_user_mail'];
+                    $result = explode('@', $string);
+                    $model_register->user_name = $result[0];
+                    $model_register->user_email = Yii::app()->session['temp_user_mail'];
+                    $model_register->user_password = Myclass::getRandomString();
+                    $pass_for_mail = $model_register->user_password;
+                    $model_register->user_activation_key = Myclass::getRandomString();
+                    //$model->created = date('Y-m-d H:i:s');
+                    //$model->modified = date('Y-m-d H:i:s');
+                    if($model_register->save(false)){
+                        $mail = new Sendmail;
+                $message = '<p>Dear ' . $model_register->user_name . '</p>';
+                $message .= '<p>Thank you for your intrest, we just need to verify your email address</p>';
+                $message .= '<p><a href="' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model_register->user_activation_key . '&userid=' . $model_register->user_id . '">Click Here to activate</a></p><br />';
+                $message .= "<p>If you can't click the button above, you can verify your email address by copying and pasting (or typing) the following address into your browser:</p>";
+                $message .= '<p><a href="' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model_register->user_activation_key . '&userid=' . $model_register->user_id . '">' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model_register->user_activation_key . '&userid=' . $model_register->user_id . '</a></p><br />';
+                $message .= '<p>After verify you can login using following details.</p>';
+                $message .= '<p>Username :'.$model_register->user_email.'</p>';
+                $message .= '<p>Password :'.$pass_for_mail.'</p>';
+                $Subject = CHtml::encode(Yii::app()->name) . ': Confirmation your email';
+                $mail->send($model_register->user_email, $Subject, $message);
+                    }
+                    
+//                    print_r($_POST);
+//                    echo  $model_register->user_password.'-------';
+//                    echo $model_register->user_activation_key;
+//                    exit;
                     }
                     else
                         {
@@ -83,8 +115,6 @@ class EntryController extends Controller
                // print_r($_POST);exit;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-//              echo  Yii::app()->user->getState("temp_user_mail");
-//              echo  Yii::app()->user->getState("temp_user_mood");exit;
 		if(isset($_POST['Entry']))
 		{
 			$model->attributes=$_POST['Entry'];
@@ -92,10 +122,11 @@ class EntryController extends Controller
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->temp_id));
 		}
-
+                ///////////////////////////// 
 		$this->render('create',array(
 			'model'=>$model,
 		));
+                /////////////////////////////
 	}
 
 	/**
