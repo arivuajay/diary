@@ -40,13 +40,7 @@ class UserIdentity extends CUserIdentity {
         endif;
 
         if ($this->errorCode == self::ERROR_NONE):
-            $this->_id = $user->user_id;
-            $this->setState('user_email', $user->user_email);
-            $this->setState('user_name', $user->user_name);
-            //$this->setState('tenant', $tenant);
-            $user->user_last_login = date('Y-m-d H:i:s');
-            $user->user_login_ip = Yii::app()->request->userHostAddress;
-            $user->save(false);
+            $this->setUserData($user);
         endif;
 
         return !$this->errorCode;
@@ -54,6 +48,26 @@ class UserIdentity extends CUserIdentity {
 
     public function getId() {
         return $this->_id;
+    }
+
+    public function autoLogin() {
+        $user = Users::model()->find('user_email = :U', array(':U' => $this->username));
+        if ($user === null):
+            $this->errorCode = self::ERROR_USERNAME_INVALID;
+        else:
+            $this->setUserData($user);
+        endif;
+        return !$this->errorCode;
+    }
+
+    protected function setUserData($user) {
+        $this->_id = $user->user_id;
+        $this->setState('user_email', $user->user_email);
+        $this->setState('user_name', $user->user_name);
+        $user->user_last_login = date('Y-m-d H:i:s');
+        $user->user_login_ip = Yii::app()->request->userHostAddress;
+        $user->save(false);
+        return;
     }
 
 }

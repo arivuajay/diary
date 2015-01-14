@@ -7,8 +7,11 @@
                     <?php
                     $form = $this->beginWidget('CActiveForm', array(
                         'id' => 'cms-form',
-                        'enableAjaxValidation' => false,
-                        'htmlOptions' => array('enctype' => 'multipart/form-data', 'class' => 'form-horizontal'),
+                        'enableAjaxValidation' => true,
+                        'clientOptions' => array(
+                            'validateOnSubmit' => true,
+                        ),
+                        'htmlOptions' => array('enctype' => 'multipart/form-data', 'class' => 'form-horizontal', 'role' => 'form'),
                     ));
                     ?>
                     <?php echo $form->errorSummary(array($model)); ?>

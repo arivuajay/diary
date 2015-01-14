@@ -185,7 +185,7 @@ class UsersController extends Controller {
             $haComp->userProfile = $haComp->adapter->getUserProfile();
 
             $haComp->processLogin();  //further action based on successful login or re-direct user to the required url
-            $redirectUrl = $this->createUrl("/site/default/index");
+            $redirectUrl = $this->createUrl("/site/journal/create");
             echo "<script type='text/javascript'>if(window.opener){window.opener.location = '$redirectUrl';window.close();}else{window.opener.location = '$redirectUrl';}</script>";
         } catch (Exception $e) {
             echo $e->getMessage();

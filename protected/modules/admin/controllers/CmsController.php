@@ -50,7 +50,7 @@ class CmsController extends Controller {
         $model = new Cms;
 
         // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+         $this->performAjaxValidation($model);
 
         if (isset($_POST['Cms'])) {
             $model->attributes = $_POST['Cms'];
@@ -285,4 +285,15 @@ class CmsController extends Controller {
         return $model;
     }
 
+    /**
+     * Performs the AJAX validation.
+     * @param User $model the model to be validated
+     */
+    protected function performAjaxValidation($model) {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'cms-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+    }
+    
 }

@@ -5,12 +5,12 @@
             'activateParents' => true,
             'encodeLabel' => false,
             'items' => array(
-                array('label' => '<i class="fa fa-dashboard"></i><span>Dashboard</span>', 'url' => '#'),
+                array('label' => '<i class="fa fa-dashboard"></i><span>Dashboard</span>', 'url' => array('/admin/default/index')),
                 array('label' => '<i class="fa fa-laptop"></i><span>User management</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
                     'submenuOptions' => array('class' => 'sub'),
                     'items' => array(
-                        array('label' => 'Users', 'url' => '#'),
-                        array('label' => 'Add User', 'url' => '#')
+                        array('label' => 'Users', 'url' => array('/admin/users/index')),
+//                        array('label' => 'Add User', 'url' => '#')
                     ),
                 ),
                 array('label' => '<i class="fa fa-book"></i><span>CMS</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   

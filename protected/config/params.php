@@ -20,7 +20,7 @@ return array(
     'SMTPAUTH'=>true,    // Auth : true or false
     'SMTPSECURE'=>'ssl', // Secure :tls or ssl
     
-    'NOREPLYMAIL'=>'test@test.com',
+    'NOREPLYMAIL'=>'noreply@express2help.com',
     'SITENAME'=>'Express 2 Help',
     
     //

@@ -50,37 +50,42 @@
             <!--main content end-->
         </section>
         <?php
-        $cs->registerScriptFile($themeUrl . '/js/jquery.js');
-        $cs->registerScriptFile($themeUrl . '/js/jquery-ui/jquery-ui-1.10.1.custom.min.js');
-        $cs->registerScriptFile($themeUrl . '/bs3/js/bootstrap.min.js');
-        $cs->registerScriptFile($themeUrl . '/js/jquery.dcjqaccordion.2.7.js');
-        $cs->registerScriptFile($themeUrl . '/js/jquery.scrollTo.min.js');
-        $cs->registerScriptFile($themeUrl . '/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js');
-        $cs->registerScriptFile($themeUrl . '/js/jquery.nicescroll.js');
-        $cs->registerScriptFile($themeUrl . '/js/skycons/skycons.js');
-        $cs->registerScriptFile($themeUrl . '/js/jquery.scrollTo/jquery.scrollTo.js');
-        $cs->registerScriptFile('//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js');
-        $cs->registerScriptFile($themeUrl . '/js/calendar/clndr.js');
-        $cs->registerScriptFile('//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js');
-        $cs->registerScriptFile($themeUrl . '/js/calendar/moment-2.2.1.js');
-        $cs->registerScriptFile($themeUrl . '/js/evnt.calendar.init.js');
-        $cs->registerScriptFile($themeUrl . '/js/jvector-map/jquery-jvectormap-1.2.2.min.js');
-        $cs->registerScriptFile($themeUrl . '/js/jvector-map/jquery-jvectormap-us-lcc-en.js');
-        $cs->registerScriptFile($themeUrl . '/js/gauge/gauge.js');
-        $cs->registerScriptFile($themeUrl . '/js/css3clock/js/css3clock.js');
-        $cs->registerScriptFile($themeUrl . '/js/easypiechart/jquery.easypiechart.js');
-        $cs->registerScriptFile($themeUrl . '/js/sparkline/jquery.sparkline.js');
-        $cs->registerScriptFile($themeUrl . '/js/morris-chart/morris.js');
-        $cs->registerScriptFile($themeUrl . '/js/morris-chart/raphael-min.js');
-        $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.js');
-        $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.tooltip.min.js');
-        $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.resize.js');
-        $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.pie.resize.js');
-        $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.animator.min.js');
-        $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.growraf.js');
-        $cs->registerScriptFile($themeUrl . '/js/dashboard.js');
-        $cs->registerScriptFile($themeUrl . '/js/jquery.customSelect.min.js');
-        $cs->registerScriptFile($themeUrl . '/js/scripts.js');
+        $cs_pos_end = CClientScript::POS_END;
+        
+        $cs->registerScriptFile($themeUrl . '/js/jquery.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jquery-ui/jquery-ui-1.10.1.custom.min.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/bs3/js/bootstrap.min.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jquery.dcjqaccordion.2.7.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jquery.scrollTo.min.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jquery.nicescroll.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/skycons/skycons.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jquery.scrollTo/jquery.scrollTo.js',$cs_pos_end);
+        $cs->registerScriptFile('//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/calendar/clndr.js',$cs_pos_end);
+        $cs->registerScriptFile('//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/calendar/moment-2.2.1.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/evnt.calendar.init.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jvector-map/jquery-jvectormap-1.2.2.min.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jvector-map/jquery-jvectormap-us-lcc-en.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/css3clock/js/css3clock.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/easypiechart/jquery.easypiechart.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/sparkline/jquery.sparkline.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/morris-chart/morris.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/morris-chart/raphael-min.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jquery.customSelect.min.js',$cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/scripts.js',$cs_pos_end);
+        
+        if($this->uniqueid == 'admin/default' && $this->action->Id == 'index'){
+//            $cs->registerScriptFile($themeUrl . '/js/gauge/gauge.js', $cs_pos_end);
+//            $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.js',$cs_pos_end);
+//            $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.tooltip.min.js',$cs_pos_end);
+//            $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.resize.js',$cs_pos_end);
+//            $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.pie.resize.js',$cs_pos_end);
+//            $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.animator.min.js',$cs_pos_end);
+//            $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.growraf.js',$cs_pos_end);
+//            $cs->registerScriptFile($themeUrl . '/js/dashboard.js',$cs_pos_end);
+        }
         ?>
         <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="<?php echo $themeUrl; ?>/js/flot-chart/excanvas.min.js"></script><![endif]-->
     </body>

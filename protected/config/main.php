@@ -40,7 +40,10 @@ return array(
         //
         //local mail components
         //
-        'user' => array('allowAutoLogin' => true),
+        'user' => array(
+            'allowAutoLogin' => true,
+            'loginUrl' => array('/site/users/login'),
+            ),
         // uncomment the following to enable URLs in path-format
         'urlManager' => array(
             'urlFormat' => 'path',

@@ -112,11 +112,14 @@ class HybridAuthIdentity extends CUserIdentity {
             endif;
 
             $result = $this->registerNewUser($model, $newrecord);
+            $identity = new UserIdentity($result->user_email, 'anonyms');
+            $identity->autoLogin();
+            Yii::app()->user->login($identity);
 
-            $model = new LoginForm('login');
-            $log = array('username' => $result->user_email, 'password' => $result->user_password);
-            $model->attributes = $log;
-            $model->login();
+//            $model = new LoginForm('login');
+//            $log = array('username' => $result->user_email, 'password' => $result->user_password);
+//            $model->attributes = $log;
+//            $model->login();
 //            $identity->autoLogin();
 //            Yii::app()->user->login($identity,0);
         }
@@ -133,10 +136,6 @@ class HybridAuthIdentity extends CUserIdentity {
             $model->user_last_login = date('Y-m-d h:i:s');
         endif;
         
-        var_dump($this->userProfile);
-        var_dump($model->attributes);
-        exit;
-
 //        if (!empty($this->userProfile->photoURL) && ($newrecord || empty($patient->profile_picture))):
 //            if ($image = $patient->urlImageSave($this->userProfile->photoURL, rand()))
 //                $model->user_avatar = $image;
