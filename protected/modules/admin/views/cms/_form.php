@@ -1,3 +1,13 @@
+<?php
+/* @var $this UserController */
+/* @var $model User */
+
+$this->breadcrumbs = array(
+    'CMS' => array('index'),
+    ($model->isNewRecord) ? "Add Page" : "Update Page",
+);
+?>
+
 <div class="row">
     <div class="col-lg-12">
         <section class="panel">

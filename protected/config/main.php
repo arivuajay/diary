@@ -43,7 +43,11 @@ return array(
         'user' => array(
             'allowAutoLogin' => true,
             'loginUrl' => array('/site/users/login'),
-            ),
+        ),
+        'admin' => array(
+            'allowAutoLogin' => true,
+            'loginUrl' => array('/admin/default/login'),
+        ),
         // uncomment the following to enable URLs in path-format
         'urlManager' => array(
             'urlFormat' => 'path',

@@ -30,7 +30,7 @@ class AdminModule extends CWebModule {
         if (parent::beforeControllerAction($controller, $action)) {
             // this method is called before any module controller action is performed
             // you may place customized code here
-            if (Yii::app()->user->isGuest && $action->id != 'login'):
+            if (Yii::app()->user->isGuest && ($action->id != 'login' && $action->id != 'forgotpassword')):
                 Yii::app()->getController()->redirect(array('/admin/default/login'));
             endif;
             return true;

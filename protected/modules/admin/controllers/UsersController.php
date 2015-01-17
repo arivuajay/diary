@@ -25,7 +25,7 @@ class UsersController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'changestatus'),
+                'actions' => array('index', 'view', 'changestatus', 'deletemultiple'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -121,15 +121,19 @@ class UsersController extends Controller {
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id) {
-        $userid = $this->loadModel($id)->user_id;
-        $this->loadModel($id)->delete();
-        Users::model()->deleteByPk($userid);
+        $user = $this->loadModel($id);
 
-        Yii::app()->user->setFlash('success', 'You have deleted successfully');
-
-        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-        if (!isset($_GET['ajax'])){
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+        if(empty($user))
+            throw new CHttpException(404, 'The requested page does not exist.');
+        
+        $user->setAttribute('user_status', '2');
+        if($user->save()){
+            Yii::app()->user->setFlash('success', 'You have deleted successfully');
+            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+            if (!isset($_GET['ajax']))
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+        }else{
+            Yii::app()->user->setFlash('error', 'Faield to delete');
         }
     }
 
@@ -137,7 +141,9 @@ class UsersController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $users = Users::model()->findAll();
+        $Criteria = new CDbCriteria();
+        $Criteria->condition = "user_status != '2'";
+        $users = Users::model()->findAll($Criteria);
 
         $this->render('index', array(
             'users' => $users,
@@ -186,10 +192,29 @@ class UsersController extends Controller {
     public function actionChangestatus($id) {
         $user = $this->loadModel($id);
         $user->user_status = ($user->user_status == 0) ? 1 : 0;
-        $user->save(false);
-
-        Yii::app()->user->setFlash('success', Yii::t('admin', 'ADMIN333'));
-        $this->redirect(array('/admin/user/index'));
+        if($user->save(false)){
+            $user->user_status == 0 ? $status= 'In-Active' : $status= 'Active';
+            echo '"'.$user->user_name.'" status: '.$status;
+        }else{
+            echo 'Error while changing status !!!';
+        }
+    }
+    
+    public function actionDeletemultiple() {
+        $return = array();
+        foreach ($_POST['id'] as $id) {
+            $user = $this->loadModel($id);
+            $user->user_status = 2;
+            if($user->save(false)){
+                $return['sts'] = 'success';
+                $return['text'] = 'Selected Users deleted successfully';
+            }else{
+                $return['sts'] = 'fail';
+                $return['text'] = 'Failed to delete this user: '.$user->user_name;
+                exit;
+            }
+        }
+        echo json_encode($return);
     }
 
 }

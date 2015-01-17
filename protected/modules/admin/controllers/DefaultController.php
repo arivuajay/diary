@@ -17,7 +17,7 @@ class DefaultController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('logout', 'index'),
+                'actions' => array('logout', 'index', 'profile', 'changepassword'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -46,14 +46,31 @@ class DefaultController extends Controller {
         }
         $this->render('login', compact('model'));
     }
+    
+    public function actionProfile() {
+        $id = Yii::app()->user->id;
+        $model = Admin::model()->findByPk($id);
+        $model->setScenario('update');
+        $this->performAjaxValidation($model);
 
+        if (isset($_POST['Admin'])) {
+            $model->attributes = $_POST['Admin'];
+            if ($model->validate()):
+                $model->save(false);
+                Yii::app()->user->setFlash('success', 'Profile updated successfully');
+                $this->redirect(array('profile'));
+            endif;
+        }
+        $this->render('profile', compact('model'));
+    }
+    
     public function actionLogout() {
         Yii::app()->user->logout(false);
         $this->redirect('login');
     }
 
     public function actionForgotpassword() {
-        $this->layout = 'main';
+        $this->layout = '//layouts/login';
         $newmodel = new Admin('forgotpassword');
         $newmodel->setScenario('forgotpassword');
         if (isset($_POST['Admin'])):
@@ -124,8 +141,8 @@ class DefaultController extends Controller {
             if ($model->validate()) {
                 $model->admin_password = Myclass::encrypt($_POST['Admin']['current_password']);
                 $model->save(false);
-                Yii::app()->user->setFlash('success', Yii::t('admin', 'ADMIN332'));
-                $this->redirect(array('index'));
+                Yii::app()->user->setFlash('success', 'Password changed successfullly');
+                $this->redirect(array('changepassword'));
             }
         }
         $this->render('changepassword', compact('model'));
@@ -232,4 +249,16 @@ class DefaultController extends Controller {
       );
       }
      */
+    
+    /**
+     * Performs the AJAX validation.
+     * @param User $model the model to be validated
+     */
+    protected function performAjaxValidation($model) {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'user-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+    }
+
 }
