@@ -40,7 +40,7 @@ $this->breadcrumbs = array(
                     <div class="form-group">
                         <?php echo $form->labelEx($model, 'body', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
                         <div class="col-lg-10">
-                            <?php echo $form->textField($model, 'body', array('class' => 'form-control')); ?>
+                            <?php echo $form->textArea($model, 'body', array('class' => 'form-control')); ?>
                         </div>
                     </div>
                     <div class="form-group">

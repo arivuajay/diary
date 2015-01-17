@@ -39,14 +39,14 @@ You may customize this page by editing <tt><?php echo __FILE__; ?></tt>
                                         <a href="#" class="nav-toggle"></a>
                                         <ul id="sub-nav" class="nav">
                                             <li><a href="#home" class="nav-link">Main</a></li>
-                                            <li><a href="#" class="nav-link">About Us</a></li>
+                                            <li><a href="<?php echo $baseUrl;?>/site/cms/view/slug/about-us">" class="nav-link">About Us</a></li>
                                             <li><a href="#" class="nav-link">Faq</a></li>
                                             <li><a href="#" class="nav-link">Your Personal Diary<span class="sub-toggle"></span></a>
                                                 <ul>
                                                     <li><a href="#" class="nav-link">Why you need Diary</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#" class="nav-link">Testimonial</a></li>	
+                                            <li><a href="<?php echo $baseUrl;?>/site/cms/view/slug/privacy">" class="nav-link">Privacy</a></li>	
                                             <li><a href="#" class="nav-link">Contact Us</a></li>
                                             <li><a href="#" class="nav-link">Feedback</a></li>
                                             <li><a href="#" class="nav-link">Blog</a></li>
