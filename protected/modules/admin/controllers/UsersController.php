@@ -13,6 +13,7 @@ class UsersController extends Controller {
     public function filters() {
         return array(
             'accessControl', // perform access control for CRUD operations
+//            'postOnly + delete', // we only allow deletion via POST request
         );
     }
 
@@ -120,19 +121,16 @@ class UsersController extends Controller {
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id) {
-
-
-
         $userid = $this->loadModel($id)->user_id;
         $this->loadModel($id)->delete();
-        User::model()->deleteByPk($userid);
+        Users::model()->deleteByPk($userid);
 
         Yii::app()->user->setFlash('success', 'You have deleted successfully');
 
-
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-        if (!isset($_GET['ajax']))
+        if (!isset($_GET['ajax'])){
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+        }
     }
 
     /**

@@ -20,7 +20,15 @@
         $cs->registerCssFile($themeUrl . '/js/morris-chart/morris.css');
         $cs->registerCssFile($themeUrl . '/css/style.css');
         $cs->registerCssFile($themeUrl . '/css/style-responsive.css');
+        $cs->registerCssFile($themeUrl . '/js/advanced-datatable/css/demo_page.css');
+        $cs->registerCssFile($themeUrl . '/js/advanced-datatable/css/demo_table.css');
+        $cs->registerCssFile($themeUrl . '/js/data-tables/DT_bootstrap.css');
+        $cs->registerCssFile($themeUrl . '/css/tableTools.css');
         ?>
+
+        <script>
+            var theme_url = '<?php echo $themeUrl ?>';
+        </script>
 
         <!-- Just for debugging purposes. Don't actually copy this line! -->
         <!--[if lt IE 9]>
@@ -45,38 +53,45 @@
             <!--sidebar end-->
             <!--main content start-->
             <section id="main-content">
+                
                 <?php echo $content; ?>
             </section>
             <!--main content end-->
         </section>
         <?php
         $cs_pos_end = CClientScript::POS_END;
-        
-        $cs->registerScriptFile($themeUrl . '/js/jquery.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/jquery-ui/jquery-ui-1.10.1.custom.min.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/bs3/js/bootstrap.min.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/jquery.dcjqaccordion.2.7.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/jquery.scrollTo.min.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/jquery.nicescroll.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/skycons/skycons.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/jquery.scrollTo/jquery.scrollTo.js',$cs_pos_end);
-        $cs->registerScriptFile('//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/calendar/clndr.js',$cs_pos_end);
-        $cs->registerScriptFile('//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/calendar/moment-2.2.1.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/evnt.calendar.init.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/jvector-map/jquery-jvectormap-1.2.2.min.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/jvector-map/jquery-jvectormap-us-lcc-en.js',$cs_pos_end);
+
+        $cs->registerScriptFile($themeUrl . '/js/jquery.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jquery-ui/jquery-ui-1.10.1.custom.min.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/bs3/js/bootstrap.min.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jquery.dcjqaccordion.2.7.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jquery.scrollTo.min.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jquery.nicescroll.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/skycons/skycons.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jquery.scrollTo/jquery.scrollTo.js', $cs_pos_end);
+        $cs->registerScriptFile('//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/calendar/clndr.js', $cs_pos_end);
+        $cs->registerScriptFile('//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/calendar/moment-2.2.1.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/evnt.calendar.init.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jvector-map/jquery-jvectormap-1.2.2.min.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jvector-map/jquery-jvectormap-us-lcc-en.js', $cs_pos_end);
         $cs->registerScriptFile($themeUrl . '/js/css3clock/js/css3clock.js', $cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/easypiechart/jquery.easypiechart.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/sparkline/jquery.sparkline.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/morris-chart/morris.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/morris-chart/raphael-min.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/jquery.customSelect.min.js',$cs_pos_end);
-        $cs->registerScriptFile($themeUrl . '/js/scripts.js',$cs_pos_end);
-        
-        if($this->uniqueid == 'admin/default' && $this->action->Id == 'index'){
+        $cs->registerScriptFile($themeUrl . '/js/easypiechart/jquery.easypiechart.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/sparkline/jquery.sparkline.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/morris-chart/morris.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/morris-chart/raphael-min.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jquery.customSelect.min.js', $cs_pos_end);
+
+        $cs->registerScriptFile($themeUrl . '/js/advanced-datatable/js/jquery.dataTables.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/data-tables/DT_bootstrap.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/tableTools.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/dynamic_table_init.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/jquery.table2excel.js', $cs_pos_end);
+        $cs->registerScriptFile($themeUrl . '/js/scripts.js', $cs_pos_end);
+
+        if ($this->uniqueid == 'admin/default' && $this->action->Id == 'index') {
 //            $cs->registerScriptFile($themeUrl . '/js/gauge/gauge.js', $cs_pos_end);
 //            $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.js',$cs_pos_end);
 //            $cs->registerScriptFile($themeUrl . '/js/flot-chart/jquery.flot.tooltip.min.js',$cs_pos_end);
