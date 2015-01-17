@@ -28,7 +28,7 @@ class UsersController extends Controller {
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array(
                     'index', 'view', 'register', 'signupsocial', 'sociallogin', 
-                    'login', 'activation', 'test', 'forgot', 'reset'),
+                    'login', 'activation', 'test', 'forgot', 'reset','temporary'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -250,6 +250,52 @@ class UsersController extends Controller {
             $this->redirect(array('/site/users/login'));
         } else {
             echo var_dump($user->getErrors());
+        }
+        exit;
+    }
+    
+    public function actiontemporary($activationkey, $userid) {
+        $user = Users::model()->findByAttributes(array(
+            'user_id' => $userid,
+            'user_activation_key' => $activationkey,
+            'user_last_login' => null)
+        );
+         $temp_model = Entry::model()->findByAttributes(array(
+            'temp_activation_key' => $activationkey,
+        ));
+        $journal_model = new Diary;
+        if (empty($user))
+            throw new CHttpException(404, 'The specified post cannot be found.');
+        
+        $journal_model->setAttribute('diary_user_id', $userid);
+        $journal_model->setAttribute('diary_title', $temp_model->temp_title);
+        $journal_model->setAttribute('diary_description', $temp_model->temp_description);
+        $journal_model->setAttribute('diary_category_id', $temp_model->temp_category_id);
+        $journal_model->setAttribute('diary_tags', $temp_model->temp_tags);
+        $journal_model->setAttribute('diary_current_date', $temp_model->temp_current_date);
+        $journal_model->setAttribute('diary_user_mood_id', $temp_model->temp_user_mood_id);
+        $journal_model->setAttribute('diary_upload', $temp_model->temp_upload);
+        $journal_model->setAttribute('created', $temp_model->created);
+        $journal_model->setAttribute('modified', $temp_model->modified);
+        if ($journal_model->save(false)) {
+        Entry::model()->deleteByPk(array('temp_activation_key'=>$temp_model->temp_activation_key,'temp_id'=>$temp_model->temp_id));
+        $user = $this->loadModel($userid);
+        $user->setAttribute('user_status', '1');
+        $user->setAttribute('user_last_login', date('Y-m-d H:i:s'));
+        if ($user->save(false)) {
+            $mail = new Sendmail;
+            $message = '<p>Dear ' . $user->user_name . '</p>';
+            $message .= '<p>Your email account verified successfully.</p>';
+            $message .= '<p>You can login with your email and password: ';
+            $message .= '<a href="' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/user/login">Click Here to Login</a></p>';
+            $Subject = CHtml::encode(Yii::app()->name) . ': Email Verfied';
+            $mail->send($user->user_email, $Subject, $message);
+            
+            Yii::app()->user->setFlash('success', "Your Email account verified. you can login");
+            $this->redirect(array('/site/users/login'));
+        } else {
+            echo var_dump($user->getErrors());
+        }
         }
         exit;
     }

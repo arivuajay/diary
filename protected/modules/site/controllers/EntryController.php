@@ -106,9 +106,9 @@ class EntryController extends Controller {
                 $mail = new Sendmail;
                 $message = '<p>Dear ' . $model_register->user_name . '</p>';
                 $message .= '<p>Thank you for your intrest, we just need to verify your email address</p>';
-                $message .= '<p><a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model_register->user_activation_key . '&userid=' . $model_register->user_id . '">Click Here to activate</a></p><br />';
+                $message .= '<p><a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/temporary?activationkey=' . $model_register->user_activation_key . '&userid=' . $model_register->user_id . '">Click Here to activate</a></p><br />';
                 $message .= "<p>If you can't click the button above, you can verify your email address by copying and pasting (or typing) the following address into your browser:</p>";
-                $message .= '<p><a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model_register->user_activation_key . '&userid=' . $model_register->user_id . '">' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model_register->user_activation_key . '&userid=' . $model_register->user_id . '</a></p><br />';
+                $message .= '<p><a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/temporary?activationkey=' . $model_register->user_activation_key . '&userid=' . $model_register->user_id . '">' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/temporary?activationkey=' . $model_register->user_activation_key . '&userid=' . $model_register->user_id . '</a></p><br />';
                 $message .= '<p>After verify you can login using following details.</p>';
                 $message .= '<p>Username :' . $model_register->user_email . '</p>';
                 $message .= '<p>Password :' . $pass_for_mail . '</p>';
