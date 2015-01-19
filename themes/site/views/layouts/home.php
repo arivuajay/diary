@@ -99,10 +99,10 @@
         <link rel="apple-touch-icon" sizes="72x72" href="<?php echo $themeUrl; ?>/css/home/assets/assets/images/apple_touch_icon_72x72.png" />
         <link rel="apple-touch-icon" sizes="114x114" href="<?php echo $themeUrl; ?>/css/home/assets/assets/images/apple_touch_icon_114x114.png" />
 
-        <script src="assets/js/jquery-1.11.1.min.js"></script>
-        <script src="assets/js/jquery-migrate-1.2.1.js"></script>
-        <script src="assets/js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="assets/js/modernizr.custom.js"></script>
+        <script src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery-1.11.1.min.js"></script>
+        <script src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery-migrate-1.2.1.js"></script>
+        <script src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/modernizr.custom.js"></script>
 
 
     </head>
@@ -134,7 +134,7 @@
         <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/bootstrap-datetimepicker.min.js"></script>
         <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.scrollTo.min.js"></script>
         <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.fitvids.js"></script>
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<!--        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
 
 
         <!-- SlickNavigation For Mobile Device-->
@@ -163,9 +163,9 @@
         <!-- Cycle Slider Gallery End-->
 
         <!--SuperSized Gallery-->
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/supersized.3.2.7.min.js"></script>
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/supersized.shutter.min.js"></script>
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/supersized_custom.js"></script>
+<!--        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/supersized.3.2.7.min.js"></script>-->
+<!--        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/supersized.shutter.min.js"></script>-->
+<!--        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/supersized_custom.js"></script>-->
         <!--SuperSized Gallery End-->
 
         <!-- Filter Gallery And PrettyPhoto-->

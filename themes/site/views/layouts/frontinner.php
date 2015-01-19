@@ -106,7 +106,7 @@
         <li> <a href="#"><span class="glyphicons glyphicons-link"></span><span class="sidebar-title">Donation</span></a> </li>
         <li> <a href="#"><span class="glyphicons glyphicons-edit"></span><span class="sidebar-title">Feedback</span></a> </li>
         <li> <a href="#"><span class="glyphicons glyphicons-table"></span><span class="sidebar-title">Blog</span></a> </li>
-        <li> <a href="<?php echo $baseUrl;?>/site/cms/view/slug/about-us" class="ajax-disable"><span class="glyphicons glyphicons-inbox"></span><span class="sidebar-title">Privacy</span></a> </li>
+        <li> <a href="<?php echo $baseUrl;?>/site/cms/view/slug/privacy" class="ajax-disable"><span class="glyphicons glyphicons-inbox"></span><span class="sidebar-title">Privacy</span></a> </li>
       </ul>
     </div>
   </aside>
