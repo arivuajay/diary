@@ -20,6 +20,13 @@
                         array('label' => 'Add Page', 'url' => array('/admin/cms/createpage')),
                     ),
                 ),
+                array('label' => '<i class="fa fa-book"></i><span>Faqs</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
+                    'submenuOptions' => array('class' => 'sub'),
+                    'items' => array(
+                        array('label' => 'Manage Faqs', 'url' => array('/admin/faq/index')),
+                        array('label' => 'Add Faq', 'url' => array('/admin/faq/createfaq')),
+                    ),
+                ),
             ),
             'htmlOptions' => array('class' => 'sidebar-menu', "id" => "nav-accordion")
         ));
