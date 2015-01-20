@@ -40,7 +40,7 @@ $this->breadcrumbs = array(
                                 <td>
                                     <?php
 //                                        echo CHtml::link('<i class="fa fa-eye" title="View"></i>', array('/admin/cms/viewpage', 'id' => $page->id), array('rel' => 'tooltip')) . "&nbsp;&nbsp;";
-                                    echo CHtml::link('<i class="fa fa-edit" title = "Update"></i>', array('/admin/cms/updatepage', 'id' => $page->id), array('rel' => 'tooltip')) . "&nbsp;&nbsp;";
+                                    echo CHtml::link('<i class="fa fa-edit" title = "Edit"></i>', array('/admin/cms/updatepage', 'id' => $page->id), array('rel' => 'tooltip')) . "&nbsp;&nbsp;";
                                     echo CHtml::link('<i class="fa fa-trash-o" title="Delete"></i>', array('/admin/cms/deletepage', 'id' => $page->id), array('rel' => 'tooltip', 'onclick' => "return confirm('Are you sure you want to delete?');"));
                                     ?>
                                 </td>

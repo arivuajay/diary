@@ -7,6 +7,9 @@ class CmsController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/frontinner';
+        public $pageDescription;
+        public $pageKeywords;
+        public $pageTitle;
 
 	/**
 	 * @return array action filters
@@ -51,11 +54,14 @@ class CmsController extends Controller
 	 */
 	public function actionView($slug)
 	{    //echo $slug;
-              
+                
                 $data = Cms::model()->findByAttributes(
                 array('slug'=>$slug)
                 );
-               // print_r($data);exit;
+                $this->pageDescription = $data->metaDescription;
+                $this->pageKeywords = $data->metaKeywords;
+                $this->pageTitle = $data->metaTitle;
+                //print_r($data);exit;
                 
 		$this->render('view',array(
 			'model'=>$data,
@@ -128,6 +134,7 @@ class CmsController extends Controller
 	 */
 	public function actionIndex()
 	{
+
 		$dataProvider=new CActiveDataProvider('Cms');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,

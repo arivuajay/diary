@@ -89,7 +89,7 @@
     </div>
     <div class="sidebar-menu">
       <ul class="nav sidebar-nav">
-      <li> <a class="accordion-toggle" href="<?php echo $baseUrl;?>/site/cms/view/slug/about-us"><span class="glyphicons glyphicons-book"></span><span class="sidebar-title">About Us</span><span class="caret"></span></a>
+      <li> <a class="accordion-toggle" href="#"><span class="glyphicons glyphicons-book"></span><span class="sidebar-title">About</span><span class="caret"></span></a>
           <ul id="sideFive" class="nav sub-nav">
             <li><a href="#"><span class="glyphicons glyphicons glyphicons-user"></span> Profile</a></li>
             <li><a href="#"><span class="glyphicons glyphicons-picture"></span> Testimonials</a></li>
@@ -105,7 +105,7 @@
         <li> <a href="#"><span class="glyphicons glyphicons-pencil"></span><span class="sidebar-title">Tell a Friend</span></a> </li>
         <li> <a href="#"><span class="glyphicons glyphicons-link"></span><span class="sidebar-title">Donation</span></a> </li>
         <li> <a href="#"><span class="glyphicons glyphicons-edit"></span><span class="sidebar-title">Feedback</span></a> </li>
-        <li> <a href="#"><span class="glyphicons glyphicons-table"></span><span class="sidebar-title">Blog</span></a> </li>
+        <li> <a href="<?php echo $baseUrl;?>/site/cms/view/slug/about-us" class="ajax-disable"><span class="glyphicons glyphicons-inbox"></span><span class="sidebar-title">About us</span></a> </li>
         <li> <a href="<?php echo $baseUrl;?>/site/cms/view/slug/privacy" class="ajax-disable"><span class="glyphicons glyphicons-inbox"></span><span class="sidebar-title">Privacy</span></a> </li>
       </ul>
     </div>

@@ -4,14 +4,14 @@
 
 $this->breadcrumbs = array(
     'CMS' => array('index'),
-    ($model->isNewRecord) ? "Add Page" : "Update Page",
+    ($model->isNewRecord) ? "Add Page" : $model->heading,
 );
 ?>
 
 <div class="row">
     <div class="col-lg-12">
         <section class="panel">
-            <header class="panel-heading"><?php echo ($model->isNewRecord) ? "Add Page" : "Update Page"; ?></header>
+            <header class="panel-heading"><?php echo ($model->isNewRecord) ? "Add Page" :  $model->heading; ?></header>
             <div class="panel-body">
                 <div class="position-center">
                     <?php
@@ -67,7 +67,7 @@ $this->breadcrumbs = array(
 
                     <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10">
-                            <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class' => 'btn btn-primary')); ?>
+                            <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Update', array('class' => 'btn btn-primary')); ?>
                         </div>
                     </div>
                     <?php $this->endWidget(); ?>

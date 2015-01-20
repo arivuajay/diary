@@ -85,7 +85,7 @@ class FaqController extends Controller
 	 * @param integer $id the ID of the model to be updated
 	 */
 	public function actionUpdatefaq($id)
-	{
+	{ 
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed

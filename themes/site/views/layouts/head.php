@@ -2,10 +2,15 @@
 <!-- Meta, title, CSS, favicons, etc. -->
 <meta charset="utf-8">
 <title>Express 2 Help</title>
-<meta name="keywords" content="HTML5 Bootstrap 3 Admin Template UI Theme" />
-<meta name="description" content="Fusion - A Responsive HTML5 Admin UI Template Theme">
-<meta name="author" content="AdminDesigns">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--<meta name="keywords" content="HTML5 Bootstrap 3 Admin Template UI Theme" />-->
+<?php
+
+Yii::app()->clientScript->registerMetaTag($this->pageKeywords, "keywords");
+Yii::app()->clientScript->registerMetaTag($this->pageTitle, "Title");
+Yii::app()->clientScript->registerMetaTag($this->pageDescription, "description");
+?>
+<!--<meta name="author" content="AdminDesigns">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
 <!-- Font CSS (Via CDN) -->
 <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800'>
