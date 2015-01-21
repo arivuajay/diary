@@ -148,7 +148,7 @@ You may customize this page by editing <tt><?php echo __FILE__; ?></tt>
                                                             <li><a href="#" onClick="javascript:location.href='<?php echo $baseUrl;?>/site/cms/view/slug/privacy'" class="">Privacy</a></li>		
                                                             <li><a href="#" class="nav-link">Contact Us</a></li>	
                                                             <li><a href="#" class="nav-link">Feedback</a></li>
-                                                            <li><a href="#" class="nav-link">Blog</a></li>
+                                                            <li><a href="#" onClick="javascript:location.href='<?php echo $baseUrl;?>/site/carriers'" class="nav-link">Careers</a></li>
                                                         </ul>
                                                     </nav>
                                                     <!--  // Home Page Menu section -->
