@@ -39,6 +39,7 @@ class Users extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('user_name, user_email, user_password, confirm_password', 'required', 'on' => 'register'),
+            array('user_name, user_email, user_password', 'required', 'on' => 'webservice'),
             array('user_name, user_email, user_password', 'required', 'on' => 'social_register'),
             array('user_email, user_password, user_activation_key, user_login_ip', 'length', 'max' => 250),
             array('user_password', 'compare', 'compareAttribute' => 'confirm_password', 'on' => 'register'),

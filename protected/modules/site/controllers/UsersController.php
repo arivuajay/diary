@@ -27,8 +27,8 @@ class UsersController extends Controller {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array(
-                    'index', 'view', 'register', 'signupsocial', 'sociallogin', 
-                    'login', 'activation', 'test', 'forgot', 'reset','temporary'),
+                    'index', 'view', 'register', 'signupsocial', 'sociallogin',
+                    'login', 'activation', 'test', 'forgot', 'reset', 'temporary'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -69,16 +69,9 @@ class UsersController extends Controller {
             $model->attributes = $_POST['Users'];
             $model->user_activation_key = Myclass::getRandomString();
             $valid = $model->validate();
-            if ($valid && $model->save(false)) {
-                $mail = new Sendmail;
-                $message = '<p>Dear ' . $model->user_name . '</p>';
-                $message .= '<p>Thank you for signing up, we just need to verify your email address</p>';
-                $message .= '<p><a href="' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">Click Here to activate</a></p><br />';
-                $message .= "<p>If you can't click the button above, you can verify your email address by copying and pasting (or typing) the following address into your browser:</p>";
-                $message .= '<p><a href="' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '</a></p><br />';
-                $Subject = CHtml::encode(Yii::app()->name) . ': Confirmation your email';
-                $mail->send($model->user_email, $Subject, $message);
-
+            if ($valid) {
+                $this->addUser($model);
+                
                 Yii::app()->user->setFlash('success', "Please check your mail for activation");
                 $this->redirect(array('/site/users/login'));
             }
@@ -204,7 +197,7 @@ class UsersController extends Controller {
         require_once $path . '/hybridauth-' . HybridAuthIdentity::VERSION . '/hybridauth/index.php';
     }
 
-    public function actionLogin() {
+    public function actionLogin() { 
         if (!Yii::app()->user->isGuest)
             $this->redirect(array('/site/journal/create'));
 
@@ -242,10 +235,10 @@ class UsersController extends Controller {
             $message = '<p>Dear ' . $user->user_name . '</p>';
             $message .= '<p>Your email account verified successfully.</p>';
             $message .= '<p>You can login with your email and password: ';
-            $message .= '<a href="' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/user/login">Click Here to Login</a></p>';
+            $message .= '<a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/login">Click Here to Login</a></p>';
             $Subject = CHtml::encode(Yii::app()->name) . ': Email Verfied';
             $mail->send($user->user_email, $Subject, $message);
-            
+
             Yii::app()->user->setFlash('success', "Your Email account verified. you can login");
             $this->redirect(array('/site/users/login'));
         } else {
@@ -253,20 +246,20 @@ class UsersController extends Controller {
         }
         exit;
     }
-    
+
     public function actiontemporary($activationkey, $userid) {
         $user = Users::model()->findByAttributes(array(
             'user_id' => $userid,
             'user_activation_key' => $activationkey,
             'user_last_login' => null)
         );
-         $temp_model = Entry::model()->findByAttributes(array(
+        $temp_model = Entry::model()->findByAttributes(array(
             'temp_activation_key' => $activationkey,
         ));
         $journal_model = new Diary;
         if (empty($user))
             throw new CHttpException(404, 'The specified post cannot be found.');
-        
+
         $journal_model->setAttribute('diary_user_id', $userid);
         $journal_model->setAttribute('diary_title', $temp_model->temp_title);
         $journal_model->setAttribute('diary_description', $temp_model->temp_description);
@@ -278,28 +271,28 @@ class UsersController extends Controller {
         $journal_model->setAttribute('created', $temp_model->created);
         $journal_model->setAttribute('modified', $temp_model->modified);
         if ($journal_model->save(false)) {
-        Entry::model()->deleteByPk(array('temp_activation_key'=>$temp_model->temp_activation_key,'temp_id'=>$temp_model->temp_id));
-        $user = $this->loadModel($userid);
-        $user->setAttribute('user_status', '1');
-        $user->setAttribute('user_last_login', date('Y-m-d H:i:s'));
-        if ($user->save(false)) {
-            $mail = new Sendmail;
-            $message = '<p>Dear ' . $user->user_name . '</p>';
-            $message .= '<p>Your email account verified successfully.</p>';
-            $message .= '<p>You can login with your email and password: ';
-            $message .= '<a href="' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/user/login">Click Here to Login</a></p>';
-            $Subject = CHtml::encode(Yii::app()->name) . ': Email Verfied';
-            $mail->send($user->user_email, $Subject, $message);
-            
-            Yii::app()->user->setFlash('success', "Your Email account verified. you can login");
-            $this->redirect(array('/site/users/login'));
-        } else {
-            echo var_dump($user->getErrors());
-        }
+            Entry::model()->deleteByPk(array('temp_activation_key' => $temp_model->temp_activation_key, 'temp_id' => $temp_model->temp_id));
+            $user = $this->loadModel($userid);
+            $user->setAttribute('user_status', '1');
+            $user->setAttribute('user_last_login', date('Y-m-d H:i:s'));
+            if ($user->save(false)) {
+                $mail = new Sendmail;
+                $message = '<p>Dear ' . $user->user_name . '</p>';
+                $message .= '<p>Your email account verified successfully.</p>';
+                $message .= '<p>You can login with your email and password: ';
+                $message .= '<a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/login">Click Here to Login</a></p>';
+                $Subject = CHtml::encode(Yii::app()->name) . ': Email Verfied';
+                $mail->send($user->user_email, $Subject, $message);
+
+                Yii::app()->user->setFlash('success', "Your Email account verified. you can login");
+                $this->redirect(array('/site/users/login'));
+            } else {
+                echo var_dump($user->getErrors());
+            }
         }
         exit;
     }
-    
+
     public function actionForgot() {
         if (!Yii::app()->user->isGuest)
             $this->redirect(array('/site/journal/create'));
@@ -308,7 +301,7 @@ class UsersController extends Controller {
         $this->performAjaxValidation($model);
         if (isset($_POST['forgot'])) {
             $user = Users::model()->findByAttributes(array('user_email' => $_POST['LoginForm']['username']));
-            if(empty($user)){
+            if (empty($user)) {
                 Yii::app()->user->setFlash('error', "This Email Address Not Exists");
                 $this->redirect(array('/site/users/forgot'));
             }
@@ -317,35 +310,35 @@ class UsersController extends Controller {
             $model->setAttribute('reset_password_string', $reset_link);
             $model->setAttribute('modified', date('Y-m-d H:i:s'));
             $model->save(false);
-            
+
             $mail = new Sendmail;
             $message = '<p>Dear ' . $user->user_name . '</p>';
             $message .= '<p>We received a request to reset the password for your account.To reset your password, click on the button below (or copy/paste the URL into your browser). </p>';
-            $message .= '<a href="' . $_SERVER['HTTP_HOST'].Yii::app()->baseUrl . '/site/users/reset?str='.$model->reset_password_string.'&id='.$model->user_id.'">Click to Reset Password</a></p>';
-            $message .= '<p>This Password Link is valid for only 5 minutes from request time ('.date('Y-m-d H:i:s').')</p>';
+            $message .= '<a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/reset?str=' . $model->reset_password_string . '&id=' . $model->user_id . '">Click to Reset Password</a></p>';
+            $message .= '<p>This Password Link is valid for only 5 minutes from request time (' . date('Y-m-d H:i:s') . ')</p>';
             $Subject = CHtml::encode(Yii::app()->name) . ': Reset Password';
             $mail->send($user->user_email, $Subject, $message);
-            
+
             Yii::app()->user->setFlash('success', "Your Password Reset Link sent to your email address.");
             $this->redirect(array('/site/users/login'));
         }
         $this->render('forgot', array('model' => $model));
     }
-    
+
     public function actionReset($str, $id) {
         if (!Yii::app()->user->isGuest)
             $this->redirect(array('/site/journal/create'));
 
         $model = $this->loadModel($id);
-        if(empty($model) || $model->reset_password_string != $str){
+        if (empty($model) || $model->reset_password_string != $str) {
             Yii::app()->user->setFlash('error', "Not a valid Reset Link");
             $this->redirect(array('/site/users/login'));
-        }else{
+        } else {
             $time1 = new DateTime(date('H:i:s'));
             $time2 = new DateTime(date('H:i:s', strtotime($model->modified)));
             $interval = $time1->diff($time2);
-            $minutes = $interval->format('%i');    
-            if($minutes > 5){
+            $minutes = $interval->format('%i');
+            if ($minutes > 5) {
                 Yii::app()->user->setFlash('error', "This Reset Link Expired. Please Try again.");
                 $this->redirect(array('/site/users/forgot'));
             }
@@ -381,19 +374,52 @@ class UsersController extends Controller {
 //        }
 //        //end
 //        exit;
-        
+
         $mail = new Sendmail;
-        try{
-            if($mail->send('prakash.paramanandam@arkinfotec.com', 'test', 'test')){
-            echo 'success';
-            }else{
+        try {
+            if ($mail->send('prakash.paramanandam@arkinfotec.com', 'test', 'test')) {
+                echo 'success';
+            } else {
                 echo 'fail';
             }
-
         } catch (Exception $ex) {
             echo $ex->getMessage();
         }
-                exit;
+        exit;
+    }
+
+    public function addUser($model) {
+        $response = null;
+        if (!is_object($model)) {
+            print_r($_POST);exit;
+//            'Name' => $_POST['Users']['user_name'],
+//            'Email' => $_POST['Users']['user_email'],
+//            'Password' => $_POST['Users']['user_password']  
+            $param = $model;
+            $model = new Users('webservice');
+            $model->attributes = $param;
+            if (!$model->validate()) {
+                $response['status'] = '0';
+                $response['message'] = $model->errors;
+
+                return $response;
+            }
+        }
+
+        $model->save(false);
+
+        $mail = new Sendmail;
+        $message = '<p>Dear ' . $model->user_name . '</p>';
+        $message .= '<p>Thank you for signing up, we just need to verify your email address</p>';
+        $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">Click Here to activate</a></p><br />';
+        $message .= "<p>If you can't click the button above, you can verify your email address by copying and pasting (or typing) the following address into your browser:</p>";
+        $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '</a></p><br />';
+        $Subject = CHtml::encode(Yii::app()->name) . ': Confirmation your email';
+        $mail->send($model->user_email, $Subject, $message);
+
+        $response['status'] = '1';
+
+        return $response;
     }
 
 }

@@ -37,6 +37,7 @@ class Sendmail {
                 $mailer->Send();
             } catch (Exception $exc) {
                 echo $exc->getTraceAsString();
+                exit;
             }
         endif;
     }

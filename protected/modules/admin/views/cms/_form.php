@@ -37,10 +37,11 @@ $this->breadcrumbs = array(
                             <?php echo $form->textField($model, 'slug', array('class' => 'form-control')); ?>
                         </div>
                     </div>
+                    <script src="<?php echo Yii::app()->baseUrl.'/ckeditor/ckeditor.js'; ?>"></script>
                     <div class="form-group">
                         <?php echo $form->labelEx($model, 'body', array('class' => 'col-lg-2 col-sm-2 control-label')); ?>
                         <div class="col-lg-10">
-                            <?php echo $form->textArea($model, 'body', array('class' => 'form-control')); ?>
+                            <?php echo $form->textArea($model, 'body', array('class' => 'form-control','id'=>'editor1')); ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -76,3 +77,13 @@ $this->breadcrumbs = array(
         </section>
     </div>
 </div>
+<script type="text/javascript">
+    CKEDITOR.replace( 'editor1', {
+         filebrowserBrowseUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/browse.php?type=files',
+         filebrowserImageBrowseUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/browse.php?type=images',
+         filebrowserFlashBrowseUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/browse.php?type=flash',
+         filebrowserUploadUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/upload.php?type=files',
+         filebrowserImageUploadUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/upload.php?type=images',
+         filebrowserFlashUploadUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/upload.php?type=flash'
+    });
+</script>
