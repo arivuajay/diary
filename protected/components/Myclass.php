@@ -26,23 +26,25 @@ class Myclass extends CController {
         }
         return $final_rand;
     }
-    
-    public static function getMood($key = NULL){
-       $mood =  CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_type');
-        
-        if(isset($key) && $key != NULL)
+
+    public static function getMood($key = NULL) {
+        $mood = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_type');
+
+        if (isset($key) && $key != NULL)
             return $mood[$key];
-        
+
         return $mood;
     }
-    public static function getCategory($key = NULL){
-       $mood =  CHtml::listData(Category::model()->findAll(), 'category_id', 'category_name');
-        
-        if(isset($key) && $key != NULL)
+
+    public static function getCategory($key = NULL) {
+        $mood = CHtml::listData(Category::model()->findAll(), 'category_id', 'category_name');
+
+        if (isset($key) && $key != NULL)
             return $mood[$key];
-        
+
         return $mood;
     }
+
     public static function rememberMeAdmin($username, $check) {
         if ($check > 0) {
             $time = time();     // Gets the current server time                                          
@@ -54,5 +56,49 @@ class Myclass extends CController {
             unset(Yii::app()->request->cookies['admin_username']);
         }
     }
-   
+
+    public static function addUser($model) {
+        $response = null;
+        $webserve = false;
+
+        if (!is_object($model)) {
+            $webserve = true;
+//            'Name' => $_POST['Users']['user_name'],
+//            'Email' => $_POST['Users']['user_email'],
+//            'Password' => $_POST['Users']['user_password']  
+            $param = $model;
+
+            $model = new Users('webservice');
+            $model->user_name = $param['user_name'];
+            $model->user_email = $param['user_email'];
+            $model->user_password = $param['user_password'];
+            $model->user_status = 1;
+
+            if (!$model->validate()) {
+                $response['success'] = 0;
+                $response['message'] = str_replace("\r\n","",strip_tags(CHtml::errorSummary($model,'')));
+
+                return $response;
+            }
+        }
+
+        $model->save(false);
+
+        if (!$webserve) {
+            $mail = new Sendmail;
+            $message = '<p>Dear ' . $model->user_name . '</p>';
+            $message .= '<p>Thank you for signing up, we just need to verify your email address</p>';
+            $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">Click Here to activate</a></p><br />';
+            $message .= "<p>If you can't click the button above, you can verify your email address by copying and pasting (or typing) the following address into your browser:</p>";
+            $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '</a></p><br />';
+            $Subject = CHtml::encode(Yii::app()->name) . ': Confirmation your email';
+            $mail->send($model->user_email, $Subject, $message);
+        }
+
+        $response['success'] = 1;
+        $response['message'] = "Successfully Created";
+
+        return $response;
+    }
+
 }

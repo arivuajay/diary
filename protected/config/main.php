@@ -12,10 +12,10 @@ return array(
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
-        'application.components.*',
+        'application.components.*'
     ),
     'modules' => array(
-        'site', 'admin','webservice',
+        'site', 'admin', 'webservice',
         // uncomment the following to enable the Gii tool
         'gii' => array(
             'class' => 'system.gii.GiiModule',

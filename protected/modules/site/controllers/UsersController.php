@@ -67,10 +67,9 @@ class UsersController extends Controller {
         $this->performAjaxValidation($model);
         if (isset($_POST['Users'])) {
             $model->attributes = $_POST['Users'];
-            $model->user_activation_key = Myclass::getRandomString();
             $valid = $model->validate();
             if ($valid) {
-                $this->addUser($model);
+                Myclass::addUser($model);
                 
                 Yii::app()->user->setFlash('success', "Please check your mail for activation");
                 $this->redirect(array('/site/users/login'));
@@ -387,39 +386,4 @@ class UsersController extends Controller {
         }
         exit;
     }
-
-    public function addUser($model) {
-        $response = null;
-        if (!is_object($model)) {
-            print_r($_POST);exit;
-//            'Name' => $_POST['Users']['user_name'],
-//            'Email' => $_POST['Users']['user_email'],
-//            'Password' => $_POST['Users']['user_password']  
-            $param = $model;
-            $model = new Users('webservice');
-            $model->attributes = $param;
-            if (!$model->validate()) {
-                $response['status'] = '0';
-                $response['message'] = $model->errors;
-
-                return $response;
-            }
-        }
-
-        $model->save(false);
-
-        $mail = new Sendmail;
-        $message = '<p>Dear ' . $model->user_name . '</p>';
-        $message .= '<p>Thank you for signing up, we just need to verify your email address</p>';
-        $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">Click Here to activate</a></p><br />';
-        $message .= "<p>If you can't click the button above, you can verify your email address by copying and pasting (or typing) the following address into your browser:</p>";
-        $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '</a></p><br />';
-        $Subject = CHtml::encode(Yii::app()->name) . ': Confirmation your email';
-        $mail->send($model->user_email, $Subject, $message);
-
-        $response['status'] = '1';
-
-        return $response;
-    }
-
 }

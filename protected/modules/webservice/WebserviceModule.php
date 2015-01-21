@@ -8,6 +8,10 @@ class WebserviceModule extends CWebModule
 		// you may place code here to customize the module or the application
 
 		// import the module-level models and components
+		$this->setImport(array(
+                        'application.models.*',
+			'application.components.*'
+		));
 	}
 
 	public function beforeControllerAction($controller, $action)

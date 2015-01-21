@@ -149,6 +149,7 @@ class Users extends CActiveRecord {
             $this->created = date('Y-m-d h:i:s');
             $this->modified = date('Y-m-d h:i:s');
             $this->user_login_ip = Yii::app()->request->getUserHostAddress();
+            $this->user_activation_key = Myclass::getRandomString();
 
             $this->user_password = Myclass::encrypt($this->user_password);
         endif;
