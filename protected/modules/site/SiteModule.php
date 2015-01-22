@@ -6,7 +6,7 @@ class SiteModule extends CWebModule {
         Yii::app()->theme = 'site';
         $this->layoutPath = Yii::getPathOfAlias('webroot.themes.' . Yii::app()->theme->name . '.views.layouts');
         $this->layout = 'frontend';
-        
+
         // this method is called when the module is being created
         // you may place code here to customize the module or the application
         // import the module-level models and components

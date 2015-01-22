@@ -174,7 +174,7 @@ class Myclass extends CController {
         return $response;
     }
 
-    
+
     public static function loginApp($param) {
         $model = new LoginForm('login');
         $model->username = $param['username'];

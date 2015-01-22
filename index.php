@@ -13,10 +13,10 @@ defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 require_once($yii);
 $app = Yii::createWebApplication($config);
 
-defined('SITEURL') || 
+defined('SITEURL') ||
     @define('SITEURL', Yii::app()->createAbsoluteUrl("/"));
 
-defined('DS') || 
+defined('DS') ||
     @define('DS', DIRECTORY_SEPARATOR);
 
 $app->run();
