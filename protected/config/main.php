@@ -87,13 +87,9 @@ return array(
         ),
     ),
     // application-level parameters that can be accessed
-    // using Yii::app()->params['paramName']
-    'params' => array(
-        // this is used in contact page
-        'adminEmail' => 'webmaster@example.com',
-    ),
     //setting the basic language value
     'defaultController' => 'site/default/index',
+     // using Yii::app()->params['paramName']
     'params' => require(dirname(__FILE__) . '/params.php'),
     'timeZone' => 'Asia/Calcutta',
     'theme' => 'site',
