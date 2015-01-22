@@ -3,89 +3,6 @@
 /* @var $model Diary */
 /* @var $form CActiveForm */
 ?>
-
-<!--<div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'diary-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
-)); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'diary_user_id'); ?>
-		<?php echo $form->textField($model,'diary_user_id',array('size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->error($model,'diary_user_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'diary_title'); ?>
-		<?php echo $form->textField($model,'diary_title',array('size'=>60,'maxlength'=>250)); ?>
-		<?php echo $form->error($model,'diary_title'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'diary_description'); ?>
-		<?php echo $form->textArea($model,'diary_description',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'diary_description'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'diary_category_id'); ?>
-		<?php echo $form->textField($model,'diary_category_id',array('size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->error($model,'diary_category_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'diary_tags'); ?>
-		<?php echo $form->textField($model,'diary_tags',array('size'=>60,'maxlength'=>250)); ?>
-		<?php echo $form->error($model,'diary_tags'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'diary_current_date'); ?>
-		<?php echo $form->textField($model,'diary_current_date'); ?>
-		<?php echo $form->error($model,'diary_current_date'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'diary_user_mood_id'); ?>
-		<?php echo $form->textField($model,'diary_user_mood_id',array('size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->error($model,'diary_user_mood_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'diary_upload'); ?>
-		<?php echo $form->textArea($model,'diary_upload',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'diary_upload'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'created'); ?>
-		<?php echo $form->textField($model,'created'); ?>
-		<?php echo $form->error($model,'created'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'modified'); ?>
-		<?php echo $form->textField($model,'modified'); ?>
-		<?php echo $form->error($model,'modified'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
-
-</div> form -->
  <script>
 $(function() {
 $( "#datepicker" ).datepicker();
@@ -102,8 +19,8 @@ $( "#datepicker" ).datepicker();
     <div id="topbar">
       <div class="topbar-left">
         <ol class="breadcrumb">
-          <li class="crumb-active"><a href="#">WRITE AN JOURNAL</a></li>
-          <li class="crumb-link"><a href="index.html">Home</a></li>
+          <li class="crumb-active"><a>WRITE AN JOURNAL</a></li>
+          <li class="crumb-link"><a href="<?php echo SITEURL; ?>">Home</a></li>
           <li class="crumb-trail">WRITE AN JOURNAL</li>
         </ol>
       </div>
