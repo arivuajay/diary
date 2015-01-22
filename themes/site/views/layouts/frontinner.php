@@ -99,7 +99,12 @@
           </ul>
         </li>        
         <li> <a href="#" class="ajax-disable"><span class="glyphicons glyphicons-book_open"></span><span class="sidebar-title">Writing Tips</span></a> </li>
-        <li> <a href="faq.html" class="ajax-disable"><span class="glyphicons glyphicons-edit"></span><span class="sidebar-title">FAQ</span></a> </li>
+        <li>
+            <?php
+            echo CHtml::link(' <span class="glyphicons glyphicons-edit"></span><span class="sidebar-title">FAQ</span>', array('/site/faq/'));
+            ?>
+        </li>
+        
         <li> <a href="#"><span class="glyphicons glyphicons-globe"></span><span class="sidebar-title">Contact us</span></a> </li>
         <li> <a href="#"><span class="glyphicons glyphicons-settings"></span><span class="sidebar-title">Offers</span></a> </li>
         <li> <a href="#"><span class="glyphicons glyphicons-pencil"></span><span class="sidebar-title">Tell a Friend</span></a> </li>
