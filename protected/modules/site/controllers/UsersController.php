@@ -303,7 +303,7 @@ class UsersController extends Controller {
             $response = Myclass::forgotPass($model);
 
             if ($response['success'] === 0) {
-                Yii::app()->user->setFlash("error", "This Email Address Not Exists");
+                Yii::app()->user->setFlash("success", "This Email Address Not Exists");
                 $this->redirect(array('/site/users/forgot'));
             } else {
                 Yii::app()->user->setFlash('success', "Your Password Reset Link sent to your email address.");
