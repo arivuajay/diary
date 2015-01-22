@@ -135,7 +135,6 @@
             <?php
             echo CHtml::link(' <span><i class="fa fa-calendar"></i></span><span class="sptext">Register / login</span>', array('/site/users/login'), array('class' => 'spmenu spmenu2'));
             ?>
-
         </div>
         <div id="spmenu2">
             <button class="spmenu spmenu1"  onclick="modalshow('#video1')"  data-toggle="modal" data-target="#lightbox2">
