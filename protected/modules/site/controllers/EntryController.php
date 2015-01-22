@@ -96,8 +96,6 @@ class EntryController extends Controller {
             $model_register->user_email = Yii::app()->session['temp_user_mail'];
             $model_register->user_password = Myclass::getRandomString();
             $pass_for_mail = $model_register->user_password;
-            $activation_key = Myclass::getRandomString();
-            $model_register->user_activation_key = $activation_key;
             //$model->created = date('Y-m-d H:i:s');
             //$model->modified = date('Y-m-d H:i:s');
 
@@ -126,11 +124,12 @@ class EntryController extends Controller {
                 $model->attributes = $_POST['Entry'];
                 ///echo 'test'; exit;
 
-                $model->temp_activation_key =  $activation_key;
-                    $curr_timestamp = strtotime($_POST['Entry']['temp_current_date']);
-                    $model->temp_current_date = date('Y-m-d H:i:s', $curr_timestamp);
-                    $model->created = date('Y-m-d H:i:s');
-                    $model->modified = date('Y-m-d H:i:s');
+                $model->temp_activation_key = $model_register->user_activation_key;
+                $curr_timestamp = strtotime($_POST['Entry']['temp_current_date']);
+                $model->temp_current_date = date('Y-m-d H:i:s', $curr_timestamp);
+                $model->created = date('Y-m-d H:i:s');
+                $model->modified = date('Y-m-d H:i:s');
+                
                 if (@!empty($_FILES['Entry']['name']['temp_upload'])) {
                     $model->temp_upload = $_POST['Entry']['temp_upload'];
 
@@ -147,8 +146,8 @@ class EntryController extends Controller {
                 if ($model->save()) {
 
                     //redirect home check mail and active ......
-                   Yii::app()->user->setFlash('success', "Please check your mail for activation");
-                $this->redirect(Yii::app()->baseUrl);
+                    Yii::app()->user->setFlash('success', "Please check your mail for activation");
+                    $this->redirect(Yii::app()->baseUrl);
                 }
             }
         } else {
