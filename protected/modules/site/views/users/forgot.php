@@ -35,7 +35,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                             <span class="panel-header-menu pull-right mr15 text-muted fs12"><?php echo CHtml::link('Login >>', array('/site/users/login'))?></span> </div>
                         <div class="panel-body">
                             <?php
-                            foreach (Yii::app()->user->getFlashes() as $key => $message) {
+                            foreach ($this->flashMessages as $key => $message) {
                                 echo '<div class="alert flash-' . $key . '">' . $message . "</div>\n";
                             }
                             ?>

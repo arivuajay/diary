@@ -1,6 +1,5 @@
 <?php
-$flashMessages = Yii::app()->user->getFlashes();
-if (!empty($flashMessages)):
+if (!empty($this->flashMessages)):
     echo '<div class="col-lg-5 col-md-5  col-sm-5 center-block fn clearfix mt20 alert-notify">';
     foreach ($flashMessages as $key => $message) {
         echo "<div class='alert alert-$key'>$message <a href='javascript:void(0)' class='close alert-close' aria-hidden='true'>&times;</a></div>";
@@ -16,7 +15,7 @@ if (isset(Yii::app()->request->cookies['admin_username']->value)) {
     $model->username = Yii::app()->request->cookies['admin_username']->value;
     $model->rememberMe = 1;
 }
-?> 
+?>
 <h2 class="form-signin-heading">sign in now</h2>
 <?php echo $form->errorSummary($model, ''); ?>
 <div class="login-wrap">

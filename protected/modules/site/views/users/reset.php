@@ -7,9 +7,9 @@ $themeUrl = Yii::app()->theme->baseUrl;
     <script> var boxtest = localStorage.getItem('boxed');
         if (boxtest === 'true') {
             document.body.className += ' boxed-layout';
-        }</script> 
+        }</script>
     <a href="<?php echo Yii::app()->baseUrl?>" id="return-arrow"> <i class="fa fa-arrow-circle-left fa-3x text-light"></i> <span class="text-light"> Return <br>
-            to Website </span> </a> 
+            to Website </span> </a>
 
     <!-- Start: Main -->
     <div id="main">
@@ -29,13 +29,13 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         'htmlOptions' => array('class' => 'form-signin cmxform', 'role' => 'form')
                     ));
 
-                    ?> 
+                    ?>
                     <div class="panel">
-                        <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock text-purple2"></span> Reset Password </span> 
+                        <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock text-purple2"></span> Reset Password </span>
                             <span class="panel-header-menu pull-right mr15 text-muted fs12"><?php echo CHtml::link('Login >>', array('/site/users/login'))?></span> </div>
                         <div class="panel-body">
                             <?php
-                            foreach (Yii::app()->user->getFlashes() as $key => $message) {
+                            foreach ($this->flashMessages as $key => $message) {
                                 echo '<div class="alert flash-' . $key . '">' . $message . "</div>\n";
                             }
                             ?>
@@ -54,7 +54,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 </div>
                                     <?php echo $form->error($model, 'confirm_password', array('class' => 'error')); ?>
                             </div>
-                            
+
                         </div>
                         <div class="panel-footer"> <span class="text-muted fs12 lh30"></span>
                             <?php echo CHtml::button('Reset Password', array("class" => "btn btn-sm bg-purple2 pull-right", "type" => "submit", 'name' => 'reset')); ?>
@@ -76,10 +76,10 @@ $themeUrl = Yii::app()->theme->baseUrl;
 
             "use strict";
 
-            // Init Theme Core 	  
+            // Init Theme Core
             Core.init();
 
-            // Enable Ajax Loading 	  
+            // Enable Ajax Loading
             Ajax.init();
 
             // Init Full Page BG(Backstretch) plugin
