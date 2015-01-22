@@ -7,9 +7,7 @@ class DefaultController extends Controller {
         $moodModel = new MoodType;
         $mood = Myclass::getMood();
 
-        $this->render('index', array(
-            'moodModel' => $moodModel,
-        ));
+        $this->render('index', array('moodModel' => $moodModel));
     }
 
 }

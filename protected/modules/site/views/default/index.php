@@ -1,4 +1,5 @@
 <!--Home Page=============================-->
+<?php var_dump($moodModel); ?>
 <div id="home" class="item">
     <img src="<?php echo $themeUrl; ?>/css/home/assets/img/2.jpg" alt="The Spice Lounge" class="fullBg">
     <div class="clearfix">
