@@ -1,12 +1,15 @@
 <!--Home Page=============================-->
-<?php var_dump($moodModel); ?>
+<?php
+        $baseUrl = Yii::app()->baseUrl;
+        $themeUrl = Yii::app()->theme->baseUrl;
+        ?>
 <div id="home" class="item">
     <img src="<?php echo $themeUrl; ?>/css/home/assets/img/2.jpg" alt="The Spice Lounge" class="fullBg">
     <div class="clearfix">
         <div class="header_details">
             <div class="container">
                 <div class="header_icons accura-header-block accura-hidden-2xs">
-                    <a href="#"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a></div>
+                    <a href="<?php echo SITEURL;?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a></div>
                 <div class="call">
                     <div class="home_address">
                         NO.OF. USERS & <br>
