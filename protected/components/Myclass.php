@@ -47,7 +47,7 @@ class Myclass extends CController {
 
     public static function rememberMeAdmin($username, $check) {
         if ($check > 0) {
-            $time = time();     // Gets the current server time                                          
+            $time = time();     // Gets the current server time
             $cookie = new CHttpCookie('admin_username', $username);
 
             $cookie->expire = $time + 60 * 60 * 24 * 30;               // 30 days
@@ -63,9 +63,6 @@ class Myclass extends CController {
 
         if (!is_object($model)) {
             $webserve = true;
-//            'Name' => $_POST['Users']['user_name'],
-//            'Email' => $_POST['Users']['user_email'],
-//            'Password' => $_POST['Users']['user_password']  
             $param = $model;
 
             $model = new Users('webservice');
@@ -76,7 +73,7 @@ class Myclass extends CController {
 
             if (!$model->validate()) {
                 $response['success'] = 0;
-                $response['message'] = str_replace("\r\n","",strip_tags(CHtml::errorSummary($model,'')));
+                $response['message'] = str_replace("\r\n", "", strip_tags(CHtml::errorSummary($model, '')));
 
                 return $response;
             }
@@ -93,6 +90,46 @@ class Myclass extends CController {
             $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '</a></p><br />';
             $Subject = CHtml::encode(Yii::app()->name) . ': Confirmation your email';
             $mail->send($model->user_email, $Subject, $message);
+        }
+
+        $response['success'] = 1;
+        $response['message'] = "Successfully Created";
+
+        return $response;
+    }
+
+    public static function forgotPass($model) {
+        $response = null;
+        $webserve = false;
+
+        if (!is_object($model)) {
+            $webserve = true;
+            $param = $model;
+            $model = new LoginForm('forgotpass');
+            $model->username = $param['user_password'];
+        }
+
+        $user = Users::model()->findByAttributes(array('user_email' => $model->username));
+        if (empty($user)) {
+            $response['success'] = 0;
+            $response['message'] = str_replace("\r\n", "", strip_tags(CHtml::errorSummary($model, '')));
+
+            return $response;
+        }
+
+        $reset_link = Myclass::getRandomString(25);
+        $user->setAttribute('reset_password_string', $reset_link);
+        $user->setAttribute('modified', date('Y-m-d H:i:s'));
+        $user->save(false);
+
+        if (!$webserve) {
+            $mail = new Sendmail;
+            $message = '<p>Dear ' . $user->user_name . '</p>';
+            $message .= '<p>We received a request to reset the password for your account.To reset your password, click on the button below (or copy/paste the URL into your browser). </p>';
+            $message .= '<a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/reset?str=' . $user->reset_password_string . '&id=' . $user->user_id . '">Click to Reset Password</a></p>';
+            $message .= '<p>This Password Link is valid for only 5 minutes from request time (' . date('Y-m-d H:i:s') . ')</p>';
+            $Subject = CHtml::encode(Yii::app()->name) . ': Reset Password';
+            $mail->send($user->user_email, $Subject, $message);
         }
 
         $response['success'] = 1;

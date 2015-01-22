@@ -7,9 +7,9 @@ $themeUrl = Yii::app()->theme->baseUrl;
     <script> var boxtest = localStorage.getItem('boxed');
         if (boxtest === 'true') {
             document.body.className += ' boxed-layout';
-        }</script> 
+        }</script>
     <a href="<?php echo Yii::app()->baseUrl?>" id="return-arrow"> <i class="fa fa-arrow-circle-left fa-3x text-light"></i> <span class="text-light"> Return <br>
-            to Website </span> </a> 
+            to Website </span> </a>
 
     <!-- Start: Main -->
     <div id="main">
@@ -29,9 +29,9 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         'htmlOptions' => array('class' => 'form-signin cmxform', 'role' => 'form')
                     ));
 
-                    ?> 
+                    ?>
                     <div class="panel">
-                        <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock text-purple2"></span> Lost Password </span> 
+                        <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock text-purple2"></span> Lost Password </span>
                             <span class="panel-header-menu pull-right mr15 text-muted fs12"><?php echo CHtml::link('Login >>', array('/site/users/login'))?></span> </div>
                         <div class="panel-body">
                             <?php
@@ -47,7 +47,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 </div>
                                 <?php echo $form->error($model, 'username', array('class' => 'error')); ?>
                             </div>
-                            
+
                         </div>
                         <div class="panel-footer"> <span class="text-muted fs12 lh30"></span>
                             <?php echo CHtml::button('Get Reset Link', array("class" => "btn btn-sm bg-purple2 pull-right", "type" => "submit", 'name' => 'forgot')); ?>
@@ -69,10 +69,10 @@ $themeUrl = Yii::app()->theme->baseUrl;
 
             "use strict";
 
-            // Init Theme Core 	  
+            // Init Theme Core
             Core.init();
 
-            // Enable Ajax Loading 	  
+            // Enable Ajax Loading
             Ajax.init();
 
             // Init Full Page BG(Backstretch) plugin

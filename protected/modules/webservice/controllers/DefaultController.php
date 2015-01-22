@@ -10,4 +10,12 @@ class DefaultController extends Controller {
         Yii::app()->end();
     }
 
+    public function actionForgotpassword() {
+        $params = $_REQUEST;
+        $result = Myclass::forgotPass($params);
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+
 }

@@ -70,7 +70,7 @@ class UsersController extends Controller {
             $valid = $model->validate();
             if ($valid) {
                 Myclass::addUser($model);
-                
+
                 Yii::app()->user->setFlash('success', "Please check your mail for activation");
                 $this->redirect(array('/site/users/login'));
             }
@@ -196,7 +196,7 @@ class UsersController extends Controller {
         require_once $path . '/hybridauth-' . HybridAuthIdentity::VERSION . '/hybridauth/index.php';
     }
 
-    public function actionLogin() { 
+    public function actionLogin() {
         if (!Yii::app()->user->isGuest)
             $this->redirect(array('/site/journal/create'));
 
@@ -296,31 +296,21 @@ class UsersController extends Controller {
         if (!Yii::app()->user->isGuest)
             $this->redirect(array('/site/journal/create'));
 
-        $model = new LoginForm();
+        $model = new LoginForm('forgotpass');
         $this->performAjaxValidation($model);
         if (isset($_POST['forgot'])) {
-            $user = Users::model()->findByAttributes(array('user_email' => $_POST['LoginForm']['username']));
-            if (empty($user)) {
-                Yii::app()->user->setFlash('error', "This Email Address Not Exists");
+            $model->attributes = $_POST['LoginForm'];
+            $response = Myclass::forgotPass($model);
+            
+            if (true) {
+                Yii::app()->user->setFlash("error", "This Email Address Not Exists");
                 $this->redirect(array('/site/users/forgot'));
+            } else {
+                Yii::app()->user->setFlash('success', "Your Password Reset Link sent to your email address.");
+                $this->redirect(array('/site/users/login'));
             }
-            $model = $this->loadModel($user->user_id);
-            $reset_link = Myclass::getRandomString(25);
-            $model->setAttribute('reset_password_string', $reset_link);
-            $model->setAttribute('modified', date('Y-m-d H:i:s'));
-            $model->save(false);
-
-            $mail = new Sendmail;
-            $message = '<p>Dear ' . $user->user_name . '</p>';
-            $message .= '<p>We received a request to reset the password for your account.To reset your password, click on the button below (or copy/paste the URL into your browser). </p>';
-            $message .= '<a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/reset?str=' . $model->reset_password_string . '&id=' . $model->user_id . '">Click to Reset Password</a></p>';
-            $message .= '<p>This Password Link is valid for only 5 minutes from request time (' . date('Y-m-d H:i:s') . ')</p>';
-            $Subject = CHtml::encode(Yii::app()->name) . ': Reset Password';
-            $mail->send($user->user_email, $Subject, $message);
-
-            Yii::app()->user->setFlash('success', "Your Password Reset Link sent to your email address.");
-            $this->redirect(array('/site/users/login'));
         }
+
         $this->render('forgot', array('model' => $model));
     }
 
@@ -386,4 +376,5 @@ class UsersController extends Controller {
         }
         exit;
     }
+
 }
