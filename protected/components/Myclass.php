@@ -81,7 +81,7 @@ class Myclass extends CController {
 
         $model->save(false);
 
-        if (!$webserve) {
+//        if (!$webserve) {
             $mail = new Sendmail;
             $message = '<p>Dear ' . $model->user_name . '</p>';
             $message .= '<p>Thank you for signing up, we just need to verify your email address</p>';
@@ -90,7 +90,7 @@ class Myclass extends CController {
             $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '</a></p><br />';
             $Subject = CHtml::encode(Yii::app()->name) . ': Confirmation your email';
             $mail->send($model->user_email, $Subject, $message);
-        }
+//        }
 
         $response['success'] = 1;
         $response['message'] = "Successfully Created";
@@ -139,21 +139,26 @@ class Myclass extends CController {
     }
 
     public static function addEntry($param) {
-        $user = Users::model()->findByAttributes(array('user_email' => $param['email']));
+        $user = Users::model()->findByAttributes(array('user_email' => $param['mail']));
         if (!$user) {
             $data['user_name'] = "User";
-            $data['user_email'] = $param['email'];
+            $data['user_email'] = $param['mail'];
             $data['user_password'] = self::getRandomString(6);
             $result = self::addUser($data);
 
-            $user = Users::model()->findByAttributes(array('user_email' => $param['email']));
+            $user = Users::model()->findByAttributes(array('user_email' => $param['mail']));
         }
+
         $model = new Diary('webservice');
         $model->diary_title = $param['title'];
         $model->diary_description = $param['text'];
-        $model->diary_category_id = $param['category'];
-        $model->diary_current_date = date('Y-m-d H:i:s', strtotime($param['year'] . "-" . $param['month'] . "-" . $param['date'] . " " . $param['time']));
-        $model->diary_user_mood_id = $param['mood'];
+        $mood_array = array('1'=>"Happy", "Sad", "Excited");
+        $cat_array = array('1'=>"Family","Friends","Business");
+        $model->diary_category_id = array_search($param['category'], $cat_array);
+        $model->diary_user_mood_id = array_search($param['mood'], $mood_array);
+
+        $bind_time = trim($param['year'] . "-" . $param['month'] . "-" . $param['date'] . " " . $param['time']);
+        $model->diary_current_date = date('Y-m-d H:i:s', strtotime($bind_time));
         $model->diary_tags = $param['tag'];
 
         $model->diary_user_id = $user->user_id;
@@ -173,6 +178,7 @@ class Myclass extends CController {
         $model = new LoginForm('login');
         $model->username = $param['username'];
         $model->password = $param['password'];
+
         if ($model->validate() && $model->login()) {
             $response['success'] = 1;
             $response['message'] = "Successfully logged in";
@@ -180,6 +186,8 @@ class Myclass extends CController {
             $response['success'] = 0;
             $response['message'] = str_replace("\r\n", "", strip_tags(CHtml::errorSummary($model, '')));
         }
+
+        return $response;
     }
 
 }
