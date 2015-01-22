@@ -128,4 +128,14 @@ class Entry extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+        protected function beforeSave() {
+            if($this->isNewRecord){
+                $model->created = date('Y-m-d H:i:s');
+            }
+            
+            $model->modified = date('Y-m-d H:i:s');
+
+            return parent::beforeSave();
+        }
 }

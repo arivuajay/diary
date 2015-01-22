@@ -106,13 +106,13 @@ class Myclass extends CController {
             $webserve = true;
             $param = $model;
             $model = new LoginForm('forgotpass');
-            $model->username = $param['user_password'];
+            $model->username = $param['user_email'];
         }
 
         $user = Users::model()->findByAttributes(array('user_email' => $model->username));
         if (empty($user)) {
             $response['success'] = 0;
-            $response['message'] = str_replace("\r\n", "", strip_tags(CHtml::errorSummary($model, '')));
+            $response['message'] = "This Email Address Not Exists";
 
             return $response;
         }
@@ -122,20 +122,64 @@ class Myclass extends CController {
         $user->setAttribute('modified', date('Y-m-d H:i:s'));
         $user->save(false);
 
-        if (!$webserve) {
-            $mail = new Sendmail;
-            $message = '<p>Dear ' . $user->user_name . '</p>';
-            $message .= '<p>We received a request to reset the password for your account.To reset your password, click on the button below (or copy/paste the URL into your browser). </p>';
-            $message .= '<a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/reset?str=' . $user->reset_password_string . '&id=' . $user->user_id . '">Click to Reset Password</a></p>';
-            $message .= '<p>This Password Link is valid for only 5 minutes from request time (' . date('Y-m-d H:i:s') . ')</p>';
-            $Subject = CHtml::encode(Yii::app()->name) . ': Reset Password';
-            $mail->send($user->user_email, $Subject, $message);
-        }
+//        if (!$webserve) {
+        $mail = new Sendmail;
+        $message = '<p>Dear ' . $user->user_name . '</p>';
+        $message .= '<p>We received a request to reset the password for your account.To reset your password, click on the button below (or copy/paste the URL into your browser). </p>';
+        $message .= '<a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/reset?str=' . $user->reset_password_string . '&id=' . $user->user_id . '">Click to Reset Password</a></p>';
+        $message .= '<p>This Password Link is valid for only 5 minutes from request time (' . date('Y-m-d H:i:s') . ')</p>';
+        $Subject = CHtml::encode(Yii::app()->name) . ': Reset Password';
+        $mail->send($user->user_email, $Subject, $message);
+//        }
 
         $response['success'] = 1;
-        $response['message'] = "Successfully Created";
+        $response['message'] = "Your Password Reset Link sent to your email address.";
 
         return $response;
+    }
+
+    public static function addEntry($param) {
+        $user = Users::model()->findByAttributes(array('user_email' => $param['email']));
+        if (!$user) {
+            $data['user_name'] = "User";
+            $data['user_email'] = $param['email'];
+            $data['user_password'] = self::getRandomString(6);
+            $result = self::addUser($data);
+
+            $user = Users::model()->findByAttributes(array('user_email' => $param['email']));
+        }
+        $model = new Diary('webservice');
+        $model->diary_title = $param['title'];
+        $model->diary_description = $param['text'];
+        $model->diary_category_id = $param['category'];
+        $model->diary_current_date = date('Y-m-d H:i:s', strtotime($param['year'] . "-" . $param['month'] . "-" . $param['date'] . " " . $param['time']));
+        $model->diary_user_mood_id = $param['mood'];
+        $model->diary_tags = $param['tag'];
+
+        $model->diary_user_id = $user->user_id;
+
+        if ($model->save()) {
+            $response['success'] = 1;
+            $response['message'] = "Your Password Reset Link sent to your email address.";
+        } else {
+            $response['success'] = 0;
+            $response['message'] = str_replace("\r\n", "", strip_tags(CHtml::errorSummary($model, '')));
+        }
+
+        return $response;
+    }
+
+    public static function loginApp($param) {
+        $model = new LoginForm('login');
+        $model->username = $param['username'];
+        $model->password = $param['password'];
+        if ($model->validate() && $model->login()) {
+            $response['success'] = 1;
+            $response['message'] = "Successfully logged in";
+        } else {
+            $response['success'] = 0;
+            $response['message'] = str_replace("\r\n", "", strip_tags(CHtml::errorSummary($model, '')));
+        }
     }
 
 }

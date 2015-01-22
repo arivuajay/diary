@@ -58,7 +58,7 @@ class JournalController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new Diary;
+        $model = new Diary('create');
 
         // Uncomment the following line if AJAX validation is needed
         $this->performAjaxValidation($model);
@@ -81,7 +81,7 @@ class JournalController extends Controller {
                 $model->modified = date('Y-m-d H:i:s');
             if (@!empty($_FILES['Diary']['name']['diary_upload'])) {
                 $model->diary_upload = $_POST['Diary']['diary_upload'];
-                
+
                 if ($model->validate(array('diary_upload'))) {
                     $model->diary_upload = CUploadedFile::getInstance($model, 'diary_upload');
                 } else {
@@ -110,6 +110,7 @@ class JournalController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
+        $model->setScenario('update');
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);

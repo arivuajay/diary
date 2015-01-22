@@ -71,11 +71,11 @@ class EntryController extends Controller {
             if (!empty($userModel)) {
                 $this->redirect(array('users/login'));
             }
-            ///////////////////////////// 
+            /////////////////////////////
             $this->render('create', array(
                 'model' => $model,
             ));
-            /////////////////////////////                                        
+            /////////////////////////////
         }
 
         // echo 'hi';
@@ -133,7 +133,7 @@ class EntryController extends Controller {
                     $model->modified = date('Y-m-d H:i:s');
                 if (@!empty($_FILES['Entry']['name']['temp_upload'])) {
                     $model->temp_upload = $_POST['Entry']['temp_upload'];
-                    
+
                     if ($model->validate(array('temp_upload'))) {
                         $model->temp_upload = CUploadedFile::getInstance($model, 'temp_upload');
                     } else {
@@ -156,7 +156,7 @@ class EntryController extends Controller {
         }
 
 
-        /////////////////////////////       
+        /////////////////////////////
     }
 
     /**

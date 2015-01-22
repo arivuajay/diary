@@ -255,7 +255,7 @@ class UsersController extends Controller {
         $temp_model = Entry::model()->findByAttributes(array(
             'temp_activation_key' => $activationkey,
         ));
-        $journal_model = new Diary;
+        $journal_model = new Diary('create');
         if (empty($user))
             throw new CHttpException(404, 'The specified post cannot be found.');
 
@@ -301,8 +301,8 @@ class UsersController extends Controller {
         if (isset($_POST['forgot'])) {
             $model->attributes = $_POST['LoginForm'];
             $response = Myclass::forgotPass($model);
-            
-            if (true) {
+
+            if ($response['success'] === 0) {
                 Yii::app()->user->setFlash("error", "This Email Address Not Exists");
                 $this->redirect(array('/site/users/forgot'));
             } else {
