@@ -20,7 +20,7 @@
             <div class="container">
 
                 <?php
-                foreach (Yii::app()->user->getFlashes() as $key => $message) {
+                foreach(Yii::app()->user->getFlashes() as $key => $message) {
                     echo '<div class="alert flash-' . $key . '">' . $message . "</div>\n";
                 }
                 ?>
