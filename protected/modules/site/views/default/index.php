@@ -78,8 +78,13 @@
                                         <a href="#" class="nav-toggle"></a>
                                         <ul  id="home_nav" class="nav">
                                             <li><span class="nav-link selected1">Main</span></li>
-                                            <li><a href="#" onClick="javascript:location.href = '<?php echo $baseUrl; ?>/site/cms/view/slug/about-us'" class="">About Us</a></li>
-                                            <li><a href="#" class="nav-link">Faq</a></li>
+                                            <li><a href="<?php echo SITEURL; ?>/site/cms/view/slug/about-us" onClick="javascript:location.href = '<?php echo $baseUrl; ?>/site/cms/view/slug/about-us'" class="">About Us</a></li>
+                                            <li><a href="<?php echo SITEURL; ?>/site/faq" onClick="javascript:location.href = '<?php echo SITEURL; ?>/site/faq'" >Faq</a></li>
+<!--         <li>
+            <?php
+            echo CHtml::link('Faq', array('/site/faq/'));
+            ?>
+        </li>-->
                                             <li><a href="#" class="nav-link">Your Personal Diary<span class="sub-toggle"></span></a>
                                                 <ul>
                                                     <li><a href="#" class="nav-link">Why you need Diary</a></li>
@@ -88,7 +93,7 @@
                                             <li><a href="#" onClick="javascript:location.href = '<?php echo $baseUrl; ?>/site/cms/view/slug/privacy'" class="">Privacy</a></li>
                                             <li><a href="#" class="nav-link">Contact Us</a></li>
                                             <li><a href="#" class="nav-link">Feedback</a></li>
-                                            <li><a href="#" onClick="javascript:location.href = '<?php echo $baseUrl; ?>/site/carriers'" class="nav-link">Careers</a></li>
+                                            <li><a href="<?php echo SITEURL; ?>/site/carriers" onClick="javascript:location.href = '<?php echo $baseUrl; ?>/site/carriers'" class="nav-link">Careers</a></li>
                                         </ul>
                                     </nav>
                                     <!--  // Home Page Menu section -->
