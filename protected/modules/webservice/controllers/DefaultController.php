@@ -33,4 +33,36 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
+
+    public function actionListentries() {
+        $criteria = new CDbCriteria();
+        $criteria->addCondition("diary_user_id = '".$_REQUEST['user_id']."'");
+        $criteria->limit = 10;
+
+        $model = Diary::model()->findAll($criteria);
+        if(!$model){
+            $result['success'] = 0;
+            $result['message'] = 'No entries found!!!';
+        }else{
+            $result['success'] = 1;
+            $result['message'] = $model;
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+
+    public function actionGetentry() {
+        $model = Diary::model()->findByPk($_REQUEST['diary_id']);
+        if(!$model){
+            $result['success'] = 0;
+            $result['message'] = 'No entries found!!!';
+        }else{
+            $result['success'] = 1;
+            $result['message'] = $model;
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
 }

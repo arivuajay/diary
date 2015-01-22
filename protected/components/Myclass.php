@@ -190,4 +190,39 @@ class Myclass extends CController {
         return $response;
     }
 
+    public static function loginApp($param) {
+        $model = new LoginForm('login');
+        $model->username = $param['username'];
+        $model->password = $param['password'];
+
+        if ($model->validate() && $model->login()) {
+            $response['success'] = 1;
+            $response['message'] = "Successfully logged in";
+        } else {
+            $response['success'] = 0;
+            $response['message'] = str_replace("\r\n", "", strip_tags(CHtml::errorSummary($model, '')));
+        }
+
+        return $response;
+    }
+
+    public static function getEntries($param) {
+        $criteria = new CDbCriteria;
+
+        $criteria->addCondition("diary_user_id = '".$param['user_id']."'");
+        if($param['diary_id'])
+            $criteria->addCondition("diary_id = '".$param['diary_id']."'");
+
+        $model = Diary::model()->findAll($criteria);
+
+        if ($model->validate() && $model->login()) {
+            $response['success'] = 1;
+            $response['message'] = "Successfully logged in";
+        } else {
+            $response['success'] = 0;
+            $response['message'] = str_replace("\r\n", "", strip_tags(CHtml::errorSummary($model, '')));
+        }
+
+        return $response;
+    }
 }

@@ -23,6 +23,7 @@
  * @property MoodReport[] $moodReports
  */
 class Diary extends CActiveRecord {
+    public $diary_upload;
 
     /**
      * @return string the associated database table name
@@ -30,8 +31,6 @@ class Diary extends CActiveRecord {
     public function tableName() {
         return '{{diary}}';
     }
-
-    public $diary_upload;
 
     /**
      * @return array validation rules for model attributes.
