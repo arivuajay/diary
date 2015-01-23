@@ -63,25 +63,13 @@ class EntryController extends Controller {
 
         $model = new Entry;
         $model_register = new Users('register');
-        if (isset($_POST['email'])) {
-            $userModel = Users::model()->findByAttributes(array('user_email' => $_POST['email']));
-            Yii::app()->session['temp_user_mail'] = $_POST['email'];
-            Yii::app()->session['temp_user_mood'] = $_POST['MoodType']['mood_type'];
-            // print_r($_POST);exit;
-            if (!empty($userModel)) {
-                $this->redirect(array('users/login'));
-            }
-            /////////////////////////////
-            $this->render('create', array(
-                'model' => $model,
-            ));
-            /////////////////////////////
-        }
+
 
         // echo 'hi';
         // print_r($_POST);exit;
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
+
         if (isset($_POST['Entry'])) {
 
 
@@ -129,7 +117,7 @@ class EntryController extends Controller {
                 $model->temp_current_date = date('Y-m-d H:i:s', $curr_timestamp);
                 $model->created = date('Y-m-d H:i:s');
                 $model->modified = date('Y-m-d H:i:s');
-                
+
                 if (@!empty($_FILES['Entry']['name']['temp_upload'])) {
                     $model->temp_upload = $_POST['Entry']['temp_upload'];
 
@@ -151,7 +139,22 @@ class EntryController extends Controller {
                 }
             }
         } else {
-            $this->redirect(Yii::app()->baseUrl);
+            if (isset($_POST['email'])) {
+                $userModel = Users::model()->findByAttributes(array('user_email' => $_POST['email']));
+                Yii::app()->session['temp_user_mail'] = $_POST['email'];
+                Yii::app()->session['temp_user_mood'] = $_POST['MoodType']['mood_type'];
+                // print_r($_POST);exit;
+                if (!empty($userModel)) {
+                    $this->redirect(array('users/login'));
+                }
+                /////////////////////////////
+                $this->render('create', array(
+                    'model' => $model,
+                ));
+                /////////////////////////////
+            } else {
+                $this->redirect(Yii::app()->baseUrl);
+            }
         }
 
 
