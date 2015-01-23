@@ -146,8 +146,8 @@ class Users extends CActiveRecord {
 
     public function beforeSave() {
         if ($this->isNewRecord):
-            $this->created = date('Y-m-d h:i:s');
-            $this->modified = date('Y-m-d h:i:s');
+            $this->created = date('Y-m-d H:i:s');
+            $this->modified = date('Y-m-d H:i:s');
             $this->user_login_ip = Yii::app()->request->getUserHostAddress();
             $this->user_activation_key = Myclass::getRandomString();
 
