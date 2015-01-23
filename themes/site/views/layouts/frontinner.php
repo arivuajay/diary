@@ -95,13 +95,18 @@
             <li><a href="#"><span class="glyphicons glyphicons-picture"></span> Testimonials</a></li>
             <li><a href="#"><span class="glyphicons glyphicons-film"></span> Media</a></li>
             <li><a href="#"><span class="glyphicons glyphicons glyphicons-print"></span> Awards</a></li>
-            <li> <a href="careers.html" class="ajax-disable"><span class="glyphicons glyphicons-calendar"></span><span class="sidebar-title">Careers</span></a> </li>
+<!--            <li> <a href="careers.html" class="ajax-disable"><span class="glyphicons glyphicons-calendar"></span><span class="sidebar-title">Careers</span></a> </li>-->
           </ul>
         </li>        
         <li> <a href="#" class="ajax-disable"><span class="glyphicons glyphicons-book_open"></span><span class="sidebar-title">Writing Tips</span></a> </li>
         <li>
             <?php
-            echo CHtml::link(' <span class="glyphicons glyphicons-edit"></span><span class="sidebar-title">FAQ</span>', array('/site/faq/'));
+            echo CHtml::link(' <span class="glyphicons glyphicons-edit"></span><span class="sidebar-title">FAQ</span>', array('/site/faq/'), array('class'=>'ajax-disable'));
+            ?>
+        </li>
+        <li>
+            <?php
+            echo CHtml::link(' <span class="glyphicons glyphicons-edit"></span><span class="sidebar-title">Careers</span>', array('/site/carriers/'), array('class'=>'ajax-disable'));
             ?>
         </li>
         
