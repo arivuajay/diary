@@ -32,15 +32,20 @@ $themeUrl = Yii::app()->theme->baseUrl;
                 ));
                 ?>
                 <div class="clearfix hcont_form pad_top20">
+                    <div class="row">
                     <input type="email" name="email"  class="validate['required','email']  textbox1"
                            placeholder="* Email : " onFocus="this.placeholder = ''" onBlur="this.placeholder = '* Email :'" required/><br>
+                    </div><div class="row">
                            <?php foreach (Myclass::getMood() as $key => $mood): ?>
-                        <label class="radio-inline mr10>
-                            <?php echo $form->radioButton($moodModel,'mood_type',array('value'=>$key,'uncheckValue'=>null)); ?>
+                    <label class="radio-inline mr10" style="position:relative;height: 0px;margin: 0px;">
+                           
+                            <input type="radio" checked="checked" style="visibility: hidden;" name="MoodType[mood_type]" value="<?php echo $key; ?>">
                                 <?php echo CHtml::image("themes/site/css/frontend/img/$mood.png"); ?>
                         </label>
                     <?php endforeach; ?>
+                        </div><div class="row">
                     <input id="hcontactsubmitBtn1" value="Write an Entry" type="submit" class="submitBtn">
+                        </div>
                 </div>
                 <?php $this->endWidget(); ?>
                 <!--</form>-->
