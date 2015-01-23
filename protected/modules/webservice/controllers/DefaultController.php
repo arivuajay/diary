@@ -36,7 +36,9 @@ class DefaultController extends Controller {
 
     public function actionListentries() {
         $criteria = new CDbCriteria();
-        $criteria->addCondition("diary_user_id = '".$_REQUEST['user_id']."'");
+        $criteria->select = array('t.*');
+        $criteria->with = array('diaryUser');
+        $criteria->addCondition("t.diary_user_id = '".$_REQUEST['user_id']."' OR diaryUser.user_email = '".$_REQUEST['user_id']."'");
         $criteria->limit = 10;
 
         $model = Diary::model()->findAll($criteria);
