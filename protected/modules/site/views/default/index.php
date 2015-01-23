@@ -10,11 +10,11 @@
             <div class="container">
                 <div class="header_icons accura-header-block accura-hidden-2xs">
                     <a href="<?php echo SITEURL;?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a></div>
-                <div class="call">
+<!--                <div class="call">
                     <div class="home_address">
                         NO.OF. USERS & <br>
                     </div>
-                    VISITORS</div>
+                    VISITORS</div>-->
             </div>
 
             <div class="container">

@@ -118,7 +118,7 @@
             ?>
         </li>-->
         <li> <a href="#"><span class="glyphicons glyphicons-pencil"></span><span class="sidebar-title">Tell a Friend</span></a> </li>
-        <li> <a href="#"><span class="glyphicons glyphicons-link"></span><span class="sidebar-title">Donation</span></a> </li>
+        <!--<li> <a href="#"><span class="glyphicons glyphicons-link"></span><span class="sidebar-title">Donation</span></a> </li>-->
         <li> <a href="#"><span class="glyphicons glyphicons-edit"></span><span class="sidebar-title">Feedback</span></a> </li>
         <li> <a href="<?php echo $baseUrl;?>/site/cms/view/slug/about-us" class="ajax-disable"><span class="glyphicons glyphicons-inbox"></span><span class="sidebar-title">About us</span></a> </li>
         <li> <a href="<?php echo $baseUrl;?>/site/cms/view/slug/privacy" class="ajax-disable"><span class="glyphicons glyphicons-inbox"></span><span class="sidebar-title">Privacy</span></a> </li>
