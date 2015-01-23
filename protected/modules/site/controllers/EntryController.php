@@ -71,9 +71,6 @@ class EntryController extends Controller {
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Entry'])) {
-
-
-
             //register and send mail..
             //auto registration for new user.....
             //echo 'auto register process';
@@ -139,7 +136,7 @@ class EntryController extends Controller {
                 }
             }
         } else {
-            if (isset($_POST['email'])) {
+            if (isset($_REQUEST['email'])) {
                 $userModel = Users::model()->findByAttributes(array('user_email' => $_POST['email']));
                 Yii::app()->session['temp_user_mail'] = $_POST['email'];
                 Yii::app()->session['temp_user_mood'] = $_POST['MoodType']['mood_type'];

@@ -1,64 +1,57 @@
 <!--Home Page=============================-->
 <?php
-        $baseUrl = Yii::app()->baseUrl;
-        $themeUrl = Yii::app()->theme->baseUrl;
-        ?>
+$baseUrl = Yii::app()->baseUrl;
+$themeUrl = Yii::app()->theme->baseUrl;
+?>
 <div id="home" class="item">
     <img src="<?php echo $themeUrl; ?>/css/home/assets/img/2.jpg" alt="The Spice Lounge" class="fullBg">
     <div class="clearfix">
         <div class="header_details">
             <div class="container">
                 <div class="header_icons accura-header-block accura-hidden-2xs">
-                    <a href="<?php echo SITEURL;?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a></div>
-<!--                <div class="call">
-                    <div class="home_address">
-                        NO.OF. USERS & <br>
-                    </div>
-                    VISITORS</div>-->
+                    <a href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a></div>
+                <!--                <div class="call">
+                                    <div class="home_address">
+                                        NO.OF. USERS & <br>
+                                    </div>
+                                    VISITORS</div>-->
             </div>
-
             <div class="container">
-
                 <?php
-                foreach($this->flashMessages as $key => $message) {
+                foreach ($this->flashMessages as $key => $message) {
                     echo '<div class="alert flash-' . $key . '">' . $message . "</div>\n";
                 }
                 ?>
-
                 <!--<form id="hcontact_form" class="hcont_form pad_top13" action="" method="post">-->
                 <?php
                 $form = $this->beginWidget('CActiveForm', array(
                     'id' => 'hcontact_form',
                     'enableAjaxValidation' => false,
+                    'method' => 'GET',
                     'action' => array('/site/entry/create'), // change depending on your project
                 ));
                 ?>
-
                 <div class="clearfix hcont_form pad_top20">
                     <input type="email" name="email"  class="validate['required','email']  textbox1"
                            placeholder="* Email : " onFocus="this.placeholder = ''" onBlur="this.placeholder = '* Email :'" required/><br>
-<!--                                        <input type="text" name="phone" class="validate['required','phone']  textbox1"
-                           placeholder="* Select Your Mood : " onFocus="this.placeholder = ''" onBlur="this.placeholder = '* Select Your Mood :'" /><br>-->
-                    <?php echo $form->dropDownList($moodModel, 'mood_type', Myclass::getMood(), array('type' => 'text', 'empty' => '--Select Your Mood--', 'class' => 'form-control ')); ?><br>
+                           <?php foreach (Myclass::getMood() as $id => $mood): ?>
+                        <label class="radio-inline mr10">
+                            <input type="radio" checked="checked" style="visibility: hidden;" name="Entry[temp_user_mood_id]" value="<?php echo $id; ?>">
+                            <?php echo CHtml::image("themes/site/css/frontend/img/$mood.png"); ?>
+                        </label>
+                    <?php endforeach; ?>
                     <input id="hcontactsubmitBtn1" value="Write an Entry" type="submit" class="submitBtn">
                 </div>
-
                 <?php $this->endWidget(); ?>
                 <!--</form>-->
-
             </div>
-
-
-
             <!-- Mainheader Menu Section -->
-
             <div class="mainheaderslide" id="slide">
                 <div id="mainheader" class="header">
                     <div class="menu-inner">
                         <div class="container">
                             <div class="row">
                                 <div class="header-table col-md-12 header-menu">
-
                                     <!--  Logo section -->
                                     <div class="brand">
                                         <div class="header_icons accura-header-block accura-hidden-2xs">
@@ -72,7 +65,6 @@
                                         </div>
                                     </div>
                                     <!--  // Logo section -->
-
                                     <!-- Home Page Menu section -->
                                     <nav class="main-nav">
                                         <a href="#" class="nav-toggle"></a>
@@ -80,11 +72,11 @@
                                             <li><span class="nav-link selected1">Main</span></li>
                                             <li><a href="<?php echo SITEURL; ?>/site/cms/view/slug/about-us" onClick="javascript:location.href = '<?php echo $baseUrl; ?>/site/cms/view/slug/about-us'" class="">About Us</a></li>
                                             <li><a href="<?php echo SITEURL; ?>/site/faq" onClick="javascript:location.href = '<?php echo SITEURL; ?>/site/faq'" >Faq</a></li>
-<!--         <li>
-            <?php
-            echo CHtml::link('Faq', array('/site/faq/'));
-            ?>
-        </li>-->
+                                            <!--         <li>
+                                            <?php
+                                            echo CHtml::link('Faq', array('/site/faq/'));
+                                            ?>
+                                                    </li>-->
                                             <li><a href="#" class="nav-link">Your Personal Diary<span class="sub-toggle"></span></a>
                                                 <ul>
                                                     <li><a href="#" class="nav-link">Why you need Diary</a></li>
@@ -103,7 +95,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- // Mainheader Menu Section -->
         </div>
         <div id="boxgallery" class="boxgallery" data-effect="effect-2">
@@ -114,17 +105,10 @@
         </div>
     </div>
 </div>
-
 <!-- // Home Page
 =============================-->
-
-
-
-
 <!--About us
 =============================-->
-
-
 <!-- Footer
 =============================-->
 <div id="footer" class="footer">
@@ -132,10 +116,6 @@
 </div>
 <!-- // Footer Ends
 =============================-->
-
-
-
-
 <!--Special Menu
 =============================-->
 <div id="specialmenu" class="toHideTheBubbles hidden-phone">
@@ -155,10 +135,6 @@
 </div>
 <!-- // Special Menu
 =============================-->
-
-
-
-
 <div id="video1" >
     <div id="lightbox2" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="video1" aria-hidden="true">
         <div class="modal-dialog">
