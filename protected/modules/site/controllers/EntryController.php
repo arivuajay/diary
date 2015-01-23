@@ -137,10 +137,10 @@ class EntryController extends Controller {
             }
         } else {
             if (isset($_REQUEST['email'])) {
-                $userModel = Users::model()->findByAttributes(array('user_email' => $_POST['email']));
-                Yii::app()->session['temp_user_mail'] = $_POST['email'];
-                Yii::app()->session['temp_user_mood'] = $_POST['MoodType']['mood_type'];
-                // print_r($_POST);exit;
+                $userModel = Users::model()->findByAttributes(array('user_email' => $_GET['email']));
+                Yii::app()->session['temp_user_mail'] = $_GET['email'];
+                Yii::app()->session['temp_user_mood'] = $_GET['MoodType']['mood_type'];
+                
                 if (!empty($userModel)) {
                     $this->redirect(array('users/login'));
                 }

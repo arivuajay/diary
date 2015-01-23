@@ -3,14 +3,14 @@
 ==============================*/
 
 /*
-1.	Base styles 
-       Header 
+1.	Base styles
+       Header
 	   Scrollbar
-	   Preloader css 
+	   Preloader css
 	   CSS3 ANIMATIONS  PRELOADER CIRCLE
 	   Placeholder css
-	   Horzontal settings  
-	   
+	   Horzontal settings
+
 2.	Header Section
 3.	Home  Section
 4.	About Section
@@ -32,7 +32,7 @@
 /* // Table Of Content
 ==============================*/
 
-/*Base styles 
+/*Base styles
 ==============================*/
 
 /* Header */
@@ -92,7 +92,7 @@ a:hover, a:focus, a:active { outline: none; -moz-outline-style: none; }
 	height:100%;
 	position:absolute;
 	top:0;left:0;
-	overflow: hidden;	
+	overflow: hidden;
 }
 
 h1{
@@ -189,7 +189,7 @@ text-transform:uppercase; color: #f32a2a; font-size: 13px; letter-spacing: 1px; 
 	position: relative !important;
 	width: 100% !important;
 	height: 100% !important;
-	top: 0 !important;	
+	top: 0 !important;
 }
 #jprePercentage {
 	width: 50px;
@@ -202,7 +202,7 @@ text-transform:uppercase; color: #f32a2a; font-size: 13px; letter-spacing: 1px; 
 	margin: -25px 0 0 -25px;
 	z-index: 999998;
 	font-size: 24px;
-	color: #FFFFFF;	
+	color: #FFFFFF;
 	font-weight:500;
 	-webkit-animation: circle 1s infinite forwards;
 	   -moz-animation: circle 1s infinite forwards;
@@ -229,7 +229,7 @@ text-transform:uppercase; color: #f32a2a; font-size: 13px; letter-spacing: 1px; 
 			animation: circle 1s infinite forwards;
 }
 /* ==================================================
-	
+
 CSS3 ANIMATIONS  PRELOADER CIRCLE
 ================================================== */
 
@@ -312,7 +312,7 @@ CSS3 ANIMATIONS  PRELOADER CIRCLE
 .border_bottom{ border-bottom: 1px dotted rgba(243,42,42,0.9);}
 
 /***********
-Horzontal settings 
+Horzontal settings
 ***********/
 
 #mask {
@@ -344,11 +344,11 @@ Horzontal settings
 	min-height:100%;
 	min-width:100%;
 	z-index:777;
-}	
+}
 
 .panel{ margin:0; border:none; box-shadow: none;}
 
-	
+
 /* header SECTION
 =================================================== */
 
@@ -361,13 +361,13 @@ height:85px;
 z-index:99999;
 display:none;
 }
-	
+
 .navbar-nav ul{ display:none;}
 .navbar-nav ul ul { display:none;}
 #header .navbar-nav li:hover > ul{ display:block; position: absolute; top: 100%; background:rgba(0,0,0,0.5);}
 #header .navbar-nav ul > li:hover ul{ display:block; position: absolute; top:0px; left:100%; background:rgba(0,0,0,0.5);}
 #header .navbar-nav ul{ padding:0px 15px;}
-	
+
 #mainheader{
 margin:0 auto;
 line-height:80px;
@@ -422,10 +422,10 @@ letter-spacing:1px;
 	display:inline;
 	float:left;
 	position:relative;
-		
+
 
 }
-	
+
 li a:hover{
 	color:#ffffff;
 	transition: 0.5s;
@@ -767,7 +767,7 @@ li a:focus::after {
 
 
 /************
-#boxgallery tiled slide show  
+#boxgallery tiled slide show
 ************/
 
 #boxgallery .panel{ border:0;}
@@ -796,7 +796,7 @@ li a:focus::after {
 .header_icons li a i{ font-size:23px; line-height:60px; color:#fff;}
 
 /************
-Home Page  
+Home Page
 ************/
 
 /* Default Page */
@@ -846,7 +846,7 @@ Home Page
 .author span{font-weight:normal; color:#545454;}
 
 /* // Testimonials */
-        
+
 
 /* About SECTION
 =================================================== */
@@ -864,7 +864,7 @@ color:#acabab;
 	border:none;
 }
 .days{font-family: 'Oswald' !important;  color:#f32a2a; font-size:13px; letter-spacing:1px; text-transform:uppercase;}
-.button{background:rgba(243,42,42,0.95); 
+.button{background:rgba(243,42,42,0.95);
 color:#fff;
 border-style: none;
 font-family: 'Carrois Gothic SC', sans-serif;
@@ -1029,7 +1029,7 @@ blockquote p{ line-height:24px;}
 =================================================== */
 
 /* Gift Cards
-===============================================*/	
+===============================================*/
 
 .cbp-ig-grid {
 	list-style: none;
@@ -1039,7 +1039,7 @@ blockquote p{ line-height:24px;}
 }
 
 /* Clear floats */
-.cbp-ig-grid:before, 
+.cbp-ig-grid:before,
 .cbp-ig-grid:after { clear: both; }
 
 /* grid item */
@@ -1064,11 +1064,11 @@ transition-duration:0.8s;}
 .cbp-ig-grid li:last-child{ border-right:none; }
 /* we are using a combination of borders and box shadows to control the grid lines */
 
-.cbp-ig-grid li:nth-child(2n){ border-right:none} 
+.cbp-ig-grid li:nth-child(2n){ border-right:none}
 .cbp-ig-grid li:nth-child(4n),
 .cbp-ig-grid li:nth-child(5n-2){ border-top:1px solid #eaeaea;}
 /* // Gift Cards
-===============================================*/	
+===============================================*/
 
 /* Locations
 ===============================================*/
@@ -1091,7 +1091,7 @@ letter-spacing:1px;
 ===============================================*/
 
 /* Private Dining
-===============================================*/	
+===============================================*/
 #privatedining .title{margin-bottom:20px;}
 .pd_list{ margin-top:20px;}
 .pd_list ul{ padding:0; list-style:none;}
@@ -1100,7 +1100,7 @@ letter-spacing:1px;
 .pd_btn{ margin-top:20px;}
 
 /* // Private Dining
-===============================================*/	
+===============================================*/
 
 /* Catering
 ===============================================*/
@@ -1198,7 +1198,7 @@ input:valid, input:in-range{
 	padding:0px 15px;
 	margin:1px auto 20px;
 	cursor:pointer;
-	position:relative;	
+	position:relative;
 	outline:none;
 	clear:both;
 	color:#FFFFFF;
@@ -1216,13 +1216,13 @@ input:valid, input:in-range{
 	margin-bottom: 35px;
 	padding-top: 5px;
 }
-.reserve_form input:focus, .reserve_form textarea:focus ,input:valid:focus{ 
+.reserve_form input:focus, .reserve_form textarea:focus ,input:valid:focus{
 	border:0;
     outline: 0;
   	/* IE6-9 */
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(243,42,42,0.8);
     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(243,42,42,0.8);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(243,42,42,0.8); 
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(243,42,42,0.8);
 }
 
 #reservation_form{ display:block; width:100%;}
@@ -1263,7 +1263,7 @@ input:valid, input:in-range{
 	margin:20px auto 20px;
 	cursor:pointer;
 	text-transform:uppercase;
-	position:relative;	
+	position:relative;
 	outline:none;
 	clear:both;
 	color:#FFFFFF;
@@ -1273,7 +1273,7 @@ input:valid, input:in-range{
 #reservation_form .submitBtn:focus{ box-shadow:none; }
 
 #reservation_form label{ float:left; padding-top:10px; margin:0px 0px 0px 0px; }
-#reservation_form label.error{ 
+#reservation_form label.error{
 	color: #ff0000;
 	position:relative;
 	text-align: left;
@@ -1305,7 +1305,7 @@ form label      {position:absolute; cursor:text;}
 /* Contact SECTION
 =================================================== */
 
-.address{ 
+.address{
 font-size: 15px;
 text-transform: uppercase;
 letter-spacing:2px;
@@ -1327,7 +1327,7 @@ margin:10px 15px 10px 0px;
 a.mail-text{  font-size:15px; text-decoration:none; line-height:32px; font-weight:normal;letter-spacing: 1px; color:#545454; text-transform:uppercase; }
 a.mail-text:hover{  text-decoration:none; color: #f32a2a;}
 .mail-text i{ margin-right:10px; font-size:20px; color:#f32a2a;}
-#map_canvas { 
+#map_canvas {
 z-index:0;
 
 }
@@ -1372,7 +1372,7 @@ z-index:0;
 	padding:0px 15px;
 	margin:1px auto 20px;
 	cursor:pointer;
-	position:relative;	
+	position:relative;
 	outline:none;
 	clear:both;
 	color:#FFFFFF;
@@ -1382,13 +1382,13 @@ z-index:0;
 .cont_form .submitBtn:hover{ color:#ffffff; background-color: #727272; }
 .cont_form .submitBtn:focus{ box-shadow:none; }
 
-.cont_form input:focus, .cont_form textarea:focus ,input:valid:focus{ 
+.cont_form input:focus, .cont_form textarea:focus ,input:valid:focus{
 	border:0;
     outline: 0;
   	/* IE6-9 */
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(243,42,42,0.8);
     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(243,42,42,0.8);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(243,42,42,0.8); 
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(243,42,42,0.8);
 }
 #contact_form { display:block; width:100%;}
 #contact_form input{
@@ -1428,7 +1428,7 @@ z-index:0;
 	margin:20px auto 20px;
 	cursor:pointer;
 	text-transform:uppercase;
-	position:relative;	
+	position:relative;
 	outline:none;
 	clear:both;
 	color:#FFFFFF;
@@ -1438,7 +1438,7 @@ z-index:0;
 #contact_form .submitBtn:focus{ box-shadow:none; }
 
 #contact_form label{ float:left; padding-top:10px; margin:0px 0px 0px 0px; }
-#contact_form label.error{ 
+#contact_form label.error{
 	color: #ff0000;
 	position:relative;
 	text-align: left;
@@ -1500,7 +1500,7 @@ z-index:0;
 	padding:0px 15px;
 	margin:1px auto 20px;
 	cursor:pointer;
-	position:relative;	
+	position:relative;
 	outline:none;
 	clear:both;
 	color:#FFFFFF;
@@ -1510,13 +1510,13 @@ z-index:0;
 .hcont_form .submitBtn:hover{ color:#ffffff; background-color: #727272; }
 .hcont_form .submitBtn:focus{ box-shadow:none; }
 
-.hcont_form input:focus, .cont_form textarea:focus ,input:valid:focus{	 
+.hcont_form input:focus, .cont_form textarea:focus ,input:valid:focus{
 	border:0;
     outline: 0;
   	/* IE6-9 */
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(243,42,42,0.8);
     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(243,42,42,0.8);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(243,42,42,0.8); 
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(243,42,42,0.8);
 }
 #hcontact_form { display:block; width:50%;}
 #hcontact_form input{
@@ -1566,7 +1566,7 @@ z-index:0;
 	padding:0px 20px;
 	cursor:pointer;
 	text-transform:uppercase;
-	position:relative;	
+	position:relative;
 	outline:none;
 	clear:both;
 	color:#FFFFFF;
@@ -1576,7 +1576,7 @@ z-index:0;
 #hcontact_form .submitBtn:focus{ box-shadow:none; }
 
 #hcontact_form label{ float:left; padding-top:10px; margin:0px 0px 0px 0px; }
-#hcontact_form label.error{ 
+#hcontact_form label.error{
 	color: #ff0000;
 	position:relative;
 	text-align: left;
@@ -1601,7 +1601,7 @@ font-weight: 100;
 display: table-cell;
 vertical-align: middle;
 }
-.sptext{ 
+.sptext{
 -ms-transition:0.6s;
 -moz-transition:0.6s;
 -webkit-transition:0.6s;
@@ -1616,13 +1616,13 @@ transition:0.6s;
 .spcontainer {
 padding: 0;
 margin: 0;
-height: 90px;
+height: 75px;
 width: 390px;
 display: block;
 position:absolute;
 z-index:9999;
 bottom: 0;
-right: 0;
+right: 110px;
 overflow: hidden;
 }
 
@@ -1638,7 +1638,7 @@ z-index: 144;
 .spmenu1.forefront {
 top:20px;
 left:15px;
--ms-transform: rotate(360deg); 
+-ms-transform: rotate(360deg);
 -webkit-transform: rotate(360deg);
 transform: rotate(360deg);
 }
@@ -1654,7 +1654,7 @@ transform: rotate(3deg);
 .spmenu2.forefront {
 left:130px;
 top:20px;
--ms-transform: rotate(0deg); 
+-ms-transform: rotate(0deg);
 -webkit-transform: rotate(0deg);
 transform: rotate(0deg);
 }
@@ -1759,7 +1759,7 @@ filter: drop-shadow(4px 2px 4px rgba(0,0,0,0.2));
 		width: 20px;
 	}
 
-	.yt-controls a:hover { 
+	.yt-controls a:hover {
 		color: #89d460;
 	}
 .vjs-tech{ z-index:999;}
@@ -1780,7 +1780,7 @@ filter: drop-shadow(4px 2px 4px rgba(0,0,0,0.2));
 	background:transparent;
 	border: none;
  }
- 
+
 /* // Video SECTION
 =================================================== */
 
@@ -1827,19 +1827,19 @@ color:#fff;
 	text-align:center;
 	outline:none;
 	font-size:18px;
-} 
+}
 
 
  /* Media Queries */
 
- 
+
 @media (min-width: 1201px) and (max-width: 1400px) {
 /*.container{ background-color:#ff0000;}*/
 
 .three_fourth .content_inner{ padding-left:110px;}
 #galleryhalfwidth .project-overlay h3{ font-size:17px;}
  }
- 
+
 @media (min-width: 981px) and (max-width: 1200px) {
 /*.container{ background-color:#00ff00;}*/
 
@@ -1890,7 +1890,7 @@ color:#fff;
 #lightbox3 .nicescroll-rails { left: 95% !important; }
 .empty{ display:none;}
 }
-@media (min-width: 321px) and (max-width: 480px) { 
+@media (min-width: 321px) and (max-width: 480px) {
 /*.container{ background-color:#ff00ff;}*/
 .contentscroll {margin-right:10px;}
 
@@ -1976,12 +1976,12 @@ h1 { font-size: 23px; }
 #lightbox3 .nicescroll-rails { left: 93% !important;  margin-left: inherit; }
 .empty{ display:none;}
 }
- 
- 
+
+
 /************
-mobile  
+mobile
 ************/
- 
+
 @media (max-width: 991px) {
 .content_overlay_three_fourth{ width:100%; height:100%;}
 .galheading{top: 120px;}
@@ -2008,7 +2008,7 @@ mobile
 .yt-controls{ position:absolute; margin-top:180px;}
 #home_videos .header_details {position: absolute; top: 80px;}
 }
- 
+
 
 @media (min-width: 568px) and (max-width: 600px) and (orientation : landscape){
 	#mainheader .menu-inner{ height:70px!important;}
@@ -2047,7 +2047,7 @@ mobile
 	.cbp-ig-grid li:nth-child(2n-1) { box-shadow: 1px 0 0 #ddd;	}
 }
 
-@media screen and (max-width: 41.6em) { 
+@media screen and (max-width: 41.6em) {
 	.cbp-ig-grid li { width: 100%; border-right:none; }
 	.cbp-ig-grid li:nth-child(-n+2){ border-top: 1px solid #ddd; }
 	.cbp-ig-grid li:nth-child(2n-1) { box-shadow: none }
@@ -2055,7 +2055,7 @@ mobile
 	.cbp-ig-grid li:last-child { border-bottom:none;	}
 }
 
-@media screen and (max-width: 25em) { 
+@media screen and (max-width: 25em) {
 	.cbp-ig-grid{ width:95%;}
 	.cbp-ig-grid {	font-size: 80%;	}
 	.cbp-ig-grid li{border-right:none;}
@@ -2064,6 +2064,6 @@ mobile
 
 
 /* Firefox Only Hack code css */
-@-moz-document url-prefix() { 
- #lightbox .close {position: relative; top:-17px;} 
+@-moz-document url-prefix() {
+ #lightbox .close {position: relative; top:-17px;}
 }
