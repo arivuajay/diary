@@ -27,8 +27,8 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     ));
                     ?>
 
-                    <div class="panel-heading"> <span class="panel-title"> 
-                            <span class="glyphicon glyphicon-lock text-purple2"></span> Register </span> 
+                    <div class="panel-heading"> <span class="panel-title">
+                            <span class="glyphicon glyphicon-lock text-purple2"></span> Register </span>
                         <span class="panel-header-menu pull-right mr15 text-muted fs12"><?php echo CHtml::link('Login >>', array('/site/users/login'))?></span> </div>
                     <div class="panel-body">
                         <div class="login-avatar"> <img src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/register.png" width="150" height="112" alt="avatar"> </div>
@@ -62,11 +62,11 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 <?php echo $form->error($model, 'confirm_password'); ?>
                         </div>
                         <?php echo $form->hiddenField($model, 'user_activation_key', array('size' => 60, 'maxlength' => 250)); ?>
-                        <div class="panel-footer"> 
+                        <div class="panel-footer">
                             <span class="text-muted fs12 lh30">
                                 <button type="button" data-provider="facebook" class="btn btn-sm bg-blue1 pull-left oAuthLogin">Connect with Facebook &nbsp;<i class="fa fa-facebook"></i></button>
-                            </span> 
-                            <button type="button" data-provider="twitter" class="btn btn-sm bg-blue2 pull-right oAuthLogin">Connect with Twitter &nbsp;<i class="fa fa-twitter"></i></button>
+                            </span>
+<!--                            <button type="button" data-provider="twitter" class="btn btn-sm bg-blue2 pull-right oAuthLogin">Connect with Twitter &nbsp;<i class="fa fa-twitter"></i></button>-->
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         <!--<a class="btn btn-sm bg-purple2 pull-right" href="#"><i class="fa fa-home"></i>Register</a>-->
                         <!--<i class="fa fa-home"></i>-->
                         <?php echo CHtml::submitButton($model->isNewRecord ? 'Register' : 'Save', array('class' => 'btn btn-sm bg-purple2 pull-right',)); ?>
-                        <div class="clearfix"></div>                                                                                                                                                
+                        <div class="clearfix"></div>
                     </div>
                     <?php $this->endWidget(); ?>
 

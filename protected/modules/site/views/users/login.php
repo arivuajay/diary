@@ -64,7 +64,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 <span class="text-muted fs12 lh30">
                                     <button type="button" data-provider="facebook" class="btn btn-sm bg-blue1 pull-left oAuthLogin">Connect with Facebook &nbsp;<i class="fa fa-facebook"></i></button>
                                 </span>
-                                <button type="button" data-provider="twitter" class="btn btn-sm bg-blue2 pull-right oAuthLogin">Connect with Twitter &nbsp;<i class="fa fa-twitter"></i></button>
+<!--                                <button type="button" data-provider="twitter" class="btn btn-sm bg-blue2 pull-right oAuthLogin">Connect with Twitter &nbsp;<i class="fa fa-twitter"></i></button>-->
                                 <div class="clearfix"></div>
                             </div>
                         </div>

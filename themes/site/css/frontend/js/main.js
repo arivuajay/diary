@@ -1,9 +1,9 @@
-'use strict'; 
+'use strict';
 /*! main.js - v0.1.1
 * http://admindesigns.com/
 * Copyright (c) 2013 Admin Designs;*/
 
-// Library of Theme colors for Javascript plug and play use	
+// Library of Theme colors for Javascript plug and play use
 var tealColor =  "#a8e9ea",
 	teal2Color =  "#2dc5c7",
 	teal3Color =  "#1e9093",
@@ -35,7 +35,7 @@ var tealColor =  "#a8e9ea",
 /* Core theme functions required for
  * most of the themes vital functionality */
 var Core = function () {
-	
+
     // Delayed Animations
     var runAnimations = function () {
 
@@ -45,34 +45,34 @@ var Core = function () {
 		  var This = $(this)
 		  var delayTime = $(this).data('animate')[0];
 		  var delayAnimation = $(this).data('animate')[1];
-		  
+
  	      var delayAnimate = setTimeout(function () {
 			  $(This).removeClass('animated-delay').addClass('animated ' + delayAnimation);
-		  }, delayTime); 
-		  
+		  }, delayTime);
+
 	  });
     }
-	
+
     // Header Functions
     var runHeader = function () {
-						
-		// We use values on text inputs as they are easier than placeholders to style 
+
+		// We use values on text inputs as they are easier than placeholders to style
 		// This clears the value on focus so that it acts more like a placeholder
 		$('#HeaderSearch').focus(function() { $(this).val(''); });
     }
-	
+
     // SideMenu Functions
     var runSideMenu = function () {
-			
+
 		//  This function is responsible for the following functionality
 		//  1. LEFT MENU COLLAPSE
 		//  2. LEFT USER MENU COLLAPSE
 		//  3. LEFT MENU LINKS COLLASE (dashboard, elements, tables, etc)
 		//  4. RIGHT MENU COLLAPSE
 		//  5. Monitor and add responsive classes to "body" tag on window resize
-	
+
 		var Body = $('body');
-		
+
 		// Left SideBar Toggle Mechanics
 		// Only 1 Sidebar is open at a time
         var toggleLeftSideMenu = function () {
@@ -83,11 +83,11 @@ var Core = function () {
 			// Close menu.
 			else {
 				Body.addClass('sidebar-hidden').removeClass('sidebar-ltr sidebar-rtl');
-			}	
+			}
         }
-		
+
 		// 2. RIGHT SIDEBAR OPEN
-        var toggleRightSideMenu = function () {	
+        var toggleRightSideMenu = function () {
 			// Check state then close menu.
 			if ($('body.sidebar-rtl').length) {
 				Body.removeClass('sidebar-rtl');
@@ -101,11 +101,11 @@ var Core = function () {
 		// 2. LEFT USER MENU COLLAPSE
 		// Allow all user menu divs except the profile/signout links to open the child menu
 		$('.user-info .media-heading, .user-info .media-object, .media-links > a:first-child').click(function() {
-			
+
 			// Toggle Class to signal state change
 			$('.user-info, .user-menu').toggleClass('usermenu-open');
-			
-			// If menu is closed apply animation	
+
+			// If menu is closed apply animation
 			if ($('.user-info').hasClass('usermenu-open')) {
 				$('.user-menu').slideDown('fast');
 			}
@@ -113,26 +113,26 @@ var Core = function () {
 			else {
 				$('.user-menu').slideUp('fast',function(){$(this).removeClass('show').attr('style','')});
 			}
-			
+
 		});
-		
-		
+
+
 		// 3. LEFT MENU LINKS COLLAPSE
 		$('.sidebar-menu ul a.accordion-toggle').click(function(e) {
-			
+
 			// Any menu item with the accordion class is a dropdown. Thus we prevent default actions
 		    e.preventDefault();
-			
+
 			if ($('body').hasClass('sidebar-left-collapsed')) {return;}
 
 			// Before opening menu item check to see if it is a multi-level menu
 
 			// Check to see if the target is a multi-level menu item
-			// If it's not we collapse the entire left side menu 
+			// If it's not we collapse the entire left side menu
 			if (!$(this).parents('ul.sub-nav').hasClass('sub-nav')) {
 				$('a.accordion-toggle.menu-open').next('.sub-nav').slideUp('fast', 'swing', function() {
 					$(this).attr('style','').prev().removeClass('menu-open');
-				});				
+				});
 			}
 			// If it's a multi-level menu item we collapse all open menus that
 			// are not a direct parent of the item clicked. This is to prevent
@@ -140,7 +140,7 @@ var Core = function () {
 			else {
 				$(this).next('.sub-nav').slideUp('fast', 'swing', function() {
 					$(this).attr('style','').prev().removeClass('menu-open');
-				});			
+				});
 			}
 			// Now we expand targeted menu item, add the ".open-menu" class
 			// and remove any left over jquery animation attributes
@@ -151,30 +151,30 @@ var Core = function () {
 			}
 
 		 });
-		
+
 		// 5. MONITOR AND ADD RESPONSIVE classes to "body" tag on window resize
 		var sidebarCheck = function() {
 			if ($(window).width() < 1080) {	$('body').addClass('mobile-view').removeClass('sidebar-ltr sidebar-rtl'); }
 			else { $('body').removeClass('mobile-view'); }
 		}
-	
+
 		// Functions Calls
 		$("#toggle_sidemenu_l").click(toggleLeftSideMenu);
-		$("#toggle_sidemenu_r").click(toggleRightSideMenu);	
+		$("#toggle_sidemenu_r").click(toggleRightSideMenu);
         $(window).resize(function() {
 			 sidebarCheck();
-		});	
+		});
 
     }
-	
+
 	// Form related Functions
     var runFormElements = function () {
-				
-        // Init Bootstrap tooltips, if present 
+
+        // Init Bootstrap tooltips, if present
         if ($("[data-toggle=tooltip]").length) {
             $('[data-toggle=tooltip]').tooltip();
         }
-		
+
         // Init Bootstrap persistent tooltips. This prevents a
         // popup from closing if a checkbox it contains is clicked
 		$('.dropdown-menu .dropdown-persist').click(function (event) {
@@ -185,7 +185,7 @@ var Core = function () {
 			event.stopPropagation();
 			$(this).tab('show')
 		});
-		
+
         // if btn has ".btn-states" class we monitor it for user clicks. On Click we remove
         // the active class from its siblings and give it to the button clicked
         if ($('.btn-states').length) {
@@ -193,12 +193,12 @@ var Core = function () {
                 $(this).addClass('active').siblings().removeClass('active');
             });
         }
-		
+
     }
 
     // Creates Clickable Checklists (header menus/tables)
     var runChecklists = function () {
-		
+
         // Checklist state for table widgets and header menu buttons
         $('#content_wrapper').on('click', '.table-checklist tbody tr, .dropdown-checklist .dropdown-items li', function() {
             $(this).toggleClass('task-checked');
@@ -209,27 +209,27 @@ var Core = function () {
             }
            // $.uniform.update('input.row-checkbox');
         });
-		
+
         // Disable Selection on checklist to prevent excessive text-highlighting
-        var disableSelection = function disableSelection() {
-            return this.bind(($.support.selectstart ? "selectstart" : "mousedown") + ".ui-disableSelection", function (event) {
-                event.preventDefault();
-            });
-        };
-        $(".table-checklist tbody tr").disableSelection();
+//        var disableSelection = function disableSelection() {
+//            return this.bind(($.support.selectstart ? "selectstart" : "mousedown") + ".ui-disableSelection", function (event) {
+//                event.preventDefault();
+//            });
+//        };
+//        $(".table-checklist tbody tr").disableSelection();
     }
-		
+
     // DEMO FUNCTIONS - primarily trash
-    var runDemoJS = function () { 
-	
+    var runDemoJS = function () {
+
 	   // HEADER RELATED DEMO JS
 	   $('.toggle-color-swap').on('click',function() {
 		   var swapColor = $(this).data('swap');
 		   var navbar = $('.navbar');
 		   var navbarLogo = $('.navbar-brand img');
-		  
+
 		   var colors = 'bg-white bg-red2 bg-purple2 bg-purple3 bg-orange2 bg-dark3 bg-brown-alt bg-blue4-alt bg-blue5-alt bg-blue6-alt';
-		   
+
 		   if (swapColor === 'bg-white') {
 				navbar.removeClass(colors + ' navbar-white-text').addClass(swapColor);
 				navbarLogo.attr('src', 'img/logos/header-logo.png');
@@ -241,7 +241,7 @@ var Core = function () {
 
 		// Header Menu dropdown navigations
 		$('.navbar-left > div, .navbar-menus > div').on('show.bs.dropdown', function () {
-			
+
 			if ($(this).attr('id') == 'comment_menu') {
 				$(this).children('.dropdown-menu').addClass('animated animated-short bounceInRight');
 			}
@@ -252,9 +252,9 @@ var Core = function () {
 		$('.navbar-left > div, .navbar-menus > div').on('hide.bs.dropdown', function () {
 			$(this).children('.dropdown-menu').removeClass('animated flipInX bounceInRight');
 		});
-		
+
 		// THEME SETTING RELATED JS
-		
+
         // Toggles Theme Settings Tray
         $('.skin-toolbox-toggle, .dashboard-widget-tray .btn:last-child').on('click',function () {
             $('#skin-toolbox').toggleClass('toolbox-open');
@@ -308,10 +308,10 @@ var Core = function () {
                 }
             }
         });
-	
+
 		var boxtest = localStorage.getItem('boxed');
 		var ajaxtest = localStorage.getItem('ajax_loading');
-		
+
 		// Check local storage and update on page load
 		if (boxtest === 'true') {
 			$('#boxed-option').prop('checked', 'true');
@@ -320,7 +320,7 @@ var Core = function () {
 		if (ajaxtest === 'false') {
 			$('#ajax-option').prop('checked', false);
 		}
-		
+
 		// Assign Ajax setting on click
 		$('#ajax-option').on('click',function() {
 			var ajaxtest = localStorage.getItem('ajax_loading');
@@ -328,7 +328,7 @@ var Core = function () {
 				localStorage.setItem('ajax_loading', 'true');
 			}
 			else {
-				localStorage.setItem('ajax_loading', 'false');	
+				localStorage.setItem('ajax_loading', 'false');
 			}
 		});
 		// Assign boxed-layout setting on click
@@ -339,21 +339,21 @@ var Core = function () {
 		$('#fullwidth-option').on('click',function() {
 			localStorage.setItem('boxed', 'false');
 		});
-		
-		
+
+
         $(window).load(function() {
-			
+
 			// List of all available JS files. We're going to attempt to
 			// cache them all after the first page has finished loading.
 			// This is for DEMO purposes ONLY
 			var scripts = {
-				
+
 				// HIGH PRIORITY - Images
 				image1: 		 'img/stock/splash/1.jpg',
 				image2:		     'img/stock/splash/2.jpg',
 				image3: 		 'img/stock/splash/3.jpg',
 				image4: 		 'img/stock/splash/4.jpg',
-				
+
 				// HIGH PRIORITY
 				gmap: 			 'vendor/plugins/map/gmaps.min.js',
 				jquerymap:		 'vendor/plugins/gmap/jquery.ui.map.js',
@@ -362,17 +362,17 @@ var Core = function () {
 				chosen:		  	 'vendor/plugins/chosen/chosen.jquery.js',
 				moment:		 	 'vendor/plugins/daterange/moment.min.js',
 				globalize:   	 'vendor/plugins/globalize/globalize.js',
-	
+
 				// FORM PICKERS
 				cpicker: 	  	 'vendor/plugins/colorpicker/bootstrap-colorpicker.js',
 				timepicker:      'vendor/plugins/timepicker/bootstrap-timepicker.min.js',
 				datepicker:      'vendor/plugins/datepicker/bootstrap-datepicker.js',
 				daterange: 	     'vendor/plugins/daterange/daterangepicker.js',
-				
+
 				// FORMS
 				validate:		 'vendor/plugins/validate/jquery.validate.js',
 				masked: 	 	 'vendor/plugins/jquerymask/jquery.maskedinput.min.js',
-				
+
 				// FORMS TOOLS
 				holder: 	     'vendor/bootstrap/plugins/holder/holder.js',
 				tagmanager:      'vendor/plugins/tags/tagmanager.js',
@@ -381,7 +381,7 @@ var Core = function () {
 				paginator:		 'vendor/bootstrap/plugins/paginator/bootstrap-paginator.js',
 				knob:            'vendor/plugins/jquerydial/jquery.knob.js',
 				rangeslider:     'vendor/plugins/rangeslider/jQAllRangeSliders.min.js',
-				
+
 				// MED PRIORITY - Large File sizes
 				charts:       	 'js/pages/charts.js',
 				ckeditorCDN:     'http://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.0.1/ckeditor.js',
@@ -392,11 +392,11 @@ var Core = function () {
 				imagezoom: 		 'vendor/plugins/imagezoom/jquery.elevatezoom.min.js',
 				sketchpad:       'vendor/plugins/notepad/wPaint.min.js',
 				fileupload:      'vendor/bootstrap/plugins/fileupload/fileupload.js',
-			};	
+			};
 
 			var cacheCheck = function(o) {
 				$.each(o, function(i, p) {
-					
+
 					if (localStorage.getItem(i) !== 'cached') {
 						$.ajax({
 							url: p,
@@ -404,9 +404,9 @@ var Core = function () {
 							success: function(data) {
 								localStorage.setItem(i, 'cached');
 								console.log(localStorage.getItem(i));
-							}				
+							}
 						});
-						
+
 					}
 					else {}
 				});
@@ -415,7 +415,7 @@ var Core = function () {
 			// cacheCheck(scripts);
 		});
     }
-	
+
 	return {
         init: function () {
             runAnimations();
@@ -425,5 +425,5 @@ var Core = function () {
             runHeader();
 			runDemoJS();
         }
-	} 
+	}
 }();

@@ -210,4 +210,22 @@ class Myclass extends CController {
 
         return $response;
     }
+
+    public static function getPageUrl($id,$format='array') {
+        $page = Cms::model()->findByPk($id);
+        if($page){
+            switch ($format):
+                case 'relative':
+                    $url = Yii::app()->createUrl('/site/cms/view', array('slug'=>$page->slug));
+                    break;
+                case 'array':
+                    $url = array('/site/cms/view', 'slug'=>$page->slug);
+                    break;
+            endswitch;
+
+            return $url;
+        }
+        return;
+
+    }
 }
