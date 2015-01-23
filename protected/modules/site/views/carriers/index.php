@@ -8,7 +8,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
       <div class="topbar-left">
         <ol class="breadcrumb">
           <li class="crumb-active"><a href="#">CAREERS</a></li>
-          <li class="crumb-link"><a href="#">Home</a></li>
+          <li class="crumb-link"><a href="<?php echo SITEURL;?>">Home</a></li>
           <li class="crumb-trail">CAREERS</li>
         </ol>
       </div>
