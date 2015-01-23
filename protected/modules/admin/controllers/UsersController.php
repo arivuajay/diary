@@ -143,6 +143,7 @@ class UsersController extends Controller {
     public function actionIndex() {
         $Criteria = new CDbCriteria();
         $Criteria->condition = "user_status != '2'";
+        $criteria->order = 'created DESC';
         $users = Users::model()->findAll($Criteria);
 
         $this->render('index', array(
