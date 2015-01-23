@@ -111,12 +111,12 @@
         </li>
         
         <li> <a href="#"><span class="glyphicons glyphicons-globe"></span><span class="sidebar-title">Contact us</span></a> </li>
-        <!--<li> <a href="#"><span class="glyphicons glyphicons-settings"></span><span class="sidebar-title">All your needs</span></a> </li>-->
-        <li>
+        <li> <a href="#"><span class="glyphicons glyphicons-settings"></span><span class="sidebar-title">All your needs</span></a> </li>
+<!--        <li>
             <?php
-            echo CHtml::link(' <span class="glyphicons glyphicons-settings"></span><span class="sidebar-title">All your needs</span>', array('/site/carriers/'), array('class'=>'ajax-disable'));
+            echo CHtml::link(' <span class="glyphicons glyphicons-settings"></span><span class="sidebar-title">All your needs</span>', array(' '), array('class'=>'ajax-disable'));
             ?>
-        </li>
+        </li>-->
         <li> <a href="#"><span class="glyphicons glyphicons-pencil"></span><span class="sidebar-title">Tell a Friend</span></a> </li>
         <li> <a href="#"><span class="glyphicons glyphicons-link"></span><span class="sidebar-title">Donation</span></a> </li>
         <li> <a href="#"><span class="glyphicons glyphicons-edit"></span><span class="sidebar-title">Feedback</span></a> </li>
