@@ -32,7 +32,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                 ?>
                 <div class="clearfix hcont_form pad_top20">
                     <div class="row">
-                        <input type="email" name="email"  class="validate['required','email']  textbox1" placeholder=" Email : " onFocus="this.placeholder = ''" onBlur="this.placeholder = ' Email :'" required/>
+                        <input type="email" name="email"  class="validate['required','email']  textbox1" placeholder="  Email Address " onFocus="this.placeholder = ''" onBlur="this.placeholder = ' Email Address'" required/>
                     </div>
 
                     <div class="row hmoodlist">

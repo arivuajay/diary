@@ -45,6 +45,15 @@ font-size: 13px;
 color: #a6a9b9;
 width:100%;
 }
+ul.nav li a .side-text{
+font-family: 'Oswald';
+text-transform: uppercase;
+font-weight: 400;
+font-style: normal;
+font-size: 13px;
+color: #a6a9b9;
+width:100%;
+}
 /*.main-nav ul ul li a:hover, .main-nav ul ul li.selected a{ background-color:transparent; color:#333;}*/
 
 
@@ -153,5 +162,7 @@ ul.nav li a:hover::after, ul.nav li.selected a:after { /* use CSS generated cont
 .menu-inner .nav-toggle{ top:23px;}
 .header_details{ margin-top:60px;}
 }
-
-
+.nav-link.side-text
+{
+    font-size: 17px;
+}
