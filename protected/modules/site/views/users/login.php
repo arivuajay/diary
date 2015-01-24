@@ -45,11 +45,11 @@ $themeUrl = Yii::app()->theme->baseUrl;
                             }
                             ?>
                             <div class="login-avatar"> <img src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/login.png" width="150" height="112" alt="avatar">
-                                <div class="text-purple2" style="text-align: center; font-weight: bold; margin-top: 10px;">Your Own Personal Diary / Journal” here</div>
+                                <div class="text-purple2" style="text-align: center; font-weight: bold; margin-top: 10px;">Your Own Personal Diary / Journal</div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span> </span>
-                                    <?php echo $form->textField($model, 'username', array('class' => 'form-control', 'autocomplete' => 'off', 'autofocus', 'placeholder' => Users::model()->getAttributeLabel('user_name'))); ?>
+                                    <?php echo $form->textField($model, 'username', array('class' => 'form-control', 'autocomplete' => 'off', 'autofocus', 'placeholder' => $model->getAttributeLabel('username'))); ?>
                                     <!--<input type="text" class="form-control" placeholder="User Name">-->
                                 </div>
                                 <?php echo $form->error($model, 'username', array('class' => 'error')); ?>
@@ -58,7 +58,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 <span class="text-password">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <?php echo CHtml::link('Lost password', array('/site/users/forgot')) ?></span>
                                 <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span> </span>
-                                    <?php echo $form->passwordField($model, 'password', array('class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => Users::model()->getAttributeLabel('password'))); ?>
+                                    <?php echo $form->passwordField($model, 'password', array('class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => $model->getAttributeLabel('password'))); ?>
                                     <!--<input type="text" class="form-control" placeholder="Password">-->
                                 </div>
                                 <?php echo $form->error($model, 'password', array('class' => 'error')); ?>
