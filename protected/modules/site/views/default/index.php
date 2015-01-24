@@ -60,7 +60,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 <div class="header-table col-md-12 header-menu">
                                     <nav class="main-nav">
                                         <ul id="label-nav" class="nav">
-                                            <li class="selected"><a href="#" class="nav-link">Your own personal diary / journal</a></li>
+                                            <li class="selected"><a href="#" class="nav-link side-text">Your own personal diary / journal</a></li>
                                         </ul>
                                     </nav>
 
@@ -73,13 +73,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                             'activateParents' => true,
                                             'items' => array(
                                                 array('label' => 'Home', 'url' => array('/site/default/index'), 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'About', 'url' => Myclass::getPageUrl(1), 'linkOptions' => array('class' => 'nav-link')),
+                                                array('label' => 'About Us', 'url' => Myclass::getPageUrl(1), 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'FAQ', 'url' => array('/site/faq'), 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Your Personal Diary', 'url' => array('/site/users/login'), 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Testimonial', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Contact', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Feedback', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'Login', 'url' => array('/site/users/login'), 'linkOptions' => array('class' => 'nav-link','visible'=>Yii::app()->user->isGuest)),
+                                                array('label' => 'Login / Register', 'url' => array('/site/users/login'), 'linkOptions' => array('class' => 'nav-link','visible'=>Yii::app()->user->isGuest)),
+//                                                //array('label' => 'Register', 'url' => array('/site/users/register'), 'linkOptions' => array('class' => 'nav-link','visible'=>Yii::app()->user->isGuest)),
                                                 array('label' => 'All your needs', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                             ),
                                             'htmlOptions' => array('class' => 'nav', "id" => "sub-nav"),
