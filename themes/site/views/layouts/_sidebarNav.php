@@ -4,7 +4,7 @@
     $this->widget('zii.widgets.CMenu', array(
         'activateParents' => true,
         'items' => array(
-            array('label' => '<span class="glyphicons glyphicons-book"></span><span class="sidebar-title">About</span><span class="caret"></span>', 'url' => Myclass::getPageUrl(1),
+            array('label' => '<span class="glyphicons glyphicons-book"></span><span class="sidebar-title">About</span><span class="caret"></span>', 'url' => '#',
                 'linkOptions' => array('class' => 'accordion-toggle'),
                 'items' => array(
                     array('label' => '<span class="glyphicons glyphicons glyphicons-user"></span> Profile', 'url' => '#'),
