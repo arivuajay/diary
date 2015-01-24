@@ -212,6 +212,7 @@ class Myclass extends CController {
     }
 
     public static function getPageUrl($id,$format='array') {
+        $url = '#';
         $page = Cms::model()->findByPk($id);
         if($page){
             switch ($format):
@@ -222,10 +223,7 @@ class Myclass extends CController {
                     $url = array('/site/cms/view', 'slug'=>$page->slug);
                     break;
             endswitch;
-
-            return $url;
         }
-        return;
-
+        return $url;
     }
 }
