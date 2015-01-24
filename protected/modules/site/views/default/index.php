@@ -12,7 +12,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     <a href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a>
                 </div>
                 <div class="call">
-                    <?php echo CHtml::link(CHtml::image("$themeUrl/css/home/assets/img/google_play_button.png",'PlayStore',array("border"=>"0")),'https://play.google.com/store?hl=en',array('target'=>'_blank')) ?>
+                    <?php echo CHtml::link(CHtml::image("$themeUrl/css/home/assets/img/google_play_button.png",'PlayStore',array("border"=>"0")),'https://play.google.com/store/apps/details?id=com.express.splash&hl=en',array('target'=>'_blank')) ?>
                 </div>
             </div>
             <div class="container">
