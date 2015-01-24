@@ -86,9 +86,9 @@
                         <div class="col-xs-4"> <a href="#"> <span class="glyphicons glyphicons-home fs22 text-blue2"></span>
                                 <h5 class="fs11">Manage Journal</h5>
                             </a> </div>
-                        <div class="col-xs-4"> <a href="#"> <span class="glyphicons glyphicons-inbox fs22 text-orange2"></span>
-                                <h5 class="fs11">Write a journal</h5>
-                            </a> </div>
+                        <div class="col-xs-4">
+                            <?php echo CHtml::link('<span class="glyphicons glyphicons-inbox fs22 text-orange2"></span><h5 class="fs11">Write a journal</h5>',array('/site/journal/create')); ?>
+                        </div>
                         <div class="col-xs-4"> <a href="#"> <span class="glyphicons glyphicons-bell fs22 text-purple2"></span>
                                 <h5 class="fs11">Mood report</h5>
                             </a> </div>
@@ -196,9 +196,9 @@
         <!-- End: Main -->
 
         <!-- Google Map API -->
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>-->
 
-        <script type="text/javascript">
+<!--        <script type="text/javascript">
             jQuery(document).ready(function() {
 
                 "use strict";
@@ -354,7 +354,7 @@
                 $(".custom").mask("9.99.999.9999");
 
             });
-        </script>
+        </script>-->
     </body>
 
 

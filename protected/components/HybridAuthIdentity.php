@@ -5,19 +5,19 @@ class HybridAuthIdentity extends CUserIdentity {
     const VERSION = '2.1.2';
 
     /**
-     * 
+     *
      * @var Hybrid_Auth
      */
     public $hybridAuth;
 
     /**
-     * 
+     *
      * @var Hybrid_Provider_Adapter
      */
     public $adapter;
 
     /**
-     * 
+     *
      * @var Hybrid_User_Profile
      */
     public $userProfile;
@@ -80,7 +80,7 @@ class HybridAuthIdentity extends CUserIdentity {
                 )
             ),
             "debug_mode" => false,
-            // to enable logging, set 'debug_mode' to true, then provide here a path of a writable file 
+            // to enable logging, set 'debug_mode' to true, then provide here a path of a writable file
             "debug_file" => "",
         );
 
@@ -90,7 +90,7 @@ class HybridAuthIdentity extends CUserIdentity {
     /**
      *
      * @param string $provider
-     * @return bool 
+     * @return bool
      */
     public function validateProviderName($provider) {
         if (!is_string($provider))
@@ -133,9 +133,10 @@ class HybridAuthIdentity extends CUserIdentity {
             $model->user_password = $password;
             $model->user_status = 1;
         else:
+            $model->user_status = 1;
             $model->user_last_login = date('Y-m-d h:i:s');
         endif;
-        
+
 //        if (!empty($this->userProfile->photoURL) && ($newrecord || empty($patient->profile_picture))):
 //            if ($image = $patient->urlImageSave($this->userProfile->photoURL, rand()))
 //                $model->user_avatar = $image;
@@ -156,7 +157,7 @@ class HybridAuthIdentity extends CUserIdentity {
 //            if (!empty($city))
 //                $patient->city = $city->cityID;
 //        endif;
-//        
+//
 //        if (empty($patient->zipcode))
 //            $patient->zipcode = $this->userProfile->zip;
 //        if (empty($model->mobile_number))

@@ -9,12 +9,11 @@ $themeUrl = Yii::app()->theme->baseUrl;
         <div class="header_details">
             <div class="container">
                 <div class="header_icons accura-header-block accura-hidden-2xs">
-                    <a href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a></div>
-                <!--                <div class="call">
-                                    <div class="home_address">
-                                        NO.OF. USERS & <br>
-                                    </div>
-                                    VISITORS</div>-->
+                    <a href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a>
+                </div>
+                <div class="call">
+                    <?php echo CHtml::link(CHtml::image("$themeUrl/css/home/assets/img/google_play_button.png",'PlayStore',array("border"=>"0")),'https://play.google.com/store?hl=en',array('target'=>'_blank')) ?>
+                </div>
             </div>
             <div class="container">
                 <?php
@@ -33,19 +32,21 @@ $themeUrl = Yii::app()->theme->baseUrl;
                 ?>
                 <div class="clearfix hcont_form pad_top20">
                     <div class="row">
-                    <input type="email" name="email"  class="validate['required','email']  textbox1"
-                           placeholder=" Email : " onFocus="this.placeholder = ''" onBlur="this.placeholder = ' Email :'" required/><br>
-                    </div><div class="row">
-                           <?php foreach (Myclass::getMood() as $key => $mood): ?>
-                    <label class="radio-inline mr10" style="position:relative;height: 0px;margin: 0px;">
+                        <input type="email" name="email"  class="validate['required','email']  textbox1" placeholder=" Email : " onFocus="this.placeholder = ''" onBlur="this.placeholder = ' Email :'" required/>
+                    </div>
 
-                            <input type="radio" checked="checked" style="visibility: hidden;" name="MoodType[mood_type]" value="<?php echo $key; ?>">
-                                <?php echo CHtml::image("themes/site/css/frontend/img/$mood.png"); ?>
-                        </label>
-                    <?php endforeach; ?>
-                        </div><div class="row">
-                    <input id="hcontactsubmitBtn1" value="Write an Entry" type="submit" class="submitBtn">
-                        </div>
+                    <div class="row hmoodlist">
+                        <p class="mood_label">Select Your Mood</p>
+                        <?php foreach (Myclass::getMood() as $key => $mood): ?>
+                            <label class="radio-inline mr10">
+                                <input type="radio" checked="checked" name="MoodType[mood_type]" value="<?php echo $key; ?>">
+                                <?php echo CHtml::image("$themeUrl/css/frontend/img/mood_$key.png"); ?>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="row">
+                        <input id="hcontactsubmitBtn1" value="Write an Entry" type="submit" class="submitBtn">
+                    </div>
                 </div>
                 <?php $this->endWidget(); ?>
                 <!--</form>-->
@@ -72,13 +73,13 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                             'activateParents' => true,
                                             'items' => array(
                                                 array('label' => 'Home', 'url' => array('/site/default/index'), 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'About', 'url' =>Myclass::getPageUrl(1), 'linkOptions' => array('class' => 'nav-link')),
+                                                array('label' => 'About', 'url' => Myclass::getPageUrl(1), 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'FAQ', 'url' => array('/site/faq'), 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'Your Personal Diary', 'url' => array('/site/default/login'), 'linkOptions' => array('class' => 'nav-link')),
+                                                array('label' => 'Your Personal Diary', 'url' => array('/site/users/login'), 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Testimonial', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Contact', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Feedback', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'Login', 'url' => array('/site/default/login'), 'linkOptions' => array('class' => 'nav-link'),'visible'=>Yii::app()->user->isGuest),
+                                                array('label' => 'Login', 'url' => array('/site/users/login'), 'linkOptions' => array('class' => 'nav-link','visible'=>Yii::app()->user->isGuest)),
                                                 array('label' => 'All your needs', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                             ),
                                             'htmlOptions' => array('class' => 'nav', "id" => "sub-nav"),

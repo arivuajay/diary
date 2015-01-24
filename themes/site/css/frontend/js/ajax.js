@@ -95,7 +95,7 @@ var Ajax = function () {
 		jQuery.ajaxSetup({cache:true});
 
 		// Attach handler to intercept menu item events - Left Sidebar, Left User Menu, Right User Menu
-		$('.user-menu a, .sidebar_right_menu a').on('click', function(e) {
+		$('.sidebar_right_menu a').on('click', function(e) {
 
 			// Check for scenarios where we might want to prevent an ajax load
 			if ($(e.currentTarget).hasClass('accordion-toggle')) {

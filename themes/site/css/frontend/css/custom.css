@@ -1,14 +1,14 @@
 /* Author: AdminDesigns.com
- * Last Updated: 02/01/14 
+ * Last Updated: 02/01/14
  * Copyright 2014 Admin Designs
 =================================================
- * This file is reserved for changes made by 
- * the user. It's often times a good idea to 
+ * This file is reserved for changes made by
+ * the user. It's often times a good idea to
  * seperate your changes from the themes core.
  * It makes modifications, and future theme
  * updates much easier to apply.
 ================================================= */
-/* These styles have been placed here for as 
+/* These styles have been placed here for as
  * they have a high chance of needing to be
  * changed if one decides to modify the header
 -----------------------------------------------*/
@@ -19,9 +19,9 @@
 .navbar-menus > div > button:hover {
     color: #333; }
 
-/* Place your custom styles or styles which 
- * have been generated with the customization 
- * tool below this line. 
+/* Place your custom styles or styles which
+ * have been generated with the customization
+ * tool below this line.
 -----------------------------------------------*/
 
 .flash-success {
@@ -48,4 +48,12 @@
     margin-top: -38px;
     text-align: right;
     text-decoration: none;
+}
+
+.breadcrumb li{
+    display: none;
+}
+
+.breadcrumb li.crumb-active{
+    display: block !important;
 }

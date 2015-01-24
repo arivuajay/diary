@@ -91,10 +91,10 @@ $( "#datepicker" ).datepicker();
 
 </div> form -->
 
-<?php 
+<?php
  $baseUrl = Yii::app()->baseUrl;
  $themeUrl = Yii::app()->theme->baseUrl;
-?> 
+?>
 
 <!-- Start: Content -->
   <section id="content_wrapper">
@@ -113,7 +113,7 @@ $( "#datepicker" ).datepicker();
           <div class="panel">
             <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock"></span> Field Validation </span> </div>
             <div class="panel-body">
-                
+
             <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'diary-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
@@ -124,10 +124,10 @@ $( "#datepicker" ).datepicker();
                 'htmlOptions' => array('enctype' => 'multipart/form-data'),
                  'clientOptions' => array(
                             'validateOnSubmit' => true,
-                      
+
                         ),
 )); ?>
-    
+
                 <?php echo $form->errorSummary($model); ?>
 <!--              <form class="cmxform" id="altForm" method="get">-->
 <!--                <div class="form-group">
@@ -149,18 +149,18 @@ $( "#datepicker" ).datepicker();
                  <?php echo $form->labelEx($model,'temp_tags'); ?>
                  <?php echo $form->textField($model,'temp_tags',array('class'=>'form-control','size'=>60,'maxlength'=>250)); ?>
                   <?php echo $form->error($model,'temp_tags'); ?>
-                </div>                
+                </div>
                 <div class="form-group">
                    <?php echo $form->labelEx($model,'temp_current_date'); ?>
                   <div class="form-group">
                     <div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar"></i> </span>
                     <?php //echo $form->textField($model,'diary_current_date',array('id'=>'datepicker','class'=>'form-control')); ?>
-                        
+
                         <?php
 $this->widget('zii.widgets.jui.CJuiDatePicker', array(
     'model' => $model,
     'attribute' => 'temp_current_date',
-   
+
     'htmlOptions' => array(
         'id'=>'datepicker',
         'class'=>'form-control',
@@ -183,54 +183,54 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                   <?php echo $form->labelEx($model,'temp_user_mood_id',array('class'=>'col-md-3 control-label')); ?>
 
 <div class="col-md-9">
-    
+
     <?php
 $model->temp_user_mood_id=Yii::app()->session['temp_user_mood'];
-    
+
  $moods = Myclass::getMood();
 //echo Yii::app()->session['temp_user_mood'];
   foreach($moods as $key => $mood){
 //echo $form->radioButtonList($model,'diary_user_mood_id', Myclass::getMood(),array('template' => '{input}<img src='.$themeUrl.'/css/frontend/img/smiley-img'.''.'.png>', 'style' => 'width:20px!important', 'separator' => ''));
-                      
-?> 
+
+?>
 
                     <label class="radio-inline mr10">
                         <?php echo $form->radioButton($model,'temp_user_mood_id',array('value'=>$key,'uncheckValue'=>null)); ?>
-                      <img src="<?php echo $themeUrl;?>/css/frontend/img/<?php echo $mood?>.png"> </label>
-    
+                      <img src="<?php echo $themeUrl;?>/css/frontend/img/mood_<?php echo $key?>.png"> </label>
+
   <?php }?>
 
                   </div>
-                </div>  
+                </div>
 
 
-                  
-                
+
+
 <!--              </form>-->
               <br>
 				<br><br>
             </div>
-          </div>                 
+          </div>
         </div>
-        
+
         <div class="col-md-6">
           <div class="panel">
             <div class="panel-body">
-              <div id="content">      
+              <div id="content">
                   <div class="panel">
                     <div class="panel-body pn">
 <!--                      <div class="summernote" style="height: 100px;">This is the <b>Summernote</b> Editor...</div>-->
                       <?php //echo $form->textArea($model,'diary_description',array('class'=>'summernote','rows'=>6, 'cols'=>50)); ?>
                    <script src="<?php echo Yii::app()->baseUrl.'/ckeditor/ckeditor.js'; ?>"></script>
- 
+
 <div class="">
     <?php //echo $form->labelEx($model,'diary_description'); ?>
     <?php echo $form->textArea($model, 'temp_description', array('id'=>'editor1')); ?>
     <?php echo $form->error($model,'temp_description'); ?>
 </div>
-                   
-               
- 
+
+
+
 <script type="text/javascript">
     CKEDITOR.replace( 'editor1', {
          filebrowserBrowseUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/browse.php?type=files',
@@ -242,22 +242,22 @@ $model->temp_user_mood_id=Yii::app()->session['temp_user_mood'];
     });
 </script>
                     </div>
-                         
-                      
-                      
-                  </div>            
+
+
+
+                  </div>
                 </div>
                 <div class="form-group">
                     <?php echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Save',array('class'=>'submit btn bg-purple pull-right')); ?>
 	</div>
 <!--                  <input class="submit btn bg-purple pull-right" type="submit" value="Submit" />-->
                 </div>
-                
+
                   <?php $this->endWidget(); ?>
             </div>
-          </div>                              
+          </div>
         </div>
       </div>
     </div>
   </section>
-  <!-- End: Content --> 
+  <!-- End: Content -->

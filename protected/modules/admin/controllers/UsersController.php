@@ -125,16 +125,18 @@ class UsersController extends Controller {
 
         if(empty($user))
             throw new CHttpException(404, 'The requested page does not exist.');
-        
-        $user->setAttribute('user_status', '2');
-        if($user->save()){
+
+//        $user->setAttribute('user_status', '2');
+//        if($user->save()){
+        Diary::model()->deleteAll("diary_user_id = $id");
+        $user->delete();
             Yii::app()->user->setFlash('success', 'You have deleted successfully');
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
-        }else{
-            Yii::app()->user->setFlash('error', 'Faield to delete');
-        }
+//        }else{
+//            Yii::app()->user->setFlash('error', 'Faield to delete');
+//        }
     }
 
     /**
@@ -200,7 +202,7 @@ class UsersController extends Controller {
             echo 'Error while changing status !!!';
         }
     }
-    
+
     public function actionDeletemultiple() {
         $return = array();
         foreach ($_POST['id'] as $id) {
