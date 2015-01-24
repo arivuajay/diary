@@ -30,7 +30,7 @@ class JournalController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update','mycalendar','calendarevents'),
+                'actions' => array('create', 'update', 'mycalendar', 'calendarevents'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -62,10 +62,6 @@ class JournalController extends Controller {
 
         // Uncomment the following line if AJAX validation is needed
         $this->performAjaxValidation($model);
-        $path = Yii::app()->basePath . '/../uploads';
-        if (!is_dir($path)) {
-            mkdir($path);
-        }
 
         $_SESSION['KCFINDER']['disabled'] = false; // enables the file browser in the admin
         $_SESSION['KCFINDER']['uploadURL'] = Yii::app()->baseUrl . "/uploads/"; // URL for the uploads folder
@@ -73,32 +69,8 @@ class JournalController extends Controller {
 
         if (isset($_POST['Diary'])) {
             $model->attributes = $_POST['Diary'];
-            //print_r($_POST['Diary']);exit;
-            $model->diary_user_id = Yii::app()->user->id;
-            $curr_timestamp = strtotime($_POST['Diary']['diary_current_date']);
-            $model->diary_current_date = date('Y-m-d H:i:s', $curr_timestamp);
-            $model->created = date('Y-m-d H:i:s');
-            $model->modified = date('Y-m-d H:i:s');
-            $model->diary_upload = CUploadedFile::getInstance($model, 'diary_upload');
-            $fileName = time() . '_' . str_replace(' ', '_', strtolower($model->diary_upload));
-//            if (@!empty($_FILES['Diary']['name']['diary_upload'])) {
-//                $model->diary_upload = $_POST['Diary']['diary_upload'];
-//
-//                if ($model->validate(array('diary_upload'))) {
-//                    $model->diary_upload = CUploadedFile::getInstance($model, 'diary_upload');
-//                } else {
-//                    $model->diary_upload = '';
-//                }
-//
-//                $model->diary_upload->saveAs($path . '/' . $fileName);
-//            }
-            if ($model->diary_upload) {
-                $model->diary_upload->saveAs($path . '/' . $fileName);
-            }
-
-            $model->diary_upload = $fileName;
-
-            if ($model->save()) {
+            if ($model->validate()) {
+                $model->save(false);
                 $this->redirect(array('view', 'id' => $model->diary_id));
             }
         }
@@ -192,7 +164,6 @@ class JournalController extends Controller {
             Yii::app()->end();
         }
     }
-
 
     public function actionMycalendar() {
         $this->render('myCalendar');

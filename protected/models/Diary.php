@@ -23,7 +23,10 @@
  * @property MoodReport[] $moodReports
  */
 class Diary extends CActiveRecord {
-    public $diary_upload;
+
+    public $_uploadFileInst;
+    protected $_allowTypes = 'jpg,jpeg, gif, png, txt, docs, xlsx';
+    protected $_maxSize = 2;
 
     /**
      * @return string the associated database table name
@@ -45,7 +48,8 @@ class Diary extends CActiveRecord {
             array('diary_title, diary_tags', 'length', 'max' => 250),
             array('diary_user_id, diary_upload, created, modified', 'safe'),
             //for file
-            array('diary_upload', 'file', 'types' => 'gif, png, txt, docs, xlsx', 'on' => 'create,update','allowEmpty'=>true),
+//
+            array('diary_upload', 'file', 'types' => $this->_allowTypes, 'allowEmpty' => true,'maxSize'=>1024 * 1024 * $this->_maxSize, 'tooLarge'=>"File has to be larger than {$this->_maxSize}MB", 'on' => 'create'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('diary_id, diary_user_id, diary_title, diary_description, diary_category_id, diary_tags, diary_current_date, diary_user_mood_id, diary_upload, created, modified', 'safe', 'on' => 'search'),
@@ -79,7 +83,7 @@ class Diary extends CActiveRecord {
             'diary_tags' => 'Tags',
             'diary_current_date' => 'Date',
             'diary_user_mood_id' => 'Select Mood',
-            'diary_upload' => 'Upload Image,File..',
+            'diary_upload' => "Upload File: <span class='help-block'><i class=''></i>Allow types : ( $this->_allowTypes )</span>",
             'created' => 'Created',
             'modified' => 'Modified',
         );
@@ -127,6 +131,31 @@ class Diary extends CActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    public function beforeValidate() {
+
+        $this->_uploadFileInst = CUploadedFile::getInstance($this, 'diary_upload');
+        if (!is_null($this->_uploadFileInst)) {
+            $this->diary_upload = time() . '_' . str_replace(' ', '_', strtolower($this->_uploadFileInst));  // random number + file name
+        }
+
+        $this->diary_user_id = Yii::app()->user->id;
+        if ($this->diary_current_date)
+            $this->diary_current_date = date('Y-m-d H:i:s', strtotime($this->diary_current_date));
+        $this->modified = date('Y-m-d H:i:s');
+
+        if ($this->isNewRecord) {
+            $this->created = date('Y-m-d H:i:s');
+        }
+        return parent::beforeValidate();
+    }
+
+    public function afterSave() {
+        if (!is_null($this->_uploadFileInst)) {
+            $this->_uploadFileInst->saveAs(JOURNAL_IMG_PATH . $this->diary_upload);
+        }
+        return parent::afterSave();
     }
 
 }

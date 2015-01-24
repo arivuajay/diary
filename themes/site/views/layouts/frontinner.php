@@ -10,13 +10,16 @@
 
     <body class="forms-page">
         <script> var boxtest = localStorage.getItem('boxed');
-    if (boxtest === 'true') {
-        document.body.className += ' boxed-layout';
-    }</script>
+            if (boxtest === 'true') {
+                document.body.className += ' boxed-layout';
+            }</script>
 
         <!-- Start: Header -->
         <header class="navbar navbar-fixed-top">
-            <div class="navbar-branding"> <span id="toggle_sidemenu_l" class="glyphicons glyphicons-show_lines"></span> <a class="navbar-brand" href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/frontend/img/logos/header-logo.png"></a> </div>
+            <div class="navbar-branding">
+                <!--<span id="toggle_sidemenu_l" class="glyphicons glyphicons-show_lines"></span>-->
+                <a class="navbar-brand" href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/frontend/img/logos/header-logo.png"></a>
+            </div>
             <!--  advertisement-->
             <!--  <div class="navbar-left">
                 <div class="navbar-divider"></div>
@@ -65,15 +68,17 @@
                         </a>
                         <div class="mobile-link"> <span class="glyphicons glyphicons-show_big_thumbnails"></span> </div>
                         <div class="media-body">
-                            <h5 class="media-heading mt5 mbn fw700 cursor"><?php if (Yii::app()->user->isGuest) {
-        echo 'Welcome Guest';
-    } else {
-        echo Yii::app()->user->user_name;
-    } ?></h5>
+                            <h5 class="media-heading mt5 mbn fw700 cursor"><?php
+                                if (Yii::app()->user->isGuest) {
+                                    echo 'Welcome Guest';
+                                } else {
+                                    echo Yii::app()->user->user_name;
+                                }
+                                ?></h5>
                             <div class="media-links fs11"><a href="#">Menu</a><i class="fa fa-circle text-muted fs3 p8 va-m"></i>
                                 <?php if (Yii::app()->user->isGuest): ?>
                                     <a href="<?php echo $baseUrl; ?>/site/users/login">Sign In</a>
-<?php else: ?>
+                                <?php else: ?>
                                     <a href="<?php echo $baseUrl; ?>/site/users/logout">Sign Out</a>
 <?php endif; ?>
                             </div>
@@ -87,14 +92,14 @@
                                 <h5 class="fs11">Manage Journal</h5>
                             </a> </div>
                         <div class="col-xs-4">
-                            <?php echo CHtml::link('<span class="glyphicons glyphicons-inbox fs22 text-orange2"></span><h5 class="fs11">Write a journal</h5>',array('/site/journal/create')); ?>
+<?php echo CHtml::link('<span class="glyphicons glyphicons-inbox fs22 text-orange2"></span><h5 class="fs11">Write a journal</h5>', array('/site/journal/create')); ?>
                         </div>
                         <div class="col-xs-4"> <a href="#"> <span class="glyphicons glyphicons-bell fs22 text-purple2"></span>
                                 <h5 class="fs11">Mood report</h5>
                             </a> </div>
                     </div>
                 </div>
-            <?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
+<?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
             </aside>
             <!-- End: Sidebar -->
             <!-- Start: Content -->

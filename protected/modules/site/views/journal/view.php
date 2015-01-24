@@ -45,12 +45,12 @@
             'diary_id',
             'diary_user_id',
             'diary_title',
-             array(
+            array(
                 'name' => 'diary_description',
                 'type' => 'raw',
                 'value' => $model->diary_description
             ),
-             array(
+            array(
                 'name' => 'diary_category_id',
                 'type' => 'raw',
                 'value' => $model->diaryCategory->category_name
@@ -62,7 +62,11 @@
                 'type' => 'raw',
                 'value' => CHtml::image($this->createUrl("/themes/site/css/frontend/img/mood_{$model->diary_user_mood_id}.png"))
             ),
-            'diary_upload',
+            array(
+                'name' => 'diary_upload',
+                'type' => 'raw',
+                'value' => CHtml::image($this->createUrl("/".JOURNAL_IMG_PATH.$model->diary_upload))
+            ),
         //'created',
         //'modified',
         ),

@@ -116,7 +116,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
 <div id="footer" class="footer">
     <div class="copyright">Copyrights &copy; Express 2 Help 2015. &nbsp;|&nbsp;
         <?php echo CHtml::link('Privacy', Myclass::getPageUrl(2), array('class' => 'foot')); ?> |
-        <?php echo CHtml::link('Careers', array('/site/carriers'), array('class' => 'foot')); ?> |
+        <!--<?php echo CHtml::link('Careers', array('/site/carriers'), array('class' => 'foot')); ?> |-->
         <?php echo CHtml::link('Media', array(''), array('class' => 'foot')); ?> |
         <?php echo CHtml::link('Awards', array(''), array('class' => 'foot')); ?> |
     </div>
