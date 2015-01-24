@@ -58,8 +58,9 @@ class EntryController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        if (!Yii::app()->user->isGuest)
+        if (!Yii::app()->user->isGuest) {
             $this->redirect(array('/site/journal/create'));
+        }
 
         $model = new Entry;
         $model_register = new Users('register');
@@ -140,9 +141,11 @@ class EntryController extends Controller {
                 $userModel = Users::model()->findByAttributes(array('user_email' => $_GET['email']));
                 Yii::app()->session['temp_user_mail'] = $_GET['email'];
                 Yii::app()->session['temp_user_mood'] = $_GET['MoodType']['mood_type'];
-                
+
                 if (!empty($userModel)) {
-                    $this->redirect(array('users/login'));
+                    $this->redirect(array('users/login','email'=>$_GET['email']));
+                } else {
+                    $this->redirect(array('users/register'));
                 }
                 /////////////////////////////
                 $this->render('create', array(

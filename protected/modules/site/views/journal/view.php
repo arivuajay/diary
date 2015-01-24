@@ -18,7 +18,8 @@
 
 <!--<h1>View Diary #<?php echo $model->diary_id; ?></h1>-->
 
-<?php  //$this->widget('zii.widgets.CDetailView', array(
+<?php
+//$this->widget('zii.widgets.CDetailView', array(
 //	'data'=>$model,
 //	'attributes'=>array(
 //		'diary_id',
@@ -34,24 +35,37 @@
 //		'modified',
 //	),
 //));
-    ?>
+?>
 <section id="content_wrapper">
-<?php echo 'Your Journal added Sucess fully..';?>
-    <?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'diary_id',
-		'diary_user_id',
-		'diary_title',
-		'diary_description',
-		'diary_category_id',
-		'diary_tags',
-		//'diary_current_date',
-		'diary_user_mood_id',
-		'diary_upload',
-		//'created',
-		//'modified',
-	),
-));
+    <?php echo 'Your Journal added Sucess fully..'; ?>
+    <?php
+    $this->widget('zii.widgets.CDetailView', array(
+        'data' => $model,
+        'attributes' => array(
+            'diary_id',
+            'diary_user_id',
+            'diary_title',
+             array(
+                'name' => 'diary_description',
+                'type' => 'raw',
+                'value' => $model->diary_description
+            ),
+             array(
+                'name' => 'diary_category_id',
+                'type' => 'raw',
+                'value' => $model->diaryCategory->category_name
+            ),
+            'diary_tags',
+            //'diary_current_date',
+            array(
+                'name' => 'diary_user_mood_id',
+                'type' => 'raw',
+                'value' => CHtml::image($this->createUrl("/themes/site/css/frontend/img/mood_{$model->diary_user_mood_id}.png"))
+            ),
+            'diary_upload',
+        //'created',
+        //'modified',
+        ),
+    ));
     ?>
 </section>

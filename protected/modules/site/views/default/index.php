@@ -78,7 +78,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                                 array('label' => 'Testimonial', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Contact', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Feedback', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'Login', 'url' => array('/site/default/login'), 'linkOptions' => array('class' => 'nav-link')),
+                                                array('label' => 'Login', 'url' => array('/site/default/login'), 'linkOptions' => array('class' => 'nav-link'),'visible'=>Yii::app()->user->isGuest),
                                                 array('label' => 'All your needs', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                             ),
                                             'htmlOptions' => array('class' => 'nav', "id" => "sub-nav"),
