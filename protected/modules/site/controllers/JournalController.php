@@ -30,7 +30,7 @@ class JournalController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
+                'actions' => array('create', 'update','mycalendar','calendarevents'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -191,6 +191,32 @@ class JournalController extends Controller {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+
+
+    public function actionMycalendar() {
+        $this->render('myCalendar');
+    }
+
+    public function actionCalendarevents() {
+        $items[] = array(
+            'title' => 'Meeting',
+            'start' => '2012-11-23',
+            'color' => '#CC0000',
+            'allDay' => true,
+            'url' => 'http://anyurl.com'
+        );
+        $items[] = array(
+            'title' => 'Meeting reminder',
+            'start' => '2012-11-19',
+            'end' => '2012-11-22',
+            // can pass unix timestamp too
+            // 'start'=>time()
+            'color' => 'blue',
+        );
+
+        echo CJSON::encode($items);
+        Yii::app()->end();
     }
 
 }
