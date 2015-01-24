@@ -33,7 +33,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     <div class="panel-body">
                         <div class="login-avatar">
                             <img src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/register.png" width="150" height="112" alt="avatar">
-                            <div class="text-red" style="text-align: center; font-weight: bold; margin-top: 10px;">Your Own Personal Diary / Journal</div>                        </div>
+                            <div class="home-red">Your Own Personal Diary / Journal</div>                        </div>
                         <?php // echo $form->errorSummary($model); ?>
                         <div class="form-group">
                             <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span> </span>

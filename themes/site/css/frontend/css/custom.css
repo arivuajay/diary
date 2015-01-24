@@ -57,8 +57,19 @@
 .breadcrumb li.crumb-active{
     display: block !important;
 }
-.text-red{
+@font-face {
+    font-family: "Oswald";
+    font-style: normal;
+    font-weight: 300;
+    src: local("?"), url("../../home/assets/fonts/oswald-light-webfont.eot?#iefix") format("embedded-opentype"), url("../../home/assets/fonts/oswald-light-webfont.woff") format("woff"), url("../../home/assets/fonts/oswald-light-webfont.ttf") format("truetype"), url("../../home/assets/fonts/oswald-light-webfont.svg#Oswald") format("svg");
+}
+.home-red{
     font-family: "Oswald";
     text-transform: uppercase;
   color: #f32a2a !important;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 10px;
   }
