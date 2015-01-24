@@ -29,37 +29,39 @@ $themeUrl = Yii::app()->theme->baseUrl;
 
                     <div class="panel-heading"> <span class="panel-title">
                             <span class="glyphicon glyphicon-lock text-purple2"></span> Register </span>
-                        <span class="panel-header-menu pull-right mr15 text-muted fs12"><?php echo CHtml::link('Login >>', array('/site/users/login'))?></span> </div>
+                        <span class="panel-header-menu pull-right mr15 text-muted fs12"><?php echo CHtml::link('Login >>', array('/site/users/login')) ?></span> </div>
                     <div class="panel-body">
-                        <div class="login-avatar"> <img src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/register.png" width="150" height="112" alt="avatar"> </div>
+                        <div class="login-avatar">
+                            <img src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/register.png" width="150" height="112" alt="avatar">
+                            <div class="text-red" style="text-align: center; font-weight: bold; margin-top: 10px;">Your Own Personal Diary / Journal</div>                        </div>
                         <?php // echo $form->errorSummary($model); ?>
                         <div class="form-group">
                             <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span> </span>
                                 <!--<input type="text" class="form-control" placeholder="Name">-->
                                 <?php echo $form->textField($model, 'user_name', array('placeholder' => 'Name', 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
                             </div>
-                                <?php echo $form->error($model, 'user_name'); ?>
+                            <?php echo $form->error($model, 'user_name'); ?>
                         </div>
                         <div class="form-group">
                             <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span> </span>
 <!--                                    <input type="text" class="form-control" placeholder="E-mail Address">-->
                                 <?php echo $form->textField($model, 'user_email', array('placeholder' => Users::model()->getAttributeLabel('user_email'), 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
                             </div>
-                                <?php echo $form->error($model, 'user_email'); ?>
+                            <?php echo $form->error($model, 'user_email'); ?>
                         </div>
                         <div class="form-group">
                             <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span> </span>
 <!--                                    <input type="text" class="form-control" placeholder="Password">-->
                                 <?php echo $form->passwordField($model, 'user_password', array('placeholder' => Users::model()->getAttributeLabel('user_password'), 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
                             </div>
-                                <?php echo $form->error($model, 'user_password'); ?>
+                            <?php echo $form->error($model, 'user_password'); ?>
                         </div>
                         <div class="form-group">
                             <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span> </span>
 <!--                                    <input type="text" class="form-control" placeholder="Confirm Password">-->
                                 <?php echo $form->passwordField($model, 'confirm_password', array('placeholder' => Users::model()->getAttributeLabel('confirm_password'), 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
                             </div>
-                                <?php echo $form->error($model, 'confirm_password'); ?>
+                            <?php echo $form->error($model, 'confirm_password'); ?>
                         </div>
                         <?php echo $form->hiddenField($model, 'user_activation_key', array('size' => 60, 'maxlength' => 250)); ?>
                         <div class="panel-footer">
@@ -70,7 +72,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                             <div class="clearfix"></div>
                         </div>
                     </div>
-                    <div class="panel-footer"> <span class="text-muted fs12 lh30"><?php echo CHtml::link('Lost password ?', array('/site/users/forgot'))?></span>
+                    <div class="panel-footer"> <span class="text-muted fs12 lh30"><?php echo CHtml::link('Lost password ?', array('/site/users/forgot')) ?></span>
                         <?php ?>
                         <!--<a class="btn btn-sm bg-purple2 pull-right" href="#"><i class="fa fa-home"></i>Register</a>-->
                         <!--<i class="fa fa-home"></i>-->
@@ -86,9 +88,9 @@ $themeUrl = Yii::app()->theme->baseUrl;
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
 
-        $('.oAuthLogin').click(function (e) {
+        $('.oAuthLogin').click(function(e) {
             var _frameUrl = "<?php echo Yii::app()->createAbsoluteUrl('/site/users/signupsocial'); ?>?provider=" + $(this).data('provider');
             window.open(_frameUrl, "SignIn", "width=580,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=400,top=150");
             e.preventDefault();

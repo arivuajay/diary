@@ -57,3 +57,8 @@
 .breadcrumb li.crumb-active{
     display: block !important;
 }
+.text-red{
+    font-family: "Oswald";
+    text-transform: uppercase;
+  color: #f32a2a !important;
+  }
