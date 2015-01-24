@@ -198,7 +198,7 @@ class UsersController extends Controller {
 
     public function actionLogin() {
         if (!Yii::app()->user->isGuest) {
-            $this->redirect(array('/site/journal/create'));
+            $this->redirect(array('/site/dashboard'));
         }
 
 
@@ -211,7 +211,7 @@ class UsersController extends Controller {
         if (isset($_POST['sign_in'])) {
             $model->attributes = $_POST['LoginForm'];
             if ($model->validate() && $model->login()):
-                $this->redirect(array('/site/journal/create'));
+                $this->redirect(array('/site/dashboard'));
             endif;
         }
         $this->render('login', array('model' => $model));
