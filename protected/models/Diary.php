@@ -49,7 +49,7 @@ class Diary extends CActiveRecord {
             array('diary_user_id, diary_upload, created, modified', 'safe'),
             //for file
 //
-            array('diary_upload', 'file', 'types' => $this->_allowTypes, 'allowEmpty' => true,'maxSize'=>1024 * 1024 * $this->_maxSize, 'tooLarge'=>"File has to be larger than {$this->_maxSize}MB", 'on' => 'create'),
+            array('diary_upload', 'file', 'types' => $this->_allowTypes, 'allowEmpty' => true, 'maxSize' => 1024 * 1024 * $this->_maxSize, 'tooLarge' => "File has to be larger than {$this->_maxSize}MB", 'on' => 'create'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('diary_id, diary_user_id, diary_title, diary_description, diary_category_id, diary_tags, diary_current_date, diary_user_mood_id, diary_upload, created, modified', 'safe', 'on' => 'search'),
@@ -140,7 +140,9 @@ class Diary extends CActiveRecord {
             $this->diary_upload = time() . '_' . str_replace(' ', '_', strtolower($this->_uploadFileInst));  // random number + file name
         }
 
-        $this->diary_user_id = Yii::app()->user->id;
+        if ($this->scenario != 'webservice') {
+            $this->diary_user_id = Yii::app()->user->id;
+        }
         if ($this->diary_current_date)
             $this->diary_current_date = date('Y-m-d H:i:s', strtotime($this->diary_current_date));
         $this->modified = date('Y-m-d H:i:s');
