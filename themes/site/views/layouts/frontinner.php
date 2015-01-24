@@ -35,10 +35,10 @@
               </div>-->
 
             <div class="navbar-right">
-                <div class="navbar-search">
+                <div class="navbar-search" style="border: none;">
                     <input type="text" id="HeaderSearch" placeholder="Search..." value="Search...">
                 </div>
-                <div class="navbar-menus">
+<!--                <div class="navbar-menus">
                     <div class="btn-group" id="alert_menu">
                         <button type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicons glyphicons-bell"></span> <b>3</b> </button>
                         <ul class="dropdown-menu media-list" role="menu">
@@ -54,7 +54,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div>-->
             </div>
         </header>
         <!-- End: Header -->
@@ -75,7 +75,8 @@
                                     echo Yii::app()->user->user_name;
                                 }
                                 ?></h5>
-                            <div class="media-links fs11"><a href="#">Menu</a><i class="fa fa-circle text-muted fs3 p8 va-m"></i>
+                            <div class="media-links fs11">
+<!--                                <a href="#">Menu</a><i class="fa fa-circle text-muted fs3 p8 va-m"></i>-->
                                 <?php if (Yii::app()->user->isGuest): ?>
                                     <a href="<?php echo $baseUrl; ?>/site/users/login">Sign In</a>
                                 <?php else: ?>

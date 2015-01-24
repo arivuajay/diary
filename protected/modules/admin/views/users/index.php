@@ -37,16 +37,16 @@ $this->breadcrumbs = array(
                         </thead>
                         <tbody>
                             <?php foreach ($users as $key => $user): ?>
-                            <tr id="tr_<?php echo $user->user_id ?>">
+                                <tr id="tr_<?php echo $user->user_id ?>">
                                     <td><input class="multidelete" type="checkbox" id="create-switch" name="multidelete[]" data-userid="<?php echo $user->user_id ?>"/></td>
                                     <td><?php echo $user->user_name ?></td>
                                     <td><?php echo $user->user_email ?></td>
                                     <td><?php echo $user->user_last_login ?></td>
                                     <td>
-                                        <input type="checkbox" <?php echo $user->user_status == '1' ? 'checked' : '' ?> 
-                                               data-on="success" 
-                                               data-off="danger" 
-                                               data-userid="<?php echo $user->user_id ?>" 
+                                        <input type="checkbox" <?php echo $user->user_status == '1' ? 'checked' : '' ?>
+                                               data-on="success"
+                                               data-off="danger"
+                                               data-userid="<?php echo $user->user_id ?>"
                                                class="switch-mini"
                                                >
                                     </td>
@@ -81,7 +81,7 @@ $this->breadcrumbs = array(
     </thead>
     <tbody>
         <?php foreach ($users as $key => $user): ?>
-        <tr id="tr_exp_<?php echo $user->user_id ?>">
+            <tr id="tr_exp_<?php echo $user->user_id ?>">
                 <td><?php echo $key + 1; ?></td>
                 <td><?php echo $user->user_name ?></td>
                 <td><?php echo $user->user_email ?></td>
@@ -100,7 +100,7 @@ Yii::app()->clientScript->registerScript('settings-script', <<<EOD
     var table = $('#dynamic-table2').DataTable( {
         "aaSorting": [[ 4, "desc" ]]
     });
-        
+
     $(document).ready(function(){
         $('.switch-mini').on('switch-change', function (e, data) {
             userid = $(this).data('userid');
@@ -116,14 +116,14 @@ Yii::app()->clientScript->registerScript('settings-script', <<<EOD
                 }
             });
         });
-        
+
         $('#multidelete-btn').on('click', function(){
             var del = $('input[name="multidelete[]"]:checked');
             if(del.length < 1){
                 alert("Please select the users to delete !!!");
             }else{
                 var conf = confirm("Are you sure to delete the rows ?");
-        
+
                 if(conf){
                     var ChkBox = [];
                     $('input[name="multidelete[]"]:checked').each(function() {
@@ -153,7 +153,7 @@ Yii::app()->clientScript->registerScript('settings-script', <<<EOD
             }
         });
     });
-  
+
 EOD
 );
 ?>

@@ -34,9 +34,9 @@
 //));
 ?>
 <?php   $baseUrl = Yii::app()->baseUrl;
-        $themeUrl = Yii::app()->theme->baseUrl; 
-       
-        
+        $themeUrl = Yii::app()->theme->baseUrl;
+
+
         ?>
 
 <section id="content_wrapper">
@@ -54,19 +54,19 @@
         <div class="col-md-10 center-column">
           <div class="panel faq-panel mt50">
             <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon">
-                        <img src="<?php echo $themeUrl;?>/css/frontend/img/<?php echo $model->slug;?>.png">
+                        <img src="<?php echo $themeUrl;?>/css/frontend/img/about-us.png">
                     </span> <?php  echo $model->heading;?> </span> </div>
             <div class="panel-body pn">
-              <div class="row table-layout">                
-                <div class="col-abt col-xs-12 va-m p60">                  
+              <div class="row table-layout">
+                <div class="col-abt col-xs-12 va-m p60">
                   <div class="panel-group accordion mta25" id="accordion1">
-                    <div class="panel">                      
+                    <div class="panel">
                       <div id="accord1_1" class="panel-collapse collapse in">
-                        <div class="panel-body"> 
+                        <div class="panel-body">
                             <?php  echo $model->body;?>
                         </div>
                       </div>
-                    </div>                                        
+                    </div>
                   </div>
                 </div>
               </div>
