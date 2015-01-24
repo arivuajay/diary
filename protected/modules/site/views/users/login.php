@@ -34,8 +34,10 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     }
                     ?>
                     <div class="panel">
-                        <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock text-purple2"></span> Login </span>
-                            <span class="panel-header-menu pull-right mr15 text-muted fs12"><?php echo CHtml::link('Register >>', array('/site/users/register')) ?></span> </div>
+                        <div class="panel-heading">
+                            <span class="panel-title"> <span class="glyphicon glyphicon-lock text-purple2"></span> Login </span>
+                        </div>
+
                         <div class="panel-body">
                             <?php
                             foreach ($this->flashMessages as $key => $message) {
