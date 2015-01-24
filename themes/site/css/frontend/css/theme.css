@@ -1,9 +1,9 @@
 @charset "IBM437";
 /* Author: AdminDesigns.com
  * Copyright 2014 Admin Designs
-===================================================  
+===================================================
    Table of Contents
-===================================================  
+===================================================
 	I. SHARED STYLES
    II. PRIMARY COMPONENTS
   III. PANELS
@@ -54,7 +54,7 @@ body {
   left: 0px;
   margin-left: 230px; }
 
-/* Bootstraps ".container" class has been changed to a fluid full 
+/* Bootstraps ".container" class has been changed to a fluid full
  * width container */
 .container {
   width: 100%; }
@@ -202,7 +202,7 @@ hr.tall {
 /*===============================================
   D. Animations
 ================================================= */
-/* used in conjuction with "data-animate" 
+/* used in conjuction with "data-animate"
  * attr to create a delayed page animation
  * read docs for more info on proper use*/
 .animated-delay {
@@ -927,9 +927,9 @@ body.sidebar-right-open #sidebar_right {
 	  C. Panel Addon - Sidemenu
 	  D. Panel Addon - Tray
 	  E. Panel Tabs
-	  F. Panel Accordion 
+	  F. Panel Accordion
 	  G. Alternate Styles
-	  
+
   * Bootstrap Panels are a vital element in this
   * theme. Please read the documentation provided
   * with Fusion Admin to learn more
@@ -997,8 +997,8 @@ body.sidebar-right-open #sidebar_right {
 /*===============================================
   B. Panel Addon - Menu
   -----------------------------------------------
-  Typically placed under the panel header 
-  and used to hold buttons or menus 
+  Typically placed under the panel header
+  and used to hold buttons or menus
 ================================================= */
 .panel-menu {
   padding: 10px 13px;
@@ -1014,10 +1014,10 @@ body.sidebar-right-open #sidebar_right {
   -----------------------------------------------
   A side column great for housing an
   extra nav list. When used its sibling
-  panel body (content) is modified 
+  panel body (content) is modified
 ================================================= */
-/* Sidemenu and content are both floated. 
- * to create equal heights we use the 
+/* Sidemenu and content are both floated.
+ * to create equal heights we use the
  * "Table Layout" css helpers. These helpers
  * can be found in _helpers.scss */
 .panel-sidemenu {
@@ -1052,7 +1052,7 @@ body.sidebar-right-open #sidebar_right {
 /*===============================================
   D. Panel Addon - Tray
   -----------------------------------------------
-  A special slide out tray used to store 
+  A special slide out tray used to store
   additional information. Such as online users.
 ================================================= */
 .panel-tray {
@@ -1098,7 +1098,7 @@ body.sidebar-right-open #sidebar_right {
   E. PANEL TABS
   -----------------------------------------------
   Panel Tab Navigation must be placed inside
-  ".panel-heading" see Fusion Docs for example 
+  ".panel-heading" see Fusion Docs for example
 ================================================= */
 .panel-tabs {
   position: absolute;
@@ -1153,7 +1153,7 @@ body.sidebar-right-open #sidebar_right {
   border-bottom-left-radius: 3px; }
 
 /*===============================================
-  F. Accordion 
+  F. Accordion
   -----------------------------------------------
   Created with Bootstrap Panels
 ================================================= */
@@ -1235,9 +1235,9 @@ body.sidebar-right-open #sidebar_right {
 =================================================
   A. Icons - See Documentation For More Info
 ================================================= */
-/* Some font libraries have large file sizes. 
-* We optionally can attach .wf-loading to the 
-* body tag and have the fonts only visible after 
+/* Some font libraries have large file sizes.
+* We optionally can attach .wf-loading to the
+* body tag and have the fonts only visible after
 * they are fully loaded or cached. Prevents rough
 * icon flash and is currently used only on index.html */
 .wf-loading .glyphicons,
@@ -1294,7 +1294,7 @@ body.sidebar-right-open #sidebar_right {
 .iconsweets-5x {
   font-size: 5em; }
 
-/* Buttons with Icons 
+/* Buttons with Icons
 * Cross browser problems were creating problems when
 * an icon was given a larger font size than its sibling
 * text. To fix Line height, vertical align, and top
@@ -1312,9 +1312,9 @@ i.field-icon-right {
   right: 10px;
   top: 8px; }
 
-/* Icon Background and Borders 
+/* Icon Background and Borders
 * properly align icons that have been placed inside of titles
-* Useful for matching icon size to adjacent text 
+* Useful for matching icon size to adjacent text
 * Icon Background Shapes */
 .icon-circle {
   top: 0;
@@ -1412,7 +1412,7 @@ i.field-icon-right {
   vertical-align: middle; }
 
 /* Mildly styles a font awesome based icon group
- * used in occasionaly in panel heading. Look at 
+ * used in occasionaly in panel heading. Look at
  * message widget on index.html for example */
 .mini-action-icons .fa {
   position: relative;
@@ -1576,7 +1576,7 @@ label.error {
   color: #666666; }
 
 /*===============================================
-  E. Media Objects 
+  E. Media Objects
 ================================================= */
 .media {
   border-bottom: 1px solid #ededed; }
@@ -1595,7 +1595,7 @@ label.error {
   font-size: 11px; }
 
 /*===============================================
-  F. Thumbnails 
+  F. Thumbnails
 ================================================= */
 .thumbnail {
   margin-bottom: 0; }
@@ -1657,7 +1657,7 @@ label.error {
 .btn-square {
   border-radius: 0; }
 
-/* Button Colors 
+/* Button Colors
 * These are only colors that follow Bootstraps
 * color scheme. Fusion includes many more colors
 * are at end of this doc or in the SASS Partials */
@@ -1691,7 +1691,7 @@ label.error {
 .bg-default.bg-gradient {
   background-color: #f0f0f0; }
 
-/* Adds a custom "Alert"(purple) button to 
+/* Adds a custom "Alert"(purple) button to
  * the Bootstrap button lineup */
 .btn-alert {
   background-color: #7857ca; }
@@ -1713,10 +1713,10 @@ label.error {
   background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.45) 1%, rgba(255, 255, 255, 0.15) 100%);
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 1%, rgba(255, 255, 255, 0.15) 100%); }
 
-/* Button Gradients 
- * Gradients are created using a transparent gradient 
- * overlay. This way you can transform any element 
- * with a background color into a gradient without 
+/* Button Gradients
+ * Gradients are created using a transparent gradient
+ * overlay. This way you can transform any element
+ * with a background color into a gradient without
  * having to use additional colors */
 .btn-gradient,
 .bg-gradient {
@@ -2251,7 +2251,7 @@ div.switch.round label:after {
   border-color: #CFCFCF;
   border-bottom: 1px solid #FFF; }
 
-/* open state for dropdown menus in nav 
+/* open state for dropdown menus in nav
  * containers. Also a direct bootstrap override */
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
   color: #428bca;
@@ -2558,7 +2558,7 @@ div.switch.round label:after {
 /*=================================================
   v. HELPERS
 	 A. General
-     B. Font Size 
+     B. Font Size
 	 C. Table Layout
 	 D. Padding
 	 E. Margin
@@ -2780,7 +2780,7 @@ div.switch.round label:after {
 
 .p50 {
   padding: 50px !important; }
-  
+
 .p60 {
   padding: 25px !important; }
 
@@ -2969,7 +2969,7 @@ div.switch.round label:after {
 
 .mt25 {
   margin-top: 25px !important; }
-  
+
 .mta25 {
   margin-top: 0px !important; }
 
@@ -3454,13 +3454,13 @@ table.fc-header {
 
  * This file is reserved for changes done on
  * a per-page basis. To create independent
- * page layouts an additional class was added 
+ * page layouts an additional class was added
  * to the pages body. For example login.html
  * has an extra body class of ".login-page"
- 
+
  * Note: Pages not listed here were made using
  * 100% reusable styles placed in theme.css
-================================================= 
+=================================================
  A. Dashboard.html - Default
 ================================================= */
 body.dashboard-page .jvectormap-zoomin,
@@ -3656,7 +3656,7 @@ body.login-page .panel {
 
 body.login-page .login-avatar {
   margin: 15px 20px 25px;
-  padding-bottom: 25px;
+  padding-bottom: 10px;
   border-bottom: 1px dashed #DDD; }
 
 body.login-page .login-avatar img {
@@ -4115,7 +4115,7 @@ body.timeline-page #content {
   margin: 0 auto;
   background: rgba(255, 255, 255, 0.4);
   box-shadow: 0px 0 1px rgba(255, 255, 255, 0.8) inset; }
-  
+
 .login-page .panel-bg1 {
   padding: 12px;
   width: 430px;
@@ -4166,11 +4166,11 @@ body.timeline-page #content {
 	 Q. Nestable
 	 R. Image Zoom
 	 S. Jquery Plugins
-	  
- * This file contains small changes applied 
+
+ * This file contains small changes applied
  * specifically to 3rd party addons. Please
  * see vendor.scss for actual plugin styles
-================================================= 
+=================================================
  A. Markitup Editor
 ================================================= */
 /* Container */
@@ -4356,7 +4356,7 @@ input.ui-editRangeSlider-inputValue {
   right: -13px !important; }
 
 /*===============================================
-  E. Clndr 
+  E. Clndr
 ================================================= */
 .clndr .clndr-controls {
   display: none;
@@ -5472,8 +5472,8 @@ span.dynatree-drop-target.dynatree-drop-reject {
 
 /* ==============================================
   * All color variables used in this stylesheet
-  * are stored in modules/_colors.scss	  
-  
+  * are stored in modules/_colors.scss
+
   VII. COLOR SYSTEM
 	  A. Misc Skin/Colors
 	  B. Colors for Custom Elements
@@ -5491,14 +5491,14 @@ span.dynatree-drop-target.dynatree-drop-reject {
 	  N. Border Colors
 	  O. Background Colors
 	  P. Background Colors - Advanced Set
-  
+
   * The Fusion Color System has two variations
   * of every color. A Light shade and a dark
-  * shade. To create a gradient we set the 
+  * shade. To create a gradient we set the
   * elements background-color to the dark shade
-  * and then apply a gradient overlay via 
-  * the "gradient" mixin. 
-================================================= 
+  * and then apply a gradient overlay via
+  * the "gradient" mixin.
+=================================================
   A. Misc Skin/Colors
 ================================================= */
 /* Custom Theme(purple) Alert */
@@ -6255,10 +6255,10 @@ div.switch.switch-grey3 input:checked + label {
 
 .bg-purple2 {
   background-color: #a287d4 !important; }
-  
+
 .bg-blue1 {
   background-color: #3b5998 !important; }
-  
+
 .bg-blue2 {
   background-color: #55acee !important; }
 
@@ -6571,7 +6571,7 @@ div.switch.switch-grey3 input:checked + label {
 /* COLOR MODIFICATIONS SPECIFICALLY FOR BUTTONS
 * Any variations to buttons were placed below so that
 * the above classes contain only color styles. This
-* allows the styles to be used on any element rather 
+* allows the styles to be used on any element rather
 * than just "Text" or "Buttons" as their name suggest
 ----------------------------------------------------------*/
 .bg-creme-alt {
@@ -6681,7 +6681,7 @@ body.sidebar-collapsed #sidebar:before {
 ===================================================
    Fusion Admin has created another column size
    which helps create an even better responsive
-   layout for larger resolutions. This new column 
+   layout for larger resolutions. This new column
    has been labeled "xl" and is set for 1560px
 =================================================== */
 .visible-xl {

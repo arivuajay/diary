@@ -8,7 +8,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
         if (boxtest === 'true') {
             document.body.className += ' boxed-layout';
         }</script>
-    <a href="<?php echo Yii::app()->baseUrl?>" id="return-arrow"> <i class="fa fa-arrow-circle-left fa-3x text-light"></i> <span class="text-light"> Return <br>
+    <a href="<?php echo Yii::app()->baseUrl ?>" id="return-arrow"> <i class="fa fa-arrow-circle-left fa-3x text-light"></i> <span class="text-light"> Return <br>
             to Website </span> </a>
 
     <!-- Start: Main -->
@@ -28,7 +28,6 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         ),
                         'htmlOptions' => array('class' => 'form-signin cmxform', 'role' => 'form')
                     ));
-
                     if (isset(Yii::app()->request->cookies['altimus_app_username']->value)) {
                         $model->username = Yii::app()->request->cookies['altimus_app_username']->value;
                         $model->rememberMe = 1;
@@ -36,29 +35,31 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     ?>
                     <div class="panel">
                         <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock text-purple2"></span> Login </span>
-                            <span class="panel-header-menu pull-right mr15 text-muted fs12"><?php echo CHtml::link('Register >>', array('/site/users/register'))?></span> </div>
+                            <span class="panel-header-menu pull-right mr15 text-muted fs12"><?php echo CHtml::link('Register >>', array('/site/users/register')) ?></span> </div>
                         <div class="panel-body">
                             <?php
                             foreach ($this->flashMessages as $key => $message) {
                                 echo '<div class="alert flash-' . $key . '">' . $message . "</div>\n";
                             }
                             ?>
-                            <div class="login-avatar"> <img src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/login.png" width="150" height="112" alt="avatar"> </div>
+                            <div class="login-avatar"> <img src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/login.png" width="150" height="112" alt="avatar">
+                                <div class="text-purple2" style="text-align: center; font-weight: bold; margin-top: 10px;">Your Own Personal Diary / Journal” here</div>
+                            </div>
                             <div class="form-group">
                                 <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span> </span>
                                     <?php echo $form->textField($model, 'username', array('class' => 'form-control', 'autocomplete' => 'off', 'autofocus', 'placeholder' => Users::model()->getAttributeLabel('user_name'))); ?>
                                     <!--<input type="text" class="form-control" placeholder="User Name">-->
                                 </div>
-                                    <?php echo $form->error($model, 'username', array('class' => 'error')); ?>
+                                <?php echo $form->error($model, 'username', array('class' => 'error')); ?>
                             </div>
                             <div class="form-group">
                                 <span class="text-password">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <?php echo CHtml::link('Lost password', array('/site/users/forgot'))?></span>
+                                    <?php echo CHtml::link('Lost password', array('/site/users/forgot')) ?></span>
                                 <div class="input-group"> <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span> </span>
                                     <?php echo $form->passwordField($model, 'password', array('class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => Users::model()->getAttributeLabel('password'))); ?>
                                     <!--<input type="text" class="form-control" placeholder="Password">-->
                                 </div>
-                                    <?php echo $form->error($model, 'password', array('class' => 'error')); ?>
+                                <?php echo $form->error($model, 'password', array('class' => 'error')); ?>
                             </div>
                             <div class="panel-footer">
                                 <span class="text-muted fs12 lh30">
@@ -68,9 +69,16 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 <div class="clearfix"></div>
                             </div>
                         </div>
-                        <div class="panel-footer"> <span class="text-muted fs12 lh30"><?php echo $form->checkBox($model, 'rememberMe', array('id' => 'check')); ?><?php echo ' Remember Me'; ?> </span>
-                            <?php echo CHtml::button('Login', array("class" => "btn btn-sm bg-purple2 pull-right", "type" => "submit", 'name' => 'sign_in')); ?>
-              <!--              <a class="btn btn-sm bg-purple2 pull-right" href="#"><i class="fa fa-home"></i> Login</a>-->
+                        <div class="panel-footer">
+                            <span class="text-muted fs12 lh30">
+                                <?php echo $form->checkBox($model, 'rememberMe', array('id' => 'check')); ?>
+                                <?php echo ' Remember Me'; ?>
+                            </span>
+                            <div class="pull-right">
+                                <?php echo CHtml::link('Register', array('/site/users/register'), array("class" => "btn btn-sm bg-primary")); ?>
+
+                                <?php echo CHtml::button('Login', array("class" => "btn btn-sm bg-purple2", "type" => "submit", 'name' => 'sign_in')); ?>
+                            </div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -84,7 +92,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
 
     <div class="overlay-black"></div>
     <script type="text/javascript">
-        jQuery(document).ready(function () {
+        jQuery(document).ready(function() {
 
             "use strict";
 
@@ -98,7 +106,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
             $.backstretch("<?php echo $themeUrl; ?>/css/frontend/img/stock/splash/6.jpg");
 
 
-            $('.oAuthLogin').click(function (e) {
+            $('.oAuthLogin').click(function(e) {
                 var _frameUrl = "<?php echo Yii::app()->createAbsoluteUrl('/site/users/signupsocial'); ?>?provider=" + $(this).data('provider');
                 window.open(_frameUrl, "SignIn", "width=580,height=410,toolbar=0,scrollbars=0,status=0,resizable=0,location=0,menuBar=0,left=400,top=150");
                 e.preventDefault();

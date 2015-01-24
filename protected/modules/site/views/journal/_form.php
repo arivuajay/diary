@@ -29,7 +29,7 @@ $( "#datepicker" ).datepicker();
       <div class="row">
         <div class="col-md-6">
           <div class="panel">
-            <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock"></span> Field Validation </span> </div>
+            <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock"></span> Details </span> </div>
             <div class="panel-body">
 
             <?php $form=$this->beginWidget('CActiveForm', array(
@@ -38,7 +38,7 @@ $( "#datepicker" ).datepicker();
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>true,
+	'enableAjaxValidation'=>false,
                 'htmlOptions' => array('enctype' => 'multipart/form-data'),
                  'clientOptions' => array(
                             'validateOnSubmit' => true,
@@ -142,7 +142,7 @@ $model->diary_user_mood_id=Yii::app()->session['temp_user_mood'];
 
 <div class="">
     <?php //echo $form->labelEx($model,'diary_description'); ?>
-    <?php echo $form->textArea($model, 'diary_description', array('id'=>'editor1')); ?>
+    <?php echo $form->textArea($model, 'diary_description', array('id'=>'editor1','style'=>'height:800px')); ?>
     <?php echo $form->error($model,'diary_description'); ?>
 </div>
 

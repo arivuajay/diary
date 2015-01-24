@@ -123,7 +123,7 @@ class UsersController extends Controller {
     public function actionDelete($id) {
         $user = $this->loadModel($id);
 
-        if(empty($user))
+        if (empty($user))
             throw new CHttpException(404, 'The requested page does not exist.');
 
 //        $user->setAttribute('user_status', '2');
@@ -131,10 +131,10 @@ class UsersController extends Controller {
         Diary::model()->deleteAll("diary_user_id = $id");
         Entry::model()->deleteAll("temp_activation_key = '$user->user_activation_key'");
         $user->delete();
-            Yii::app()->user->setFlash('success', 'You have deleted successfully');
-            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-            if (!isset($_GET['ajax']))
-                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+        Yii::app()->user->setFlash('success', 'You have deleted successfully');
+        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+        if (!isset($_GET['ajax']))
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
 //        }else{
 //            Yii::app()->user->setFlash('error', 'Faield to delete');
 //        }
@@ -196,10 +196,10 @@ class UsersController extends Controller {
     public function actionChangestatus($id) {
         $user = $this->loadModel($id);
         $user->user_status = ($user->user_status == 0) ? 1 : 0;
-        if($user->save(false)){
-            $user->user_status == 0 ? $status= 'In-Active' : $status= 'Active';
-            echo '"'.$user->user_name.'" status: '.$status;
-        }else{
+        if ($user->save(false)) {
+            $user->user_status == 0 ? $status = 'In-Active' : $status = 'Active';
+            echo '"' . $user->user_name . '" status: ' . $status;
+        } else {
             echo 'Error while changing status !!!';
         }
     }
@@ -208,13 +208,15 @@ class UsersController extends Controller {
         $return = array();
         foreach ($_POST['id'] as $id) {
             $user = $this->loadModel($id);
-            $user->user_status = 2;
-            if($user->save(false)){
+            Diary::model()->deleteAll("diary_user_id = $id");
+            Entry::model()->deleteAll("temp_activation_key = '$user->user_activation_key'");
+
+            if ($user->delete()) {
                 $return['sts'] = 'success';
                 $return['text'] = 'Selected Users deleted successfully';
-            }else{
+            } else {
                 $return['sts'] = 'fail';
-                $return['text'] = 'Failed to delete this user: '.$user->user_name;
+                $return['text'] = 'Failed to delete this user: ' . $user->user_name;
                 exit;
             }
         }
