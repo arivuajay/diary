@@ -1,15 +1,15 @@
 /* Author: AdminDesigns.com
  * Copyright 2014 Admin Designs
-===================================================  
+===================================================
    Table of Contents
-===================================================  
+===================================================
 	I. EDITORS
    II. PLUGINS
   III. FONTS
 ===================================================
   I. EDITORS
 =================================================== */
-/*! X-editable - v1.5.0 
+/*! X-editable - v1.5.0
 * In-place editing with Twitter Bootstrap, jQuery UI or pure jQuery
 * http://github.com/vitalets/x-editable
 * Copyright (c) 2013 Vitaliy Potapov; Licensed MIT */
@@ -6102,7 +6102,7 @@ span.dynatree-drop-target.dynatree-drop-reject {
  *
  * Name:	Stanley Ng
  * Email: 	stanleyhlng@googlegroups.com
- * 
+ *
  * Reference:
  * http://code.google.com/p/google-code-prettify/source/browse/trunk/src/prettify.css
  */
@@ -6549,7 +6549,7 @@ li.L9 {
 
 .fa-home:before {
   content: "\f015"; }
-  
+
 .fa-facebook {
   content: "\f082";
 }
@@ -9346,7 +9346,7 @@ html, html .halflings {
 	http://zocial.smcllns.com
 	by Sam Collins (@smcllns)
 	License: http://opensource.org/licenses/mit-license.php
-	
+
 	You are free to use and modify, as long as you keep this license comment intact or link back to zocial.smcllns.com on your site.
 */
 /* Button structure */
@@ -10235,11 +10235,15 @@ button:-moz-focus-inner {
   font-weight: normal;
   font-style: normal; }
 
-/* Loaded via CDN as everyone has this font 
+/* Loaded via CDN as everyone has this font
  * cached by google and it's too large
 @import "fonts/open-sans/opensans";
 */
-/* Loaded individually for pages as they are large 
+/* Loaded individually for pages as they are large
 @import "icomoon/icomoon";
 @import "iconsweets/iconsweets";
 */
+
+.events_highlight{
+    background-color: green !important;
+}

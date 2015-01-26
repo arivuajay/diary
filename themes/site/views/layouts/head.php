@@ -38,17 +38,18 @@
     ?>
 
     <?php
-       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/jquery/jquery-1.11.1.min.js');
+    $cs->registerCoreScript('jquery');
+//       $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/jquery/jquery-1.11.1.min.js',$cs_pos_end);
    // $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/jquery/jquery_ui/jquery-ui.min.js');
-    $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/bootstrap/js/bootstrap.min.js');
-    $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/backstretch/jquery.backstretch.min.js');
-    $cs->registerScriptFile($themeUrl . '/css/frontend/js/utility/spin.min.js');
+    $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/bootstrap/js/bootstrap.min.js',$cs_pos_end);
+    $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/backstretch/jquery.backstretch.min.js',$cs_pos_end);
+    $cs->registerScriptFile($themeUrl . '/css/frontend/js/utility/spin.min.js',$cs_pos_end);
    // $cs->registerScriptFile($themeUrl . '/css/frontend/js/utility/underscore-min.js');
-    $cs->registerScriptFile($themeUrl . '/css/frontend/js/main.js');
-    $cs->registerScriptFile($themeUrl . '/css/frontend/js/ajax.js');
-    $cs->registerScriptFile($themeUrl . '/css/frontend/js/custom.js');
+    $cs->registerScriptFile($themeUrl . '/css/frontend/js/main.js',$cs_pos_end);
+    $cs->registerScriptFile($themeUrl . '/css/frontend/js/ajax.js',$cs_pos_end);
+    $cs->registerScriptFile($themeUrl . '/css/frontend/js/custom.js',$cs_pos_end);
 
-    
+
     $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/calendar/fullcalendar.min.js',$cs_pos_end);
     $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/calendar/gcal.js',$cs_pos_end);
     //$cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/ckeditor/ckeditor.js',$cs_pos_end);

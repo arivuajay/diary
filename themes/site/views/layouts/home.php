@@ -33,93 +33,32 @@
         $cs->registerCssFile($themeUrl . '/css/home/assets/css/portfolio_new.css');
         $cs->registerCssFile($themeUrl . '/css/home/assets/css/prettyPhoto.css');
         $cs->registerCssFile($themeUrl . '/css/home/assets/css/colors/color1.css');
-        $cs->registerCssFile($themeUrl . '/css/home/assets/css/supersized.css');
-        $cs->registerCssFile($themeUrl . '/css/home/assets/css/supersized.css');
-        $cs->registerCssFile($themeUrl . '/css/home/assets/css/supersized.css');
-        $cs->registerCssFile($themeUrl . '/css/home/assets/css/supersized.css');
-        $cs->registerCssFile($themeUrl . '/css/home/assets/css/supersized.css');
-        $cs->registerCssFile($themeUrl . '/css/home/assets/css/supersized.css');
-        $cs->registerCssFile($themeUrl . '/css/home/assets/css/supersized.css');
 
-
-        $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery-1.11.1.min.js');
-        $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery-migrate-1.2.1.js');
-        $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery-ui.min.js');
+//        $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery-1.11.1.min.js');
+//        $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery-migrate-1.2.1.js');
+//        $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery-ui.min.js');
         $cs->registerScriptFile($themeUrl . '/css/home/assets/js/modernizr.custom.js');
-        $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery-1.11.1.min.js');
-        $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery-1.11.1.min.js');
         ?>
 
-        <!--
-        <link rel="stylesheet" href="assets/css/bootstrap.css" type="text/css"/>
-        <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css" type="text/css"/>
-        <link rel="stylesheet" href="assets/css/font-awesome.css" type="text/css" />
-        <link rel="stylesheet" href="assets/css/animate.min.css" type="text/css" />
-        <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
-        
-        Menu
-        <link rel="stylesheet" href="assets/css/menu.css" type="text/css" />
-        SlickNavigation For Mobile Device
-        <link rel="stylesheet" href="assets/css/slicknav.css">
-        SlickNavigation For Mobile Device End
-        Menu End
-        
-        Home Tiled Slider
-        <link rel="stylesheet" href="assets/css/component.css" type="text/css" />
-        Home Tiled Slider End
-        
-         Vegas Slider
-        <link rel="stylesheet" href="assets/css/vegas_styles.css" />
-         Vegas Slider End
-        
-        Gallery
-        
-        Gallery Cycle Slider
-        <link rel="stylesheet" href="assets/css/cycleslider.css">
-        Gallery Cycle Slider End
-        
-        Gallery SuperSized Slider
-        <link rel="stylesheet" href="assets/css/supersized.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="assets/css/supersized.shutter.css" type="text/css" media="screen" />
-        Gallery SuperSized Slider End
-        
-        Gallery Filer
-        <link type="text/css" rel="stylesheet" href="assets/css/portfolio_new.css"/>
-        <link rel="stylesheet" href="assets/css/prettyPhoto.css" type="text/css" />
-        Gallery Filer End
-        
-        Color Change
-        <link rel="stylesheet" href="assets/css/colors/color1.css" id="color" type="text/css" />
-        Color Change End-->
-
-
-
-        <link rel="shortcut icon" href="<?php echo $themeUrl; ?>/css/home/assets/assets/images/favicon.ico" /> 
+        <link rel="shortcut icon" href="<?php echo $themeUrl; ?>/css/home/assets/assets/images/favicon.ico" />
         <link rel="apple-touch-icon" href="<?php echo $themeUrl; ?>/css/home/assets/assets/images/apple_touch_icon.png" />
         <link rel="apple-touch-icon" sizes="72x72" href="<?php echo $themeUrl; ?>/css/home/assets/assets/images/apple_touch_icon_72x72.png" />
         <link rel="apple-touch-icon" sizes="114x114" href="<?php echo $themeUrl; ?>/css/home/assets/assets/images/apple_touch_icon_114x114.png" />
-
-        <script src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery-1.11.1.min.js"></script>
-        <script src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery-migrate-1.2.1.js"></script>
-        <script src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/modernizr.custom.js"></script>
-
-
     </head>
     <body>
         <!--PRELOADER-->
         <section id="jSplash">
             <div id="circle"></div>
         </section>
-        <div id="menutop"></div>	
+        <div id="menutop"></div>
 
 
-        <!--Wrapper 
+        <!--Wrapper
         =============================-->
         <div id="wrapper">
-            
+
             <?php echo $content; ?>
-            
+
         </div>
         <!-- // Wrapper =============================-->
 
