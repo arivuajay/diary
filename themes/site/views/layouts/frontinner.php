@@ -76,7 +76,8 @@
                                 }
                                 ?></h5>
                             <div class="media-links fs11">
-<!--                                <a href="#">Menu</a><i class="fa fa-circle text-muted fs3 p8 va-m"></i>-->
+                                <?php echo CHtml::link('Profile',array('/site/users/myprofile'));  ?>
+                                <i class="fa fa-circle text-muted fs3 p8 va-m"></i>
                                 <?php if (Yii::app()->user->isGuest): ?>
                                     <a href="<?php echo $baseUrl; ?>/site/users/login">Sign In</a>
                                 <?php else: ?>
