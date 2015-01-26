@@ -7,49 +7,59 @@ $themeUrl = Yii::app()->theme->baseUrl;
     <img src="<?php echo $themeUrl; ?>/css/home/assets/img/2.jpg" alt="The Spice Lounge" class="fullBg">
     <div class="clearfix">
         <div class="header_details">
-            <div class="container">
-                <div class="header_icons accura-header-block accura-hidden-2xs">
-                    <a href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a>
-                </div>
-                <div class="call">
-                    <?php echo CHtml::link(CHtml::image("$themeUrl/css/home/assets/img/google_play_button.png",'PlayStore',array("border"=>"0")),'https://play.google.com/store/apps/details?id=com.express.splash&hl=en',array('target'=>'_blank')) ?>
-                </div>
-            </div>
+                        <div class="container">
+                            <div class="header_icons accura-header-block accura-hidden-2xs">
+                                <a href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a>
+                            </div>
+                            <div class="call">
+            <?php echo CHtml::link(CHtml::image("$themeUrl/css/home/assets/img/google_play_button.png", 'PlayStore', array("border" => "0")), 'https://play.google.com/store/apps/details?id=com.express.splash&hl=en', array('target' => '_blank')) ?>
+                            </div>
+                        </div>
             <div class="container">
                 <?php
                 foreach ($this->flashMessages as $key => $message) {
                     echo '<div class="alert flash-' . $key . '">' . $message . "</div>\n";
                 }
-                ?>
-                <!--<form id="hcontact_form" class="hcont_form pad_top13" action="" method="post">-->
-                <?php
+
                 $form = $this->beginWidget('CActiveForm', array(
                     'id' => 'hcontact_form',
-                    'enableAjaxValidation' => false,
-                    'method' => 'GET',
-                    'action' => array('/site/entry/create'), // change depending on your project
+                    'enableAjaxValidation' => true,
+                    'clientOptions' => array(
+                        'validateOnSubmit' => true,
+                    ),
+                    'method' => 'POST',
+                    'htmlOptions' => array('role' => 'form')
                 ));
+                $moodTypes = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_type');
                 ?>
                 <div class="clearfix hcont_form pad_top20">
                     <div class="row">
-                        <input type="email" name="email"  class="validate['required','email']  textbox1" placeholder="  Email Address " onFocus="this.placeholder = ''" onBlur="this.placeholder = ' Email Address'" required/>
+                        <?php
+                        echo $form->emailField($model, 'email', array('class' => 'textbox1', 'placeholder' => $model->getAttributeLabel('email')));
+                        echo $form->error($model, 'email');
+                        ?>
                     </div>
 
                     <div class="row hmoodlist">
-                        <p class="mood_label">Select Your Mood</p>
-                        <?php foreach (Myclass::getMood() as $key => $mood): ?>
-                            <label class="radio-inline mr10">
-                                <input type="radio" checked="checked" name="MoodType[mood_type]" value="<?php echo $key; ?>">
-                                <?php echo CHtml::image("$themeUrl/css/frontend/img/mood_$key.png"); ?>
+                        <p class="mood_label"><?php echo $model->getAttributeLabel('moodtype') ?></p>
+                        <?php
+                        $i = 0;
+                        foreach ($moodTypes as $key => $mood):
+                            ?>
+                            <label class="radio-inline mr10 <?php if ($i == 0) echo "selected"; ?> ">
+                                <input type="radio" name="QuickCreate[moodtype]" class="mood_type_id" <?php if ($i == 0) echo "checked='checked'"; ?>  value="<?php echo $key; ?>">
+                                <?php echo CHtml::image("$themeUrl/css/frontend/img/mood_$key.png", $mood, array('class' => 'mood_type_smiley')); ?>
                             </label>
-                        <?php endforeach; ?>
+                            <?php
+                            $i++;
+                        endforeach;
+                        ?>
                     </div>
                     <div class="row">
-                        <input id="hcontactsubmitBtn1" value="Write an Entry" type="submit" class="submitBtn">
+                        <?php echo CHtml::submitButton('Write an Entry', array('class' => 'submitBtn', 'id' => 'hcontactsubmitBtn1')); ?>
                     </div>
                 </div>
                 <?php $this->endWidget(); ?>
-                <!--</form>-->
             </div>
             <!-- Mainheader Menu Section -->
             <div class="mainheaderslide" id="slide">
@@ -79,7 +89,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                                 array('label' => 'Testimonial', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Contact', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Feedback', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'Login / Register', 'url' => array('/site/users/login'), 'linkOptions' => array('class' => 'nav-link','visible'=>Yii::app()->user->isGuest)),
+                                                array('label' => 'Login / Register', 'url' => array('/site/users/login'), 'linkOptions' => array('class' => 'nav-link', 'visible' => Yii::app()->user->isGuest)),
 //                                                //array('label' => 'Register', 'url' => array('/site/users/register'), 'linkOptions' => array('class' => 'nav-link','visible'=>Yii::app()->user->isGuest)),
                                                 array('label' => 'All your needs', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                             ),
@@ -115,7 +125,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
 <!-- Footer
 =============================-->
 <div id="footer" class="footer">
-    <div class="copyright">Copyrights &copy; Express 2 Help 2015. &nbsp;|&nbsp;
+    <div class="copyright">Copyrights &copy; Express 2 Help <?php echo date('Y'); ?>. &nbsp;|&nbsp;
         <?php echo CHtml::link('Privacy', Myclass::getPageUrl(2), array('class' => 'foot')); ?> |
         <!--<?php echo CHtml::link('Careers', array('/site/carriers'), array('class' => 'foot')); ?> |-->
         <?php echo CHtml::link('Media', array(''), array('class' => 'foot')); ?> |
@@ -147,3 +157,13 @@ $themeUrl = Yii::app()->theme->baseUrl;
 =============================-->
 <!-- // Lightbox  for home page special promo pack-->
 </div>
+<script type="text/javascript">
+    $(function() {
+        $('.mood_type_smiley').on('click', function() {
+            $('.hmoodlist label').removeClass('selected');
+            $('.mood_type_id').removeAttr('checked', 'checked');
+            $(this).closest('label').addClass('selected');
+            $(this).prev('input[type="radio"]').attr('checked', 'checked');
+        });
+    })
+</script>

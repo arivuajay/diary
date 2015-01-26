@@ -27,6 +27,25 @@ class Myclass extends CController {
         return $final_rand;
     }
 
+    public static function slugify($text) {
+// replace non letter or digits by -
+        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+// trim
+        $text = trim($text, '-');
+// transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+// lowercase
+        $text = strtolower($text);
+// remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        if (empty($text)) {
+            return 'n-a';
+        }
+
+        return $text;
+    }
+
     public static function getMood($key = NULL) {
         $mood = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_type');
 
@@ -82,14 +101,14 @@ class Myclass extends CController {
         $model->save(false);
 
 //        if (!$webserve) {
-            $mail = new Sendmail;
-            $message = '<p>Dear ' . $model->user_name . '</p>';
-            $message .= '<p>Thank you for signing up, we just need to verify your email address</p>';
-            $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">Click Here to activate</a></p><br />';
-            $message .= "<p>If you can't click the button above, you can verify your email address by copying and pasting (or typing) the following address into your browser:</p>";
-            $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '</a></p><br />';
-            $Subject = CHtml::encode(Yii::app()->name) . ': Confirmation your email';
-            $mail->send($model->user_email, $Subject, $message);
+        $mail = new Sendmail;
+        $message = '<p>Dear ' . $model->user_name . '</p>';
+        $message .= '<p>Thank you for signing up, we just need to verify your email address</p>';
+        $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">Click Here to activate</a></p><br />';
+        $message .= "<p>If you can't click the button above, you can verify your email address by copying and pasting (or typing) the following address into your browser:</p>";
+        $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '</a></p><br />';
+        $Subject = CHtml::encode(Yii::app()->name) . ': Confirmation your email';
+        $mail->send($model->user_email, $Subject, $message);
 //        }
 
         $response['success'] = 1;
@@ -152,8 +171,8 @@ class Myclass extends CController {
         $model = new Diary('webservice');
         $model->diary_title = $param['title'];
         $model->diary_description = $param['text'];
-        $mood_array = array('1'=>"Happy", "Sad", "Excited");
-        $cat_array = array('1'=>"Family","Friends","Business");
+        $mood_array = array('1' => "Happy", "Sad", "Excited");
+        $cat_array = array('1' => "Family", "Friends", "Business");
         $model->diary_category_id = array_search($param['category'], $cat_array);
         $model->diary_user_mood_id = array_search($param['mood'], $mood_array);
 
@@ -174,7 +193,6 @@ class Myclass extends CController {
         return $response;
     }
 
-
     public static function loginApp($param) {
         $model = new LoginForm('login');
         $model->username = $param['username'];
@@ -194,9 +212,9 @@ class Myclass extends CController {
     public static function getEntries($param) {
         $criteria = new CDbCriteria;
 
-        $criteria->addCondition("diary_user_id = '".$param['user_id']."'");
-        if($param['diary_id'])
-            $criteria->addCondition("diary_id = '".$param['diary_id']."'");
+        $criteria->addCondition("diary_user_id = '" . $param['user_id'] . "'");
+        if ($param['diary_id'])
+            $criteria->addCondition("diary_id = '" . $param['diary_id'] . "'");
 
         $model = Diary::model()->findAll($criteria);
 
@@ -211,19 +229,20 @@ class Myclass extends CController {
         return $response;
     }
 
-    public static function getPageUrl($id,$format='array') {
+    public static function getPageUrl($id, $format = 'array') {
         $url = '#';
         $page = Cms::model()->findByPk($id);
-        if($page){
+        if ($page) {
             switch ($format):
                 case 'relative':
-                    $url = Yii::app()->createUrl('/site/cms/view', array('slug'=>$page->slug));
+                    $url = Yii::app()->createUrl('/site/cms/view', array('slug' => $page->slug));
                     break;
                 case 'array':
-                    $url = array('/site/cms/view', 'slug'=>$page->slug);
+                    $url = array('/site/cms/view', 'slug' => $page->slug);
                     break;
             endswitch;
         }
         return $url;
     }
+
 }

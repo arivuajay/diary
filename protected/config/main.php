@@ -28,14 +28,14 @@ return array(
     ),
     // application components
     'components' => array(
-        //
         'clientScript' => array(
             'packages' => array(
                 'jquery' => array(
-                    'baseUrl' => '//ajax.googleapis.com/ajax/libs/jquery/1/',
-                    'js' => array('jquery.min.js'),
-                )
-            ),
+                    'baseUrl' => '//code.jquery.com/',
+//                    'baseUrl'=>'http://localhost/altimus/js/vendor/',
+                    'js' => array('jquery-1.10.1.min.js', 'jquery-migrate-1.2.1.min.js'),
+                ),
+            )
         ),
         //
         //local mail components
@@ -89,7 +89,7 @@ return array(
     // application-level parameters that can be accessed
     //setting the basic language value
     'defaultController' => 'site/default/index',
-     // using Yii::app()->params['paramName']
+    // using Yii::app()->params['paramName']
     'params' => require(dirname(__FILE__) . '/params.php'),
     'timeZone' => 'Asia/Calcutta',
     'theme' => 'site',

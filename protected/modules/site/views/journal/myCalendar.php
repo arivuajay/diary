@@ -1,37 +1,55 @@
+<?php
+$myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->findAll(), 'dist_date', 'dist_date'));
+?>
+<script type="text/javascript">
+    var avail_dates = <?php echo CJSON::encode($myDiary); ?>;
+</script>
+
 <section id="content_wrapper">
+    <div id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-active"><a href="#">Dashboard</a></li>
+            </ol>
+        </div>
+        <div class="topbar-right pt30">
+            <?php echo CHtml::link('<button class="btn btn-default btn-sm" type="button">Write An Entry</button>', array('/site/journal/create')); ?>
+        </div>
+    </div>
     <div id="content">
         <div class="row">
             <div class="col-md-12">
                 <?php
                 $this->widget('ext.EFullCalendar.EFullCalendar', array(
-                    // polish version available, uncomment to use it
-                    // 'lang'=>'pl',
-                    // you can create your own translation by copying locale/pl.php
-                    // and customizing it
-                    // remove to use without theme
-                    // this is relative path to:
-                    // themes/<path>
-                    'themeCssFile' => 'cupertino/theme.css',
-                    // raw html tags
                     'htmlOptions' => array(
-                        // you can scale it down as well, try 80%
                         'style' => 'width:100%'
                     ),
-                    // FullCalendar's options.
-                    // Documentation available at
-                    // http://arshaw.com/fullcalendar/docs/
                     'options' => array(
                         'header' => array(
-                            'left' => 'title',
-                            'center' => '',
-                            'right' => 'today,month,agendaWeek,agendaDay'
+                            'left' => 'prev,next today',
+                            'center' => 'title',
+                            'right' => 'month,agendaWeek,agendaDay'
                         ),
-                        'lazyFetching' => true,
-                        'events' => $this->createUrl('/site/journal/calendarevents'), // action URL for dynamic events, or
-                        'events' => array() // pass array of events directly
-                    // event handling
-                    // mouseover for example
-//        'eventMouseover'=>new CJavaScriptExpression("js_function_callback"),
+                        'lazyFetching' => false,
+                        'dayClick' => new CJavaScriptExpression("js:function(date, allDay, jsEvent, view) {
+                            newdate = $.format.date(date, 'yyyy-MM-dd');
+                            if(!$(this).hasClass('fc-other-month')){
+                                if($(this).hasClass('events_highlight')){
+                                    window.location = '" . $this->createUrl('/site/journal/listjournal') . "?date='+newdate;
+                                }else{
+                                    window.location = '" . $this->createUrl('/site/journal/create') . "?date='+newdate;
+                                }
+                            }
+                        }"),
+                        'dayRender' => new CJavaScriptExpression('js:function (date, cell) {
+                            newdate = $.format.date(date, ""+"yyyy-MM-dd");
+//                            console.log(avail_dates);
+//                            console.log(newdate);
+                            html_cont = cell.html();
+                            if(jQuery.inArray( newdate, avail_dates ) > -1){
+                                cell.addClass("events_highlight");
+                            }
+                        }'),
                     )
                 ));
                 ?>

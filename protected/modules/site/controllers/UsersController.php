@@ -64,6 +64,8 @@ class UsersController extends Controller {
             $this->redirect(array('/site/journal/create'));
 
         $model = new Users('register');
+        if (Yii::app()->session['temp_user_mail'])
+            $model->user_email = Yii::app()->session['temp_user_mail'];
         $this->performAjaxValidation($model);
         if (isset($_POST['Users'])) {
             $model->attributes = $_POST['Users'];
@@ -198,20 +200,21 @@ class UsersController extends Controller {
 
     public function actionLogin() {
         if (!Yii::app()->user->isGuest) {
-            $this->redirect(array('/site/dashboard'));
+            $this->redirect(array('/site/journal/dashboard'));
         }
 
 
 
         $model = new LoginForm('login');
-        if (!is_null($_REQUEST['email'])) {
-            $model->username = $_REQUEST['email'];
-        }
+
+        if (Yii::app()->session['temp_user_mail'])
+            $model->username = Yii::app()->session['temp_user_mail'];
+
         $this->performAjaxValidation($model);
         if (isset($_POST['sign_in'])) {
             $model->attributes = $_POST['LoginForm'];
             if ($model->validate() && $model->login()):
-                $this->redirect(array('/site/dashboard'));
+                $this->redirect(array('/site/journal/dashboard'));
             endif;
         }
         $this->render('login', array('model' => $model));

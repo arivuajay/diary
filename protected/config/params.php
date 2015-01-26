@@ -22,6 +22,8 @@ return array(
 
     'NOREPLYMAIL'=>'noreply@express2help.com',
     'SITENAME'=>'Express 2 Help',
+    'JS_SHORT_DATE_FORMAT' => 'yy-mm-dd',
+    'PHP_SHORT_DATE_FORMAT' => 'Y-m-d',
 
     //
     //Product Settings

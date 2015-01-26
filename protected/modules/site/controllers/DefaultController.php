@@ -4,10 +4,26 @@ class DefaultController extends Controller {
 
     public function actionIndex() {
         $this->layout = 'home';
-        $moodModel = new MoodType;
-        $mood = Myclass::getMood();
+        $model = new QuickCreate();
+        $this->performAjaxValidation($model);
+        if (isset($_POST['QuickCreate'])) {
+            $model->attributes = $_POST['QuickCreate'];
+            if ($model->validate()) {
+                if ($model->checkUserExists()) {
+                    $this->redirect(array('users/login'));
+                } else {
+                    $this->redirect(array('users/register'));
+                }
+            }
+        }
+        $this->render('index', compact('model'));
+    }
 
-        $this->render('index', array('moodModel' => $moodModel));
+    protected function performAjaxValidation($model) {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'hcontact_form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
     }
 
 }

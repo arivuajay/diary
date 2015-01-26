@@ -27,12 +27,22 @@ class Diary extends CActiveRecord {
     public $_uploadFileInst;
     protected $_allowTypes = 'jpg,jpeg, gif, png, txt, docs, xlsx';
     protected $_maxSize = 2;
+    public $dist_date;
 
     /**
      * @return string the associated database table name
      */
     public function tableName() {
         return '{{diary}}';
+    }
+
+    public function scopes() {
+        $alias = $this->getTableAlias(false, false);
+        $userID = Yii::app()->user->id;
+        return array(
+            'mine' => array('condition' => "$alias.diary_user_id = '{$userID}'"),
+            'uniqueDays' => array('select' => "DISTINCT(DATE($alias.diary_current_date)) AS `dist_date`"),
+        );
     }
 
     /**
@@ -157,6 +167,10 @@ class Diary extends CActiveRecord {
         if (!is_null($this->_uploadFileInst)) {
             $this->_uploadFileInst->saveAs(JOURNAL_IMG_PATH . $this->diary_upload);
         }
+
+        unset(Yii::app()->session['temp_user_mail']);
+        unset(Yii::app()->session['temp_user_mood']);
+
         return parent::afterSave();
     }
 

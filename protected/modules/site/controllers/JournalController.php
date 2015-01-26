@@ -30,7 +30,7 @@ class JournalController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'mycalendar', 'calendarevents'),
+                'actions' => array('create', 'update', 'dashboard', 'calendarevents', 'listjournal'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -57,7 +57,7 @@ class JournalController extends Controller {
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
-    public function actionCreate() {
+    public function actionCreate($date = null) {
         $model = new Diary('create');
 
         // Uncomment the following line if AJAX validation is needed
@@ -73,6 +73,10 @@ class JournalController extends Controller {
                 $model->save(false);
                 $this->redirect(array('view', 'id' => $model->diary_id));
             }
+        } else {
+            if ($date)
+                $model->diary_current_date = date(PHP_SHORT_DATE_FORMAT, strtotime($date));
+            $model->diary_user_mood_id = Yii::app()->session['temp_user_mood'];
         }
 
         $this->render('create', array(
@@ -165,29 +169,27 @@ class JournalController extends Controller {
         }
     }
 
-    public function actionMycalendar() {
+    public function actionDashboard() {
         $this->render('myCalendar');
     }
 
     public function actionCalendarevents() {
-        $items[] = array(
-            'title' => 'Meeting',
-            'start' => '2012-11-23',
-            'color' => '#CC0000',
-            'allDay' => true,
-            'url' => 'http://anyurl.com'
-        );
-        $items[] = array(
-            'title' => 'Meeting reminder',
-            'start' => '2012-11-19',
-            'end' => '2012-11-22',
-            // can pass unix timestamp too
-            // 'start'=>time()
-            'color' => 'blue',
-        );
+        foreach ($myDiary as $diary) {
+            $items[] = array(
+                'state' => 'TRUE',
+                'title' => "See date journal",
+                'start' => $diary->diary_current_date,
+//                'url' => $this->createUrl('/site/journal/listjournal', array('date' => date('Y-m-d',  strtotime($diary->diary_current_date))))
+            );
+        }
 
         echo CJSON::encode($items);
         Yii::app()->end();
+    }
+
+    public function actionListjournal($date = null) {
+        $journalList = Diary::model()->mine()->findAll("DATE(diary_current_date) = '$date'");
+        $this->render('listjournal', compact('journalList'));
     }
 
 }

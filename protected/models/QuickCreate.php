@@ -5,12 +5,10 @@
  * LoginForm is the data structure for keeping
  * user login form data. It is used by the 'login' action of 'SiteController'.
  */
-class LoginForm extends CFormModel {
+class QuickCreate extends CFormModel {
 
-    public $username;
-    public $password;
-    public $rememberMe;
-    private $_identity;
+    public $email;
+    public $moodtype;
 
     /**
      * Declares the validation rules.
@@ -20,12 +18,8 @@ class LoginForm extends CFormModel {
     public function rules() {
         return array(
             // username and password are required
-            array('username, password', 'required'),
-            // rememberMe needs to be a boolean
-            array('rememberMe', 'boolean'),
-            // password needs to be authenticated
-            array('password', 'authenticate'),
-            array('username', 'email'),
+            array('email, moodtype', 'required'),
+            array('email', 'email'),
         );
     }
 
@@ -34,9 +28,8 @@ class LoginForm extends CFormModel {
      */
     public function attributeLabels() {
         return array(
-            'username' => 'Your Registered Email',
-            'password' => 'Password',
-            'rememberMe' => 'Remember me next time',
+            'email' => 'Email Address',
+            'moodtype' => 'Select Your Mood'
         );
     }
 
@@ -44,21 +37,17 @@ class LoginForm extends CFormModel {
      * Authenticates the password.
      * This is the 'authenticate' validator as declared in rules().
      */
-    public function authenticate($attribute, $params) {
+    public function checkUserExists() {
         if (!$this->hasErrors()) {
-            $this->_identity = new UserIdentity($this->username, $this->password);
-            if (!$this->_identity->authenticate()) {
-                switch ($this->_identity->errorCode):
-                    case UserIdentity::ERROR_ACCOUNT_BLOCKED:
-                        $errMsg = "Your account was inactive. Kindly activate your account or contact with site adminstrator.";
-                        break;
-                    default:
-                        $errMsg = "Your account was inactive. Kindly activate your account or contact with site adminstrator.";
-                        break;
-                endswitch;
-                $this->addError('password', $errMsg);
+            $userModel = Users::model()->exists("user_email = '{$this->email}'");
+            Yii::app()->session['temp_user_mail'] = $this->email;
+            Yii::app()->session['temp_user_mood'] = $this->moodtype;
+
+            if (!empty($userModel)) {
+                return true;
             }
         }
+        return false;
     }
 
     /**
