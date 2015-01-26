@@ -21,15 +21,16 @@
  */
 class Users extends CActiveRecord {
 
+    public $currentpassword;
+    public $new_password;
+    public $confirm_password;
+
     /**
      * @return string the associated database table name
      */
     public function tableName() {
         return '{{users}}';
     }
-
-    public $new_password;
-    public $confirm_password;
 
     /**
      * @return array validation rules for model attributes.
@@ -43,6 +44,7 @@ class Users extends CActiveRecord {
             array('user_name, user_email, user_password', 'required', 'on' => 'social_register'),
             array('user_email, user_password, user_activation_key, user_login_ip', 'length', 'max' => 250),
             array('user_password', 'compare', 'compareAttribute' => 'confirm_password', 'on' => 'register'),
+            array('user_name, user_email', 'required', 'on' => 'update'),
             array('user_email', 'unique', 'message' => "user email already exists"),
             array('user_email', 'email'),
             array('user_status', 'length', 'max' => 1),
@@ -52,8 +54,19 @@ class Users extends CActiveRecord {
             array('user_id, user_email, user_password, user_status, user_activation_key, user_last_login, user_login_ip, created, modified, reset_password_string', 'safe', 'on' => 'search'),
             array('new_password', 'compare', 'compareAttribute' => 'confirm_password', 'on' => 'reset'),
             array('new_password, confirm_password', 'required', 'on' => 'reset'),
-//            array('password', 'forgot', 'on' => 'forgot'),
+            array('currentpassword,new_password,confirm_password', 'required', 'on' => 'changepassword'),
+            array('currentpassword', 'equalPasswords', 'on' => 'changepassword'),
+            array('confirm_password', 'compare', 'compareAttribute' => 'new_password', 'message' => 'RepeatPassword does not match', 'on' => 'changepassword')
         );
+    }
+
+    public function equalPasswords($attribute, $params) {
+        if ($this->$attribute) {
+            $user = Users::model()->findByPk(Yii::app()->user->id);
+            if ($this->$attribute != "" && $user->user_password != Myclass::encrypt($this->$attribute)) {
+                $this->addError($attribute, 'Current password is incorrect.');
+            }
+        }
     }
 
 //    public function forgot($attribute, $params) {
@@ -156,4 +169,5 @@ class Users extends CActiveRecord {
 
         return parent::beforeSave();
     }
+
 }

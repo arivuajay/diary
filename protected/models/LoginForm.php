@@ -53,7 +53,7 @@ class LoginForm extends CFormModel {
                         $errMsg = "Your account was inactive. Kindly activate your account or contact with site adminstrator.";
                         break;
                     default:
-                        $errMsg = "Your account was inactive. Kindly activate your account or contact with site adminstrator.";
+                        $errMsg = "Incorrect username or password.";
                         break;
                 endswitch;
                 $this->addError('password', $errMsg);

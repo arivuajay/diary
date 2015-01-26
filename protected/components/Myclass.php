@@ -245,4 +245,32 @@ class Myclass extends CController {
         return $url;
     }
 
+    public static function updateUser($model) {
+        $response = null;
+        $webserve = false;
+
+        if (!is_object($model)) {
+            $webserve = true;
+            $param = $model;
+
+            $model = new Users('webservice');
+            $model->user_name = $param['user_name'];
+            $model->user_email = $param['user_email'];
+
+            if (!$model->validate()) {
+                $response['success'] = 0;
+                $response['message'] = str_replace("\r\n", "", strip_tags(CHtml::errorSummary($model, '')));
+
+                return $response;
+            }
+        }
+
+        $model->save(false);
+
+        $response['success'] = 1;
+        $response['message'] = "Successfully updated.";
+
+        return $response;
+    }
+
 }

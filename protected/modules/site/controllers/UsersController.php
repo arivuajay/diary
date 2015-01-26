@@ -32,7 +32,7 @@ class UsersController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('update', 'logout'),
+                'actions' => array('update', 'logout', 'myprofile'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -64,8 +64,7 @@ class UsersController extends Controller {
             $this->redirect(array('/site/journal/create'));
 
         $model = new Users('register');
-        if (Yii::app()->session['temp_user_mail'])
-            $model->user_email = Yii::app()->session['temp_user_mail'];
+
         $this->performAjaxValidation($model);
         if (isset($_POST['Users'])) {
             $model->attributes = $_POST['Users'];
@@ -76,6 +75,9 @@ class UsersController extends Controller {
                 Yii::app()->user->setFlash('success', "Please check your mail for activation");
                 $this->redirect(array('/site/users/login'));
             }
+        } else {
+            if (Yii::app()->session['temp_user_mail'])
+                $model->user_email = Yii::app()->session['temp_user_mail'];
         }
 
         $this->render('register', array(
@@ -384,6 +386,35 @@ class UsersController extends Controller {
             echo $ex->getMessage();
         }
         exit;
+    }
+
+    public function actionMyprofile() {
+        $this->layout = '//layouts/frontinner';
+        $model = Users::model()->findByPk(Yii::app()->user->id);
+        if (isset($_POST['update'])) {
+            $model->setScenario('update');
+            $model->attributes = $_POST['Users'];
+            $valid = $model->validate();
+            if ($valid) {
+                Myclass::updateUser($model);
+
+                Yii::app()->user->setFlash('success', "Your profile successfully updated.");
+                $this->refresh();
+            }
+        } elseif (isset($_POST['forgot'])) {
+            $model->setScenario('changepassword');
+            $model->attributes = $_POST['Users'];
+            if ($model->validate()) {
+                $model->user_password = Myclass::encrypt($_POST['Users']['new_password']);
+                $model->save(false);
+                Yii::app()->user->setFlash('success', 'Password has been reset successfully');
+                $this->refresh();
+            }
+        }
+
+        $this->render('update_profile', array(
+            'model' => $model,
+        ));
     }
 
 }
