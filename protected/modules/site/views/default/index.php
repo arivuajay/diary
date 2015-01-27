@@ -3,6 +3,40 @@
 $baseUrl = Yii::app()->baseUrl;
 $themeUrl = Yii::app()->theme->baseUrl;
 ?>
+<div id="header" class="header">
+<div class="menu-inner">
+<div class="container"><div class="row">
+				<div class="header-table col-md-12 header-menu">
+        			<!--  Logo section -->
+                                <div class="brand"><a href="#home"  class="nav-link"><?php echo Yii::app()->name;?></a></div>
+                    <!--  // Logo section -->
+
+		<!-- Sub Page Menu section -->
+	  <nav class="main-nav">
+						<a href="#" class="nav-toggle"></a>
+						<ul id="sub-nav" class="nav">
+				  <li><a href="#home" class="nav-link">Main</a></li>
+				  <li><a href="#" class="nav-link">About Us</a></li>
+				  <li><a href="#" class="nav-link">Faq</a></li>
+				  <li><a href="#" class="nav-link">Your Personal Diary<span class="sub-toggle"></span></a>
+                  		<ul>
+                        	<li><a href="#" class="nav-link">Why you need Diary</a></li>
+ 						</ul>
+                  </li>
+                  <li><a href="#" class="nav-link">Testimonial</a></li>	
+				  <li><a href="#" class="nav-link">Contact Us</a></li>
+                   <li><a href="#" class="nav-link">Feedback</a></li>
+                   <li><a href="#" class="nav-link">Blog</a></li>
+				  </ul>
+				  </nav>
+                  <!--  // Sub Page Menu section -->
+               
+				</div>
+</div></div>   
+</div>
+</div>
+
+
 <div id="home" class="item">
     <img src="<?php echo $themeUrl; ?>/css/home/assets/img/2.jpg" alt="The Spice Lounge" class="fullBg">
     <div class="clearfix">
@@ -10,6 +44,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         <div class="container">
                             <div class="header_icons accura-header-block accura-hidden-2xs">
                                 <a href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a>
+                                <div class="your-own">YOUR OWN PERSONAL DIARY/JOURNAL</div>
                             </div>
                             <div class="call">
             <?php echo CHtml::link(CHtml::image("$themeUrl/css/home/assets/img/google_play_button.png", 'PlayStore', array("border" => "0")), 'https://play.google.com/store/apps/details?id=com.express.splash&hl=en', array('target' => '_blank')) ?>
@@ -32,7 +67,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                 ));
                 $moodTypes = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_type');
                 ?>
-                <div class="clearfix hcont_form pad_top20">
+                <div class="clearfix hcont_form pad_top40">
                     <div class="row">
                         <?php
                         echo $form->emailField($model, 'email', array('class' => 'textbox1', 'placeholder' => $model->getAttributeLabel('email')));
@@ -70,7 +105,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 <div class="header-table col-md-12 header-menu">
                                     <nav class="main-nav">
                                         <ul id="label-nav" class="nav">
-                                            <li class="selected"><a href="#" class="nav-link side-text">Your own personal diary / journal</a></li>
+<!--                                            <li class="selected"><a href="#" class="nav-link side-text">Your own personal diary / journal</a></li>-->
                                         </ul>
                                     </nav>
 

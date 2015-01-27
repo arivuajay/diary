@@ -73,11 +73,11 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         </div>
                         <div class="panel-footer">
                             <span class="text-muted fs12 lh30">
-                                <?php echo $form->checkBox($model, 'rememberMe', array('id' => 'check')); ?>
+                                <?php echo $form->checkBox($model, 'rememberMe', array('id' => 'check','checked'=>'checked')); ?>
                                 <?php echo ' Remember Me'; ?>
                             </span>
                             <div class="pull-right">
-                                <?php echo CHtml::link('Register', array('/site/users/register'), array("class" => "btn btn-sm bg-primary")); ?>
+                                <?php echo CHtml::link('Register', array('/site/users/register'), array("class" => "btn btn-sm bg-primary register")); ?>
 
                                 <?php echo CHtml::button('Login', array("class" => "btn btn-sm bg-purple2", "type" => "submit", 'name' => 'sign_in')); ?>
                             </div>

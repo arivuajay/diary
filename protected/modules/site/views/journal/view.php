@@ -37,13 +37,13 @@
 //));
 ?>
 <section id="content_wrapper">
-    <?php echo 'Your Journal added Sucess fully..'; ?>
+    <?php echo 'Your Journal added Successfully.'; ?>
     <?php
     $this->widget('zii.widgets.CDetailView', array(
         'data' => $model,
         'attributes' => array(
-            'diary_id',
-            'diary_user_id',
+//            'diary_id',
+//            'diary_user_id',
             'diary_title',
             array(
                 'name' => 'diary_description',
@@ -57,16 +57,17 @@
             ),
             'diary_tags',
             //'diary_current_date',
-            array(
-                'name' => 'diary_user_mood_id',
-                'type' => 'raw',
-                'value' => CHtml::image($this->createUrl("/themes/site/css/frontend/img/mood_{$model->diary_user_mood_id}.png"))
-            ),
-//            array(
+//                        array(
 //                'name' => 'diary_upload',
 //                'type' => 'raw',
 //                'value' => CHtml::image($this->createUrl("/".JOURNAL_IMG_PATH.$model->diary_upload))
 //            ),
+            array(
+                'name' => 'Selected Mood',
+                'type' => 'raw',
+                'value' => CHtml::image($this->createUrl("/themes/site/css/frontend/img/mood_{$model->diary_user_mood_id}.png"))
+            ),
+
         //'created',
         //'modified',
         ),
