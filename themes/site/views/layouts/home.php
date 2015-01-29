@@ -18,6 +18,7 @@
         $baseUrl = Yii::app()->baseUrl;
         $themeUrl = Yii::app()->theme->baseUrl;
         $cs = Yii::app()->getClientScript();
+        $cs_pos_end = CClientScript::POS_END;
 
         $cs->registerCssFile($themeUrl . '/css/home/assets/css/bootstrap.css');
         $cs->registerCssFile($themeUrl . '/css/home/assets/css/bootstrap-datetimepicker.min.css');
@@ -57,6 +58,8 @@
         =============================-->
         <div id="wrapper">
 
+            
+            
             <?php echo $content; ?>
 
         </div>
@@ -77,7 +80,8 @@
 
 
         <!-- SlickNavigation For Mobile Device-->
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.slicknav.min.js"></script>
+        <!--<script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.slicknav.min.js"></script>-->
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.slicknav.min.js',$cs_pos_end);?>
         <!-- SlickNavigation For Mobile Device Ends-->
 
         <!-- Content NiceScroll -->

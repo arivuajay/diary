@@ -21,7 +21,7 @@
                 <a class="navbar-brand" href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/frontend/img/logos/header-logo.png"></a>
             </div>
             <!--  advertisement-->
-            <!--  <div class="navbar-left">
+<!--              <div class="navbar-left">
                 <div class="navbar-divider"></div>
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
              e2h

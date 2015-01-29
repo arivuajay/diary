@@ -302,6 +302,7 @@ CSS3 ANIMATIONS  PRELOADER CIRCLE
 .pad_top13{ padding-top:13px;}
 .pad_top20{ padding-top:20px;}
 .pad_top30{ padding-top:30px;}
+.pad_top40{ padding-top:40px;}
 .pad_top50{ padding-top:50px;}
 .pad_bot20{ padding-bottom:20px;}
 .bold{ font-family: 'Oswald'; text-transform:uppercase; color:#545454;letter-spacing:1px; font-size:15px;}
@@ -2099,3 +2100,10 @@ mobile
 @-moz-document url-prefix() {
     #lightbox .close {position: relative; top:-17px;}
 }
+
+  .your-own{
+      font-size: 19px;
+      color: #F52A2A;
+      margin: 0 0 0 -25px;
+      
+  }
