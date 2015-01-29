@@ -86,25 +86,26 @@ $themeUrl = Yii::app()->theme->baseUrl;
                             <?php //echo $form->fileField($model, 'diary_upload'); ?>
                             <?php //echo $form->error($model, 'diary_upload'); ?>
                             
-                         <?php $this->widget('ext.EAjaxUpload.EAjaxUpload',
-array(
-        'id'=>'uploadFile',
-        'config'=>array(
-               'action'=>Yii::app()->createUrl('controller/upload'),
-               'allowedExtensions'=>array("jpg","jpeg","gif","mov","pdf","docx"),//array("jpg","jpeg","gif","exe","mov" and etc...
-               'sizeLimit'=>5*1024*1024,// maximum file size in bytes
-              // 'minSizeLimit'=>10*1024*1024,// minimum file size in bytes
-               //'onComplete'=>"js:function(id, fileName, responseJSON){ alert(fileName); }",
-               //'messages'=>array(
-               //                  'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
-               //                  'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
-               //                  'minSizeError'=>"{file} is too small, minimum file size is {minSizeLimit}.",
-               //                  'emptyError'=>"{file} is empty, please select files again without it.",
-               //                  'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
-               //                 ),
-               //'showMessage'=>"js:function(message){ alert(message); }"
-              )
-)); ?>
+                         <?php $this->widget('CMultiFileUpload', array(
+     'model'=>$model,
+     'attribute'=>'photos',
+     //'accept'=>'jpg|gif|png',
+     'options'=>array(
+        // 'onFileSelect'=>'function(e, v, m){ alert("onFileSelect - "+v) }',
+        // 'afterFileSelect'=>'function(e, v, m){ alert("afterFileSelect - "+v) }',
+        // 'onFileAppend'=>'function(e, v, m){ alert("onFileAppend - "+v) }',
+        // 'afterFileAppend'=>'function(e, v, m){ alert("afterFileAppend - "+v) }',
+        // 'onFileRemove'=>'function(e, v, m){ alert("onFileRemove - "+v) }',
+        // 'afterFileRemove'=>'function(e, v, m){ alert("afterFileRemove - "+v) }',
+     ),
+     'denied'=>'File is not allowed',
+     'max'=>10, // max 10 files
+     'htmlOptions' => array(
+              'multiple' => 'true', 
+     ),
+ 
+ 
+  )); ?>
                             
                         </div>
                         <div class="form-group">
