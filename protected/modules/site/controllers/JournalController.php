@@ -194,51 +194,7 @@ class JournalController extends Controller {
         $this->render('listjournal', compact('journalList'));
     }
     
-    
-    public function actionMulti()
- 
-    {
-        $model = new Diary('create');
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
-        $type = isset($_GET['type']) ? $_GET['type'] : 'post';
- 
-        if (isset($_POST['Diary'])) {
- 
-            $model->attributes = $_POST['Diary'];
- 
-            $photos = CUploadedFile::getInstancesByName('Diary[photos]');
- 
-            // proceed if the images have been set
-            if (isset($photos) && count($photos) > 0) {
- 
-                // go through each uploaded image
-                foreach ($photos as $image => $pic) {
-                    echo $pic->name.'<br />';
-                    if ($pic->saveAs(Yii::getPathOfAlias('webroot').'/photos/path/'.$pic->name)) {
-                        // add it to the main model now
-                        $img_add = new Diary('create');
-                        $img_add->filename = $pic->name; //it might be $img_add->name for you, filename is just what I chose to call it in my model
-                        $img_add->topic_id = $model->id; // this links your picture model to the main model (like your user, or profile model)
- 
-                        $img_add->save(); // DONE
-                    }
-                    else{
-                        echo 'Cannot upload!';
-                    }
-                }
-            }
- 
-            if ($model->save())
-                $this->redirect(array('update', 'id' => $model->id));
-        }
-        $this->render('create', array(
-            'model' => $model,
- 
-        ));
- 
-    }
-     
+
     
     
 }
