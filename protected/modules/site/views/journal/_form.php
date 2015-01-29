@@ -8,7 +8,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
     <div id="topbar">
         <div class="topbar-left">
             <ol class="breadcrumb">
-                <li class="crumb-active"><a>WRITE AN JOURNAL</a></li>
+                <li class="crumb-active"><a>WRITE A JOURNAL</a></li>
                 <li class="crumb-link"><a href="<?php echo SITEURL; ?>">Home</a></li>
                 <li class="crumb-trail">WRITE AN JOURNAL</li>
             </ol>
@@ -82,9 +82,30 @@ $themeUrl = Yii::app()->theme->baseUrl;
                             </div>
                         </div>
                         <div class="form-group">
-                            <?php echo $form->labelEx($model, 'diary_upload'); ?>
-                            <?php echo $form->fileField($model, 'diary_upload'); ?>
-                            <?php echo $form->error($model, 'diary_upload'); ?>
+                            <?php //echo $form->labelEx($model, 'diary_upload'); ?>
+                            <?php //echo $form->fileField($model, 'diary_upload'); ?>
+                            <?php //echo $form->error($model, 'diary_upload'); ?>
+                            
+                         <?php $this->widget('ext.EAjaxUpload.EAjaxUpload',
+array(
+        'id'=>'uploadFile',
+        'config'=>array(
+               'action'=>Yii::app()->createUrl('controller/upload'),
+               'allowedExtensions'=>array("jpg","jpeg","gif","mov","pdf","docx"),//array("jpg","jpeg","gif","exe","mov" and etc...
+               'sizeLimit'=>5*1024*1024,// maximum file size in bytes
+              // 'minSizeLimit'=>10*1024*1024,// minimum file size in bytes
+               //'onComplete'=>"js:function(id, fileName, responseJSON){ alert(fileName); }",
+               //'messages'=>array(
+               //                  'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
+               //                  'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
+               //                  'minSizeError'=>"{file} is too small, minimum file size is {minSizeLimit}.",
+               //                  'emptyError'=>"{file} is empty, please select files again without it.",
+               //                  'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
+               //                 ),
+               //'showMessage'=>"js:function(message){ alert(message); }"
+              )
+)); ?>
+                            
                         </div>
                         <div class="form-group">
                             <!--                  <label class="col-md-3 control-label">Select Mood</label>-->

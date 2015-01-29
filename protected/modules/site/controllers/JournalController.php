@@ -74,6 +74,8 @@ class JournalController extends Controller {
                 $this->redirect(array('view', 'id' => $model->diary_id));
             }
         } else {
+            $curr_date = date("Y/m/d");
+            $model->diary_current_date = date(PHP_SHORT_DATE_FORMAT, strtotime($curr_date));
             if ($date)
                 $model->diary_current_date = date(PHP_SHORT_DATE_FORMAT, strtotime($date));
             $model->diary_user_mood_id = Yii::app()->session['temp_user_mood'];
@@ -191,5 +193,70 @@ class JournalController extends Controller {
         $journalList = Diary::model()->mine()->findAll("DATE(diary_current_date) = '$date'");
         $this->render('listjournal', compact('journalList'));
     }
-
+    
+    
+    public function actionMulti()
+ 
+    {
+        $model = new Diary('create');
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+        $type = isset($_GET['type']) ? $_GET['type'] : 'post';
+ 
+        if (isset($_POST['Diary'])) {
+ 
+            $model->attributes = $_POST['Diary'];
+ 
+            $photos = CUploadedFile::getInstancesByName('Diary[photos]');
+ 
+            // proceed if the images have been set
+            if (isset($photos) && count($photos) > 0) {
+ 
+                // go through each uploaded image
+                foreach ($photos as $image => $pic) {
+                    echo $pic->name.'<br />';
+                    if ($pic->saveAs(Yii::getPathOfAlias('webroot').'/photos/path/'.$pic->name)) {
+                        // add it to the main model now
+                        $img_add = new Diary('create');
+                        $img_add->filename = $pic->name; //it might be $img_add->name for you, filename is just what I chose to call it in my model
+                        $img_add->topic_id = $model->id; // this links your picture model to the main model (like your user, or profile model)
+ 
+                        $img_add->save(); // DONE
+                    }
+                    else{
+                        echo 'Cannot upload!';
+                    }
+                }
+            }
+ 
+            if ($model->save())
+                $this->redirect(array('update', 'id' => $model->id));
+        }
+        $this->render('create', array(
+            'model' => $model,
+ 
+        ));
+ 
+    }
+    
+    
+    
+    public function actionUpload()
+{
+        Yii::import("ext.EAjaxUpload.qqFileUploader");
+ 
+        $folder='upload/';// folder for uploaded files
+        $allowedExtensions = array("jpg");//array("jpg","jpeg","gif","exe","mov" and etc...
+        $sizeLimit = 10 * 1024 * 1024;// maximum file size in bytes
+        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+        $result = $uploader->handleUpload($folder);
+        $return = htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+ 
+        $fileSize=filesize($folder.$result['filename']);//GETTING FILE SIZE
+        $fileName=$result['filename'];//GETTING FILE NAME
+ 
+        echo $return;// it's array
+}
+    
+    
 }
