@@ -41,6 +41,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
     <img src="<?php echo $themeUrl; ?>/css/home/assets/img/2.jpg" alt="The Spice Lounge" class="fullBg">
     <div class="clearfix">
         <div class="header_details">
+            <div style="color:#A4C3DC;font-size: 20px;">BETA</div>
                         <div class="container">
                             <div class="header_icons accura-header-block accura-hidden-2xs">
                                 <a href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a>
@@ -121,12 +122,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                                 array('label' => 'About Us', 'url' => Myclass::getPageUrl(1), 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'FAQ', 'url' => array('/site/faq'), 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Your Personal Diary', 'url' => array('/site/users/login'), 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'Testimonial', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
+                                                array('label' => 'Testimonial', 'url' => '#', 'linkOptions'=>array('onclick'=>'underDevelopment()')),
                                                 array('label' => 'Contact', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Feedback', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
+                                                array('label' => 'Connect with life style counselor / Psychologist', 'url' => '#','linkOptions'=>array('onclick'=>'underDevelopment()')),
+                                                //array('label' => 'Connect with IMAGE  Consultant', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
                                                 array('label' => 'Login / Register', 'url' => array('/site/users/login'), 'linkOptions' => array('class' => 'nav-link', 'visible' => Yii::app()->user->isGuest)),
-//                                                //array('label' => 'Register', 'url' => array('/site/users/register'), 'linkOptions' => array('class' => 'nav-link','visible'=>Yii::app()->user->isGuest)),
-                                                array('label' => 'All your needs', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
+//                                                array('label' => 'Register', 'url' => array('/site/users/register'), 'linkOptions' => array('class' => 'nav-link','visible'=>Yii::app()->user->isGuest)),
+                                                array('label' => 'All your needs', 'url' => '#', 'linkOptions'=>array('onclick'=>'underDevelopment()')),
                                             ),
                                             'htmlOptions' => array('class' => 'nav', "id" => "sub-nav"),
                                             'encodeLabel' => false,
@@ -201,4 +204,9 @@ $themeUrl = Yii::app()->theme->baseUrl;
             $(this).prev('input[type="radio"]').attr('checked', 'checked');
         });
     })
+</script>
+<script>
+function underDevelopment() {
+    alert("Under Development");
+}
 </script>

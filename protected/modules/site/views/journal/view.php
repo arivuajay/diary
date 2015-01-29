@@ -35,6 +35,7 @@
 //		'modified',
 //	),
 //));
+
 ?>
 <section id="content_wrapper">
     <?php echo 'Your Journal added Successfully.'; ?>
@@ -56,12 +57,13 @@
                 'value' => $model->diaryCategory->category_name
             ),
             'diary_tags',
-            //'diary_current_date',
-//                        array(
-//                'name' => 'diary_upload',
-//                'type' => 'raw',
-//                'value' => CHtml::image($this->createUrl("/".JOURNAL_IMG_PATH.$model->diary_upload))
-//            ),
+            'diary_current_date',
+                        array(
+                'name' => 'Uploaded',
+                'type' => 'raw',
+               // 'value' => CHtml::image($this->createUrl("/".JOURNAL_IMG_PATH.$model->diary_upload))
+                'value' => CHtml::link($model->diary_upload, $this->createUrl("/".JOURNAL_IMG_PATH.$model->diary_upload), array("target"=>"_blank")),
+            ),
             array(
                 'name' => 'Selected Mood',
                 'type' => 'raw',
