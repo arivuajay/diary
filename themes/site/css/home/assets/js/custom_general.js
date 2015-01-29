@@ -222,14 +222,14 @@ window.location.href = name;
 });
 
 
-//$(function(){
-//	$('#sub-nav').slicknav({
-//	label: '',
-//	duration: 1000,
-//	easingOpen: "easeOutQuint", //available with jQuery UI
-//	closeOnClick:true
-//});
-//});
+$(function(){
+	$('#sub-nav').slicknav({
+	label: '',
+	duration: 1000,
+	easingOpen: "easeOutQuint", //available with jQuery UI
+	closeOnClick:true
+});
+});
 
 
 

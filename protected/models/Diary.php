@@ -28,6 +28,7 @@ class Diary extends CActiveRecord {
     protected $_allowTypes = 'jpg,jpeg, gif, png, txt, docs, xlsx';
     protected $_maxSize = 2;
     public $dist_date;
+    public $diary_category;
 
     /**
      * @return string the associated database table name
@@ -63,7 +64,23 @@ class Diary extends CActiveRecord {
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('diary_id, diary_user_id, diary_title, diary_description, diary_category_id, diary_tags, diary_current_date, diary_user_mood_id, diary_upload, created, modified', 'safe', 'on' => 'search'),
+            array('diary_category', 'catCheck', 'on' => 'create'),
         );
+    }
+
+    public function catCheck($attribute, $params) {
+        if ($this->diary_category_id == 'others') {
+            if($this->$attribute == ''){
+                $this->addError($attribute, 'New category Name cannot be blank');
+            }else{
+                $criteria = new CDbCriteria;  
+                $criteria->addCondition('category_name = "'.$this->$attribute.'"');
+                $cat = Category::model()->find($criteria);
+                if(!empty($cat)){
+                    $this->addError($attribute, 'This Category Name already exists');
+                }
+            }
+        }
     }
 
     /**
@@ -96,6 +113,7 @@ class Diary extends CActiveRecord {
             'diary_upload' => "Upload File: <span class='help-block'><i class=''></i>Allow types : ( $this->_allowTypes )</span>",
             'created' => 'Created',
             'modified' => 'Modified',
+            'diary_category' => 'New category Name',
         );
     }
 

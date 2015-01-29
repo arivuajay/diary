@@ -68,8 +68,19 @@ class JournalController extends Controller {
         $_SESSION['KCFINDER']['uploadDir'] = Yii::app()->basePath . "/../uploads/"; // path to the uploads folder
 
         if (isset($_POST['Diary'])) {
+            $new_category = $_POST['Diary']['diary_category_id'] == 'others';
+            if($new_category == true){
+                //temp validation
+                $_POST['Diary']['category_id'] = 0;
+            }
             $model->attributes = $_POST['Diary'];
             if ($model->validate()) {
+                if($new_category == true){
+                    $catmodel = new Category();
+                    $catmodel->setAttribute('category_name', $_POST['Diary']['diary_category']);
+                    $catmodel->save(false);
+                    $model->setAttribute('diary_category_id', $catmodel->category_id);
+                }
                 $model->save(false);
                 $this->redirect(array('view', 'id' => $model->diary_id));
             }

@@ -416,14 +416,22 @@ var Core = function () {
 		});
     }
 
-	return {
-        init: function () {
-            runAnimations();
-            runSideMenu();
-            runFormElements();
-            runChecklists();
-            runHeader();
-			runDemoJS();
-        }
-	}
+//    return {
+//        init: function () {
+//            runAnimations();
+//            runSideMenu();
+//            runFormElements();
+//            runChecklists();
+//            runHeader();
+//            runDemoJS();
+//        }
+//    }
+    
+        runAnimations();
+        runSideMenu();
+        runFormElements();
+        runChecklists();
+        runHeader();
+        runDemoJS();
+
 }();

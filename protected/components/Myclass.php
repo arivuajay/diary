@@ -63,6 +63,12 @@ class Myclass extends CController {
 
         return $mood;
     }
+    
+    public static function getCategorywithOthers() {
+        $mood = CHtml::listData(Category::model()->findAll(), 'category_id', 'category_name');
+        $mood['others'] = 'Others';
+        return $mood;
+    }
 
     public static function rememberMeAdmin($username, $check) {
         if ($check > 0) {

@@ -17,7 +17,7 @@
         <!-- Start: Header -->
         <header class="navbar navbar-fixed-top">
             <div class="navbar-branding">
-                <!--<span id="toggle_sidemenu_l" class="glyphicons glyphicons-show_lines"></span>-->
+                <span id="toggle_sidemenu_l" class="glyphicons glyphicons-show_lines"></span>
                 <a class="navbar-brand" href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/frontend/img/logos/header-logo.png"></a>
             </div>
             <!--  advertisement-->

@@ -58,7 +58,7 @@ html, body, .container {
 @media screen and (min-aspect-ratio: 1280/850) {
 	.bg-img img {
 		width: 200%;
-		height: auto;
+		/*height: auto;*/
 	}
 }
 

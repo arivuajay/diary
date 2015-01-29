@@ -2040,6 +2040,13 @@ mobile
     .empty{ display:none;}
     .yt-controls{ position:absolute; margin-top:180px;}
     #home_videos .header_details {position: absolute; top: 80px;}
+    
+    /* New styles */
+    #hcontact_form { width: 100% !important;}
+    .container .hmerow{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 }
 
 
@@ -2107,3 +2114,5 @@ mobile
       margin: 0 0 0 -25px;
       
   }
+  
+  

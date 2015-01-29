@@ -4,36 +4,23 @@ $baseUrl = Yii::app()->baseUrl;
 $themeUrl = Yii::app()->theme->baseUrl;
 ?>
 <div id="header" class="header">
-<div class="menu-inner">
-<div class="container"><div class="row">
-				<div class="header-table col-md-12 header-menu">
-        			<!--  Logo section -->
-                                <div class="brand"><a href="#home"  class="nav-link"><?php echo Yii::app()->name;?></a></div>
+    <div class="menu-inner">
+        <div class="container"><div class="row">
+                <div class="header-table col-md-12 header-menu">
+                    <!--  Logo section -->
+                    <div class="brand"><a href="#home"  class="nav-link"><?php echo Yii::app()->name; ?></a></div>
                     <!--  // Logo section -->
 
-		<!-- Sub Page Menu section -->
-	  <nav class="main-nav">
-						<a href="#" class="nav-toggle"></a>
-						<ul id="sub-nav" class="nav">
-				  <li><a href="#home" class="nav-link">Main</a></li>
-				  <li><a href="#" class="nav-link">About Us</a></li>
-				  <li><a href="#" class="nav-link">Faq</a></li>
-				  <li><a href="#" class="nav-link">Your Personal Diary<span class="sub-toggle"></span></a>
-                  		<ul>
-                        	<li><a href="#" class="nav-link">Why you need Diary</a></li>
- 						</ul>
-                  </li>
-                  <li><a href="#" class="nav-link">Testimonial</a></li>	
-				  <li><a href="#" class="nav-link">Contact Us</a></li>
-                   <li><a href="#" class="nav-link">Feedback</a></li>
-                   <li><a href="#" class="nav-link">Blog</a></li>
-				  </ul>
-				  </nav>
-                  <!--  // Sub Page Menu section -->
-               
-				</div>
-</div></div>   
-</div>
+                    <nav class="main-nav">
+                        <a href="#" class="nav-toggle"></a>
+                        <!-- Main Page Menu section -->
+                        <?php $this->renderPartial('_menu'); ?>
+                    </nav>
+                    <!--  // Sub Page Menu section -->
+
+                </div>
+            </div></div>   
+    </div>
 </div>
 
 
@@ -42,15 +29,15 @@ $themeUrl = Yii::app()->theme->baseUrl;
     <div class="clearfix">
         <div class="header_details">
             <div style="color:#A4C3DC;font-size: 20px;">BETA</div>
-                        <div class="container">
-                            <div class="header_icons accura-header-block accura-hidden-2xs">
-                                <a href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a>
-                                <div class="your-own">YOUR OWN PERSONAL DIARY/JOURNAL</div>
-                            </div>
-                            <div class="call">
-            <?php echo CHtml::link(CHtml::image("$themeUrl/css/home/assets/img/google_play_button.png", 'PlayStore', array("border" => "0")), 'https://play.google.com/store/apps/details?id=com.express.splash&hl=en', array('target' => '_blank')) ?>
-                            </div>
-                        </div>
+            <div class="container">
+                <div class="header_icons accura-header-block accura-hidden-2xs">
+                    <a href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a>
+                    <div class="your-own">YOUR OWN PERSONAL DIARY/JOURNAL</div>
+                </div>
+                <div class="call">
+                    <?php echo CHtml::link(CHtml::image("$themeUrl/css/home/assets/img/google_play_button.png", 'PlayStore', array("border" => "0")), 'https://play.google.com/store/apps/details?id=com.express.splash&hl=en', array('target' => '_blank')) ?>
+                </div>
+            </div>
             <div class="container">
                 <?php
                 foreach ($this->flashMessages as $key => $message) {
@@ -69,14 +56,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
                 $moodTypes = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_type');
                 ?>
                 <div class="clearfix hcont_form pad_top40">
-                    <div class="row">
+                    <div class="row hmerow">
                         <?php
                         echo $form->emailField($model, 'email', array('class' => 'textbox1', 'placeholder' => $model->getAttributeLabel('email')));
                         echo $form->error($model, 'email');
                         ?>
                     </div>
 
-                    <div class="row hmoodlist">
+                    <div class="row hmoodlist hmerow">
                         <p class="mood_label"><?php echo $model->getAttributeLabel('moodtype') ?></p>
                         <?php
                         $i = 0;
@@ -91,7 +78,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         endforeach;
                         ?>
                     </div>
-                    <div class="row">
+                    <div class="row hmerow">
                         <?php echo CHtml::submitButton('Write an Entry', array('class' => 'submitBtn', 'id' => 'hcontactsubmitBtn1')); ?>
                     </div>
                 </div>
@@ -106,35 +93,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 <div class="header-table col-md-12 header-menu">
                                     <nav class="main-nav">
                                         <ul id="label-nav" class="nav">
-<!--                                            <li class="selected"><a href="#" class="nav-link side-text">Your own personal diary / journal</a></li>-->
+                                            <!--                                            <li class="selected"><a href="#" class="nav-link side-text">Your own personal diary / journal</a></li>-->
                                         </ul>
                                     </nav>
 
                                     <!-- Home Page Menu section -->
                                     <nav class="main-nav">
                                         <a href="#" class="nav-toggle"></a>
-                                        <?php
-                                        $this->widget('zii.widgets.CMenu', array(
-                                            'activeCssClass' => 'selected',
-                                            'activateParents' => true,
-                                            'items' => array(
-                                                array('label' => 'Home', 'url' => array('/site/default/index'), 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'About Us', 'url' => Myclass::getPageUrl(1), 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'FAQ', 'url' => array('/site/faq'), 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'Your Personal Diary', 'url' => array('/site/users/login'), 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'Testimonial', 'url' => '#', 'linkOptions'=>array('onclick'=>'underDevelopment()')),
-                                                array('label' => 'Contact', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'Feedback', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'Connect with life style counselor / Psychologist', 'url' => '#','linkOptions'=>array('onclick'=>'underDevelopment()')),
-                                                //array('label' => 'Connect with IMAGE  Consultant', 'url' => '#', 'linkOptions' => array('class' => 'nav-link')),
-                                                array('label' => 'Login / Register', 'url' => array('/site/users/login'), 'linkOptions' => array('class' => 'nav-link', 'visible' => Yii::app()->user->isGuest)),
-//                                                array('label' => 'Register', 'url' => array('/site/users/register'), 'linkOptions' => array('class' => 'nav-link','visible'=>Yii::app()->user->isGuest)),
-                                                array('label' => 'All your needs', 'url' => '#', 'linkOptions'=>array('onclick'=>'underDevelopment()')),
-                                            ),
-                                            'htmlOptions' => array('class' => 'nav', "id" => "sub-nav"),
-                                            'encodeLabel' => false,
-                                        ));
-                                        ?>
+                                        <?php $this->renderPartial('_menu'); ?>
                                     </nav>
                                     <!--  // Home Page Menu section -->
                                 </div>
@@ -196,8 +162,8 @@ $themeUrl = Yii::app()->theme->baseUrl;
 <!-- // Lightbox  for home page special promo pack-->
 </div>
 <script type="text/javascript">
-    $(function() {
-        $('.mood_type_smiley').on('click', function() {
+    $(function () {
+        $('.mood_type_smiley').on('click', function () {
             $('.hmoodlist label').removeClass('selected');
             $('.mood_type_id').removeAttr('checked', 'checked');
             $(this).closest('label').addClass('selected');
@@ -206,7 +172,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
     })
 </script>
 <script>
-function underDevelopment() {
-    alert("Under Development");
-}
+    function underDevelopment() {
+        alert("Under Development");
+    }
 </script>

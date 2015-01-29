@@ -4,15 +4,16 @@
     $this->widget('zii.widgets.CMenu', array(
         'activateParents' => true,
         'items' => array(
-            array('label' => '<span class="glyphicons glyphicons-book"></span><span class="sidebar-title">About</span>', 'url' => Myclass::getPageUrl(1),
-                'linkOptions' => array('class' => 'accordion-toggle'),
-                'items' => array(
-                    array('label' => '<span class="glyphicons glyphicons glyphicons-user"></span> Profile', 'url' => '#'),
-                    array('label' => '<span class="glyphicons glyphicons-picture"></span> Testimonials', 'url' => '#'),
-                    array('label' => '<span class="glyphicons glyphicons-film"></span> Media', 'url' => '#'),
-                    array('label' => '<span class="glyphicons glyphicons-print"></span> Awards', 'url' => '#'),
-                ),
-            ),
+//            array('label' => '<span class="glyphicons glyphicons-book"></span><span class="sidebar-title">About</span>', 'url' => Myclass::getPageUrl(1),
+//                'linkOptions' => array('class' => 'accordion-toggle'),
+//                'items' => array(
+//                    array('label' => '<span class="glyphicons glyphicons glyphicons-user"></span> Profile', 'url' => '#'),
+//                    array('label' => '<span class="glyphicons glyphicons-picture"></span> Testimonials', 'url' => '#'),
+//                    array('label' => '<span class="glyphicons glyphicons-film"></span> Media', 'url' => '#'),
+//                    array('label' => '<span class="glyphicons glyphicons-print"></span> Awards', 'url' => '#'),
+//                ),
+//            ),
+            array('label' => '<span class="glyphicons glyphicons-book"></span><span class="sidebar-title">About</span>', 'url' => Myclass::getPageUrl(1)),
             array('label' => '<span class="glyphicons glyphicons-pencil"></span><span class="sidebar-title">Writing Tips</span>', 'url' => Myclass::getPageUrl(3)),
             array('label' => '<span class="glyphicons glyphicons-edit"></span><span class="sidebar-title">FAQ</span>', 'url' => array('/site/faq/')),
             /*          array('label' => '<span class="glyphicons glyphicons-calendar"></span><span class="sidebar-title">Careers</span>', 'url' => array('/site/carriers/')),

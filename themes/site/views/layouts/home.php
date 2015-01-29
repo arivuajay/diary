@@ -57,11 +57,11 @@
         <!--Wrapper
         =============================-->
         <div id="wrapper">
+            <div id="mask">
+                
+                <?php echo $content; ?>
 
-            
-            
-            <?php echo $content; ?>
-
+            </div>
         </div>
         <!-- // Wrapper =============================-->
 
@@ -69,58 +69,59 @@
 
 
         <!--java script-->
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/bootstrap.min.js"></script>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/bootstrap.min.js', $cs_pos_end); ?>
         <!-- Form Validation-->
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.validate.min.js"></script>
+        
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.validate.min.js', $cs_pos_end); ?>
+        
         <!-- Form Validation End-->
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/bootstrap-datetimepicker.min.js"></script>
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.scrollTo.min.js"></script>
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.fitvids.js"></script>
-<!--        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/bootstrap-datetimepicker.min.js', $cs_pos_end); ?>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.scrollTo.min.js', $cs_pos_end); ?>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.fitvids.js', $cs_pos_end); ?>
+        <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
 
 
         <!-- SlickNavigation For Mobile Device-->
-        <!--<script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.slicknav.min.js"></script>-->
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.slicknav.min.js',$cs_pos_end);?>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.slicknav.min.js', $cs_pos_end); ?>
         <!-- SlickNavigation For Mobile Device Ends-->
 
         <!-- Content NiceScroll -->
-        <script src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.nicescroll.min.js"></script>
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.mousewheel.min.js"></script>
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.easing.1.3.js"></script>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.nicescroll.min.js', $cs_pos_end); ?>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.mousewheel.min.js', $cs_pos_end); ?>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.easing.1.3.js', $cs_pos_end); ?>
         <!-- Content NiceScroll End-->
 
         <!-- include retina js -->
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/retina-1.1.0.min.js"></script>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/retina-1.1.0.min.js', $cs_pos_end); ?>
         <!-- include retina js Ends-->
 
         <!-- Optional Scripts Starts -->
 
         <!-- Preloader Starts -->
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jpreloader.min.js"></script>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jpreloader.min.js', $cs_pos_end); ?>
         <!-- Preloader End -->
 
         <!-- Cycle Slider Gallery Starts-->
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.cycle.all.js"></script>
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.cycle2.caption2.js"></script>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.cycle.all.js', $cs_pos_end); ?>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.cycle2.caption2.js', $cs_pos_end); ?>
         <!-- Cycle Slider Gallery End-->
 
         <!--SuperSized Gallery-->
-<!--        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/supersized.3.2.7.min.js"></script>-->
-<!--        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/supersized.shutter.min.js"></script>-->
-<!--        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/supersized_custom.js"></script>-->
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/supersized.3.2.7.min.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/supersized.shutter.min.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/supersized_custom.js', $cs_pos_end); ?>
         <!--SuperSized Gallery End-->
 
         <!-- Filter Gallery And PrettyPhoto-->
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.prettyPhoto.js"></script>
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/jquery.mixitup.min.js"></script>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.prettyPhoto.js', $cs_pos_end); ?>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.mixitup.min.js', $cs_pos_end); ?>
         <!-- Filter Gallery And PrettyPhoto End-->
 
 
         <!-- Home Tiled Sldier -->
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/classie.js"></script>
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/boxesFx.js"></script>
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/wait.js"></script>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/classie.js', $cs_pos_end); ?>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/boxesFx.js', $cs_pos_end); ?>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/wait.js', $cs_pos_end); ?>
         <!-- Home Tiled Sldier End-->
 
 
@@ -141,8 +142,8 @@
         <!-- Optional Scripts Ends -->
 
         <!-- Custom Scripts -->
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/custom_general_box.js"></script>
-        <script type="text/javascript" src="<?php echo $themeUrl; ?>/css/home/assets/js/custom_general.js"></script>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/custom_general_box.js', $cs_pos_end); ?>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/custom_general.js', $cs_pos_end); ?>
         <!-- Custom Scripts End-->
 
     </body>

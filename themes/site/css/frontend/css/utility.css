@@ -782,7 +782,8 @@ ul.sidebar-nav ul#sideEight.sub-nav > li > a:hover {
     max-width: 75px; }
 
   .navbar-brand {
-    display: none; }
+    display: none; 
+  }
 
   .sidebar-rtl .navbar .navbar-right {
     max-width: 55px; }

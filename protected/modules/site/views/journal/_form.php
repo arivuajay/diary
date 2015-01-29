@@ -44,9 +44,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         </div>
                         <div class="form-group">
                             <?php echo $form->labelEx($model, 'diary_category_id'); ?>
-                            <?php echo $form->dropDownList($model, 'diary_category_id', Myclass::getCategory(), array('type' => 'text', 'empty' => '--Select Your Category--', 'class' => 'form-control ')); ?>
+                            <?php echo $form->dropDownList($model, 'diary_category_id', Myclass::getCategorywithOthers(), array('type' => 'text', 'empty' => '--Select Your Category--', 'class' => 'form-control ')); ?>
                             <?php //echo $form->textField($model,'diary_category_id',array('class'=>'form-control','size'=>20,'maxlength'=>20)); ?>
                             <?php echo $form->error($model, 'diary_category_id'); ?>
+                        </div>
+                        <div class="form-group hidden" id="div_category">
+                            <?php echo $form->labelEx($model, 'diary_category'); ?>
+                            <?php echo $form->textField($model, 'diary_category', array('class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
+                            <?php echo $form->error($model, 'diary_category'); ?>
                         </div>
                         <div class="form-group">
                             <?php echo $form->labelEx($model, 'diary_tags'); ?>
@@ -179,3 +184,20 @@ $themeUrl = Yii::app()->theme->baseUrl;
 </div>
 </section>
 <!-- End: Content -->
+
+<?php 
+//$js = <<< EOD
+//    $(docue)
+//EOD;
+//
+//Yii::app()->clientScript->registerScript('_journal_form', $js);
+?>
+
+<script>
+    $(document).ready(function(){
+        $('#Diary_diary_category_id').val() == 'others' ? $('#div_category').removeClass('hidden') : $('#div_category').addClass('hidden');
+        $('#Diary_diary_category_id').on('change', function(){
+            $(this).val() == 'others' ? $('#div_category').removeClass('hidden') : $('#div_category').addClass('hidden');
+        });
+    });
+</script>
