@@ -38,7 +38,7 @@
 }
 
 .errorMessage, .error{
-     color: #a94442;
+    color: #a94442;
 }
 
 .text-password{
@@ -66,13 +66,39 @@
 .home-red{
     font-family: "Oswald";
     text-transform: uppercase;
-  color: #f32a2a !important;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 1px;
-  text-align: center;
-  margin-top: 10px;
-  }
-  .register{
-        margin: 0 95px 0 0;
-  }
+    color: #f32a2a !important;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 10px;
+}
+.register{
+    margin: 0 95px 0 0;
+}
+
+#logo_below_text{
+    clear: both;
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 20px 14px;
+}
+
+.navbar {
+    min-height: 130px !important;
+}
+
+.navbar.navbar-fixed-top + #main {
+  margin-top: 130px !important; 
+}
+
+.navbar-branding {
+  height: 130px !important;
+}
+
+@media (max-width: 670px) {
+    #logo_below_text{
+        display: none;
+    }
+}

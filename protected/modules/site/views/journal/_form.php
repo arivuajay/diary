@@ -28,7 +28,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                             // controller action is handling ajax validation correctly.
                             // There is a call to performAjaxValidation() commented in generated controller code.
                             // See class documentation of CActiveForm for details on this.
-                            'enableAjaxValidation' => false,
+                            'enableAjaxValidation' => true,
                             'htmlOptions' => array('enctype' => 'multipart/form-data'),
                             'clientOptions' => array(
                                 'validateOnSubmit' => true,
@@ -186,18 +186,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
 <!-- End: Content -->
 
 <?php 
-//$js = <<< EOD
-//    $(docue)
-//EOD;
-//
-//Yii::app()->clientScript->registerScript('_journal_form', $js);
-?>
-
-<script>
+$js = <<< EOD
     $(document).ready(function(){
         $('#Diary_diary_category_id').val() == 'others' ? $('#div_category').removeClass('hidden') : $('#div_category').addClass('hidden');
         $('#Diary_diary_category_id').on('change', function(){
             $(this).val() == 'others' ? $('#div_category').removeClass('hidden') : $('#div_category').addClass('hidden');
         });
     });
-</script>
+EOD;
+
+Yii::app()->clientScript->registerScript('_journal_form', $js);
+?>

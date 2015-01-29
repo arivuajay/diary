@@ -18,7 +18,10 @@
         <header class="navbar navbar-fixed-top">
             <div class="navbar-branding">
                 <span id="toggle_sidemenu_l" class="glyphicons glyphicons-show_lines"></span>
-                <a class="navbar-brand" href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/frontend/img/logos/header-logo.png"></a>
+                <a class="navbar-brand" href="<?php echo SITEURL; ?>">
+                    <img src="<?php echo $themeUrl; ?>/css/frontend/img/logos/header-logo.png">
+                </a>
+                <span id="logo_below_text">Your Own Personal Diary / Journal</span>
             </div>
             <!--  advertisement-->
 <!--              <div class="navbar-left">
