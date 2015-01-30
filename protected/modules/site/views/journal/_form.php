@@ -59,8 +59,6 @@ $themeUrl = Yii::app()->theme->baseUrl;
                             <?php echo $form->labelEx($model, 'diary_current_date'); ?>
                             <div class="form-group">
                                 <div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar"></i> </span>
-                                    <?php //echo $form->textField($model,'diary_current_date',array('id'=>'datepicker','class'=>'form-control'));  ?>
-
                                     <?php
                                     $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                                         'name' => 'diary_current_date',
@@ -109,33 +107,24 @@ $themeUrl = Yii::app()->theme->baseUrl;
             <div class="col-md-6">
                 <div class="panel">
                     <div class="panel-body">
-                        <div id="content">
-                            <div class="panel">
-                                <div class="panel-body pn">
-                                    <!--                      <div class="summernote" style="height: 100px;">This is the <b>Summernote</b> Editor...</div>-->
-                                    <?php //echo $form->textArea($model,'diary_description',array('class'=>'summernote','rows'=>6, 'cols'=>50));   ?>
-                                    <script src="<?php echo Yii::app()->baseUrl . '/ckeditor/ckeditor.js'; ?>"></script>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <?php
+                                $this->widget('application.extensions.TheCKEditor.TheCKEditorWidget', array(
+                                    'model' => $model, # Data-Model (form model)
+                                    'attribute' => 'diary_description', # Attribute in the Data-Model
+                                    'height' => '400px',
+                                    'width' => '100%',
+                                    'toolbarSet' => 'Basic', # EXISTING(!) Toolbar (see: ckeditor.js)
+//                                    'ckeditor' => Yii::app()->basePath . '/../ckeditor/ckeditor.php',
+                                    # Path to ckeditor.php
+//                                    'ckBasePath' => Yii::app()->baseUrl . '/ckeditor/',
+                                    # Relative Path to the Editor (from Web-Root)
+//                                    'css' => Yii::app()->baseUrl . '/css/index.css',
+                                        # Additional Parameters
+                                ));
+                                ?>
 
-                                    <div class="">
-                                        <?php //echo $form->labelEx($model,'diary_description');   ?>
-                                        <?php echo $form->textArea($model, 'diary_description', array('id' => 'editor1')); ?>
-                                        <?php echo $form->error($model, 'diary_description'); ?>
-                                    </div>
-
-
-
-                                    <script type="text/javascript">
-                                        CKEDITOR.replace('editor1', {
-                                            height: '224px',
-                                            filebrowserBrowseUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/browse.php?type=files',
-                                            filebrowserImageBrowseUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/browse.php?type=images',
-                                            filebrowserFlashBrowseUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/browse.php?type=flash',
-                                            filebrowserUploadUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/upload.php?type=files',
-                                            filebrowserImageUploadUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/upload.php?type=images',
-                                            filebrowserFlashUploadUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/upload.php?type=flash'
-                                        });
-                                    </script>
-                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -150,9 +139,6 @@ $themeUrl = Yii::app()->theme->baseUrl;
 </div>
 </section>
 <!-- End: Content -->
-<style type="text/css">
-
-</style>
 <div class="modal fade" id="addNewFile" aria-hidden="true" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -169,7 +155,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     'model' => $imgModel,
                     'attribute' => 'file',
                     'multiple' => true,
-                    'htmlOptions' => array('id'=>'image-form')
+                    'htmlOptions' => array('id' => 'image-form')
                 ));
                 ?>
             </div>
