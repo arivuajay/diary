@@ -90,15 +90,31 @@
 }
 
 .navbar.navbar-fixed-top + #main {
-  margin-top: 130px !important; 
+    margin-top: 130px !important;
 }
 
 .navbar-branding {
-  height: 130px !important;
+    height: 130px !important;
 }
 
 @media (max-width: 670px) {
     #logo_below_text{
         display: none;
     }
+}
+
+.files .progress{
+    width: 170px !important;
+}
+.template-download .preview img{
+    width: 100px !important;
+    height: 100px !important;
+}
+.fileinput-button .toggle {
+    float: right;
+    margin-right: 21px !important;
+}
+
+.template-download .delete > input[type='checkbox'] {
+    float: right;
 }

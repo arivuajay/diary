@@ -18,6 +18,16 @@ class JournalController extends Controller {
         );
     }
 
+    public function actions() {
+        return array(
+            'upload' => array(
+                'class' => 'xupload.actions.XUploadAction',
+                'path' => Yii::app()->getBasePath() . "/.." . JOURNAL_IMG_PATH,
+                'publicPath' => Yii::app()->getBaseUrl() . JOURNAL_IMG_PATH,
+            ),
+        );
+    }
+
     /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
@@ -30,7 +40,7 @@ class JournalController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'dashboard', 'calendarevents', 'listjournal'),
+                'actions' => array('create', 'update', 'dashboard', 'calendarevents', 'listjournal', 'adddiaryimage', 'addFile'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -41,6 +51,12 @@ class JournalController extends Controller {
                 'users' => array('*'),
             ),
         );
+    }
+
+    public function actionAddFile() {
+        Yii::import("ext.xupload.models.XUploadForm");
+        $model = new XUploadForm;
+        $this->renderPartial('uploadFile', array('model' => $model));
     }
 
     /**
@@ -68,14 +84,15 @@ class JournalController extends Controller {
         $_SESSION['KCFINDER']['uploadDir'] = Yii::app()->basePath . "/../uploads/"; // path to the uploads folder
 
         if (isset($_POST['Diary'])) {
+            var_dump($_SESSION['diary_images']); exit;
             $new_category = $_POST['Diary']['diary_category_id'] == 'others';
-            if($new_category == true){
+            if ($new_category == true) {
                 //temp validation
                 $_POST['Diary']['category_id'] = 0;
             }
             $model->attributes = $_POST['Diary'];
             if ($model->validate()) {
-                if($new_category == true){
+                if ($new_category == true) {
                     $catmodel = new Category();
                     $catmodel->setAttribute('category_name', $_POST['Diary']['diary_category']);
                     $catmodel->save(false);
@@ -85,6 +102,7 @@ class JournalController extends Controller {
                 $this->redirect(array('view', 'id' => $model->diary_id));
             }
         } else {
+            unset($_SESSION['diary_images']);
             $curr_date = date("Y/m/d");
             $model->diary_current_date = date(PHP_SHORT_DATE_FORMAT, strtotime($curr_date));
             if ($date)
@@ -92,8 +110,9 @@ class JournalController extends Controller {
             $model->diary_user_mood_id = Yii::app()->session['temp_user_mood'];
         }
 
+
         $this->render('create', array(
-            'model' => $model,
+            'model' => $model
         ));
     }
 
@@ -204,8 +223,87 @@ class JournalController extends Controller {
         $journalList = Diary::model()->mine()->findAll("DATE(diary_current_date) = '$date'");
         $this->render('listjournal', compact('journalList'));
     }
-    
 
-    
-    
+    public function actionAdddiaryimage() {
+        Yii::import("xupload.models.XUploadForm");
+        //Here we define the paths where the files will be stored temporarily
+        $path = realpath(Yii::app()->getBasePath() . "/../" . JOURNAL_IMG_PATH) . "/";
+        $publicPath = Yii::app()->getBaseUrl() . "/" . JOURNAL_IMG_PATH;
+
+        //This is for IE which doens't handle 'Content-type: application/json' correctly
+        header('Vary: Accept');
+        if (isset($_SERVER['HTTP_ACCEPT']) && (strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false)) {
+            header('Content-type: application/json');
+        } else {
+            header('Content-type: text/plain');
+        }
+
+        //Here we check if we are deleting and uploaded file
+        if (isset($_GET["_method"])) {
+            if ($_GET["_method"] == "delete") {
+                if ($_GET["file"][0] !== '.') {
+                    $file = $path . $_GET["file"];
+                    if (is_file($file)) {
+                        unlink($file);
+                    }
+                }
+                echo json_encode(true);
+            }
+        } else {
+            $model = new XUploadForm;
+            $model->file = CUploadedFile::getInstance($model, 'file');
+            //We check that the file was successfully uploaded
+            if ($model->file !== null) {
+                //Grab some data
+                $model->mime_type = $model->file->getType();
+                $model->size = $model->file->getSize();
+                $model->name = $model->file->getName();
+                //(optional) Generate a random name for our file
+                $filename = md5(Yii::app()->user->id . microtime() . $model->name);
+                $filename .= "." . $model->file->getExtensionName();
+                if ($model->validate()) {
+                    //Move our file to our temporary dir
+                    $model->file->saveAs($path . $filename);
+                    chmod($path . $filename, 0777);
+                    //here you can also generate the image versions you need
+                    //using something like PHPThumb
+//                    Yii::import("ext.EPhpThumb.EPhpThumb");
+//                    $thumb = new EPhpThumb();
+//                    $thumb->init(); //this is needed
+//                    //chain functions
+//                    $thumb->create($path . $filename)->adaptiveResize(144, 192)->save($path . "large/" . $filename);
+//                    $thumb->create($path . $filename)->adaptiveResize(71, 71)->save($path . $filename);
+                    $_SESSION['diary_images'][] = $filename;
+//                    $prod_image = new ProductImages;
+//                    $prod_image->prod_id = $_REQUEST['prodid'];
+//                    $prod_image->prod_image = $filename;
+//                    $prod_image->save(false);
+                    //We do so, using the json structure defined in
+                    // https://github.com/blueimp/jQuery-File-Upload/wiki/Setup
+                    echo json_encode(array(array(
+                            "name" => $model->name,
+                            "type" => $model->mime_type,
+                            "size" => $model->size,
+                            "url" => $publicPath . "large/" . $filename,
+                            "thumbnail_url" => $publicPath . $filename,
+                            "delete_url" => $this->createUrl("upload", array(
+                                "_method" => "delete",
+                                "file" => $filename
+                            )),
+                            "delete_type" => "POST"
+                    )));
+                } else {
+                    //If the upload failed for some reason we log some data and let the widget know
+                    echo json_encode(array(
+                        array("error" => $model->getErrors('file'),
+                    )));
+                    Yii::log("XUploadAction: " . CVarDumper::dumpAsString($model->getErrors()), CLogger::LEVEL_ERROR, "xupload.actions.XUploadAction"
+                    );
+                }
+            } else {
+                throw new CHttpException(500, "Could not upload file");
+            }
+        }
+    }
+
 }

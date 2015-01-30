@@ -16,25 +16,22 @@ $themeUrl = Yii::app()->theme->baseUrl;
     </div>
     <div id="content">
         <div class="row">
+            <?php
+            $form = $this->beginWidget('CActiveForm', array(
+                'id' => 'diary-form',
+                'enableAjaxValidation' => true,
+                'htmlOptions' => array('enctype' => 'multipart/form-data'),
+                'clientOptions' => array(
+                    'validateOnSubmit' => true,
+                ),
+            ));
+            ?>
             <div class="col-md-6">
                 <div class="panel">
                     <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock"></span> Details </span> </div>
                     <div class="panel-body">
 
-                        <?php
-                        $form = $this->beginWidget('CActiveForm', array(
-                            'id' => 'diary-form',
-                            // Please note: When you enable ajax validation, make sure the corresponding
-                            // controller action is handling ajax validation correctly.
-                            // There is a call to performAjaxValidation() commented in generated controller code.
-                            // See class documentation of CActiveForm for details on this.
-                            'enableAjaxValidation' => true,
-                            'htmlOptions' => array('enctype' => 'multipart/form-data'),
-                            'clientOptions' => array(
-                                'validateOnSubmit' => true,
-                            ),
-                        ));
-                        ?>
+
 
                         <?php echo $form->errorSummary($model); ?>
                         <div class="form-group">
@@ -86,23 +83,8 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <?php //echo $form->labelEx($model, 'diary_upload'); ?>
-                            <?php //echo $form->fileField($model, 'diary_upload'); ?>
-                            <?php //echo $form->error($model, 'diary_upload'); ?>
-                            
-                         <?php
-                         $this->widget('xupload.XUpload', array(
-                    'url' => Yii::app()->createUrl("site/upload"),
-                    'model' => $model,
-                    'attribute' => 'diary_upload',
-                    'multiple' => true,
-)); 
-                         ?>
-                            
-                        </div>
-                        <div class="form-group">
-                            <!--                  <label class="col-md-3 control-label">Select Mood</label>-->
                             <?php echo $form->labelEx($model, 'diary_user_mood_id', array('class' => 'col-md-3 control-label')); ?>
 
                             <div class="col-md-9">
@@ -117,8 +99,9 @@ $themeUrl = Yii::app()->theme->baseUrl;
 
                             </div>
                         </div>
-                        <br>
-                        <br><br>
+                        <div class="form-group">
+                            <a href="#" id="add-new-file" class="btn btn-success">Add Image</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -135,7 +118,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
 
                                     <div class="">
                                         <?php //echo $form->labelEx($model,'diary_description');   ?>
-                                        <?php echo $form->textArea($model, 'diary_description', array('id' => 'editor1', 'style' => 'height:800px')); ?>
+                                        <?php echo $form->textArea($model, 'diary_description', array('id' => 'editor1')); ?>
                                         <?php echo $form->error($model, 'diary_description'); ?>
                                     </div>
 
@@ -143,7 +126,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
 
                                     <script type="text/javascript">
                                         CKEDITOR.replace('editor1', {
-                                            height: '282px',
+                                            height: '224px',
                                             filebrowserBrowseUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/browse.php?type=files',
                                             filebrowserImageBrowseUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/browse.php?type=images',
                                             filebrowserFlashBrowseUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/browse.php?type=flash',
@@ -153,33 +136,70 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                         });
                                     </script>
                                 </div>
-
-
-
                             </div>
                         </div>
                         <div class="form-group">
                             <?php echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Save', array('class' => 'submit btn bg-purple pull-right')); ?>
                         </div>
-                <!--                  <input class="submit btn bg-purple pull-right" type="submit" value="Submit" />-->
                     </div>
-
-                    <?php $this->endWidget(); ?>
                 </div>
             </div>
+            <?php $this->endWidget(); ?>
         </div>
     </div>
 </div>
 </section>
 <!-- End: Content -->
+<style type="text/css">
 
-<?php 
+</style>
+<div class="modal fade" id="addNewFile" aria-hidden="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="editName" class="modal-title">Add images to your diary</h4>
+            </div>
+            <div class="modal-body">
+                <?php
+                Yii::import("ext.xupload.models.XUploadForm");
+                $imgModel = new XUploadForm;
+                $this->widget('xupload.XUpload', array(
+                    'url' => Yii::app()->createUrl("/site/journal/adddiaryimage"),
+                    'model' => $imgModel,
+                    'attribute' => 'file',
+                    'multiple' => true,
+                ));
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
 $js = <<< EOD
     $(document).ready(function(){
         $('#Diary_diary_category_id').val() == 'others' ? $('#div_category').removeClass('hidden') : $('#div_category').addClass('hidden');
         $('#Diary_diary_category_id').on('change', function(){
             $(this).val() == 'others' ? $('#div_category').removeClass('hidden') : $('#div_category').addClass('hidden');
         });
+
+        $("#add-new-file").bind('click',addFileDialog);
+
+        function addFileDialog(event,ui) {
+                var _target = $('#addNewFile');
+                if (! _target) return false;
+
+                _target.modal("show");
+//                $.post('{$this->createUrl('/site/journal/addFile')}')
+//                        .done(function( data ) {
+//                                _target.empty().append( data );
+//                                _target.modal("show");
+//                        });
+
+                return false;
+        }
+
     });
 EOD;
 

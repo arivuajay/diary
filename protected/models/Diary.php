@@ -19,6 +19,7 @@
  * The followings are the available model relations:
  * @property Category $diaryCategory
  * @property MoodType $diaryUserMood
+ * @property DiaryImage[] $diaryImages
  * @property Users $diaryUser
  * @property MoodReport[] $moodReports
  */
@@ -73,7 +74,7 @@ class Diary extends CActiveRecord {
             if($this->$attribute == ''){
                 $this->addError($attribute, 'New category Name cannot be blank');
             }else{
-                $criteria = new CDbCriteria;  
+                $criteria = new CDbCriteria;
                 $criteria->addCondition('category_name = "'.$this->$attribute.'"');
                 $cat = Category::model()->find($criteria);
                 if(!empty($cat)){
@@ -93,6 +94,7 @@ class Diary extends CActiveRecord {
             'diaryCategory' => array(self::BELONGS_TO, 'Category', 'diary_category_id'),
             'diaryUserMood' => array(self::BELONGS_TO, 'MoodType', 'diary_user_mood_id'),
             'diaryUser' => array(self::BELONGS_TO, 'Users', 'diary_user_id'),
+            'diaryImages' => array(self::HAS_MANY, 'DiaryImage', 'diary_id'),
             'moodReports' => array(self::HAS_MANY, 'MoodReport', 'mood_report_diary_id'),
         );
     }

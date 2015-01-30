@@ -14,6 +14,10 @@ return array(
         'application.models.*',
         'application.components.*'
     ),
+    'aliases' => array(
+        //If you manually installed it
+        'xupload' => 'ext.xupload',
+    ),
     'modules' => array(
         'site', 'admin', 'webservice',
         // uncomment the following to enable the Gii tool
@@ -95,13 +99,4 @@ return array(
     'theme' => 'site',
     'sourceLanguage' => 'en',
     'language' => 'en_US',
-    
-    'import'=>array(
-    'application.models.*',
-    'application.components.*',
-   ),
-   'aliases' => array(
-    //If you manually installed it
-    'xupload' => 'ext.xupload',
-   ),
 );
