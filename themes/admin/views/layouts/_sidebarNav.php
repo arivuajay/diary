@@ -27,6 +27,13 @@
                         array('label' => 'Add Faq', 'url' => array('/admin/faq/createfaq')),
                     ),
                 ),
+                array('label' => '<i class="fa fa-book"></i><span>Category management</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
+                    'submenuOptions' => array('class' => 'sub'),
+                    'items' => array(
+                        array('label' => 'Manage Category', 'url' => array('/admin/category/index')),
+                        array('label' => 'Add Category', 'url' => array('/admin/category/create')),
+                    ),
+                ),
             ),
             'htmlOptions' => array('class' => 'sidebar-menu', "id" => "nav-accordion")
         ));

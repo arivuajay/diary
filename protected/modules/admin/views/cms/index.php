@@ -1,6 +1,6 @@
 <?php
-/* @var $this UserController */
-/* @var $model User */
+/* @var $this CmsController */
+/* @var $model Cms */
 
 $this->breadcrumbs = array(
     'CMS'
