@@ -1,5 +1,5 @@
 <?php
-
+Yii::import('ext.tinymce.*');
 class JournalController extends Controller {
 
     /**
@@ -26,7 +26,7 @@ class JournalController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
+                'actions' => array('index', 'view','spellchecker'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -63,12 +63,9 @@ class JournalController extends Controller {
         // Uncomment the following line if AJAX validation is needed
         $this->performAjaxValidation($model);
 
-        $_SESSION['KCFINDER']['disabled'] = false; // enables the file browser in the admin
-        $_SESSION['KCFINDER']['uploadURL'] = Yii::app()->baseUrl . "/uploads/"; // URL for the uploads folder
-        $_SESSION['KCFINDER']['uploadDir'] = Yii::app()->basePath . "/../uploads/"; // path to the uploads folder
-
         if (isset($_POST['Diary'])) {
-            var_dump($_SESSION['diary_images']); exit;
+            var_dump($_SESSION['diary_images']);
+            exit;
             $new_category = $_POST['Diary']['diary_category_id'] == 'others';
             if ($new_category == true) {
                 //temp validation

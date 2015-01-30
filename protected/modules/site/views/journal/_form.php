@@ -59,6 +59,8 @@ $themeUrl = Yii::app()->theme->baseUrl;
                             <?php echo $form->labelEx($model, 'diary_current_date'); ?>
                             <div class="form-group">
                                 <div class="input-group"> <span class="input-group-addon"><i class="fa fa-calendar"></i> </span>
+                                    <?php //echo $form->textField($model,'diary_current_date',array('id'=>'datepicker','class'=>'form-control'));  ?>
+
                                     <?php
                                     $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                                         'name' => 'diary_current_date',
@@ -108,24 +110,17 @@ $themeUrl = Yii::app()->theme->baseUrl;
                 <div class="panel">
                     <div class="panel-body">
                         <div class="form-group">
-                            <div class="col-md-12">
-                                <?php
-                                $this->widget('application.extensions.TheCKEditor.TheCKEditorWidget', array(
-                                    'model' => $model, # Data-Model (form model)
-                                    'attribute' => 'diary_description', # Attribute in the Data-Model
-                                    'height' => '400px',
-                                    'width' => '100%',
-                                    'toolbarSet' => 'Basic', # EXISTING(!) Toolbar (see: ckeditor.js)
-//                                    'ckeditor' => Yii::app()->basePath . '/../ckeditor/ckeditor.php',
-                                    # Path to ckeditor.php
-//                                    'ckBasePath' => Yii::app()->baseUrl . '/ckeditor/',
-                                    # Relative Path to the Editor (from Web-Root)
-//                                    'css' => Yii::app()->baseUrl . '/css/index.css',
-                                        # Additional Parameters
-                                ));
-                                ?>
-
-                            </div>
+                            <?php
+                            $this->widget('ext.tinymce.TinyMce', array(
+                                'model' => $model,
+                                'attribute' => 'diary_description',
+//                                'spellcheckerUrl' => 'http://speller.yandex.net/services/tinyspell',
+                                'htmlOptions' => array(
+                                    'rows' => 12,
+                                    'cols' => 60,
+                                ),
+                            ));
+                            ?>
                         </div>
                         <div class="form-group">
                             <?php echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Save', array('class' => 'submit btn bg-purple pull-right')); ?>
@@ -139,6 +134,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
 </div>
 </section>
 <!-- End: Content -->
+
 <div class="modal fade" id="addNewFile" aria-hidden="true" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
