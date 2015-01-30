@@ -110,7 +110,7 @@
     width: 100px !important;
     height: 100px !important;
 }
-.fileinput-button .toggle {
+.fileupload-buttonbar .toggle {
     float: right;
     margin-right: 21px !important;
 }

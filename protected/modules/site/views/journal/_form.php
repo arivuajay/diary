@@ -169,6 +169,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     'model' => $imgModel,
                     'attribute' => 'file',
                     'multiple' => true,
+                    'htmlOptions' => array('id'=>'image-form')
                 ));
                 ?>
             </div>

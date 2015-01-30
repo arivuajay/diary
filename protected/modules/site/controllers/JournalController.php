@@ -18,16 +18,6 @@ class JournalController extends Controller {
         );
     }
 
-    public function actions() {
-        return array(
-            'upload' => array(
-                'class' => 'xupload.actions.XUploadAction',
-                'path' => Yii::app()->getBasePath() . "/.." . JOURNAL_IMG_PATH,
-                'publicPath' => Yii::app()->getBaseUrl() . JOURNAL_IMG_PATH,
-            ),
-        );
-    }
-
     /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
@@ -51,12 +41,6 @@ class JournalController extends Controller {
                 'users' => array('*'),
             ),
         );
-    }
-
-    public function actionAddFile() {
-        Yii::import("ext.xupload.models.XUploadForm");
-        $model = new XUploadForm;
-        $this->renderPartial('uploadFile', array('model' => $model));
     }
 
     /**
@@ -286,7 +270,7 @@ class JournalController extends Controller {
                             "size" => $model->size,
                             "url" => $publicPath . "large/" . $filename,
                             "thumbnail_url" => $publicPath . $filename,
-                            "delete_url" => $this->createUrl("upload", array(
+                            "delete_url" => $this->createUrl("adddiaryimage", array(
                                 "_method" => "delete",
                                 "file" => $filename
                             )),
