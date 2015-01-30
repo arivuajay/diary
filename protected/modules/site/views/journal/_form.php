@@ -191,12 +191,6 @@ $js = <<< EOD
                 if (! _target) return false;
 
                 _target.modal("show");
-//                $.post('{$this->createUrl('/site/journal/addFile')}')
-//                        .done(function( data ) {
-//                                _target.empty().append( data );
-//                                _target.modal("show");
-//                        });
-
                 return false;
         }
 
