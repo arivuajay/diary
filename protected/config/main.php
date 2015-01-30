@@ -95,4 +95,13 @@ return array(
     'theme' => 'site',
     'sourceLanguage' => 'en',
     'language' => 'en_US',
+    
+    'import'=>array(
+    'application.models.*',
+    'application.components.*',
+   ),
+   'aliases' => array(
+    //If you manually installed it
+    'xupload' => 'ext.xupload',
+   ),
 );

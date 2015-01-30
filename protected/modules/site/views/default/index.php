@@ -28,7 +28,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
     <img src="<?php echo $themeUrl; ?>/css/home/assets/img/2.jpg" alt="The Spice Lounge" class="fullBg">
     <div class="clearfix">
         <div class="header_details">
-            <div style="color:#A4C3DC;font-size: 20px;">BETA</div>
+            <div style="color:#A4C3DC;font-size: 20px;margin-top:-26px">BETA</div>
             <div class="container">
                 <div class="header_icons accura-header-block accura-hidden-2xs">
                     <a href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a>
@@ -55,7 +55,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                 ));
                 $moodTypes = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_type');
                 ?>
-                <div class="clearfix hcont_form pad_top40">
+                <div class="clearfix hcont_form pad_top30">
                     <div class="row hmerow">
                         <?php
                         echo $form->emailField($model, 'email', array('class' => 'textbox1', 'placeholder' => $model->getAttributeLabel('email')));

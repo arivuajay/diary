@@ -91,26 +91,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
                             <?php //echo $form->fileField($model, 'diary_upload'); ?>
                             <?php //echo $form->error($model, 'diary_upload'); ?>
                             
-                         <?php $this->widget('CMultiFileUpload', array(
-     'model'=>$model,
-     'attribute'=>'photos',
-     //'accept'=>'jpg|gif|png',
-     'options'=>array(
-        // 'onFileSelect'=>'function(e, v, m){ alert("onFileSelect - "+v) }',
-        // 'afterFileSelect'=>'function(e, v, m){ alert("afterFileSelect - "+v) }',
-        // 'onFileAppend'=>'function(e, v, m){ alert("onFileAppend - "+v) }',
-        // 'afterFileAppend'=>'function(e, v, m){ alert("afterFileAppend - "+v) }',
-        // 'onFileRemove'=>'function(e, v, m){ alert("onFileRemove - "+v) }',
-        // 'afterFileRemove'=>'function(e, v, m){ alert("afterFileRemove - "+v) }',
-     ),
-     'denied'=>'File is not allowed',
-     'max'=>10, // max 10 files
-     'htmlOptions' => array(
-              'multiple' => 'true', 
-     ),
- 
- 
-  )); ?>
+                         <?php
+                         $this->widget('xupload.XUpload', array(
+                    'url' => Yii::app()->createUrl("site/upload"),
+                    'model' => $model,
+                    'attribute' => 'diary_upload',
+                    'multiple' => true,
+)); 
+                         ?>
                             
                         </div>
                         <div class="form-group">
