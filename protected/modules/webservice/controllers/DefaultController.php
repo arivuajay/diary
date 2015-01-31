@@ -71,23 +71,19 @@ class DefaultController extends Controller {
     }
 
     public function actionDeleteentry() {
-        $criteria = new CDbCriteria();
-        $criteria->select = array('t.*');
-        $criteria->with = array('diaryUser');
-        $criteria->addCondition("t.diary_user_id = '" . $_REQUEST['user_id'] . "' OR diaryUser.user_email = '" . $_REQUEST['user_id'] . "'");
-        $criteria->addCondition("t.diary_id = '" . $_REQUEST['diary_id'] . "'");
+        $diary_id = trim($_REQUEST['diary_id']);
+        $diary_user = trim($_REQUEST['user_id']);
 
-        $model = Diary::model()->deleteAll($criteria);
+        $query = "DELETE FROM {{diary}} WHERE diary_id = '$diary_id' AND diary_user_id = (SELECT user_id FROM {{users}} WHERE user_email = '$diary_user')";
 
-        if (!$model) {
-            $result['success'] = 0;
-            $result['message'] = 'No entries found!!!';
-        } else {
-            $result['success'] = 1;
-            $result['message'] = $model;
-        }
+        Yii::app()->db->createCommand($query)->query();
+
+        $result['success'] = 1;
+        $result['message'] = 'Successfully deleted.';
+
         echo CJSON::encode($result);
 
         Yii::app()->end();
     }
+
 }
