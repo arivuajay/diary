@@ -35,7 +35,7 @@ $this->breadcrumbs=array(
                                         <?php
 //                                        echo CHtml::link('<i class="fa fa-eye" title="View"></i>', array('/admin/category/view', 'id' => $data->category_id), array('id' => 'tooltip1')) . "&nbsp;&nbsp;";
                                         echo CHtml::link('<i class="fa fa-edit" title = "Update"></i>', array('/admin/category/update', 'id' => $data->category_id), array('id' => 'tooltip')) . "&nbsp;&nbsp;";
-                                        echo CHtml::link('<i class="fa fa-trash-o" title="Delete"></i>', array('/admin/category/delete', 'id' => $data->category_id), array('id' => 'tooltip', 'onclick' => "return confirm('Are you sure you want to delete?');"));
+//                                        echo CHtml::link('<i class="fa fa-trash-o" title="Delete"></i>', array('/admin/category/delete', 'id' => $data->category_id), array('id' => 'tooltip', 'onclick' => "return confirm('Are you sure you want to delete?');"));
                                         ?>
                                     </td>
                                 

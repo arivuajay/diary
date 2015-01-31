@@ -53,7 +53,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     'method' => 'POST',
                     'htmlOptions' => array('role' => 'form')
                 ));
-                $moodTypes = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_type');
+                $moodTypes = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_image');
                 ?>
                 <div class="clearfix hcont_form pad_top30">
                     <div class="row hmerow">
@@ -67,11 +67,11 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         <p class="mood_label"><?php echo $model->getAttributeLabel('moodtype') ?></p>
                         <?php
                         $i = 0;
-                        foreach ($moodTypes as $key => $mood):
+                        foreach ($moodTypes as $key => $mood): 
                             ?>
                             <label class="radio-inline mr10 <?php if ($i == 0) echo "selected"; ?> ">
                                 <input type="radio" name="QuickCreate[moodtype]" class="mood_type_id" <?php if ($i == 0) echo "checked='checked'"; ?>  value="<?php echo $key; ?>">
-                                <?php echo CHtml::image("$themeUrl/css/frontend/img/mood_$key.png", $mood, array('class' => 'mood_type_smiley')); ?>
+                                <?php echo CHtml::image("$themeUrl/image/mood_type/$mood", $mood, array('class' => 'mood_type_smiley')); ?>
                             </label>
                             <?php
                             $i++;

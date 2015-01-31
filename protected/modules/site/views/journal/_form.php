@@ -86,12 +86,12 @@ $themeUrl = Yii::app()->theme->baseUrl;
 
                             <div class="col-md-9">
                                 <?php
-                                $moods = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_type');
+                                $moods = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_image');
                                 foreach ($moods as $key => $mood) {
                                     ?>
                                     <label class="radio-inline mr10">
                                         <?php echo $form->radioButton($model, 'diary_user_mood_id', array('value' => $key, 'uncheckValue' => null)); ?>
-                                        <img src="<?php echo $themeUrl; ?>/css/frontend/img/mood_<?php echo $key ?>.png"> </label>
+                                        <img src="<?php echo $themeUrl; ?>/image/mood_type/<?php echo $mood ?>"> </label>
                                 <?php } ?>
 
                             </div>
