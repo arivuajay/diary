@@ -70,4 +70,24 @@ class DefaultController extends Controller {
         Yii::app()->end();
     }
 
+    public function actionDeleteentry() {
+        $criteria = new CDbCriteria();
+        $criteria->select = array('t.*');
+        $criteria->with = array('diaryUser');
+        $criteria->addCondition("t.diary_user_id = '" . $_REQUEST['user_id'] . "' OR diaryUser.user_email = '" . $_REQUEST['user_id'] . "'");
+        $criteria->addCondition("t.diary_id = '" . $_REQUEST['diary_id'] . "'");
+
+        $model = Diary::model()->deleteAll($criteria);
+
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No entries found!!!';
+        } else {
+            $result['success'] = 1;
+            $result['message'] = $model;
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
 }
