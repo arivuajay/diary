@@ -1,5 +1,7 @@
 <?php
+
 Yii::import('ext.tinymce.*');
+
 class JournalController extends Controller {
 
     /**
@@ -26,7 +28,7 @@ class JournalController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view','spellchecker'),
+                'actions' => array('index', 'view', 'spellchecker'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -64,9 +66,7 @@ class JournalController extends Controller {
         $this->performAjaxValidation($model);
 
         if (isset($_POST['Diary'])) {
-            var_dump($_SESSION['diary_images']);
-            exit;
-            $new_category = $_POST['Diary']['diary_category_id'] == 'others';
+            $new_category = ($_POST['Diary']['diary_category_id'] == 'others');
             if ($new_category == true) {
                 //temp validation
                 $_POST['Diary']['category_id'] = 0;
@@ -80,6 +80,16 @@ class JournalController extends Controller {
                     $model->setAttribute('diary_category_id', $catmodel->category_id);
                 }
                 $model->save(false);
+                $diary_images = $_SESSION['diary_images'];
+                if (!empty($diary_images)):
+                    foreach ($diary_images as $image):
+                        $imgModel = new DiaryImage();
+                        $imgModel->diary_id = $model->diary_id;
+                        $imgModel->diary_image = $image;
+                        $imgModel->save(false);
+                    endforeach;
+                endif;
+                unset($_SESSION['diary_images']);
                 $this->redirect(array('view', 'id' => $model->diary_id));
             }
         } else {
@@ -226,6 +236,8 @@ class JournalController extends Controller {
                     $file = $path . $_GET["file"];
                     if (is_file($file)) {
                         unlink($file);
+                        $key = array_search($file, $_SESSION['diary_images']);
+                        unset($_SESSION['diary_images'][$key]);
                     }
                 }
                 echo json_encode(true);

@@ -52,6 +52,7 @@
 
     $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/calendar/fullcalendar.min.js',$cs_pos_end);
     $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/calendar/gcal.js',$cs_pos_end);
+    $cs->registerScriptFile($themeUrl . '/css/frontend/js/jquery.tmpl.min.js',$cs_pos_end);
     //$cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/ckeditor/ckeditor.js',$cs_pos_end);
     //$cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/summernote/summernote.js');
    // $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/markitup/jquery.markitup.js');

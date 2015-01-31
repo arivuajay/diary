@@ -118,3 +118,18 @@
 .template-download .delete > input[type='checkbox'] {
     float: right;
 }
+#image_preview_list {
+  display: block;
+  float: left;
+  list-style: outside none none;
+  margin: 10px 0;
+  padding: 0;
+  width: 100%;
+}
+.overlay-icon {
+  position: absolute;
+}
+
+.top-right {
+  right: 16px;
+}

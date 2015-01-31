@@ -30,9 +30,6 @@ $themeUrl = Yii::app()->theme->baseUrl;
                 <div class="panel">
                     <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock"></span> Details </span> </div>
                     <div class="panel-body">
-
-
-
                         <?php echo $form->errorSummary($model); ?>
                         <div class="form-group">
                             <?php echo $form->labelEx($model, 'diary_title'); ?>
@@ -101,6 +98,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         </div>
                         <div class="form-group">
                             <a href="#" id="add-new-file" class="btn btn-success">Add Image</a>
+                            <ul id="image_preview_list">
+                                <li class="col-sm-6 col-md-3">
+                                    <div class="thumbnail tile tile-medium tile-teal">
+                                        <a href="#"><i class="fa fa-camera-retro fa-lg overlay-icon top-right"></i></a>
+                                            <img src="" class="img-responsive" />
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -114,9 +119,9 @@ $themeUrl = Yii::app()->theme->baseUrl;
                             $this->widget('ext.tinymce.TinyMce', array(
                                 'model' => $model,
                                 'attribute' => 'diary_description',
-//                                'spellcheckerUrl' => 'http://speller.yandex.net/services/tinyspell',
+                                'settings' => array('menubar' => false),
                                 'htmlOptions' => array(
-                                    'rows' => 12,
+                                    'rows' => 14,
                                     'cols' => 60,
                                 ),
                             ));
@@ -155,9 +160,26 @@ $themeUrl = Yii::app()->theme->baseUrl;
                 ));
                 ?>
             </div>
+            <div class="modal-footer">
+                <div class="pull-right">
+                    <button aria-hidden="true" data-dismiss="modal" class="btn btn-success" type="button">Done</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<!-- The template to display files available for download -->
+<script id="template-on-preview" type="text/x-tmpl">
+    <div class="image-thumb" id="some-unique-thumb-id-1" style="background-image: url(some/image-1.ext)">
+    <a href="#"></a>
+</div>
+    <li class="preview-list">
+    <span class="thumbnail"><span>${thumbnail_url}</span></span>
+    <span class="name"><span>${thumbnail_url}</span></span>
+    </li>
+</script>
+
 
 <?php
 $js = <<< EOD
@@ -176,7 +198,16 @@ $js = <<< EOD
                 _target.modal("show");
                 return false;
         }
+        $("#template-on-preview").template("listAttendees"); //compiling the template to named listAttendees
+        $('#image-form').bind('fileuploaddone', function (e, data) {
+        $.tmpl("listAttendees", data.result).appendTo("ul#image_list");
 
+//            $(data.result).each(function(k,v){
+//        console.log(v);
+//                console.log(v.delete_url);
+//                console.log(v.thumbnail_url);
+//            });
+        });
     });
 EOD;
 

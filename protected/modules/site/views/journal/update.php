@@ -16,6 +16,4 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Diary <?php echo $model->diary_id; ?></h1>
-
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

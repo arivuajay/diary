@@ -63,7 +63,7 @@ class Myclass extends CController {
 
         return $mood;
     }
-    
+
     public static function getCategorywithOthers() {
         $mood = CHtml::listData(Category::model()->findAll(), 'category_id', 'category_name');
         $mood['others'] = 'Others';
@@ -93,6 +93,9 @@ class Myclass extends CController {
             $model = new Users('webservice');
             $model->user_name = $param['user_name'];
             $model->user_email = $param['user_email'];
+            if($param['user_password'] == 'FB'):
+                $param['user_password'] = Myclass::getRandomString(6);
+            endif;
             $model->user_password = $param['user_password'];
             $model->user_status = 1;
 
@@ -190,9 +193,11 @@ class Myclass extends CController {
 
         if ($model->save()) {
             $response['success'] = 1;
+            $response['pref_date'] = date('Y-m-d', strtotime($model->diary_current_date));
             $response['message'] = "Your Password Reset Link sent to your email address.";
         } else {
             $response['success'] = 0;
+            $response['pref_date'] = date('Y-m-d', strtotime($model->diary_current_date));
             $response['message'] = str_replace("\r\n", "", strip_tags(CHtml::errorSummary($model, '')));
         }
 
