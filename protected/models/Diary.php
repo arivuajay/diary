@@ -193,5 +193,5 @@ class Diary extends CActiveRecord {
 
         return parent::afterSave();
     }
-
+    
 }

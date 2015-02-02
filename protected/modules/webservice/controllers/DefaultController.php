@@ -55,6 +55,32 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
+    
+    
+    public function actionJournaldates() {
+        $criteria = new CDbCriteria();
+        $criteria->select = array('DATE(t.diary_current_date) as diary_current_date');
+        $criteria->with = array('diaryUser');
+        $criteria->addCondition("t.diary_user_id = '" . $_REQUEST['user_id'] . "' OR diaryUser.user_email = '" . $_REQUEST['user_id'] . "'");
+        if (isset($_REQUEST['pref_date']))
+            $criteria->addCondition("DATE(t.diary_current_date) = '" . $_REQUEST['pref_date'] . "'");
+        $criteria->limit = 10;
+        $model = Diary::model()->findAll($criteria);
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No entries found!!!';
+        } else {
+            $result['success'] = 1;
+            $jour_date = array();
+            foreach ($model as $key => $mdl){
+                $jour_date[$key]['diary_current_date'] = $mdl->diary_current_date;
+            }
+            $result['message'] = $jour_date;
+        }
+         echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
 
     public function actionGetentry() {
         $model = Diary::model()->findByPk($_REQUEST['diary_id']);
