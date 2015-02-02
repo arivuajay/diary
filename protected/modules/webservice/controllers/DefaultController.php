@@ -64,7 +64,7 @@ class DefaultController extends Controller {
         $criteria->addCondition("t.diary_user_id = '" . $_REQUEST['user_id'] . "' OR diaryUser.user_email = '" . $_REQUEST['user_id'] . "'");
         if (isset($_REQUEST['pref_date']))
             $criteria->addCondition("DATE(t.diary_current_date) = '" . $_REQUEST['pref_date'] . "'");
-        $criteria->limit = 10;
+//        $criteria->limit = 10;
         $model = Diary::model()->findAll($criteria);
         if (!$model) {
             $result['success'] = 0;

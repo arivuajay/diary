@@ -1,6 +1,6 @@
 <?php
 
-class MoodTypeController extends Controller {
+class MoodtypeController extends Controller {
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -136,6 +136,8 @@ class MoodTypeController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
+        
+       // echo 'test';exit;
         $dataProvider = new CActiveDataProvider('MoodType');
         $moods = MoodType::model()->findAll();
 
