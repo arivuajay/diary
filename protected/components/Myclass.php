@@ -184,8 +184,8 @@ class Myclass extends CController {
         $cat_array = array('1' => "Family", "Friends", "Business");
         $model->diary_category_id = array_search($param['category'], $cat_array);
         $model->diary_user_mood_id = array_search($param['mood'], $mood_array);
+        $bind_time = trim("{$param['month']} {$param['date']} {$param['year']} {$param['time']}");
 
-        $bind_time = trim($param['year'] . "-" . $param['month'] . "-" . $param['date'] . " " . $param['time']);
         $model->diary_current_date = date('Y-m-d H:i:s', strtotime($bind_time));
         $model->diary_tags = $param['tag'];
 
