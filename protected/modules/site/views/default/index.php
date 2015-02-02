@@ -55,7 +55,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                 ));
                 $moodTypes = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_image');
                 ?>
-                <div class="clearfix hcont_form pad_top30">
+                <div class="clearfix hcont_form pad_top20">
                     <div class="row hmerow">
                         <?php
                         echo $form->emailField($model, 'email', array('class' => 'textbox1', 'placeholder' => $model->getAttributeLabel('email')));

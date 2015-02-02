@@ -1552,6 +1552,7 @@ a.mail-text:hover{  text-decoration:none; color: #f32a2a;}
     font-family: oswald;
     font-size: 14px;
     margin: 0;
+    color: #000000;
 }
 
 #hcontact_form .row.hmoodlist {
@@ -2108,9 +2109,9 @@ mobile
     #lightbox .close {position: relative; top:-17px;}
 }
 
-  .your-own{
-      font-size: 19px;
+.your-own{
+      font-size: 15px;
       color: #F52A2A;
-      margin: 0 0 0 -25px;
+      margin: 0px;
   }
   
