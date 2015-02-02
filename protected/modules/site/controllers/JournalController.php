@@ -120,9 +120,35 @@ class JournalController extends Controller {
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Diary'])) {
+            $new_category = ($_POST['Diary']['diary_category_id'] == 'others');
+            if ($new_category == true) {
+                //temp validation
+                $_POST['Diary']['category_id'] = 0;
+            }
             $model->attributes = $_POST['Diary'];
-            if ($model->save())
+            if ($model->validate()) {
+                if ($new_category == true) {
+                    $catmodel = new Category();
+                    $catmodel->setAttribute('category_name', $_POST['Diary']['diary_category']);
+                    $catmodel->save(false);
+                    $model->setAttribute('diary_category_id', $catmodel->category_id);
+                }
+                $model->save(false);
+                DiaryImage::model()->deleteAll("diary_id = '{$model->diary_id}'");
+                $diary_images = $_SESSION['diary_images'];
+                if (!empty($diary_images)):
+                    foreach ($diary_images as $image):
+                        $imgModel = new DiaryImage();
+                        $imgModel->diary_id = $model->diary_id;
+                        $imgModel->diary_image = $image;
+                        $imgModel->save(false);
+                    endforeach;
+                endif;
+                unset($_SESSION['diary_images']);
                 $this->redirect(array('view', 'id' => $model->diary_id));
+            }
+        } else {
+            unset($_SESSION['diary_images']);
         }
 
         $this->render('update', array(
@@ -186,7 +212,7 @@ class JournalController extends Controller {
      * @param Diary $model the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'diary-form') {
+        if (isset($_POST ['ajax']) && $_POST ['ajax'] === 'diary-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
@@ -232,14 +258,15 @@ class JournalController extends Controller {
         //Here we check if we are deleting and uploaded file
         if (isset($_GET["_method"])) {
             if ($_GET["_method"] == "delete") {
-                if ($_GET["file"][0] !== '.') {
+                if ($_GET["file"] [0] !== '.') {
                     $file = $path . $_GET["file"];
                     if (is_file($file)) {
                         unlink($file);
-                        $key = array_search($file, $_SESSION['diary_images']);
-                        unset($_SESSION['diary_images'][$key]);
                     }
                 }
+                DiaryImage::model()->deleteAll("diary_image = '{$_GET["file"]}'");
+                $key = array_search(@$_GET["file"], @$_SESSION['diary_images']);
+                unset($_SESSION['diary_images'][$key]);
                 echo json_encode(true);
             }
         } else {
@@ -290,7 +317,7 @@ class JournalController extends Controller {
                     echo json_encode(array(
                         array("error" => $model->getErrors('file'),
                     )));
-                    Yii::log("XUploadAction: " . CVarDumper::dumpAsString($model->getErrors()), CLogger::LEVEL_ERROR, "xupload.actions.XUploadAction"
+                    Yii::log("XUploadAction: " . CVarDumper::dumpAsString($model->getErrors()), CLogger:: LEVEL_ERROR, "xupload.actions.XUploadAction"
                     );
                 }
             } else {

@@ -74,15 +74,50 @@ class DefaultController extends Controller {
         $diary_id = trim($_REQUEST['diary_id']);
         $diary_user = trim($_REQUEST['user_id']);
 
-        $query = "DELETE FROM {{diary}} WHERE diary_id = '$diary_id' AND diary_user_id = (SELECT user_id FROM {{users}} WHERE user_email = '$diary_user')";
+        $criteria = new CDbCriteria();
+        $criteria->select = array('t.*');
+        $criteria->with = array('diaryUser');
+        $criteria->addCondition("t.diary_user_id = '$diary_user' OR diaryUser.user_email = '$diary_user'");
+        $criteria->addCondition("t.diary_id = '$diary_id'");
 
-        Yii::app()->db->createCommand($query)->query();
+        $model = Diary::model()->find($criteria);
 
-        $result['success'] = 1;
-        $result['message'] = 'Successfully deleted.';
-
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No entries found!!!';
+        } else {
+            $model->delete();
+            $result['success'] = 1;
+            $result['message'] = 'Succesfully deleted.';
+        }
         echo CJSON::encode($result);
 
+        Yii::app()->end();
+    }
+
+    public function actionUploadjournalimg() {
+//        header('Content-Type: image/png');
+//        $path = '/' . JOURNAL_IMG_PATH . 'avatar1.jpg';
+//        $fileurl = file_get_contents($this->createAbsoluteUrl($path));
+//        $base64_encode = base64_encode($fileurl);
+//        var_dump($base64_encode);
+        $base64_encode = $_REQUEST['data'];
+        $file_type = $_REQUEST['type'];
+
+        if (!empty($base64_encode) && !empty($file_type)):
+            $base64_decode = base64_decode($base64_encode);
+            $newfile = uniqid() . $file_type;
+            $success = file_put_contents(JOURNAL_IMG_PATH . $newfile, $base64_decode);
+            if ($success) {
+                $result['success'] = 1;
+                $result['message'] = $newfile;
+            } else {
+                $result['success'] = 0;
+                $result['message'] = 'Unable to save file';
+            }
+        endif;
+
+        echo CJSON::encode($result);
         Yii::app()->end();
     }
 

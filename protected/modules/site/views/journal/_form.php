@@ -19,7 +19,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
             <?php
             $form = $this->beginWidget('CActiveForm', array(
                 'id' => 'diary-form',
-                'enableAjaxValidation' => true,
+                'enableAjaxValidation' => false,
                 'htmlOptions' => array('enctype' => 'multipart/form-data'),
                 'clientOptions' => array(
                     'validateOnSubmit' => true,
@@ -99,12 +99,21 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         <div class="form-group">
                             <a href="#" id="add-new-file" class="btn btn-success">Add Image</a>
                             <ul id="image_preview_list">
-                                <li class="col-sm-6 col-md-3">
-                                    <div class="thumbnail tile tile-medium tile-teal">
-                                        <a href="#"><i class="fa fa-camera-retro fa-lg overlay-icon top-right"></i></a>
-                                            <img src="" class="img-responsive" />
-                                    </div>
-                                </li>
+                                <?php
+                                if (!$model->isNewRecord && $model->diaryImages):
+                                    foreach ($model->diaryImages as $dImage):
+                                        $_SESSION['diary_images'][] = $dImage->diary_image;
+                                        echo '<li class="col-sm-6 col-md-3">';
+                                        echo '<div class="thumbnail tile tile-medium tile-teal">';
+                                        echo '<a data-url="' . $this->createUrl("/site/journal/adddiaryimage/_method/delete/file/{$dImage->diary_image}") . '" data-type="POST" href="javascript:void(0);" class="delete_diary_image">';
+                                        echo '<i class="fa fa-times-circle fa-lg overlay-icon top-right"></i>';
+                                        echo '</a>';
+                                        echo CHtml::image($this->createUrl("/uploads/journal/{$dImage->diary_image}"), '', array("class" => "img-responsive"));
+                                        echo '</div>';
+                                        echo '</li>';
+                                    endforeach;
+                                endif;
+                                ?>
                             </ul>
                         </div>
                     </div>
@@ -171,12 +180,13 @@ $themeUrl = Yii::app()->theme->baseUrl;
 
 <!-- The template to display files available for download -->
 <script id="template-on-preview" type="text/x-tmpl">
-    <div class="image-thumb" id="some-unique-thumb-id-1" style="background-image: url(some/image-1.ext)">
-    <a href="#"></a>
-</div>
-    <li class="preview-list">
-    <span class="thumbnail"><span>${thumbnail_url}</span></span>
-    <span class="name"><span>${thumbnail_url}</span></span>
+    <li class="col-sm-6 col-md-3">
+    <div class="thumbnail tile tile-medium tile-teal">
+    <a class="delete_diary_image" href="javascript:void(0);" data-type="POST" data-url="${delete_url}">
+    <i class="fa fa-times-circle fa-lg overlay-icon top-right"></i>
+    </a>
+    <img src="${thumbnail_url}" class="img-responsive" />
+    </div>
     </li>
 </script>
 
@@ -191,6 +201,20 @@ $js = <<< EOD
 
         $("#add-new-file").bind('click',addFileDialog);
 
+        $("a.delete_diary_image").live('click',function(){
+        if(confirm("Are you sure want to remove ?")){
+            _dataType = $(this).data('type');
+            _dataUrl = $(this).data('url');
+            var _curImg = $(this);
+            $.ajax({
+                type: _dataType,
+                url: _dataUrl
+            }).done(function( msg ){
+                _curImg.parents('li').remove();
+            });
+        }
+        });
+
         function addFileDialog(event,ui) {
                 var _target = $('#addNewFile');
                 if (! _target) return false;
@@ -198,15 +222,18 @@ $js = <<< EOD
                 _target.modal("show");
                 return false;
         }
-        $("#template-on-preview").template("listAttendees"); //compiling the template to named listAttendees
+        $("#template-on-preview").template("listAttendees");
         $('#image-form').bind('fileuploaddone', function (e, data) {
-        $.tmpl("listAttendees", data.result).appendTo("ul#image_list");
-
-//            $(data.result).each(function(k,v){
-//        console.log(v);
-//                console.log(v.delete_url);
-//                console.log(v.thumbnail_url);
-//            });
+            $.tmpl("listAttendees", data.result).appendTo("ul#image_preview_list");
+        });
+        $('#image-form').bind('fileuploaddestroy', function (e, data) {
+//        console.log(data.url);
+        _dataURL = data.url;
+        var pieces = _dataURL.split(/[\s/]+/);
+//        console.log(pieces);
+        _imgURL = pieces[pieces.length-1];
+//        $("ul#image_preview_list li").find("data-img='"+_imgURL+"'").remove();
+//            $.tmpl("listAttendees", data.result).appendTo("ul#image_preview_list");
         });
     });
 EOD;

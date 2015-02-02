@@ -33,8 +33,8 @@
                                         <td><?php echo CHtml::image($this->createUrl("/themes/site/css/frontend/img/mood_{$journal->diary_user_mood_id}.png"), $journal->diary_title); ?>
                                         </td>
                                         <td>
-                                                <?php echo CHtml::link('Edit',array('/site/journal/update','id'=>$journal->diary_id)) ?>
-                                            <?php echo $journal->diaryUserMood->mood_type; ?></td>
+                                            <?php echo CHtml::link('Edit', array('/site/journal/update', 'id' => $journal->diary_id)) ?>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

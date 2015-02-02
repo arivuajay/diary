@@ -194,7 +194,7 @@ class Myclass extends CController {
         if ($model->save()) {
             $response['success'] = 1;
             $response['pref_date'] = date('Y-m-d', strtotime($model->diary_current_date));
-            $response['message'] = "Your Password Reset Link sent to your email address.";
+            $response['message'] = 'Successfully added.';
         } else {
             $response['success'] = 0;
             $response['pref_date'] = date('Y-m-d', strtotime($model->diary_current_date));

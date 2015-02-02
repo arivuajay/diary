@@ -23,41 +23,10 @@
                 </a>
                 <span id="logo_below_text">Your Own Personal Diary / Journal</span>
             </div>
-            <!--  advertisement-->
-<!--              <div class="navbar-left">
-                <div class="navbar-divider"></div>
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-             e2h
-            <ins class="adsbygoogle"
-                 style="display:inline-block;width:468px;height:60px"
-                 data-ad-client="ca-pub-8758067131866544"
-                 data-ad-slot="6920464373"></ins>
-            <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-              </div>-->
-
             <div class="navbar-right">
                 <div class="navbar-search" style="border: none;">
                     <input type="text" id="HeaderSearch" placeholder="Search..." value="Search...">
                 </div>
-<!--                <div class="navbar-menus">
-                    <div class="btn-group" id="alert_menu">
-                        <button type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicons glyphicons-bell"></span> <b>3</b> </button>
-                        <ul class="dropdown-menu media-list" role="menu">
-                            <li class="dropdown-header">Recent Messages<span class="pull-right glyphicons glyphicons-bell"></span></li>
-                            <li class="p15 pb10">
-                                <ul class="list-unstyled">
-                                    <li><span class="glyphicons glyphicons-bell text-orange2 fs16 mr15"></span><b>CEO</b> lunch meeting Tuesday</li>
-                                    <li class="pt10"><span class="glyphicons glyphicons-facebook text-blue2 fs16 mr15"></span>Facebook likes are at <b>4,100</b></li>
-                                    <li class="pt10"><span class="glyphicons glyphicons-paperclip text-teal2 fs16 mr15"></span>Mark <b>uploaded</b> 3 new Docs</li>
-                                    <li class="pt10"><span class="glyphicons glyphicons-gift text-purple2 fs16 mr15"></span>It's <b>Marks</b> 34th Birthday</li>
-                                    <li class="pt10"><span class="glyphicons glyphicons-cup text-red2 fs16 mr15"></span>Best new employee awarded to <b>Jessica</b></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>-->
             </div>
         </header>
         <!-- End: Header -->
@@ -79,13 +48,13 @@
                                 }
                                 ?></h5>
                             <div class="media-links fs11">
-                                <?php echo CHtml::link('Profile',array('/site/users/myprofile'));  ?>
+                                <?php echo CHtml::link('Profile', array('/site/users/myprofile')); ?>
                                 <i class="fa fa-circle text-muted fs3 p8 va-m"></i>
                                 <?php if (Yii::app()->user->isGuest): ?>
                                     <a href="<?php echo $baseUrl; ?>/site/users/login">Sign In</a>
                                 <?php else: ?>
                                     <a href="<?php echo $baseUrl; ?>/site/users/logout">Sign Out</a>
-<?php endif; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -93,22 +62,24 @@
                 <div class="user-divider"></div>
                 <div class="user-menu  usermenu-open" style="display: block;">
                     <div class="row text-center mb15">
-                        <div class="col-xs-4"> <a href="#"> <span class="glyphicons glyphicons-home fs22 text-blue2"></span>
-                                <h5 class="fs11">Manage Journal</h5>
-                            </a> </div>
                         <div class="col-xs-4">
-<?php echo CHtml::link('<span class="glyphicons glyphicons-inbox fs22 text-orange2"></span><h5 class="fs11">Write a journal</h5>', array('/site/journal/create')); ?>
+                            <?php
+                            echo CHtml::link('<span class="glyphicons glyphicons-home fs22 text-blue2"></span><h5 class="fs11">Manage Journal</h5>', array('/site/journal/dashboard'));
+                            ?>
+                        </div>
+                        <div class="col-xs-4">
+                            <?php echo CHtml::link('<span class="glyphicons glyphicons-inbox fs22 text-orange2"></span><h5 class="fs11">Write a journal</h5>', array('/site/journal/create')); ?>
                         </div>
                         <div class="col-xs-4"> <a href="#"> <span class="glyphicons glyphicons-bell fs22 text-purple2"></span>
                                 <h5 class="fs11">Mood report</h5>
                             </a> </div>
                     </div>
                 </div>
-<?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
+                <?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
             </aside>
             <!-- End: Sidebar -->
             <!-- Start: Content -->
-<?php echo $content; ?>
+            <?php echo $content; ?>
             <!-- End: Content -->
 
             <!-- Start: Right Sidebar -->

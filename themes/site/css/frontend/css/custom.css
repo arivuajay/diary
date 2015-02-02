@@ -126,10 +126,15 @@
   padding: 0;
   width: 100%;
 }
+
+#image_preview_list li{
+    margin-bottom: 20px;
+}
 .overlay-icon {
   position: absolute;
 }
 
 .top-right {
-  right: 16px;
+  right: 4px;
+  top: -4px;
 }
