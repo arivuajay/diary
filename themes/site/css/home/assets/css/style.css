@@ -1551,7 +1551,7 @@ a.mail-text:hover{  text-decoration:none; color: #f32a2a;}
 #hcontact_form .hmoodlist .mood_label{
     font-family: oswald;
     font-size: 14px;
-    margin: 0;
+    margin: 10px 0;
     color: #000000;
 }
 
@@ -1605,6 +1605,7 @@ a.mail-text:hover{  text-decoration:none; color: #f32a2a;}
     clear:both;
     color:#FFFFFF;
     background-color:#f32a2a;
+    margin: 10px 0;
 }
 #hcontact_form .submitBtn:hover { color:#ffffff; background-color: #727272; }
 #hcontact_form .submitBtn:focus{ box-shadow:none; }
@@ -2041,7 +2042,7 @@ mobile
     .empty{ display:none;}
     .yt-controls{ position:absolute; margin-top:180px;}
     #home_videos .header_details {position: absolute; top: 80px;}
-    
+
     /* New styles */
     #hcontact_form { width: 100% !important;}
     .container .hmerow{
@@ -2110,8 +2111,17 @@ mobile
 }
 
 .your-own{
-      font-size: 15px;
-      color: #F52A2A;
-      margin: 0px;
+    font-size: 13px;
+    color: #F52A2A;
+    margin: 0px;
+}
+
+.header_icons.accura-header-block.accura-hidden-2xs img {
+  width: 200px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1111px !important;
   }
-  
+}

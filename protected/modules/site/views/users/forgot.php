@@ -70,7 +70,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
             "use strict";
 
             // Init Theme Core
-            Core.init();
+//            Core.init();
 
             // Enable Ajax Loading
             Ajax.init();

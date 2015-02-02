@@ -223,13 +223,26 @@ class JournalController extends Controller {
     }
 
     public function actionCalendarevents() {
+        $myDiary = Diary::model()->mine()->findAll(array('order'=>'created DESC'));
+        $limit = 2;
+        $date = array();
         foreach ($myDiary as $diary) {
-            $items[] = array(
-                'state' => 'TRUE',
-                'title' => "See date journal",
-                'start' => $diary->diary_current_date,
-//                'url' => $this->createUrl('/site/journal/listjournal', array('date' => date('Y-m-d',  strtotime($diary->diary_current_date))))
-            );
+            if(isset($date[strtotime($diary->diary_current_date)])){
+                $date[strtotime($diary->diary_current_date)] = $date[strtotime($diary->diary_current_date)] + 1;
+            }else{
+                $date[strtotime($diary->diary_current_date)] = 1;
+            }
+            
+            if($date[strtotime($diary->diary_current_date)] <= 2){
+                $items[] = array(
+                    'state' => 'TRUE',
+                    'title' => $diary->diary_title,
+                    'start' => date('Y-m-d', strtotime($diary->diary_current_date)),
+                    'color' => '#A0D65A',
+    //                'start' => $diary->diary_current_date,
+                    'url' => $this->createUrl('/site/journal/listjournal', array('date' => date('Y-m-d',  strtotime($diary->diary_current_date))))
+                );
+            }
         }
 
         echo CJSON::encode($items);

@@ -1,8 +1,8 @@
 <?php
-$myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->findAll(), 'dist_date', 'dist_date'));
+//$myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->findAll(), 'dist_date', 'dist_date'));
 ?>
 <script type="text/javascript">
-    var avail_dates = <?php echo CJSON::encode($myDiary); ?>;
+//    var avail_dates = <?php echo CJSON::encode($myDiary); ?>;
 </script>
 
 <section id="content_wrapper">
@@ -30,6 +30,7 @@ $myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->fi
                             'center' => 'title',
                             'right' => 'month,agendaWeek,agendaDay'
                         ),
+                        'events'=>$this->createUrl('journal/calendarevents'),
                         'lazyFetching' => false,
                         'dayClick' => new CJavaScriptExpression("js:function(date, allDay, jsEvent, view) {
                             newdate = $.format.date(date, 'yyyy-MM-dd');
@@ -41,15 +42,16 @@ $myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->fi
                                 }
                             }
                         }"),
-                        'dayRender' => new CJavaScriptExpression('js:function (date, cell) {
-                            newdate = $.format.date(date, ""+"yyyy-MM-dd");
-//                            console.log(avail_dates);
-//                            console.log(newdate);
-                            html_cont = cell.html();
-                            if(jQuery.inArray( newdate, avail_dates ) > -1){
-                                cell.addClass("events_highlight");
-                            }
-                        }'),
+//                        'dayRender' => new CJavaScriptExpression('js:function (date, cell) {
+//                            newdate = $.format.date(date, ""+"yyyy-MM-dd");
+////                            console.log(avail_dates);
+////                            console.log(newdate);
+//                            console.log(cell);
+//                            html_cont = cell.html();
+//                            if(jQuery.inArray( newdate, avail_dates ) > -1){
+//                                cell.addClass("events_highlight");
+//                            }
+//                        }'),
                     )
                 ));
                 ?>
