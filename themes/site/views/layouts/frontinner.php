@@ -9,10 +9,33 @@
 
 
     <body class="forms-page">
-        <script> var boxtest = localStorage.getItem('boxed');
+        <script>
+        tinymce.init({
+                selector:'textarea',
+                external_plugins: {"nanospell": "<?php echo $baseUrl ?>/themes/admin/js/nanospell/plugin.js"},
+                nanospell_server: "php" // choose "php" "asp" "asp.net" or "java"
+                }); 
+        </script>
+        <script> 
+            var boxtest = localStorage.getItem('boxed');
             if (boxtest === 'true') {
                 document.body.className += ' boxed-layout';
-            }</script>
+            }
+
+            $(document).ready(function(){
+//               tinymce.init({
+//            		selector: 'textarea',
+//            		external_plugins: {"nanospell": "<?php echo $baseUrl ?>/extensions/tinymce/vendors/nanospell/plugin.js"},
+//            		nanospell_server: 'php', // choose "php" "asp" "asp.net"
+//            		nanospell_dictionary: 'en', // download 23 more at http://tinymcespellcheck.com/dictionaries
+//            		nanospell_ignore_words_with_numerals: true,
+//            		nanospell_autostart: true,
+//            		nanospell_ignore_block_caps: false,
+//            		nanospell_compact_menu: false,
+//            		toolbar: 'nanospell'
+//            	});
+            });
+        </script>
 
         <!-- Start: Header -->
         <header class="navbar navbar-fixed-top">

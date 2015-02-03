@@ -128,6 +128,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
                             $this->widget('ext.tinymce.TinyMce', array(
                                 'model' => $model,
                                 'attribute' => 'diary_description',
+//                                'compressorRoute' => 'tinyMce/compressor',
+                                'spellcheckerRoute' => 'http://speller.yandex.net/services/tinyspell',
+//                                'spellcheckerUrl' => 'http://api.yandex.ru/speller/doc/dg/tasks/how-to-spellcheck-tinymce.xml',
+//                                'spellcheckerUrl' => array('tinyMce/spellchecker'),
+//                                'fileManager' => array(
+//                                    'class' => 'ext.elFinder.TinyMceElFinder',
+//                                    'connectorRoute' => 'admin/elfinder/connector',
+//                                ),
                                 'settings' => array('menubar' => false),
                                 'htmlOptions' => array(
                                     'rows' => 14,

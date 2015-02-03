@@ -82,12 +82,16 @@ return array(
         'Smtpmail' => array(
             'class' => 'application.extensions.smtpmail.PHPMailer',
             'Host' => "smtp.gmail.com",
-            'Username' => 'prakash.paramanandam@arkinfotec.com',
-            'Password' => 'prakashpp123',
+            'Username' => '',
+            'Password' => '',
             'Mailer' => 'smtp',
             'Port' => 587,
             'SMTPAuth' => true,
             'SMTPSecure' => 'tls',
+        ),
+        'request' => array(
+            'class' => 'HttpRequest',
+            'enableCsrfValidation' => true,
         ),
     ),
     // application-level parameters that can be accessed

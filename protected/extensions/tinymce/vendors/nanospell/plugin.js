@@ -35,6 +35,7 @@
  * A huge thanks To Moxiecode Systems AB For releasing and maintaining a world class javascript HTML Editor.
  * Without TinyMCE this project would be pointless.
  */
+
 (function(exports, undefined) {
 	"use strict";
 	//#  SECTION TINYMCE INTEGRATION  #//
