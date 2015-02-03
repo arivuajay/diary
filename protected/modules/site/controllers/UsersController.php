@@ -390,12 +390,24 @@ class UsersController extends Controller {
 
     public function actionMyprofile() {
         $this->layout = '//layouts/frontinner';
+        $path = realpath(Yii::app()->getBasePath() . "/../") . "/themes/site/image/prof_img/";
         $model = Users::model()->findByPk(Yii::app()->user->id);
         if (isset($_POST['update'])) {
             $model->setScenario('update');
+            $old_name = $model->user_prof_image;
             $model->attributes = $_POST['Users'];
+            $model->user_prof_image = CUploadedFile::getInstance($model, 'user_prof_image');
             $valid = $model->validate();
             if ($valid) {
+                if(!empty($model->user_prof_image)){
+                $name = $model->user_prof_image->getName();
+                    $filename = time() .'_'. Yii::app()->user->id.'_' . $name;
+                    $model->user_prof_image->saveAs($path . $filename);
+                     unlink($path.$old_name);
+                    $model->user_prof_image = $filename;
+                } else {
+                    $model->user_prof_image = $old_name;
+                }
                 Myclass::updateUser($model);
 
                 Yii::app()->user->setFlash('success', "Your profile successfully updated.");

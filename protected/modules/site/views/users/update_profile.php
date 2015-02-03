@@ -19,7 +19,8 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     <?php
                     $form = $this->beginWidget('CActiveForm', array(
                         'id' => 'users-form',
-                        'htmlOptions' => array('class' => 'form-signin cmxform', 'role' => 'form')
+                        'htmlOptions' => array('class' => 'form-signin cmxform', 'role' => 'form'),
+                         'htmlOptions' => array('enctype' => 'multipart/form-data','role' => 'form'),
                     ));
                     ?>
 
@@ -40,6 +41,16 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 <?php echo $form->textField($model, 'user_email', array('placeholder' => Users::model()->getAttributeLabel('user_email'), 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
                             </div>
                             <?php echo $form->error($model, 'user_email'); ?>
+                        </div>
+                           <div class="form-group">
+                            <div class="input-group"> 
+                                <?php echo $form->labelEx($model, 'user_prof_image', array('class' => 'col-lg-7 col-sm-2 control-label')); ?>
+                                <?php //echo $form->textField($model, 'user_email', array('placeholder' => Users::model()->getAttributeLabel('user_email'), 'class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
+                                <?php echo $form->fileField($model, 'user_prof_image'); ?>
+                                <?php if(!empty($model->user_prof_image)) {echo CHtml::image($this->createUrl("/themes/site/image/prof_img/".$model->user_prof_image),'alt',array('width'=>100,'height'=>100));}?>
+
+                            </div>
+                            <?php echo $form->error($model, 'user_image'); ?>
                         </div>
                     </div>
                     <div class="panel-footer">
