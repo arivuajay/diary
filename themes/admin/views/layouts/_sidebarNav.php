@@ -17,7 +17,7 @@
                     'submenuOptions' => array('class' => 'sub'),
                     'items' => array(
                         array('label' => 'Pages', 'url' => array('/admin/cms/index')),
-                        array('label' => 'Add Page', 'url' => array('/admin/cms/createpage')),
+//                        array('label' => 'Add Page', 'url' => array('/admin/cms/createpage')),
                     ),
                 ),
                 array('label' => '<i class="fa fa-book"></i><span>Faqs</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
@@ -38,7 +38,21 @@
                     'submenuOptions' => array('class' => 'sub'),
                     'items' => array(
                         array('label' => 'Manage Mood type', 'url' => array('/admin/moodtype/index')),
-                        array('label' => 'Add Mood type', 'url' => array('/admin/moodtype/create')),
+//                        array('label' => 'Add Mood type', 'url' => array('/admin/moodtype/create')),
+                    ),
+                ),
+                array('label' => '<i class="fa fa-th"></i><span>Banner Layouts</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
+                    'submenuOptions' => array('class' => 'sub'),
+                    'items' => array(
+                        array('label' => 'Manage Banner Layout', 'url' => array('/admin/bannerlayout/index')),
+//                        array('label' => 'Add Banner Layout', 'url' => array('/admin/bannerlayout/create')),
+                    ),
+                ),
+                array('label' => '<i class="fa fa-picture-o"></i><span>Banner Management</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
+                    'submenuOptions' => array('class' => 'sub'),
+                    'items' => array(
+                        array('label' => 'Manage Banner', 'url' => array('/admin/banner/index')),
+                        array('label' => 'Add Banner', 'url' => array('/admin/banner/create')),
                     ),
                 ),
             ),

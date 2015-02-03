@@ -28,15 +28,15 @@ class Myclass extends CController {
     }
 
     public static function slugify($text) {
-// replace non letter or digits by -
+        // replace non letter or digits by -
         $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
-// trim
+        // trim
         $text = trim($text, '-');
-// transliterate
+        // transliterate
         $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-// lowercase
+        // lowercase
         $text = strtolower($text);
-// remove unwanted characters
+        // remove unwanted characters
         $text = preg_replace('~[^-\w]+~', '', $text);
 
         if (empty($text)) {
@@ -93,7 +93,7 @@ class Myclass extends CController {
             $model = new Users('webservice');
             $model->user_name = $param['user_name'];
             $model->user_email = $param['user_email'];
-            if($param['user_password'] == 'FB'):
+            if ($param['user_password'] == 'FB'):
                 $param['user_password'] = Myclass::getRandomString(6);
             endif;
             $model->user_password = $param['user_password'];
@@ -282,6 +282,34 @@ class Myclass extends CController {
         $response['message'] = "Successfully updated.";
 
         return $response;
+    }
+    
+    public static function getPageLayouts($key = NULL) {
+        /* if you add any value, add in column also (banner_layout_page) ***/
+        $layouts = array(
+            'home' => 'Home',
+            'user_inner' => 'User Inner Page'
+        );
+        
+        if(isset($key))
+            echo $layouts[$key];
+        
+        return $layouts;
+    }
+    
+    public static function getPageLayoutPositions($key = NULL) {
+        /* if you add any value, add in column also (banner_layout_page) ***/
+        $layout_positions = array(
+            'top' => 'Top',
+            'right' => 'Right',
+            'bottom' => 'Bottom',
+            'left' => 'Left'
+        );
+        
+        if(isset($key))
+            echo $layout_positions[$key];
+        
+        return $layout_positions;
     }
 
 }

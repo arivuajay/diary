@@ -184,13 +184,13 @@
     
     <div class="top-nav clearfix">
         <ul class="nav pull-right top-menu">
-            <li>
+<!--            <li>
                 <input type="text" class="form-control search" placeholder=" Search">
-            </li>
+            </li>-->
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <img alt="" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/avatar1_small.jpg">
-                    <span class="username">Admin</span>
+                    <!--<img alt="" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/avatar1_small.jpg">-->
+                    <span class="username">Administrator</span>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu extended logout">

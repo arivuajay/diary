@@ -18,7 +18,7 @@ $this->menu=array(
         <section class="panel">
             <header class="panel-heading">Mood Types
 <!--            <span class="pull-right">
-                    <?php echo CHtml::link('+ Add Category', array('/admin/category/create'), array('class' => 'label label-success')); ?>
+                    <?php echo CHtml::link('+ Add Mood', array('/admin/moodtype/create'), array('class' => 'label label-success')); ?>
                 </span>-->
             </header>
             <div class="panel-body">
