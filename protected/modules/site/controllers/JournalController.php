@@ -233,7 +233,7 @@ class JournalController extends Controller {
                 $date[strtotime($diary->diary_current_date)] = 1;
             }
             
-            if($date[strtotime($diary->diary_current_date)] <= 2){
+            if($date[strtotime($diary->diary_current_date)] <= $limit){
                 $items[] = array(
                     'state' => 'TRUE',
                     'title' => $diary->diary_title,
