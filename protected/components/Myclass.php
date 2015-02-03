@@ -192,6 +192,15 @@ class Myclass extends CController {
         $model->diary_user_id = $user->user_id;
 
         if ($model->save()) {
+            $diary_images = $params['journal_images'];
+            if (!empty($diary_images)):
+                foreach ($diary_images as $image):
+                    $imgModel = new DiaryImage();
+                    $imgModel->diary_id = $model->diary_id;
+                    $imgModel->diary_image = $image;
+                    $imgModel->save(false);
+                endforeach;
+            endif;
             $response['success'] = 1;
             $response['pref_date'] = date('Y-m-d', strtotime($model->diary_current_date));
             $response['message'] = 'Successfully added.';
@@ -283,32 +292,32 @@ class Myclass extends CController {
 
         return $response;
     }
-    
+
     public static function getPageLayouts($key = NULL) {
-        /* if you add any value, add in column also (banner_layout_page) ***/
+        /* if you add any value, add in column also (banner_layout_page) ** */
         $layouts = array(
             'home' => 'Home',
             'user_inner' => 'User Inner Page'
         );
-        
-        if(isset($key))
+
+        if (isset($key))
             echo $layouts[$key];
-        
+
         return $layouts;
     }
-    
+
     public static function getPageLayoutPositions($key = NULL) {
-        /* if you add any value, add in column also (banner_layout_page) ***/
+        /* if you add any value, add in column also (banner_layout_page) ** */
         $layout_positions = array(
             'top' => 'Top',
             'right' => 'Right',
             'bottom' => 'Bottom',
             'left' => 'Left'
         );
-        
-        if(isset($key))
+
+        if (isset($key))
             echo $layout_positions[$key];
-        
+
         return $layout_positions;
     }
 

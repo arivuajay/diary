@@ -403,7 +403,8 @@ class UsersController extends Controller {
                 $name = $model->user_prof_image->getName();
                     $filename = time() .'_'. Yii::app()->user->id.'_' . $name;
                     $model->user_prof_image->saveAs($path . $filename);
-                     unlink($path.$old_name);
+                    if(!empty($old_name)) {
+                    unlink($path.$old_name);}
                     $model->user_prof_image = $filename;
                 } else {
                     $model->user_prof_image = $old_name;
