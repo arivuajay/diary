@@ -23,6 +23,17 @@
                 </a>
                 <span id="logo_below_text">Your Own Personal Diary / Journal</span>
             </div>
+            <div class="navbar-left frontinner-left">
+                <div class="navbar-divider"></div>
+                <?php echo $this->renderPartial(
+                        '//layouts/_bannerblock', 
+                        array(
+                            'layout' => 'user_inner',
+                            'position' => 'top',
+                            'dimension' => '468*60'
+                            )
+                        ); ?>
+            </div>
             <div class="navbar-right">
                 <div class="navbar-search" style="border: none;">
                     <input type="text" id="HeaderSearch" placeholder="Search..." value="Search...">

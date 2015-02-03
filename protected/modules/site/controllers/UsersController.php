@@ -28,7 +28,7 @@ class UsersController extends Controller {
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array(
                     'index', 'view', 'register', 'signupsocial', 'sociallogin',
-                    'login', 'activation', 'test', 'forgot', 'reset', 'temporary'),
+                    'login', 'activation', 'test', 'forgot', 'reset', 'temporary', 'reminder'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -428,6 +428,21 @@ class UsersController extends Controller {
         $this->render('update_profile', array(
             'model' => $model,
         ));
+    }
+
+    public function actionReminder($key) {
+        if ($key == 'vZu3G6Ewy') {
+            $users = Users::model()->isActive()->findAll();
+            
+            foreach ($users as $user){
+                $mail = new Sendmail;
+                $message = '<p>Dear ' . $user->user_name . ',</p>';
+                $message .= '<p>Its time to write your journal</p>';
+                $Subject = CHtml::encode(Yii::app()->name) . ': Reminder';
+                $mail->send($user->user_email, $Subject, $message);
+            }
+        }
+        Yii::app()->end();
     }
 
 }

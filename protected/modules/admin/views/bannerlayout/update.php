@@ -3,8 +3,8 @@
 /* @var $model Banner */
 
 $this->breadcrumbs=array(
-	'Banners'=>array('index'),
-	$model->banner_id=>array('view','id'=>$model->banner_id),
+	'Banner Layouts'=>array('index'),
+	$model->banner_layout_id=>array('view','id'=>$model->banner_layout_id),
 	'Update',
 );
 

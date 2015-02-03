@@ -13,10 +13,10 @@ class BannerController extends Controller {
     public function filters() {
         return array(
             'accessControl', // perform access control for CRUD operations
-            'postOnly + delete', // we only allow deletion via POST request
+//            'postOnly + delete', // we only allow deletion via POST request
         );
     }
-
+    
     /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
@@ -25,7 +25,7 @@ class BannerController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
+                'actions' => array('index', 'view', 'changestatus', 'filepathcreate'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -58,21 +58,73 @@ class BannerController extends Controller {
      */
     public function actionCreate() {
         $model = new Banner;
-        $path = realpath(Yii::app()->getBasePath() . "/../") . "/themes/site/image/banners/";
+        $model->setScenario('create');
         // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+        $path = realpath(Yii::app()->getBasePath() . "/../") . "/themes/site/image/banners/";
+        $this->performAjaxValidation($model);
 
         if (isset($_POST['Banner'])) {
+            isset($_POST['Banner']['banner_status']) ? $_POST['Banner']['banner_status'] = 1 : $_POST['Banner']['banner_status'] = 0; 
             $model->attributes = $_POST['Banner'];
             $model->banner_image = CUploadedFile::getInstance($model, 'banner_image');
 
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->banner_id));
+            $layout = BannerLayout::model()->findByPk($model->banner_layout_id);
+            $dimensions = explode('*', $layout->banner_layout_dimensions);
+            $model->setAttribute('banner_width', $dimensions[0]);
+            $model->setAttribute('banner_height', $dimensions[1]);
+            $banner_path = $this->actionFilepathcreate($layout, $dimensions);
+            $model->setAttribute('banner_path', $banner_path);
+
+            if ($model->validate()) {
+                if ($model->banner_image !== null) {
+                    $name = $model->banner_image->getName();
+                    $filename = time() . '_' . $name;
+                    $model->banner_image->saveAs($path . $banner_path . $filename);
+                }
+                $model->banner_image = $filename;
+                $model->save(false);
+                Yii::app()->user->setFlash('success', 'Banner Added successfully.');
+//                $this->redirect(array('view', 'id' => $model->banner_id));
+                $this->redirect(array('create'));
+            }
         }
 
         $this->render('create', array(
             'model' => $model,
         ));
+    }
+
+    public function actionFilepathcreate($layout, $dimensions) {
+        $path = realpath(Yii::app()->getBasePath() . "/../") . "/themes/site/image/banners/";
+        $banner_path = $path . $layout->banner_layout_page;
+        $banner_layout_dimensions = $dimensions[0] . 'x' . $dimensions[1];
+
+        if (!file_exists($banner_path)) {
+            mkdir($banner_path, 0777, true);
+            $banner_path = $path . $layout->banner_layout_page . '/' . $layout->banner_layout_position;
+            if (!file_exists($banner_path)) {
+                mkdir($banner_path, 0777, true);
+                $banner_path = $path . $layout->banner_layout_page . '/' . $layout->banner_layout_position . '/' . $banner_layout_dimensions;
+                if (!file_exists($banner_path)) {
+                    mkdir($banner_path, 0777, true);
+                }
+            }
+        } else {
+            $banner_path = $path . $layout->banner_layout_page . '/' . $layout->banner_layout_position;
+            if (!file_exists($banner_path)) {
+                mkdir($banner_path, 0777, true);
+                $banner_path = $path . $layout->banner_layout_page . '/' . $layout->banner_layout_position . '/' . $banner_layout_dimensions;
+                if (!file_exists($banner_path)) {
+                    mkdir($banner_path, 0777, true);
+                }
+            } else {
+                $banner_path = $path . $layout->banner_layout_page . '/' . $layout->banner_layout_position . '/' . $banner_layout_dimensions;
+                if (!file_exists($banner_path)) {
+                    mkdir($banner_path, 0777, true);
+                }
+            }
+        }
+        return $layout->banner_layout_page . '/' . $layout->banner_layout_position . '/' . $banner_layout_dimensions . '/';
     }
 
     /**
@@ -87,9 +139,41 @@ class BannerController extends Controller {
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Banner'])) {
+            isset($_POST['Banner']['banner_status']) ? $_POST['Banner']['banner_status'] = 1 : $_POST['Banner']['banner_status'] = 0; 
+            $path = realpath(Yii::app()->getBasePath() . "/../") . "/themes/site/image/banners/";
+            $old_image = $model->banner_image;
+            $old_path = $model->banner_path;
+            
             $model->attributes = $_POST['Banner'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->banner_id));
+            $model->banner_image = CUploadedFile::getInstance($model, 'banner_image');
+
+            $layout = BannerLayout::model()->findByPk($model->banner_layout_id);
+            $dimensions = explode('*', $layout->banner_layout_dimensions);
+            $model->setAttribute('banner_width', $dimensions[0]);
+            $model->setAttribute('banner_height', $dimensions[1]);
+            $banner_path = $this->actionFilepathcreate($layout, $dimensions);
+            $model->setAttribute('banner_path', $banner_path);
+
+            if ($model->validate()) {
+                if ($model->banner_image !== null) {
+                    $name = $model->banner_image->getName();
+                    $filename = time() . '_' . $name;
+                    $model->banner_image->saveAs($path . $banner_path . $filename);
+                    
+                    if(file_exists($path.$old_path.$old_image)){
+                        unlink($path.$old_path.$old_image);
+                    }
+                    $model->banner_image = $filename;
+                    $model->banner_path = $banner_path;
+                }else{
+                    $model->banner_image = $old_image;
+                    $model->banner_path = $old_path;
+                }
+                if ($model->save(false))
+                    Yii::app()->user->setFlash('success', 'Banner Updated successfully.');
+                    $this->redirect(array('index'));
+    //                $this->redirect(array('view', 'id' => $model->banner_id));
+            }
         }
 
         $this->render('update', array(
@@ -103,20 +187,29 @@ class BannerController extends Controller {
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id) {
+        $model = $this->loadModel($id);
         $this->loadModel($id)->delete();
+        
+        $path = realpath(Yii::app()->getBasePath() . "/../") . "/themes/site/image/banners/";
+        if(file_exists($path.$model->banner_path.$model->banner_image)){
+            unlink($path.$model->banner_path.$model->banner_image);
+        }
+
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+//            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
     }
 
     /**
      * Lists all models.
      */
     public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('Banner');
+//        $dataProvider = new CActiveDataProvider('Banner');
+        $banners = Banner::model()->findAll();
         $this->render('index', array(
-            'dataProvider' => $dataProvider,
+            'banners' => $banners
         ));
     }
 
@@ -156,6 +249,17 @@ class BannerController extends Controller {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'banner-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+
+    public function actionChangestatus($id) {
+        $banner = $this->loadModel($id);
+        $banner->banner_status = ($banner->banner_status == 0) ? 1 : 0;
+        if ($banner->save(false)) {
+            $banner->banner_status == 0 ? $status = 'In-Active' : $status = 'Active';
+            echo '"' . $banner->banner_title . '" status: ' . $status;
+        } else {
+            echo 'Error while changing status !!!';
         }
     }
 

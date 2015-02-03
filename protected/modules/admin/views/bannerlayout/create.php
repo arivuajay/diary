@@ -4,14 +4,11 @@
 
 $this->breadcrumbs=array(
 	'Banners'=>array('index'),
-	$model->banner_id=>array('view','id'=>$model->banner_id),
-	'Update',
+	'Create',
 );
 
 //$this->menu=array(
 //	array('label'=>'List Banner', 'url'=>array('index')),
-//	array('label'=>'Create Banner', 'url'=>array('create')),
-//	array('label'=>'View Banner', 'url'=>array('view', 'id'=>$model->banner_id)),
 //	array('label'=>'Manage Banner', 'url'=>array('admin')),
 //);
 ?>

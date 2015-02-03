@@ -32,6 +32,12 @@ class Users extends CActiveRecord {
         return '{{users}}';
     }
 
+    public function scopes() {
+        $alias = $this->getTableAlias(false, false);
+        return array(
+            'isActive' => array('condition' => "$alias.user_status = '1'"),
+        );
+    }
     /**
      * @return array validation rules for model attributes.
      */
