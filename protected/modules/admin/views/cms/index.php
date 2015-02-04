@@ -12,9 +12,9 @@ $this->breadcrumbs = array(
         <section class="panel">
             <header class="panel-heading">
                 Pages
-                <span class="pull-right">
+<!--                <span class="pull-right">
                     <?php echo CHtml::link('+ Add Page', array('/admin/cms/createpage'), array('class' => 'label label-success')); ?>
-                </span>
+                </span>-->
             </header>
             <div class="panel-body">
                 <table class="table table-hover general-table datatable">

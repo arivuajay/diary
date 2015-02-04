@@ -52,7 +52,7 @@ class XUpload extends CJuiInputWidget {
      * set to true to auto Uploading Files
      * @var boolean
      */
-    public $autoUpload = false;
+    public $autoUpload = true;
 
     /**
      * @var string name of the form view to be rendered

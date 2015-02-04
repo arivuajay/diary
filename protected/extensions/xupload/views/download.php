@@ -6,6 +6,7 @@
             <td></td>
             <td class="name"><span>{%=file.name%}</span></td>
             <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td>Completed</td>            
             <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
         {% } else { %}
             <td class="preview">{% if (file.thumbnail_url) { %}
