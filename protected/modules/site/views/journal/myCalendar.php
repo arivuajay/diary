@@ -5,35 +5,35 @@ $myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->fi
     var avail_dates = <?php echo CJSON::encode($myDiary); ?>;
 </script>
 
-<section id="content_wrapper">
-    <div id="topbar">
-        <div class="topbar-left">
-            <ol class="breadcrumb">
-                <li class="crumb-active"><a href="#">Dashboard</a></li>
-            </ol>
-        </div>
-        <div class="topbar-right pt30">
-            <?php echo CHtml::link('<button class="btn btn-default btn-sm" type="button">Write An Entry</button>', array('/site/journal/create')); ?>
-        </div>
+
+<div id="topbar">
+    <div class="topbar-left">
+        <ol class="breadcrumb">
+            <li class="crumb-active"><a href="#">Dashboard</a></li>
+        </ol>
     </div>
-    <div id="content">
-        <div class="row">
-            <div class="col-md-12">
-                <?php
-                $this->widget('ext.EFullCalendar.EFullCalendar', array(
-                    'htmlOptions' => array(
-                        'style' => 'width:100%'
+    <div class="topbar-right pt30">
+        <?php echo CHtml::link('<button class="btn btn-default btn-sm" type="button">Write An Entry</button>', array('/site/journal/create')); ?>
+    </div>
+</div>
+<div id="content">
+    <div class="row">
+        <div class="col-md-12">
+            <?php
+            $this->widget('ext.EFullCalendar.EFullCalendar', array(
+                'htmlOptions' => array(
+                    'style' => 'width:100%'
+                ),
+                'options' => array(
+                    'header' => array(
+                        'left' => 'prev,next today',
+                        'center' => 'title',
+                        'right' => 'month,agendaWeek,agendaDay'
                     ),
-                    'options' => array(
-                        'header' => array(
-                            'left' => 'prev,next today',
-                            'center' => 'title',
-                            'right' => 'month,agendaWeek,agendaDay'
-                        ),
-                        //uncomment if you want to show events
+                    //uncomment if you want to show events
 //                        'events'=>$this->createUrl('journal/calendarevents'),
-                        'lazyFetching' => false,
-                        'dayClick' => new CJavaScriptExpression("js:function(date, allDay, jsEvent, view) {
+                    'lazyFetching' => false,
+                    'dayClick' => new CJavaScriptExpression("js:function(date, allDay, jsEvent, view) {
                             newdate = $.format.date(date, 'yyyy-MM-dd');
                             if(!$(this).hasClass('fc-other-month')){
                                 if($(this).hasClass('events_highlight_new')){
@@ -43,7 +43,7 @@ $myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->fi
                                 }
                             }
                         }"),
-                        'dayRender' => new CJavaScriptExpression('js:function (date, cell) {
+                    'dayRender' => new CJavaScriptExpression('js:function (date, cell) {
                             newdate = $.format.date(date, ""+"yyyy-MM-dd");
 //                            console.log(avail_dates);
 //                            console.log(newdate);
@@ -53,10 +53,9 @@ $myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->fi
                                 cell.addClass("events_highlight_new");
                             }
                         }'),
-                    )
-                ));
-                ?>
-            </div>
+                )
+            ));
+            ?>
         </div>
     </div>
-</section>
+</div>

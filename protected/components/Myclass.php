@@ -325,5 +325,21 @@ class Myclass extends CController {
         }
         return array();
     }
+    
+    public static function getUserDiaryImages($id) {
+        $images = DiaryImage::model()->findAllByAttributes(array('diary_id' => $id));
+        $content = '';
+        foreach ($images as $image){
+            $ext = explode('.', $image->diary_image)[1];
+            $type = in_array($ext, array('jpg','jpeg', 'gif', 'png')) ? 'picture' : 'file';
+            $content .= '<span class="glyphicon glyphicon-'.$type.'">  ';
+            $content .= CHtml::link(
+                    $image->diary_image, 
+                    Yii::app()->createUrl('uploads/journal/'.$image->diary_image),
+                    array('target' => '_blank'));
+            $content .= '<br /><br />';
+        }
+        return $content;
+    }
 
 }

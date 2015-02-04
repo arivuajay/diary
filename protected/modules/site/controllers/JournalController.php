@@ -50,6 +50,13 @@ class JournalController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $model = $this->loadModel($id);
+        
+        if($model->diary_user_id != Yii::app()->user->id){
+            Yii::app()->user->setFlash('danger', "Wrong url");
+            $this->redirect(array('dashboard'));
+        }
+            
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -81,6 +88,7 @@ class JournalController extends Controller {
                 }
                 $model->save(false);
                 $diary_images = $_SESSION['diary_images'];
+
                 if (!empty($diary_images)):
                     foreach ($diary_images as $image):
                         $imgModel = new DiaryImage();
@@ -90,6 +98,7 @@ class JournalController extends Controller {
                     endforeach;
                 endif;
                 unset($_SESSION['diary_images']);
+                Yii::app()->user->setFlash('success', "Your Journal added Successfully.");
                 $this->redirect(array('view', 'id' => $model->diary_id));
             }
         } else {

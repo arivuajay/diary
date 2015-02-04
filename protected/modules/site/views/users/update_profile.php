@@ -3,8 +3,6 @@ $baseUrl = Yii::app()->baseUrl;
 $themeUrl = Yii::app()->theme->baseUrl;
 ?>
 
-<!-- Start: Content -->
-<section id="content_wrapper">
     <div id="topbar">
         <div class="topbar-left">
             <ol class="breadcrumb">
@@ -105,5 +103,3 @@ $themeUrl = Yii::app()->theme->baseUrl;
             </div>
         </div>
     </div>
-</section>
-<!-- End: Content -->

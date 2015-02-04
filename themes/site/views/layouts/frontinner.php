@@ -123,9 +123,23 @@
                 <?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
             </aside>
             <!-- End: Sidebar -->
+            <section id="content_wrapper">
+             <?php if (isset($this->flashMessages)): ?>
+                <div style="padding: 10px;">
+                    <?php foreach ($this->flashMessages as $key => $message) { ?>
+                    <div class="alert alert-<?php echo $key; ?> fade in" style="margin-bottom: 0px;">
+                            <button type="button" class="close close-sm" data-dismiss="alert">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <?php echo $message; ?>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php endif ?>
             <!-- Start: Content -->
             <?php echo $content; ?>
             <!-- End: Content -->
+            </section>
 
             <!-- Start: Right Sidebar -->
             <aside id="sidebar_right">

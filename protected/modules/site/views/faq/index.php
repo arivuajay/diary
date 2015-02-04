@@ -9,7 +9,7 @@
         ?>
 
 
-<section id="content_wrapper">
+
     <div id="topbar">
         <div class="topbar-left">
             <ol class="breadcrumb">
@@ -44,4 +44,3 @@
             </div>
         </div>
     </div>
-</section>

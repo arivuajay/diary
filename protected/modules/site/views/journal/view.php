@@ -35,44 +35,74 @@
 //		'modified',
 //	),
 //));
-
 ?>
-<section id="content_wrapper">
-    <?php echo 'Your Journal added Successfully.'; ?>
-    <?php
-    $this->widget('zii.widgets.CDetailView', array(
-        'data' => $model,
-        'attributes' => array(
-//            'diary_id',
-//            'diary_user_id',
-            'diary_title',
-            array(
-                'name' => 'diary_description',
-                'type' => 'raw',
-                'value' => $model->diary_description
-            ),
-            array(
-                'name' => 'diary_category_id',
-                'type' => 'raw',
-                'value' => $model->diaryCategory->category_name
-            ),
-            'diary_tags',
-            'diary_current_date',
-                        array(
-                'name' => 'Uploaded',
-                'type' => 'raw',
-               // 'value' => CHtml::image($this->createUrl("/".JOURNAL_IMG_PATH.$model->diary_upload))
-                'value' => CHtml::link($model->diary_upload, $this->createUrl("/".JOURNAL_IMG_PATH.$model->diary_upload), array("target"=>"_blank")),
-            ),
-            array(
-                'name' => 'Selected Mood',
-                'type' => 'raw',
-                'value' => CHtml::image($this->createUrl("/themes/site/css/frontend/img/mood_{$model->diary_user_mood_id}.png"))
-            ),
 
-        //'created',
-        //'modified',
-        ),
-    ));
-    ?>
-</section>
+<div id="topbar">
+    <div class="topbar-left">
+        <ol class="breadcrumb">
+            <li class="crumb-active"><a href="#">View Journal</a></li>
+  <!--          <li class="crumb-link"><a href="<?php // echo $baseUrl; ?>">Home</a></li>
+            <li class="crumb-trail"><?php //  echo $model->heading; ?></li>-->
+        </ol>
+    </div>
+</div>
+
+<div id="content">
+    <div class="row">
+        <div class="col-md-10 center-column">
+            <div class="panel faq-panel mt50">
+                <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock"></span> View Journal # <?php echo $model->diary_id; ?><?php //  echo $model->heading; ?> </span> </div>
+                <div class="panel-body pn">
+                    <div class="row table-layout">
+                        <div class="col-abt col-xs-12 va-m p60">
+                            <div class="panel-group accordion mta25" id="accordion1">
+                                <div class="panel">
+                                    <div id="accord1_1" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <?php
+                                            $this->widget('zii.widgets.CDetailView', array(
+                                                'data' => $model,
+                                                'attributes' => array(
+                                        //            'diary_id',
+                                        //            'diary_user_id',
+                                                    'diary_title',
+                                                    array(
+                                                        'name' => 'diary_description',
+                                                        'type' => 'raw',
+                                                        'value' => $model->diary_description
+                                                    ),
+                                                    array(
+                                                        'name' => 'diary_category_id',
+                                                        'type' => 'raw',
+                                                        'value' => $model->diaryCategory->category_name
+                                                    ),
+                                                    'diary_tags',
+                                                    'diary_current_date',
+                                                    array(
+                                                        'name' => 'Uploaded',
+                                                        'type' => 'raw',
+                                                        // 'value' => CHtml::image($this->createUrl("/".JOURNAL_IMG_PATH.$model->diary_upload))
+                                                        'value' => Myclass::getUserDiaryImages($model->diary_id)
+                                                    ),
+                                                    array(
+                                                        'name' => 'Selected Mood',
+                                                        'type' => 'raw',
+                                                        'value' => CHtml::image($this->createUrl("/themes/site/image/mood_type/{$model->diaryUserMood->mood_image}"))
+                                                    ),
+                                                //'created',
+                                                //'modified',
+                                                ),
+                                            ));
+                                            ?>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

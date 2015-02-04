@@ -104,7 +104,7 @@
 }
 
 .files .progress{
-    width: 170px !important;
+    width: 155px !important;
 }
 .template-download .preview img{
     width: 100px !important;
@@ -147,4 +147,8 @@
     color: green;
     font-size: 20px;
     font-weight: bold;
+}
+
+.table-striped .name{
+    width: 35%;
 }
