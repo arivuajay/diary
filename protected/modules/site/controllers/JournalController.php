@@ -82,7 +82,11 @@ class JournalController extends Controller {
                 //temp validation
                 $_POST['Diary']['category_id'] = 0;
             }
+            !isset($_POST['Diary']['diary_description']) ? $_POST['Diary']['diary_description'] = '' : '';
+            !isset($_POST['Diary']['diary_user_mood_id']) ? $_POST['Diary']['diary_user_mood_id'] = '' : '';
+            
             $model->attributes = $_POST['Diary'];
+
             if ($model->validate()) {
                 if ($new_category == true) {
                     $catmodel = new Category();
@@ -293,7 +297,7 @@ class JournalController extends Controller {
                 DiaryImage::model()->deleteAll("diary_image = '{$_GET["file"]}'");
                 $key = array_search(@$_GET["file"], @$_SESSION['diary_images']);
                 unset($_SESSION['diary_images'][$key]);
-                echo json_encode(true);
+                echo json_encode(array(true, 'file' => $_GET["file"], 'file2' => $file));
             }
         } else {
             $model = new XUploadForm;

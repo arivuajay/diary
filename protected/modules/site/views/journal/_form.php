@@ -17,7 +17,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
             <?php
             $form = $this->beginWidget('CActiveForm', array(
                 'id' => 'diary-form',
-                'enableAjaxValidation' => false,
+                'enableAjaxValidation' => true,
                 'htmlOptions' => array('enctype' => 'multipart/form-data'),
                 'clientOptions' => array(
                     'validateOnSubmit' => true,
@@ -88,7 +88,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 foreach ($moods as $key => $mood) {
                                     ?>
                                     <label class="radio-inline mr10">
-                                        <?php echo $form->radioButton($model, 'diary_user_mood_id', array('value' => $key, 'uncheckValue' => null)); ?>
+                                        <?php echo $form->radioButton($model, 'diary_user_mood_id', array('value' => $key, 'uncheckValue' => null, 'id' => 'diary_user_mood_id_'.$key)); ?>
                                         <img src="<?php echo $themeUrl; ?>/image/mood_type/<?php echo $mood ?>"> </label>
                                 <?php } ?>
 
@@ -214,6 +214,8 @@ $js = <<< EOD
                 type: _dataType,
                 url: _dataUrl
             }).done(function( msg ){
+                _dataUrl = _curImg.data('url');
+                $("button[data-url='"+_dataUrl+"']").closest("tr").remove()
                 _curImg.parents('li').remove();
             });
         }
@@ -231,16 +233,18 @@ $js = <<< EOD
             $.tmpl("listAttendees", data.result).appendTo("ul#image_preview_list");
         });
         $('#image-form').bind('fileuploaddestroy', function (e, data) {
-//        console.log(data.url);
-        _dataURL = data.url;
-        var pieces = _dataURL.split(/[\s/]+/);
-//        console.log(pieces);
-        _imgURL = pieces[pieces.length-1];
-//        $("ul#image_preview_list li").find("data-img='"+_imgURL+"'").remove();
-//            $.tmpl("listAttendees", data.result).appendTo("ul#image_preview_list");
+            _dataURL = data.url;
+            var pieces = _dataURL.split(/[\s/]+/);
+            _imgURL = pieces[pieces.length-1];
+            _imgURL = data.url;
+            $("ul#image_preview_list li a[data-url='"+_imgURL+"']").closest("li").remove();
         });
     });
 EOD;
 
 Yii::app()->clientScript->registerScript('_journal_form', $js);
 ?>
+
+<script>
+//$('ul#image_preview_list li a').find('data-url="'+_imgURL+'"').closet("li").remove();
+</script>
