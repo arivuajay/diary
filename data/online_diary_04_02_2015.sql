@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v8.55 
-MySQL - 5.5.36 : Database - online_diary
+MySQL - 5.6.17 : Database - online_diary
 *********************************************************************
 */
 
@@ -31,7 +31,7 @@ CREATE TABLE `journal_admin` (
 
 /*Data for the table `journal_admin` */
 
-insert  into `journal_admin`(`admin_id`,`admin_name`,`admin_username`,`admin_password`,`admin_status`,`admin_email`,`created_date`,`admin_last_login`,`admin_login_ip`) values (1,'Administrator','admin','c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec','1','arivu@creativert.com','2015-01-10 19:35:03','2015-02-04 10:54:35','127.0.0.1');
+insert  into `journal_admin`(`admin_id`,`admin_name`,`admin_username`,`admin_password`,`admin_status`,`admin_email`,`created_date`,`admin_last_login`,`admin_login_ip`) values (1,'Administrator','admin','c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec','1','arivu@creativert.com','2015-01-10 19:35:03','2015-02-03 15:16:26','::1');
 
 /*Table structure for table `journal_banner` */
 
@@ -50,11 +50,9 @@ CREATE TABLE `journal_banner` (
   PRIMARY KEY (`banner_id`),
   KEY `FK_journal_banner_layout` (`banner_layout_id`),
   CONSTRAINT `FK_journal_banner_layout` FOREIGN KEY (`banner_layout_id`) REFERENCES `journal_banner_layout` (`banner_layout_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `journal_banner` */
-
-insert  into `journal_banner`(`banner_id`,`banner_image`,`banner_title`,`banner_url`,`banner_layout_id`,`banner_path`,`banner_status`,`created`,`modified`) values (2,'1422961236_banner468.gif','New Banner 2','http://demo.arkinfotec.in/portal/dailystatus',2,'user_inner/top/468x60/','1','2015-02-03 16:30:36','2015-02-03 16:30:36'),(3,'1422962592_468x60.gif','New Banner','http://demo.arkinfotec.in/portal/dailystatus',2,'user_inner/top/468x60/','1','2015-02-03 16:53:03','2015-02-03 16:53:03');
 
 /*Table structure for table `journal_banner_layout` */
 
@@ -70,11 +68,9 @@ CREATE TABLE `journal_banner_layout` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`banner_layout_id`),
   KEY `FK_journal_banner_layout_page` (`banner_layout_page`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `journal_banner_layout` */
-
-insert  into `journal_banner_layout`(`banner_layout_id`,`banner_layout_name`,`banner_layout_page`,`banner_layout_position`,`banner_layout_dimensions`,`created`,`modified`) values (2,'User Inner Top Bar','user_inner','top','468*60',NULL,NULL);
 
 /*Table structure for table `journal_category` */
 
@@ -135,11 +131,11 @@ CREATE TABLE `journal_diary` (
   CONSTRAINT `FK_journal_diary_category` FOREIGN KEY (`diary_category_id`) REFERENCES `journal_category` (`category_id`),
   CONSTRAINT `FK_journal_diary_mood` FOREIGN KEY (`diary_user_mood_id`) REFERENCES `journal_mood_type` (`mood_id`),
   CONSTRAINT `FK_journal_diary_user` FOREIGN KEY (`diary_user_id`) REFERENCES `journal_users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 /*Data for the table `journal_diary` */
 
-insert  into `journal_diary`(`diary_id`,`diary_user_id`,`diary_title`,`diary_description`,`diary_category_id`,`diary_tags`,`diary_current_date`,`diary_user_mood_id`,`diary_upload`,`created`,`modified`) values (15,8,'test title','',1,'tesggguyyyyyy','0000-00-00 00:00:00',1,'','0000-00-00 00:00:00','0000-00-00 00:00:00'),(17,8,'test title','<p>test</p>\r\n',2,'test','0000-00-00 00:00:00',3,'1421162646_new_motox_default_wallpaper.jpg',NULL,NULL),(18,8,'test 14/1','<p>test</p>\r\n',1,'test','2015-01-14 00:00:00',3,'1421211580_1121.jpg','2015-01-14 10:29:40','2015-01-14 10:29:40'),(19,8,'test title','<p>test test</p>\r\n',1,'test','2015-01-14 00:00:00',1,'1421234882_1121.jpg','2015-01-14 16:58:02','2015-01-14 16:58:02'),(20,11,'test','<p>testuyyy</p>\r\n',1,'test','2015-01-19 00:00:00',1,'1421678868_1121.jpg','2015-01-19 20:17:48','2015-01-19 20:17:48'),(21,11,'test','<p>bjasdasdasd</p>\r\n',2,'test','2015-01-19 03:00:00',1,'1421773225_6748y_vintage-wine-barrel.jpg','2015-01-20 22:30:25','2015-01-20 22:30:25'),(22,16,'test','<p>Happy birthday&nbsp;</p>\r\n',1,'test','2015-01-21 00:00:00',1,'1421828085_img_0585.jpg','2015-01-21 13:44:45','2015-01-21 13:44:45'),(23,16,'test','<p>test</p>\r\n',1,'test','2015-01-21 00:00:00',1,'1421837173_img_0585.jpg','2015-01-21 16:16:13','2015-01-21 16:16:13'),(24,17,'siv','<p>Jaquorrrrrrrrrrr</p>\r\n',3,'sss','2015-01-21 00:00:00',1,'1421840145_1136805407994.jpg','2015-01-21 17:05:45','2015-01-21 17:05:45'),(25,11,'test','dfsfsdf',1,'test','2015-01-30 00:00:00',2,'1422076860_avatar1.jpg','2015-01-24 10:51:00','2015-01-24 10:51:00'),(28,14,'sample title','sample notes',2,'tag text','2015-01-02 03:30:00',2,NULL,NULL,NULL),(29,12,'test title','<p>test</p>',1,'test','2015-01-31 00:00:00',1,NULL,'2015-01-31 11:58:11','2015-01-31 11:58:11'),(30,45,'My day','<p>Test</p>',1,'','2015-02-01 00:00:00',2,NULL,'2015-02-02 17:01:29','2015-02-02 17:01:29');
+insert  into `journal_diary`(`diary_id`,`diary_user_id`,`diary_title`,`diary_description`,`diary_category_id`,`diary_tags`,`diary_current_date`,`diary_user_mood_id`,`diary_upload`,`created`,`modified`) values (15,8,'test title','',1,'tesggguyyyyyy','0000-00-00 00:00:00',1,'','0000-00-00 00:00:00','0000-00-00 00:00:00'),(17,8,'test title','<p>test</p>\r\n',2,'test','0000-00-00 00:00:00',3,'1421162646_new_motox_default_wallpaper.jpg',NULL,NULL),(18,8,'test 14/1','<p>test</p>\r\n',1,'test','2015-01-14 00:00:00',3,'1421211580_1121.jpg','2015-01-14 10:29:40','2015-01-14 10:29:40'),(19,8,'test title','<p>test test</p>\r\n',1,'test','2015-01-14 00:00:00',1,'1421234882_1121.jpg','2015-01-14 16:58:02','2015-01-14 16:58:02'),(20,11,'test','<p>testuyyy</p>\r\n',1,'test','2015-01-19 00:00:00',1,'1421678868_1121.jpg','2015-01-19 20:17:48','2015-01-19 20:17:48'),(21,11,'test','<p>bjasdasdasd</p>\r\n',2,'test','2015-01-19 03:00:00',1,'1421773225_6748y_vintage-wine-barrel.jpg','2015-01-20 22:30:25','2015-01-20 22:30:25'),(22,16,'test','<p>Happy birthday&nbsp;</p>\r\n',1,'test','2015-01-21 00:00:00',1,'1421828085_img_0585.jpg','2015-01-21 13:44:45','2015-01-21 13:44:45'),(23,16,'test','<p>test</p>\r\n',1,'test','2015-01-21 00:00:00',1,'1421837173_img_0585.jpg','2015-01-21 16:16:13','2015-01-21 16:16:13'),(24,17,'siv','<p>Jaquorrrrrrrrrrr</p>\r\n',3,'sss','2015-01-21 00:00:00',1,'1421840145_1136805407994.jpg','2015-01-21 17:05:45','2015-01-21 17:05:45'),(25,11,'test','dfsfsdf',1,'test','2015-01-30 00:00:00',2,'1422076860_avatar1.jpg','2015-01-24 10:51:00','2015-01-24 10:51:00'),(28,14,'sample title','sample notes',2,'tag text','2015-01-02 03:30:00',2,NULL,NULL,NULL),(29,12,'test title','<p>test</p>',1,'test','2015-01-31 00:00:00',1,NULL,'2015-01-31 11:58:11','2015-01-31 11:58:11'),(30,12,'test title','<p>test</p>',1,'test','2015-02-02 00:00:00',1,NULL,'2015-02-02 12:32:55','2015-02-02 12:32:55'),(31,12,'test 2','<p>test</p>',1,'test','2015-02-02 00:00:00',2,NULL,'2015-02-02 12:33:38','2015-02-02 12:33:38'),(33,11,'test title','<p>test</p>',1,'test','2015-02-03 00:00:00',1,NULL,'2015-02-03 14:04:29','2015-02-03 14:04:29'),(34,11,'test title','<p>hght</p>',1,'nice','2015-02-03 00:00:00',1,NULL,'2015-02-03 14:05:02','2015-02-03 14:05:02'),(35,11,'good day','<p>swd</p>',1,'test','2015-02-04 00:00:00',1,NULL,'2015-02-04 12:30:33','2015-02-04 12:30:33'),(36,11,'test title','<p>test</p>',1,'test','2015-02-04 00:00:00',1,NULL,'2015-02-04 13:37:30','2015-02-04 13:37:30');
 
 /*Table structure for table `journal_diary_image` */
 
@@ -152,9 +148,11 @@ CREATE TABLE `journal_diary_image` (
   PRIMARY KEY (`diary_img_id`),
   KEY `FK_journal_diary_image_diary` (`diary_id`),
   CONSTRAINT `FK_journal_diary_image_diary` FOREIGN KEY (`diary_id`) REFERENCES `journal_diary` (`diary_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 /*Data for the table `journal_diary_image` */
+
+insert  into `journal_diary_image`(`diary_img_id`,`diary_id`,`diary_image`) values (6,33,'8115b58521255701544d7b1a5463df23.jpg'),(7,33,'e41556899b47d9d8e2782c39bc48b912.jpg'),(8,33,'1f8ecf938fe2270cec29cbb8e01c8613.jpg'),(9,34,'f17f86b8707ee46d1246bfc0a4e270f1.jpg'),(10,36,'979f1140155ce48541516d2feb835603.jpg'),(11,36,'4b447d20006d5b33a381a5f6bfb57716.jpg'),(12,36,'b6fc9f8956e5abb9493e9f29cf5ec932.jpg'),(13,36,'3458f7f4d3c0f35da11ae06537bee31f.txt'),(14,36,'9eb4882732b91c043c1d03566f6e36ba.jpg');
 
 /*Table structure for table `journal_faq` */
 
@@ -215,20 +213,6 @@ CREATE TABLE `journal_mood_type` (
 
 insert  into `journal_mood_type`(`mood_id`,`mood_type`,`mood_image`,`created`,`modified`) values (1,'smile','1422714319_mood_1.png',NULL,NULL),(2,'sad','1422714331_mood_2.png',NULL,NULL),(3,'Excited','1422714414_mood_3.png',NULL,NULL),(4,'angry','1422714432_mood_1.png',NULL,NULL),(9,'laugh','1422714538_mood_3.png',NULL,NULL);
 
-/*Table structure for table `journal_pages` */
-
-DROP TABLE IF EXISTS `journal_pages`;
-
-CREATE TABLE `journal_pages` (
-  `page_id` int(11) NOT NULL AUTO_INCREMENT,
-  `page_name` varchar(255) DEFAULT NULL,
-  `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `journal_pages` */
-
 /*Table structure for table `journal_tmp_diary` */
 
 DROP TABLE IF EXISTS `journal_tmp_diary`;
@@ -266,6 +250,7 @@ CREATE TABLE `journal_users` (
   `user_name` varchar(256) NOT NULL,
   `user_email` varchar(250) NOT NULL,
   `user_password` varchar(250) NOT NULL,
+  `user_prof_image` varchar(500) NOT NULL,
   `user_status` enum('0','1','2') NOT NULL DEFAULT '0',
   `user_activation_key` varchar(250) DEFAULT NULL,
   `user_last_login` datetime DEFAULT NULL,
@@ -275,11 +260,11 @@ CREATE TABLE `journal_users` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `NewIndex1` (`user_activation_key`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
 
 /*Data for the table `journal_users` */
 
-insert  into `journal_users`(`user_id`,`user_name`,`user_email`,`user_password`,`user_status`,`user_activation_key`,`user_last_login`,`user_login_ip`,`reset_password_string`,`created`,`modified`) values (8,'aaaa','aaaa@gmail.com','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79','0','nwBiCBv8n','2015-01-14 05:02:20','122.174.109.49',NULL,NULL,NULL),(9,'Prakash','pamds9@gmail.com','c9efd9d1ad468c0d9e0e2422f2bd37133129eb15dc122197d3bce6ea9bc7507dd2bbc055deecaac99d6f9e8ac5ffed9af5aacd7ee88286e119f8364bc10b2760','2',NULL,'2015-01-17 20:17:41','122.174.154.218',NULL,'2015-01-17 08:17:21','2015-01-17 08:17:21'),(10,'marudhupandiyan14','marudhupandiyan14@gmail.com','01a6bbf049717baedfc3b1c338699f406c2501864ada4f2008b1cf39cf0631dd89e5c015a5c2c53d78acccca59b093c6eb145933d0ed2fcc6feae24ea49cc4c0','2','LpGY6lOiX',NULL,'122.174.74.39',NULL,'2015-01-19 06:55:51','2015-01-19 06:55:51'),(11,'ptrckstnly','ptrckstnly@gmail.com','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79','2','S0uLeZaan','2015-01-30 10:55:19','::1','','2015-01-19 08:17:48','2015-01-21 11:57:39'),(12,'udhyakumar','udhyakumarm@gmail.com','daef4953b9783365cad6615223720506cc46c5167cd16ab500fa597aa08ff964eb24fb19687f34d7665f778fcb6c5358fc0a5b81e1662cf90f73a2671c53f991','0','PsRxSDv2C','2015-01-21 11:45:57','61.3.110.73',NULL,'2015-01-20 10:28:53','2015-01-20 10:28:53'),(13,'Marudhu','marudhukarthick_1985@yahoo.co.in','95ca56f4ea26bd5ec0209359b44746ca5f8f7256c23584730c19d64008c3ec30546e9a96a24484c2279fec38c9f7eec620167fe5a8bbb7a023ab32147c229126','1',NULL,'2015-01-21 17:18:16','122.174.120.242',NULL,'2015-01-21 11:40:33','2015-01-21 11:40:33'),(14,'Rajendran','ceo@arkinfotec.com','e26c78fe5b9cf7a025cdaf9717bb2486fd9104796a462d20ad784d565be037c71556acb353bba6794696e751acaafa5f2e5fee722849591e6a36366d3f4e1d25','0','MHbLZBG6m','2015-01-21 11:46:51','122.174.121.0',NULL,'2015-01-21 11:46:16','2015-01-21 11:46:16'),(15,'e2h','e2h@gmail.com','68e4264f2e7f6298d94fe4d11e5bb63f61c464fe1581a09fe443fa85f26fd9053e9ec1c3700cb246464a079da67482a71e19a6b37522147dc3421e6be65e5af4','0','aHPEZCRxk',NULL,'122.174.120.242',NULL,'2015-01-21 01:44:03','2015-01-21 01:44:03'),(16,'marudhubangalore','marudhubangalore@gmail.com','ba94db91ba9096ce1f98a1ceddbaa0b5bfa400002c1e4f90a281b5557a550a342c41f0cd1a240e0e2df9723edce1bd148851c76f324853643286e53b12744496','0','8PBHGMDWS','2015-01-21 18:45:09','122.174.120.242',NULL,'2015-01-21 01:44:45','2015-01-21 01:44:45'),(17,'sivaji','marudhu.murugesan@arkinfotec.com','dd737930f7e5fa9ac7056e3d43048e772adfb58a46e5c48f3795b57cbf54515b0592d1692b99eb1c8984aa1d36f62dc2e0e9ec951cff38d46b1ba0d4ba045768','0','wZZNOn8u6','2015-01-21 17:13:08','122.174.120.242',NULL,'2015-01-21 04:54:35','2015-01-21 04:54:35'),(43,'testinomor','testinomor@gmail.com','455df601ba52e06011427dc1cc70812f18671edb29591b8aa854a3591db5403d4f52a2c15fcfcbd1aa928cd9cc295ecc14b90ddf78e46435a796d558d97b9e80','0','TRH6mXbEO',NULL,'122.174.120.242',NULL,'2015-01-21 06:42:34','2015-01-21 06:42:34'),(44,'Arivu Ajay','arivcsdfazhagan.pandi@arkinfotec.com','d404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db','0','ne4LWaDN1','2015-01-26 17:16:57','::1',NULL,'2015-01-26 09:32:31','2015-01-26 09:32:31'),(45,'prakash','prakash.paramanandam@arkinfotec.com','7fcf4ba391c48784edde599889d6e3f1e47a27db36ecc050cc92f259bfac38afad2c68a1ae804d77075e8fb722503f3eca2b2c1006ee6f6c7b7628cb45fffd1d','1','tL9ngMZJ3','2015-02-02 17:01:05','127.0.0.1',NULL,'2015-02-02 17:00:36','2015-02-02 17:00:36');
+insert  into `journal_users`(`user_id`,`user_name`,`user_email`,`user_password`,`user_prof_image`,`user_status`,`user_activation_key`,`user_last_login`,`user_login_ip`,`reset_password_string`,`created`,`modified`) values (8,'aaaa','aaaa@gmail.com','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79','','1','nwBiCBv8n','2015-01-14 05:02:20','122.174.109.49',NULL,NULL,NULL),(9,'Prakash','pamds9@gmail.com','c9efd9d1ad468c0d9e0e2422f2bd37133129eb15dc122197d3bce6ea9bc7507dd2bbc055deecaac99d6f9e8ac5ffed9af5aacd7ee88286e119f8364bc10b2760','','2',NULL,'2015-01-17 20:17:41','122.174.154.218',NULL,'2015-01-17 08:17:21','2015-01-17 08:17:21'),(10,'marudhupandiyan14','marudhupandiyan14@gmail.com','01a6bbf049717baedfc3b1c338699f406c2501864ada4f2008b1cf39cf0631dd89e5c015a5c2c53d78acccca59b093c6eb145933d0ed2fcc6feae24ea49cc4c0','','2','LpGY6lOiX',NULL,'122.174.74.39',NULL,'2015-01-19 06:55:51','2015-01-19 06:55:51'),(11,'ptrckstnly','ptrckstnly@gmail.com','3627909a29c31381a071ec27f7c9ca97726182aed29a7ddd2e54353322cfb30abb9e3a6df2ac2c20fe23436311d678564d0c8d305930575f60e2d3d048184d79','1422950868_11_9.jpg','2','S0uLeZaan','2015-02-03 11:30:26','::1','','2015-01-19 08:17:48','2015-01-21 11:57:39'),(12,'udhyakumar','udhyakumarm@gmail.com','daef4953b9783365cad6615223720506cc46c5167cd16ab500fa597aa08ff964eb24fb19687f34d7665f778fcb6c5358fc0a5b81e1662cf90f73a2671c53f991','','1','PsRxSDv2C','2015-01-21 11:45:57','61.3.110.73',NULL,'2015-01-20 10:28:53','2015-01-20 10:28:53'),(13,'Marudhu','marudhukarthick_1985@yahoo.co.in','95ca56f4ea26bd5ec0209359b44746ca5f8f7256c23584730c19d64008c3ec30546e9a96a24484c2279fec38c9f7eec620167fe5a8bbb7a023ab32147c229126','','1',NULL,'2015-01-21 17:18:16','122.174.120.242',NULL,'2015-01-21 11:40:33','2015-01-21 11:40:33'),(14,'Rajendran','ceo@arkinfotec.com','e26c78fe5b9cf7a025cdaf9717bb2486fd9104796a462d20ad784d565be037c71556acb353bba6794696e751acaafa5f2e5fee722849591e6a36366d3f4e1d25','','1','MHbLZBG6m','2015-01-21 11:46:51','122.174.121.0',NULL,'2015-01-21 11:46:16','2015-01-21 11:46:16'),(15,'e2h','e2h@gmail.com','68e4264f2e7f6298d94fe4d11e5bb63f61c464fe1581a09fe443fa85f26fd9053e9ec1c3700cb246464a079da67482a71e19a6b37522147dc3421e6be65e5af4','','0','aHPEZCRxk',NULL,'122.174.120.242',NULL,'2015-01-21 01:44:03','2015-01-21 01:44:03'),(16,'marudhubangalore','marudhubangalore@gmail.com','ba94db91ba9096ce1f98a1ceddbaa0b5bfa400002c1e4f90a281b5557a550a342c41f0cd1a240e0e2df9723edce1bd148851c76f324853643286e53b12744496','','1','8PBHGMDWS','2015-01-21 18:45:09','122.174.120.242',NULL,'2015-01-21 01:44:45','2015-01-21 01:44:45'),(17,'sivaji','marudhu.murugesan@arkinfotec.com','dd737930f7e5fa9ac7056e3d43048e772adfb58a46e5c48f3795b57cbf54515b0592d1692b99eb1c8984aa1d36f62dc2e0e9ec951cff38d46b1ba0d4ba045768','','1','wZZNOn8u6','2015-01-21 17:13:08','122.174.120.242',NULL,'2015-01-21 04:54:35','2015-01-21 04:54:35'),(43,'testinomor','testinomor@gmail.com','455df601ba52e06011427dc1cc70812f18671edb29591b8aa854a3591db5403d4f52a2c15fcfcbd1aa928cd9cc295ecc14b90ddf78e46435a796d558d97b9e80','','0','TRH6mXbEO',NULL,'122.174.120.242',NULL,'2015-01-21 06:42:34','2015-01-21 06:42:34'),(44,'Arivu Ajay','arivcsdfazhagan.pandi@arkinfotec.com','d404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db','','1','ne4LWaDN1','2015-01-26 17:16:57','::1',NULL,'2015-01-26 09:32:31','2015-01-26 09:32:31');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
