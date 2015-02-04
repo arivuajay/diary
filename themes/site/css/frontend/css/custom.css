@@ -142,3 +142,9 @@
 .frontinner-left{
     width: auto !important;
 }
+
+.events_highlight_new .fc-day-number{
+    color: green;
+    font-size: 20px;
+    font-weight: bold;
+}

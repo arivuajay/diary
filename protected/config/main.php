@@ -89,10 +89,10 @@ return array(
             'SMTPAuth' => true,
             'SMTPSecure' => 'tls',
         ),
-        'request' => array(
-            'class' => 'HttpRequest',
-            'enableCsrfValidation' => true,
-        ),
+//        'request' => array(
+//            'class' => 'HttpRequest',
+//            'enableCsrfValidation' => true,
+//        ),
     ),
     // application-level parameters that can be accessed
     //setting the basic language value
