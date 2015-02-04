@@ -330,7 +330,8 @@ class Myclass extends CController {
         $images = DiaryImage::model()->findAllByAttributes(array('diary_id' => $id));
         $content = '';
         foreach ($images as $image){
-            $ext = explode('.', $image->diary_image)[1];
+            $img_arr = explode('.', $image->diary_image);
+            $ext = $img_arr[1];
             $type = in_array($ext, array('jpg','jpeg', 'gif', 'png')) ? 'picture' : 'file';
             $content .= '<span class="glyphicon glyphicon-'.$type.'">  ';
             $content .= CHtml::link(
