@@ -11,18 +11,19 @@
     <body class="forms-page">
         <script>
         tinymce.init({
-                selector:'textarea',
-                external_plugins: {"nanospell": "<?php echo $baseUrl ?>/themes/admin/js/nanospell/plugin.js"},
-                nanospell_server: "php" // choose "php" "asp" "asp.net" or "java"
+              //  selector:'textarea',
+                browser_spellcheck : true,
+//                external_plugins: {"nanospell": "<?php echo $baseUrl ?>/themes/admin/js/nanospell/plugin.js"},
+//                nanospell_server: "php" // choose "php" "asp" "asp.net" or "java"
                 }); 
         </script>
-        <script> 
+        <script>
             var boxtest = localStorage.getItem('boxed');
             if (boxtest === 'true') {
                 document.body.className += ' boxed-layout';
             }
 
-            $(document).ready(function(){
+            $(document).ready(function () {
 //               tinymce.init({
 //            		selector: 'textarea',
 //            		external_plugins: {"nanospell": "<?php echo $baseUrl ?>/extensions/tinymce/vendors/nanospell/plugin.js"},
@@ -48,14 +49,15 @@
             </div>
             <div class="navbar-left frontinner-left">
                 <div class="navbar-divider"></div>
-                <?php echo $this->renderPartial(
-                        '//layouts/_bannerblock', 
-                        array(
-                            'layout' => 'user_inner',
-                            'position' => 'top',
-                            'dimension' => '468*60'
-                            )
-                        ); ?>
+                <?php
+                echo $this->renderPartial(
+                        '//layouts/_bannerblock', array(
+                    'layout' => 'user_inner',
+                    'position' => 'top',
+                    'dimension' => '468*60'
+                        )
+                );
+                ?>
             </div>
             <div class="navbar-right">
                 <div class="navbar-search" style="border: none;">
@@ -70,17 +72,18 @@
             <aside id="sidebar_left">
                 <div class="user-info">
                     <div class="media"> <a class="pull-left" href="#">
-                            <?php $user_details = Users::model()->findByPk(Yii::app()->user->id);
-                            if(!empty($user_details->user_prof_image)){
-                                $prof_image =CHtml::image($this->createUrl("/themes/site/image/prof_img/".$user_details->user_prof_image),'alt',array('class'=>'br64'));
-                            }else{
-                                 $prof_image =CHtml::image($this->createUrl("/themes/site/css/frontend/img/avatars/5.jpg"),'alt',array('class'=>'br64'));
+                            <?php
+                            $user_details = Users::model()->findByPk(Yii::app()->user->id);
+                            if (!empty($user_details->user_prof_image)) {
+                                $prof_image = CHtml::image($this->createUrl("/themes/site/image/prof_img/" . $user_details->user_prof_image), 'alt', array('class' => 'br64'));
+                            } else {
+                                $prof_image = CHtml::image($this->createUrl("/themes/site/css/frontend/img/avatars/5.jpg"), 'alt', array('class' => 'br64'));
                             }
                             ?>                 
 
                             <div class="media-object border border-purple br64 bw2 p2"> 
-                                <!--<img class="br64" src="<?php  echo $themeUrl; ?>/css/frontend/img/avatars/5.jpg" alt="...">--> 
-                                <?php echo  $prof_image;?>
+                                <!--<img class="br64" src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/5.jpg" alt="...">--> 
+<?php echo $prof_image; ?>
                             </div>
                         </a>
                         <div class="mobile-link"> <span class="glyphicons glyphicons-show_big_thumbnails"></span> </div>
@@ -99,7 +102,7 @@
                                     <a href="<?php echo $baseUrl; ?>/site/users/login">Sign In</a>
                                 <?php else: ?>
                                     <a href="<?php echo $baseUrl; ?>/site/users/logout">Sign Out</a>
-                                <?php endif; ?>
+<?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -113,14 +116,14 @@
                             ?>
                         </div>
                         <div class="col-xs-4">
-                            <?php echo CHtml::link('<span class="glyphicons glyphicons-inbox fs22 text-orange2"></span><h5 class="fs11">Write a journal</h5>', array('/site/journal/create')); ?>
+<?php echo CHtml::link('<span class="glyphicons glyphicons-inbox fs22 text-orange2"></span><h5 class="fs11">Write a journal</h5>', array('/site/journal/create')); ?>
                         </div>
                         <div class="col-xs-4"> <a href="#"> <span class="glyphicons glyphicons-bell fs22 text-purple2"></span>
                                 <h5 class="fs11">Mood report</h5>
                             </a> </div>
                     </div>
                 </div>
-                <?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
+<?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
             </aside>
             <!-- End: Sidebar -->
             <section id="content_wrapper">
@@ -137,7 +140,7 @@
                 </div>
             <?php endif ?>
             <!-- Start: Content -->
-            <?php echo $content; ?>
+<?php echo $content; ?>
             <!-- End: Content -->
             </section>
 

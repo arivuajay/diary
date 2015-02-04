@@ -95,7 +95,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                             </div>
                         </div>
                         <div class="form-group">
-                            <a href="#" id="add-new-file" class="btn btn-success">Add Image</a>
+                            <a href="#" id="add-new-file" class="btn btn-success">Add Files</a>
                             <ul id="image_preview_list">
                                 <?php
                                 if (!$model->isNewRecord && $model->diaryImages):
@@ -154,7 +154,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
 </div>
 
 <div class="modal fade" id="addNewFile" aria-hidden="true" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
