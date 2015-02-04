@@ -86,5 +86,15 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    
+<!--    for tinymce nano  auto spell-->
+<!--<script>
+tinymce.init({
+	selector:'textarea',
+	external_plugins: {"nanospell": "<?php echo $baseUrl.'/protected/extensions/tinymce/vendors/nanospell/plugin.js';?>"},///nanospell/plugin.js
+	nanospell_server: "php" // choose "php" "asp" "asp.net" or "java"
+	}); 
+</script>-->
+    <!--    for tinymce nano  auto spell-->
 </head>
-<?php echo $content; ?>
+<?php  echo $content; ?>

@@ -70,7 +70,18 @@
             <aside id="sidebar_left">
                 <div class="user-info">
                     <div class="media"> <a class="pull-left" href="#">
-                            <div class="media-object border border-purple br64 bw2 p2"> <img class="br64" src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/5.jpg" alt="..."> </div>
+                            <?php $user_details = Users::model()->findByPk(Yii::app()->user->id);
+                            if(!empty($user_details->user_prof_image)){
+                                $prof_image =CHtml::image($this->createUrl("/themes/site/image/prof_img/".$user_details->user_prof_image),'alt',array('class'=>'br64'));
+                            }else{
+                                 $prof_image =CHtml::image($this->createUrl("/themes/site/css/frontend/img/avatars/5.jpg"),'alt',array('class'=>'br64'));
+                            }
+                            ?>                 
+
+                            <div class="media-object border border-purple br64 bw2 p2"> 
+                                <!--<img class="br64" src="<?php  echo $themeUrl; ?>/css/frontend/img/avatars/5.jpg" alt="...">--> 
+                                <?php echo  $prof_image;?>
+                            </div>
                         </a>
                         <div class="mobile-link"> <span class="glyphicons glyphicons-show_big_thumbnails"></span> </div>
                         <div class="media-body">
