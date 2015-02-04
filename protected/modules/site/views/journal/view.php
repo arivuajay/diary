@@ -67,17 +67,21 @@
                                         //            'diary_user_id',
                                                     'diary_title',
                                                     array(
-                                                        'name' => 'diary_description',
+                                                        'name' => $model->getAttributeLabel('diary_description'),
                                                         'type' => 'raw',
                                                         'value' => $model->diary_description
                                                     ),
                                                     array(
-                                                        'name' => 'diary_category_id',
+                                                        'name' => $model->getAttributeLabel('diary_category_id'),
                                                         'type' => 'raw',
                                                         'value' => $model->diaryCategory->category_name
                                                     ),
                                                     'diary_tags',
-                                                    'diary_current_date',
+                                                    array(
+                                                        'name' => $model->getAttributeLabel('diary_current_date'),
+                                                        'type' => 'raw',
+                                                        'value' => date('Y-m-d', strtotime($model->diary_current_date))
+                                                    ),
                                                     array(
                                                         'name' => 'Uploaded',
                                                         'type' => 'raw',

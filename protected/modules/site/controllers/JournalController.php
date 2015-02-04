@@ -28,11 +28,11 @@ class JournalController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'spellchecker'),
+                'actions' => array('index', 'spellchecker'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'dashboard', 'calendarevents', 'listjournal', 'adddiaryimage', 'addFile'),
+                'actions' => array('create', 'update', 'dashboard', 'calendarevents', 'listjournal', 'adddiaryimage', 'addFile', 'view'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -42,6 +42,10 @@ class JournalController extends Controller {
             array('deny', // deny all users
                 'users' => array('*'),
             ),
+//            array('allow', // allow admin user to perform 'admin' and 'delete' actions
+//                'actions'=>array('view'),
+//                'expression'=> Yii::app()->user->isAdmin(),
+//            ),
         );
     }
 
@@ -52,7 +56,7 @@ class JournalController extends Controller {
     public function actionView($id) {
         $model = $this->loadModel($id);
         
-        if($model->diary_user_id != Yii::app()->user->id){
+        if(empty($model) || $model->diary_user_id != Yii::app()->user->id){
             Yii::app()->user->setFlash('danger', "Wrong url");
             $this->redirect(array('dashboard'));
         }
