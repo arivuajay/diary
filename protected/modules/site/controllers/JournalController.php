@@ -134,7 +134,7 @@ class JournalController extends Controller {
         $model->setScenario('update');
 
         // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+         $this->performAjaxValidation($model);
 
         if (isset($_POST['Diary'])) {
             $new_category = ($_POST['Diary']['diary_category_id'] == 'others');
