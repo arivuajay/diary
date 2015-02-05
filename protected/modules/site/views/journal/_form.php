@@ -24,7 +24,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
             ),
         ));
         ?>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="panel">
                 <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock"></span> Details </span> </div>
                 <div class="panel-body">
@@ -83,9 +83,9 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     </div>
 
                     <div class="form-group">
-                        <?php echo $form->labelEx($model, 'diary_user_mood_id', array('class' => 'col-md-3 control-label')); ?>
+                        <?php echo $form->labelEx($model, 'diary_user_mood_id', array('class' => 'col-md-6 control-label')); ?>
 
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <?php
                             $moods = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_image');
                             foreach ($moods as $key => $mood) {
@@ -121,7 +121,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="panel">
                 <div class="panel-body">
                     <div class="form-group">
