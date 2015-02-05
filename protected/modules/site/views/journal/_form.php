@@ -129,7 +129,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         $editMe = $this->widget('ext.editMe.widgets.ExtEditMe', array(
                             'attribute' => 'diary_description',
                             'model' => $model,
-                            'height' => 315,
+                            'height' => 350,
                             'toolbar' => array(
                                 array('SpellChecker', 'Scayt'),
                                 array(
