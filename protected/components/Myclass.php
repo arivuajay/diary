@@ -192,9 +192,18 @@ class Myclass extends CController {
         $model->diary_user_id = $user->user_id;
 
         if ($model->save()) {
+            $diary_images = $param['journal_images'];
+            if (!empty($diary_images)):
+                foreach ($diary_images as $image):
+                    $imgModel = new DiaryImage();
+                    $imgModel->diary_id = $model->diary_id;
+                    $imgModel->diary_image = $image;
+                    $imgModel->save(false);
+                endforeach;
+            endif;
             $response['success'] = 1;
             $response['pref_date'] = date('Y-m-d', strtotime($model->diary_current_date));
-            $response['message'] = 'Successfully added.';
+            $response['message'] = 'Successfully added.'.  json_encode($diary_images);
         } else {
             $response['success'] = 0;
             $response['pref_date'] = date('Y-m-d', strtotime($model->diary_current_date));
@@ -283,61 +292,59 @@ class Myclass extends CController {
 
         return $response;
     }
-    
+
     public static function getPageLayouts($key = NULL) {
-        /* if you add any value, add in column also (banner_layout_page) ***/
+        /* if you add any value, add in column also (banner_layout_page) ** */
         $layouts = array(
             'home' => 'Home',
             'user_inner' => 'User Inner Page'
         );
-        
-        if(isset($key) && $key != NULL)
+
+        if (isset($key) && $key != NULL)
             return $layouts[$key];
-        
+
         return $layouts;
     }
-    
+
     public static function getPageLayoutPositions($key = NULL) {
-        /* if you add any value, add in column also (banner_layout_page) ***/
+        /* if you add any value, add in column also (banner_layout_page) ** */
         $layout_positions = array(
             'top' => 'Top',
             'right' => 'Right',
             'bottom' => 'Bottom',
             'left' => 'Left'
         );
-        
-        if(isset($key) && $key != NULL)
+
+        if (isset($key) && $key != NULL)
             return $layout_positions[$key];
-        
+
         return $layout_positions;
     }
-    
+
     public static function getBannerImages($layout, $position, $dimenstion) {
         $layout = BannerLayout::model()->findByAttributes(array(
             'banner_layout_page' => $layout,
             'banner_layout_position' => $position,
             'banner_layout_dimensions' => $dimenstion
-            ));
-        
-        if(!empty($layout)){
+        ));
+
+        if (!empty($layout)) {
             $banners = Banner::model()->isActive()->findAllByAttributes(array('banner_layout_id' => $layout->banner_layout_id));
             return $banners;
         }
         return array();
     }
-    
+
     public static function getUserDiaryImages($id) {
         $images = DiaryImage::model()->findAllByAttributes(array('diary_id' => $id));
         $content = '';
-        foreach ($images as $image){
+        foreach ($images as $image) {
             $img_arr = explode('.', $image->diary_image);
             $ext = $img_arr[1];
-            $type = in_array($ext, array('jpg','jpeg', 'gif', 'png')) ? 'picture' : 'file';
-            $content .= '<span class="glyphicon glyphicon-'.$type.'">  ';
+            $type = in_array($ext, array('jpg', 'jpeg', 'gif', 'png')) ? 'picture' : 'file';
+            $content .= '<span class="glyphicon glyphicon-' . $type . '">  ';
             $content .= CHtml::link(
-                    $image->diary_image, 
-                    Yii::app()->createUrl('uploads/journal/'.$image->diary_image),
-                    array('target' => '_blank'));
+                            $image->diary_image, Yii::app()->createUrl('uploads/journal/' . $image->diary_image), array('target' => '_blank'));
             $content .= '<br /><br />';
         }
         return $content;

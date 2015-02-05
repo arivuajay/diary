@@ -12,7 +12,6 @@
  * @property string $diary_tags
  * @property string $diary_current_date
  * @property string $diary_user_mood_id
- * @property string $diary_upload
  * @property string $created
  * @property string $modified
  *
@@ -25,7 +24,6 @@
  */
 class Diary extends CActiveRecord {
 
-    public $_uploadFileInst;
     protected $_allowTypes = 'jpg,jpeg, gif, png, txt, docs, xlsx';
     protected $_maxSize = 2;
     public $dist_date;
@@ -58,13 +56,13 @@ class Diary extends CActiveRecord {
             array('diary_title, diary_description, diary_category_id,diary_current_date, diary_user_mood_id', 'required', 'on' => 'webservice'),
             array('diary_user_id, diary_category_id, diary_user_mood_id', 'length', 'max' => 20),
             array('diary_title, diary_tags', 'length', 'max' => 250),
-            array('diary_user_id, diary_upload, created, modified', 'safe'),
+            array('diary_user_id, created, modified', 'safe'),
             //for file
 //
-            array('diary_upload', 'file', 'types' => $this->_allowTypes, 'allowEmpty' => true, 'maxSize' => 1024 * 1024 * $this->_maxSize, 'tooLarge' => "File has to be larger than {$this->_maxSize}MB", 'on' => 'create'),
+//            array('diary_upload', 'file', 'types' => $this->_allowTypes, 'allowEmpty' => true, 'maxSize' => 1024 * 1024 * $this->_maxSize, 'tooLarge' => "File has to be larger than {$this->_maxSize}MB", 'on' => 'create'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('diary_id, diary_user_id, diary_title, diary_description, diary_category_id, diary_tags, diary_current_date, diary_user_mood_id, diary_upload, created, modified', 'safe', 'on' => 'search'),
+            array('diary_id, diary_user_id, diary_title, diary_description, diary_category_id, diary_tags, diary_current_date, diary_user_mood_id,  created, modified', 'safe', 'on' => 'search'),
             array('diary_category', 'catCheck', 'on' => 'create'),
         );
     }
@@ -112,7 +110,7 @@ class Diary extends CActiveRecord {
             'diary_tags' => 'Tags',
             'diary_current_date' => 'Date',
             'diary_user_mood_id' => 'Select Mood',
-            'diary_upload' => "Upload File: <span class='help-block'><i class=''></i>Allow types : ( $this->_allowTypes )</span>",
+//            'diary_upload' => "Upload File: <span class='help-block'><i class=''></i>Allow types : ( $this->_allowTypes )</span>",
             'created' => 'Created',
             'modified' => 'Modified',
             'diary_category' => 'New category Name',
@@ -144,7 +142,7 @@ class Diary extends CActiveRecord {
         $criteria->compare('diary_tags', $this->diary_tags, true);
         $criteria->compare('diary_current_date', $this->diary_current_date, true);
         $criteria->compare('diary_user_mood_id', $this->diary_user_mood_id, true);
-        $criteria->compare('diary_upload', $this->diary_upload, true);
+//        $criteria->compare('diary_upload', $this->diary_upload, true);
         $criteria->compare('created', $this->created, true);
         $criteria->compare('modified', $this->modified, true);
 
@@ -164,12 +162,6 @@ class Diary extends CActiveRecord {
     }
 
     public function beforeValidate() {
-
-        $this->_uploadFileInst = CUploadedFile::getInstance($this, 'diary_upload');
-        if (!is_null($this->_uploadFileInst)) {
-            $this->diary_upload = time() . '_' . str_replace(' ', '_', strtolower($this->_uploadFileInst));  // random number + file name
-        }
-
         if ($this->scenario != 'webservice') {
             $this->diary_user_id = Yii::app()->user->id;
         }
@@ -184,14 +176,14 @@ class Diary extends CActiveRecord {
     }
 
     public function afterSave() {
-        if (!is_null($this->_uploadFileInst)) {
-            $this->_uploadFileInst->saveAs(JOURNAL_IMG_PATH . $this->diary_upload);
-        }
+//        if (!is_null($this->_uploadFileInst)) {
+//            $this->_uploadFileInst->saveAs(JOURNAL_IMG_PATH . $this->diary_upload);
+//        }
 
         unset(Yii::app()->session['temp_user_mail']);
         unset(Yii::app()->session['temp_user_mood']);
 
         return parent::afterSave();
     }
-    
+
 }

@@ -51,10 +51,10 @@
 		<?php echo $form->textField($model,'diary_user_mood_id',array('size'=>20,'maxlength'=>20)); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'diary_upload'); ?>
-		<?php echo $form->textArea($model,'diary_upload',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
+<!--	<div class="row">
+		<?php // echo $form->label($model,'diary_upload'); ?>
+		<?php // echo $form->textArea($model,'diary_upload',array('rows'=>6, 'cols'=>50)); ?>
+	</div>-->
 
 	<div class="row">
 		<?php echo $form->label($model,'created'); ?>

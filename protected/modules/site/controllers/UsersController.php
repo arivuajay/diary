@@ -277,7 +277,7 @@ class UsersController extends Controller {
         $journal_model->setAttribute('diary_tags', $temp_model->temp_tags);
         $journal_model->setAttribute('diary_current_date', $temp_model->temp_current_date);
         $journal_model->setAttribute('diary_user_mood_id', $temp_model->temp_user_mood_id);
-        $journal_model->setAttribute('diary_upload', $temp_model->temp_upload);
+//        $journal_model->setAttribute('diary_upload', $temp_model->temp_upload);
         $journal_model->setAttribute('created', $temp_model->created);
         $journal_model->setAttribute('modified', $temp_model->modified);
         if ($journal_model->save(false)) {
@@ -433,7 +433,7 @@ class UsersController extends Controller {
     public function actionReminder($key) {
         if ($key == 'vZu3G6Ewy') {
             $users = Users::model()->isActive()->findAll();
-            
+
             foreach ($users as $user){
                 $mail = new Sendmail;
                 $message = '<p>Dear ' . $user->user_name . ',</p>';
