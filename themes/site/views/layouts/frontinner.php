@@ -6,41 +6,7 @@
     $baseUrl = Yii::app()->baseUrl;
     $themeUrl = Yii::app()->theme->baseUrl;
     ?>
-
-
     <body class="forms-page">
-<!--        <script>
-        tinymce.init({
-                selector:'textarea',
-                external_plugins: {"nanospell": "http://tinymcespellcheck.com/nanospell/plugin.js"},
-                nanospell_server: "php" // choose "php" "asp" "asp.net" or "java"
-                }); 
-
-        </script>-->
-        <script>
-            var boxtest = localStorage.getItem('boxed');
-            if (boxtest === 'true') {
-                document.body.className += ' boxed-layout';
-            }
-            tinymce.init({
-    browser_spellcheck : true,
-});
-
-//            $(document).ready(function () {
-//               tinymce.init({
-//            		selector: 'textarea',
-//            		//external_plugins: {"nanospell": "<?php echo $baseUrl ?>/extensions/tinymce/vendors/nanospell/plugin.js"},
-//            		nanospell_server: 'php', // choose "php" "asp" "asp.net"
-//            		nanospell_dictionary: 'en', // download 23 more at http://tinymcespellcheck.com/dictionaries
-//            		nanospell_ignore_words_with_numerals: true,
-//            		nanospell_autostart: true,
-//            		nanospell_ignore_block_caps: false,
-//            		nanospell_compact_menu: false,
-//            		toolbar: 'nanospell'
-//            	});
-//            });
-        </script>
-
         <!-- Start: Header -->
         <header class="navbar navbar-fixed-top">
             <div class="navbar-branding">
@@ -82,11 +48,11 @@
                             } else {
                                 $prof_image = CHtml::image($this->createUrl("/themes/site/css/frontend/img/avatars/5.jpg"), 'alt', array('class' => 'br64'));
                             }
-                            ?>                 
+                            ?>
 
-                            <div class="media-object border border-purple br64 bw2 p2"> 
-                                <!--<img class="br64" src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/5.jpg" alt="...">--> 
-<?php echo $prof_image; ?>
+                            <div class="media-object border border-purple br64 bw2 p2">
+                                <!--<img class="br64" src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/5.jpg" alt="...">-->
+                                <?php echo $prof_image; ?>
                             </div>
                         </a>
                         <div class="mobile-link"> <span class="glyphicons glyphicons-show_big_thumbnails"></span> </div>
@@ -105,7 +71,7 @@
                                     <a href="<?php echo $baseUrl; ?>/site/users/login">Sign In</a>
                                 <?php else: ?>
                                     <a href="<?php echo $baseUrl; ?>/site/users/logout">Sign Out</a>
-<?php endif; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -119,32 +85,32 @@
                             ?>
                         </div>
                         <div class="col-xs-4">
-<?php echo CHtml::link('<span class="glyphicons glyphicons-inbox fs22 text-orange2"></span><h5 class="fs11">Write a journal</h5>', array('/site/journal/create')); ?>
+                            <?php echo CHtml::link('<span class="glyphicons glyphicons-inbox fs22 text-orange2"></span><h5 class="fs11">Write a journal</h5>', array('/site/journal/create')); ?>
                         </div>
                         <div class="col-xs-4"> <a href="#"> <span class="glyphicons glyphicons-bell fs22 text-purple2"></span>
                                 <h5 class="fs11">Mood report</h5>
                             </a> </div>
                     </div>
                 </div>
-<?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
+                <?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
             </aside>
             <!-- End: Sidebar -->
             <section id="content_wrapper">
-             <?php if (isset($this->flashMessages)): ?>
-                <div style="padding: 10px;">
-                    <?php foreach ($this->flashMessages as $key => $message) { ?>
-                    <div class="alert alert-<?php echo $key; ?> fade in" style="margin-bottom: 0px;">
-                            <button type="button" class="close close-sm" data-dismiss="alert">
-                                <i class="fa fa-times"></i>
-                            </button>
-                            <?php echo $message; ?>
-                        </div>
-                    <?php } ?>
-                </div>
-            <?php endif ?>
-            <!-- Start: Content -->
-<?php echo $content; ?>
-            <!-- End: Content -->
+                <?php if (isset($this->flashMessages)): ?>
+                    <div style="padding: 10px;">
+                        <?php foreach ($this->flashMessages as $key => $message) { ?>
+                            <div class="alert alert-<?php echo $key; ?> fade in" style="margin-bottom: 0px;">
+                                <button type="button" class="close close-sm" data-dismiss="alert">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                                <?php echo $message; ?>
+                            </div>
+                        <?php } ?>
+                    </div>
+                <?php endif ?>
+                <!-- Start: Content -->
+                <?php echo $content; ?>
+                <!-- End: Content -->
             </section>
 
             <!-- Start: Right Sidebar -->

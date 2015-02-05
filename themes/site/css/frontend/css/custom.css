@@ -152,3 +152,6 @@
 .table-striped .name{
     width: 35%;
 }
+#adsBlock{
+    display: none !important;
+}
