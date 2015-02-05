@@ -58,12 +58,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
 
                                     <?php
                                     $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                                        'id' => CHtml::getIdByName(get_class($model) . '[diary_current_date]'),
                                         'name' => 'diary_current_date',
                                         'model' => $model,
                                         'attribute' => 'diary_current_date',
                                         'options' => array(
                                             'dateFormat' => JS_SHORT_DATE_FORMAT,
                                             'altFormat' => JS_SHORT_DATE_FORMAT,
+                                            'constrainInput' => 'true',
                                         ),
                                         'htmlOptions' => array(
                                             'value' => date(PHP_SHORT_DATE_FORMAT, strtotime($model->diary_current_date)),
@@ -74,9 +76,10 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                         ),
                                     ));
                                     ?>
-                                    <?php echo $form->error($model, 'diary_current_date'); ?>
+                                   
                                 </div>
                             </div>
+                             <?php echo $form->error($model, 'diary_current_date'); ?>
                         </div>
 
                         <div class="form-group">
@@ -88,11 +91,11 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 foreach ($moods as $key => $mood) {
                                     ?>
                                     <label class="radio-inline mr10">
-                                        <?php echo $form->radioButton($model, 'diary_user_mood_id', array('value' => $key, 'uncheckValue' => null, 'id' => 'diary_user_mood_id_'.$key)); ?>
+                                        <?php echo $form->radioButton($model, 'diary_user_mood_id', array('value' => $key, 'uncheckValue' => null,)); ?>
                                         <img src="<?php echo $themeUrl; ?>/image/mood_type/<?php echo $mood ?>"> </label>
                                 <?php } ?>
-
                             </div>
+                              <?php echo $form->error($model, 'diary_user_mood_id'); ?>
                         </div>
                         <div class="form-group">
                             <a href="#" id="add-new-file" class="btn btn-success">Add Files</a>
@@ -141,6 +144,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 ),
                             ));
                             ?>
+                         <?php echo $form->error($model, 'diary_description'); ?>
                         </div>
                         <div class="form-group">
                             <?php echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Save', array('class' => 'submit btn bg-purple pull-right')); ?>
