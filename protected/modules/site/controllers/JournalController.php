@@ -19,6 +19,22 @@ class JournalController extends Controller {
             'postOnly + delete', // we only allow deletion via POST request
         );
     }
+    
+    public function actions()
+     {
+          return array(
+              'compressor' => array(
+                    'class' => 'TinyMceCompressorAction',
+                    'settings' => array(
+                       'compress' => true,
+                            'disk_cache' => true,
+                        )
+                    ),
+                    'spellchecker' => array(
+                        'class' => 'TinyMceSpellcheckerAction',
+               ),
+          );
+      }
 
     /**
      * Specifies the access control rules.

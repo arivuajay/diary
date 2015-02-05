@@ -9,24 +9,27 @@
 
 
     <body class="forms-page">
-        <script>
+<!--        <script>
         tinymce.init({
-              //  selector:'textarea',
-                browser_spellcheck : true,
-//                external_plugins: {"nanospell": "<?php echo $baseUrl ?>/themes/admin/js/nanospell/plugin.js"},
-//                nanospell_server: "php" // choose "php" "asp" "asp.net" or "java"
+                selector:'textarea',
+                external_plugins: {"nanospell": "http://tinymcespellcheck.com/nanospell/plugin.js"},
+                nanospell_server: "php" // choose "php" "asp" "asp.net" or "java"
                 }); 
-        </script>
+
+        </script>-->
         <script>
             var boxtest = localStorage.getItem('boxed');
             if (boxtest === 'true') {
                 document.body.className += ' boxed-layout';
             }
+            tinymce.init({
+    browser_spellcheck : true,
+});
 
-            $(document).ready(function () {
+//            $(document).ready(function () {
 //               tinymce.init({
 //            		selector: 'textarea',
-//            		external_plugins: {"nanospell": "<?php echo $baseUrl ?>/extensions/tinymce/vendors/nanospell/plugin.js"},
+//            		//external_plugins: {"nanospell": "<?php echo $baseUrl ?>/extensions/tinymce/vendors/nanospell/plugin.js"},
 //            		nanospell_server: 'php', // choose "php" "asp" "asp.net"
 //            		nanospell_dictionary: 'en', // download 23 more at http://tinymcespellcheck.com/dictionaries
 //            		nanospell_ignore_words_with_numerals: true,
@@ -35,7 +38,7 @@
 //            		nanospell_compact_menu: false,
 //            		toolbar: 'nanospell'
 //            	});
-            });
+//            });
         </script>
 
         <!-- Start: Header -->

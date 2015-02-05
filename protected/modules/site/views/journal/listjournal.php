@@ -25,12 +25,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($journalList as $k => $journal): ?>
+                                <?php foreach ($journalList as $k => $journal): 
+                                    ?>
                                     <tr>
                                         <td><?php echo $k + 1; ?></td>
                                         <td><?php echo $journal->diary_title; ?></td>
                                         <td><?php echo $journal->diaryCategory->category_name; ?></td>
-                                        <td><?php echo CHtml::image($this->createUrl("/themes/site/css/frontend/img/mood_{$journal->diary_user_mood_id}.png"), $journal->diary_title); ?>
+                                        <td><?php echo CHtml::image($this->createUrl("/themes/site/image/mood_type/{$journal->diaryUserMood->mood_image}"), $journal->diary_title); ?>
                                         </td>
                                         <td>
                                             <?php echo CHtml::link('Edit', array('/site/journal/update', 'id' => $journal->diary_id)) ?>

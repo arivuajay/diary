@@ -125,7 +125,7 @@ class TinyMce extends CInputWidget
         $cs = Yii::app()->getClientScript();
         $cs->registerCoreScript('jquery');
         if ($this->compressorRoute === false) {
-            $cs->registerScriptFile($this->assetsDir . '/js/tinymce/tinymce.min.js');
+            $cs->registerScriptFile($this->assetsDir . '/js/tinymce/tinymce-4.0.28.min.js');
             $cs->registerScriptFile($this->assetsDir . '/js/tinymce/jquery.tinymce.min.js');
         } else {
             $opts = array(
