@@ -79,7 +79,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         ?>
                     </div>
                     <div class="row hmerow">
-                        <?php echo CHtml::submitButton('Write an Entry', array('class' => 'submitBtn', 'id' => 'hcontactsubmitBtn1')); ?>
+                          <div class="col-xs-12 col-sm-3 col-md-3">
+                          <?php echo CHtml::submitButton('Write an Entry', array('class' => 'submitBtn','name'=>'submit', 'id' => 'hcontactsubmitBtn1')); ?>
+                          </div>
+                        <div class="col-xs-6 col-md-4">
+                            <?php echo CHtml::submitButton('Submit', array('class' => 'submitBtn', 'name'=>'submit','id' => 'hcontactsubmitBtn1')); ?>
+                        </div>
+                        
+                         
                     </div>
                 </div>
                 <?php $this->endWidget(); ?>

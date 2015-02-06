@@ -149,6 +149,10 @@
     font-weight: bold;
 }
 
+.events_highlight_new{
+    background: #F99587; 
+}
+ 
 .table-striped .name{
     width: 35%;
 }

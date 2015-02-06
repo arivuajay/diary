@@ -55,6 +55,13 @@
                         array('label' => 'Add Banner', 'url' => array('/admin/banner/create')),
                     ),
                 ),
+                array('label' => '<i class="fa fa-user"></i><span>Mood Activity Management</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
+                    'submenuOptions' => array('class' => 'sub'),
+                    'items' => array(
+                        array('label' => 'Mood Activity', 'url' => array('/admin/moodactivity/index')),
+                       
+                    ),
+                ),
             ),
             'htmlOptions' => array('class' => 'sidebar-menu', "id" => "nav-accordion")
         ));
