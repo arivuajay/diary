@@ -64,6 +64,7 @@ class MoodType extends CActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'diaries' => array(self::HAS_MANY, 'Diary', 'diary_user_mood_id'),
+            'moodActivities' => array(self::HAS_MANY, 'MoodActivity', 'mood_activity_mood_id'),
             'tmpDiaries' => array(self::HAS_MANY, 'TmpDiary', 'temp_user_mood_id'),
         );
     }

@@ -51,7 +51,7 @@
     <div class="row">
         <div class="col-md-10 center-column">
             <div class="panel faq-panel mt50">
-                <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock"></span> View Journal # <?php echo $model->diary_id; ?><?php //  echo $model->heading; ?> </span> </div>
+                <div class="panel-heading"> <span class="panel-title"> <span class="glyphicon glyphicon-lock"></span> View Journal<?php //echo $model->diary_id; ?><?php //  echo $model->heading; ?> </span> </div>
                 <div class="panel-body pn">
                     <div class="row table-layout">
                         <div class="col-abt col-xs-12 va-m p60">
