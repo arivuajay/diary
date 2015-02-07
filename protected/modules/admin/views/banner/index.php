@@ -50,7 +50,7 @@ $this->breadcrumbs=array(
                                         <?php
 //                                        echo CHtml::link('<i class="fa fa-eye" title="View"></i>', arrasy('/admin/banner/view', 'id' => $banner->banner_id), array('id' => 'tooltip1')) . "&nbsp;&nbsp;";
                                         echo CHtml::link('<i class="fa fa-edit" title = "Update"></i>', array('/admin/banner/update', 'id' => $banner->banner_id), array('id' => 'tooltip')) . "&nbsp;&nbsp;";
-                                        echo CHtml::link('<i class="fa fa-trash-o" title="Delete"></i>', array('/admin/banner/delete', 'id' => $banner->banner_id), array('id' => 'tooltip', 'onclick' => "return confirm('Are you sure you want to delete?');"));
+//                                        echo CHtml::link('<i class="fa fa-trash-o" title="Delete"></i>', array('/admin/banner/delete', 'id' => $banner->banner_id), array('id' => 'tooltip', 'onclick' => "return confirm('Are you sure you want to delete?');"));
                                         ?>
                                     </td>
                                 </tr>
