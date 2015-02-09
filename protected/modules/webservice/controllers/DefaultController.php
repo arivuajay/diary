@@ -18,9 +18,18 @@ class DefaultController extends Controller {
         Yii::app()->end();
     }
 
+//    'diary_images'
+//        0 
+//            image_data
+//            image_type
+
     public function actionWriteentry() {
         $params = $_REQUEST;
-        $params['journal_images'] = $this->Uploadjournalimg($params['image_data'], $params['image_type']);
+       var_dump(CJSON::decode($params['diary_images']));
+        echo 'hi';
+       exit;
+        if (!empty($params['diary_images']))
+            $params['journal_images'] = $this->Uploadjournalimg($params['diary_images']);
         $result = Myclass::addEntry($params);
         echo CJSON::encode($result);
 
@@ -36,6 +45,10 @@ class DefaultController extends Controller {
     }
 
     public function actionListentries() {
+        $array = array(0=>array('image'=>'fgfgfg.jpg','type'=>'.jpg'),array('image'=>'fgfgfg.jpg','type'=>'.jpg'));
+        var_dump($encode = CJSON::encode($array)); 
+        var_dump($decode = CJSON::decode($encode)); 
+        exit;
         $criteria = new CDbCriteria();
         $criteria->select = array('t.*');
         $criteria->order = 'diary_id DESC';
@@ -51,7 +64,12 @@ class DefaultController extends Controller {
             $result['message'] = 'No entries found!!!';
         } else {
             $result['success'] = 1;
-            $result['message'] = $model;
+            $record = array();
+            foreach ($model as $data) {
+                $record = $data->attributes;
+                $record['diary_images'] = array_values(CHtml::listData($data->diaryImages, 'diary_img_id', 'diary_image'));
+            }
+            $result['message'] = $record;
         }
         echo CJSON::encode($result);
 
@@ -122,17 +140,23 @@ class DefaultController extends Controller {
         Yii::app()->end();
     }
 
-    public function Uploadjournalimg($base64_encode, $file_type) {
+    public function Uploadjournalimg($diary_images) {
         $result = array();
-        if (!empty($base64_encode) && !empty($file_type)):
-            $base64_decode = base64_decode($base64_encode);
-            $newfile = uniqid() . $file_type;
-            $success = file_put_contents(JOURNAL_IMG_PATH . $newfile, $base64_decode);
-            if ($success) {
-                $result[] = $newfile;
-            }
-        endif;
+//        $params['image_data'], $params['image_type']
+        foreach ($diary_images as $image):
+            $base64_encode = $image['image_data'];
+            $file_type = $image['image_type'];
+            if (!empty($base64_encode) && !empty($file_type)):
+                $base64_decode = base64_decode($base64_encode);
+                $newfile = uniqid() . $file_type;
+                $success = file_put_contents(JOURNAL_IMG_PATH . $newfile, $base64_decode);
+                if ($success) {
+                    $result[] = $newfile;
+                }
+            endif;
+        endforeach;
 
         return $result;
     }
+
 }

@@ -50,7 +50,7 @@ body {
 #content_wrapper {
   position: relative;
   display: block;
-/*  min-height: 1000px;*/
+  min-height: 700px;
   left: 0px;
   margin-left: 230px; }
 

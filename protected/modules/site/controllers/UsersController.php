@@ -241,13 +241,28 @@ class UsersController extends Controller {
         $user->setAttribute('user_status', '1');
         $user->setAttribute('user_last_login', date('Y-m-d H:i:s'));
         if ($user->save(false)) {
+//            $mail = new Sendmail;
+//            $message = '<p>Dear ' . $user->user_name . '</p>';
+//            $message .= '<p>Your email account verified successfully.</p>';
+//            $message .= '<p>You can login with your email and password: ';
+//            $message .= '<a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/login">Click Here to Login</a></p>';
+//            $Subject = CHtml::encode(Yii::app()->name) . ': Email Verfied';
+//            $mail->send($user->user_email, $Subject, $message);
+            ///////////////////////////
+            if (!empty($user->user_email)):
             $mail = new Sendmail;
-            $message = '<p>Dear ' . $user->user_name . '</p>';
-            $message .= '<p>Your email account verified successfully.</p>';
-            $message .= '<p>You can login with your email and password: ';
-            $message .= '<a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/login">Click Here to Login</a></p>';
-            $Subject = CHtml::encode(Yii::app()->name) . ': Email Verfied';
+            $loginlink = Yii::app()->createAbsoluteUrl('/site/users/login');
+            $trans_array = array(
+                "{SITENAME}" => SITENAME,
+                "{USERNAME}" => $user->user_name,
+                "{EMAIL_ID}" => $user->user_email,
+                "{NEXTSTEPURL}" => $loginlink,
+            );
+            $message = $mail->getMessage('activation', $trans_array);
+            $Subject = $mail->translate('{SITENAME}: Email Verfied');
             $mail->send($user->user_email, $Subject, $message);
+        endif;
+        /////////////////////////
 
             Yii::app()->user->setFlash('success', "Your Email account verified. you can login");
             $this->redirect(array('/site/users/login'));
@@ -399,12 +414,13 @@ class UsersController extends Controller {
             $model->user_prof_image = CUploadedFile::getInstance($model, 'user_prof_image');
             $valid = $model->validate();
             if ($valid) {
-                if(!empty($model->user_prof_image)){
-                $name = $model->user_prof_image->getName();
-                    $filename = time() .'_'. Yii::app()->user->id.'_' . $name;
+                if (!empty($model->user_prof_image)) {
+                    $name = $model->user_prof_image->getName();
+                    $filename = time() . '_' . Yii::app()->user->id . '_' . $name;
                     $model->user_prof_image->saveAs($path . $filename);
-                    if(!empty($old_name)) {
-                    unlink($path.$old_name);}
+                    if (!empty($old_name)) {
+                        unlink($path . $old_name);
+                    }
                     $model->user_prof_image = $filename;
                 } else {
                     $model->user_prof_image = $old_name;
@@ -434,7 +450,7 @@ class UsersController extends Controller {
         if ($key == 'vZu3G6Ewy') {
             $users = Users::model()->isActive()->findAll();
 
-            foreach ($users as $user){
+            foreach ($users as $user) {
                 $mail = new Sendmail;
                 $message = '<p>Dear ' . $user->user_name . ',</p>';
                 $message .= '<p>Its time to write your journal</p>';

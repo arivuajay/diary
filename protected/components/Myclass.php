@@ -110,16 +110,31 @@ class Myclass extends CController {
         $model->save(false);
 
 //        if (!$webserve) {
-        $mail = new Sendmail;
-        $message = '<p>Dear ' . $model->user_name . '</p>';
-        $message .= '<p>Thank you for signing up, we just need to verify your email address</p>';
-        $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">Click Here to activate</a></p><br />';
-        $message .= "<p>If you can't click the button above, you can verify your email address by copying and pasting (or typing) the following address into your browser:</p>";
-        $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '</a></p><br />';
-        $Subject = CHtml::encode(Yii::app()->name) . ': Confirmation your email';
-        $mail->send($model->user_email, $Subject, $message);
+//        $mail = new Sendmail;
+//        $message = '<p>Dear ' . $model->user_name . '</p>';
+//        $message .= '<p>Thank you for signing up, we just need to verify your email address</p>';
+//        $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">Click Here to activate</a></p><br />';
+//        $message .= "<p>If you can't click the button above, you can verify your email address by copying and pasting (or typing) the following address into your browser:</p>";
+//        $message .= '<p><a href="' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '">' . SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id . '</a></p><br />';
+//        $Subject = CHtml::encode(Yii::app()->name) . ': Confirmation your email';
+//        $mail->send($model->user_email, $Subject, $message);
 //        }
-
+        ///////////////////////
+        $confirmationlink = SITEURL . '/site/users/activation?activationkey=' . $model->user_activation_key . '&userid=' . $model->user_id;
+        if (!empty($model->user_email)):
+            //$loginlink = Yii::app()->createAbsoluteUrl('/site/default/login');
+            $mail = new Sendmail;
+            $trans_array = array(
+                "{SITENAME}" => SITENAME,
+                "{USERNAME}" => $model->user_name,
+                "{EMAIL_ID}" => $model->user_email,
+                "{NEXTSTEPURL}" => $confirmationlink,
+            );
+            $message = $mail->getMessage('registration', $trans_array);
+            $Subject = $mail->translate('Confirmation Mail From {SITENAME}');
+            $mail->send($model->user_email, $Subject, $message);
+        endif;
+        ///////////////////
         $response['success'] = 1;
         $response['message'] = "Successfully Created";
 
@@ -151,14 +166,33 @@ class Myclass extends CController {
         $user->save(false);
 
 //        if (!$webserve) {
-        $mail = new Sendmail;
-        $message = '<p>Dear ' . $user->user_name . '</p>';
-        $message .= '<p>We received a request to reset the password for your account.To reset your password, click on the button below (or copy/paste the URL into your browser). </p>';
-        $message .= '<a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/reset?str=' . $user->reset_password_string . '&id=' . $user->user_id . '">Click to Reset Password</a></p>';
-        $message .= '<p>This Password Link is valid for only 5 minutes from request time (' . date('Y-m-d H:i:s') . ')</p>';
-        $Subject = CHtml::encode(Yii::app()->name) . ': Reset Password';
-        $mail->send($user->user_email, $Subject, $message);
+//        $mail = new Sendmail;
+//        $message = '<p>Dear ' . $user->user_name . '</p>';
+//        $message .= '<p>We received a request to reset the password for your account.To reset your password, click on the button below (or copy/paste the URL into your browser). </p>';
+//        $message .= '<a href="' . $_SERVER['HTTP_HOST'] . Yii::app()->baseUrl . '/site/users/reset?str=' . $user->reset_password_string . '&id=' . $user->user_id . '">Click to Reset Password</a></p>';
+//        $message .= '<p>This Password Link is valid for only 5 minutes from request time (' . date('Y-m-d H:i:s') . ')</p>';
+//        $Subject = CHtml::encode(Yii::app()->name) . ': Reset Password';
+//        $mail->send($user->user_email, $Subject, $message);
 //        }
+        
+              ///////////////////////
+       $time_valid =  date('Y-m-d H:i:s');
+        $resetlink =Yii::app()->createAbsoluteUrl( '/site/users/reset?str=' . $user->reset_password_string . '&id=' . $user->user_id) ;
+        if (!empty($user->user_email)):
+            //$loginlink = Yii::app()->createAbsoluteUrl('/site/default/login');
+            $mail = new Sendmail;
+            $trans_array = array(
+                "{SITENAME}" => SITENAME,
+                "{USERNAME}" => $user->user_name,
+                "{EMAIL_ID}" => $user->user_email,
+                "{NEXTSTEPURL}" => $resetlink,
+                "{TIMEVALID}" => $time_valid,
+            );
+            $message = $mail->getMessage('forgot_password', $trans_array);
+            $Subject = $mail->translate('{SITENAME}: Reset Password');
+            $mail->send($user->user_email, $Subject, $message);
+        endif;
+        ///////////////////
 
         $response['success'] = 1;
         $response['message'] = "Your Password Reset Link sent to your email address.";
@@ -203,7 +237,7 @@ class Myclass extends CController {
             endif;
             $response['success'] = 1;
             $response['pref_date'] = date('Y-m-d', strtotime($model->diary_current_date));
-            $response['message'] = 'Successfully added.'.  json_encode($diary_images);
+            $response['message'] = 'Successfully added.' . json_encode($diary_images);
         } else {
             $response['success'] = 0;
             $response['pref_date'] = date('Y-m-d', strtotime($model->diary_current_date));

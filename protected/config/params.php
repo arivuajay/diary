@@ -32,12 +32,12 @@ return array(
     'SITENAME' => 'Express 2 Help',
     'JS_SHORT_DATE_FORMAT' => 'yy-mm-dd',
     'PHP_SHORT_DATE_FORMAT' => 'Y-m-d',
-
     'FB_APP_ID' => $fb_app_id,
     'FB_SECRET_ID' => $fb_sec_id,
     //
     //Product Settings
     'JOURNAL_IMG_PATH' => 'uploads/journal/',
     'COPYRIGHT' => '&copy; 2014 Express2Help.',
+    'EMAILHEADERIMAGE' => '/themes/site/css/frontend/img/logos/header-logo.png',
 );
 

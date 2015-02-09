@@ -41,7 +41,7 @@ class Sendmail {
         endif;
     }
 
-    public function getMessage($body = 'registration', &$translate) {
+    public function getMessage($body, &$translate) {
        
         if (EMAILLAYOUT == 'file'):
             $msg_header = file_get_contents(SITEURL . EMAILTEMPLATE . 'header.html');
@@ -64,7 +64,7 @@ class Sendmail {
         $def_trans = array(
             "{SITEURL}" => SITEURL,
             "{SITENAME}" => SITENAME,
-            "{EMAILHEADERIMAGE}" => EMAILHEADERIMAGE,
+            "{EMAILHEADERIMAGE}" => Yii::app()->createAbsoluteUrl(EMAILHEADERIMAGE),
             "{CONTACTMAIL}" => CONTACTMAIL,
         );
 
