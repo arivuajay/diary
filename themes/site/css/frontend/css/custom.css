@@ -159,3 +159,11 @@
 #adsBlock{
     display: none !important;
 }
+
+#fullcalendar .fc-widget-content{
+    cursor: pointer;
+}
+
+#fullcalendar .fc-other-month {
+    cursor: default;
+}

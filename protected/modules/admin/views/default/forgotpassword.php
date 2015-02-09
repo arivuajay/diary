@@ -1,22 +1,22 @@
 <?php
-if (!empty($this->flashMessages)):
-    echo '<div class="col-lg-5 col-md-5  col-sm-5  center-block fn clearfix mt20 alert-notify">';
-    foreach ($flashMessages as $key => $message) {
-        echo "<div class='alert alert-$key'>$message <a href='javascript:void(0)' class='close alert-close' aria-hidden='true'>&times;</a></div>";
-    }
-    echo '</div>';
-endif;
-
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'forgotform',
     'enableAjaxValidation' => false,
     'htmlOptions' => array('class' => 'form-signin')
         ));
-echo $form->errorSummary($newmodel, '');
-
+//echo $form->errorSummary($newmodel, '');
 ?>
 <h2 class="form-signin-heading">Forgot Password ?</h2>
 <?php echo $form->errorSummary($newmodel, ''); ?>
+<?php 
+if (isset($this->flashMessages)):
+//    echo '<div class="col-lg-5 col-md-5  col-sm-5 center-block fn clearfix mt20 alert-notify">';
+    foreach ($this->flashMessages as $key => $message) {
+        echo "<div class='alert alert-$key'>$message</div>";
+    }
+//    echo '</div>';
+endif;
+?>
 <div class="login-wrap">
     <div class="user-login-info">
         <?php echo $form->textField($newmodel, 'admin_email', array('placeholder' => $newmodel->getAttributeLabel('admin_email'), 'id' => 'input-email', 'class' => 'form-control')); ?>

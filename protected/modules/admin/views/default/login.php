@@ -1,11 +1,4 @@
 <?php
-if (!empty($this->flashMessages)):
-    echo '<div class="col-lg-5 col-md-5  col-sm-5 center-block fn clearfix mt20 alert-notify">';
-    foreach ($flashMessages as $key => $message) {
-        echo "<div class='alert alert-$key'>$message <a href='javascript:void(0)' class='close alert-close' aria-hidden='true'>&times;</a></div>";
-    }
-    echo '</div>';
-endif;
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'loginform',
     'enableAjaxValidation' => false,
@@ -18,6 +11,15 @@ if (isset(Yii::app()->request->cookies['admin_username']->value)) {
 ?>
 <h2 class="form-signin-heading">sign in now</h2>
 <?php echo $form->errorSummary($model, ''); ?>
+<?php 
+if (isset($this->flashMessages)):
+//    echo '<div class="col-lg-5 col-md-5  col-sm-5 center-block fn clearfix mt20 alert-notify">';
+    foreach ($this->flashMessages as $key => $message) {
+        echo "<div class='alert alert-$key'>$message </div>";
+    }
+//    echo '</div>';
+endif;
+?>
 <div class="login-wrap">
     <div class="user-login-info">
         <?php echo $form->textField($model, 'username', array('autofocus', 'class' => 'form-control', 'placeholder' => $model->getAttributeLabel('username'))); ?>

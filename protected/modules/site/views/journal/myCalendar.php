@@ -18,7 +18,7 @@ $myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->fi
 </div>
 <div id="content">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" id="fullcalendar">
             <?php
             $this->widget('ext.EFullCalendar.EFullCalendar', array(
                 'htmlOptions' => array(

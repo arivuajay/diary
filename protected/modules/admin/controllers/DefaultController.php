@@ -83,7 +83,7 @@ class DefaultController extends Controller {
                     $password = Myclass::getRandomString('8');
                     $adminmodel->admin_password = Myclass::encrypt($password);
                     $adminmodel->save(false);
-                    Yii::app()->user->setFlash('success', Yii::t('admin', 'ADMIN329'));
+//                    Yii::app()->user->setFlash('success', 'Your account password has been reset. Please check your email');
                     $loginlink = Yii::app()->createAbsoluteUrl('/admin/default/login');
 
                     $mail = new Sendmail;
@@ -97,11 +97,11 @@ class DefaultController extends Controller {
                     $message = $mail->getMessage('adminforgotpassword', $trans_array);
                     $Subject = $mail->translate('Reset Password From {SITENAME}');
                     $mail->send($newmodel->admin_email, $Subject, $message);
-
-                    $this->redirect(array('/admin/default/login'));
-                    Yii::app()->user->setFlash('success', Yii::t('admin', 'ADMIN329'));
+                    Yii::app()->user->setFlash('success', 'Your account password has been reset. Please check your email for new password');
+                    $this->redirect('login');
                 } else {
-                    Yii::app()->user->setFlash('warning', Yii::t('admin', 'ADMIN330'));
+                    Yii::app()->user->setFlash('danger', 'Email address is not valid.');
+                    $this->redirect('forgotpassword');
                 }
             endif;
 
