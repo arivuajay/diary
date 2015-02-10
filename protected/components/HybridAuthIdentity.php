@@ -34,8 +34,10 @@ class HybridAuthIdentity extends CUserIdentity {
                 "Google" => array(
                     "enabled" => true,
                     "keys" => array(
-                        "id" => "49305767216-ljvhl2k8qpjl15b0n4hqvhml3c5pa92j.apps.googleusercontent.com",
-                        "secret" => "TKEXtxHv4MKXXvFkvW9istdA",
+//                        "id" => "49305767216-ljvhl2k8qpjl15b0n4hqvhml3c5pa92j.apps.googleusercontent.com",
+//                        "secret" => "TKEXtxHv4MKXXvFkvW9istdA",
+                        "id" => GOOGLE_APP_ID,
+                        "secret" => GOOGLE_SECRET_ID
                     ),
                     "scope" => "https://www.googleapis.com/auth/userinfo.profile " . "https://www.googleapis.com/auth/userinfo.email",
                     "access_type" => "online",
@@ -46,7 +48,7 @@ class HybridAuthIdentity extends CUserIdentity {
 //                        "id" => "1043105999049965",
 //                        "secret" => "a9e6a8156bd58b152a76d554896117f5",
                         "id" => FB_APP_ID,
-                        "secret" => FB_SECRET_ID,
+                        "secret" => FB_SECRET_ID
                     ),
                     "scope" => "email",
                     "display" => "popup"

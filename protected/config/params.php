@@ -9,9 +9,15 @@ if (in_array($_SERVER['REMOTE_ADDR'], $whitelist)) {
 if (strpos($_SERVER['SERVER_NAME'], 'cherrybells.in') !== false) {
     $fb_app_id = '1539995622943889';
     $fb_sec_id = '110c466a1ee59dbb1cae307b216d1c2b';
+    
+    $google_app_id = '675517855666-ndue37r1cdhn72es30r1kkk545sm8ooi.apps.googleusercontent.com';
+    $google_sec_id = 'ahTkPog54J_DcMGI5NU-dSwk';
 } elseif (strpos($_SERVER['SERVER_NAME'], 'express2help.com') !== false) {
     $fb_app_id = '333663073505578';
     $fb_sec_id = '14209990fc94997b6bb83061865a3886';
+    
+    $google_app_id = '';
+    $google_sec_id = '';
 }
 
 
@@ -34,6 +40,8 @@ return array(
     'PHP_SHORT_DATE_FORMAT' => 'Y-m-d',
     'FB_APP_ID' => $fb_app_id,
     'FB_SECRET_ID' => $fb_sec_id,
+    'GOOGLE_APP_ID' => $google_app_id,
+    'GOOGLE_SECRET_ID' => $google_sec_id,
     //
     //Product Settings
     'JOURNAL_IMG_PATH' => 'uploads/journal/',
