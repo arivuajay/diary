@@ -41,7 +41,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
             <div class="container">
                 <?php
                 foreach ($this->flashMessages as $key => $message) {
-                    echo '<div class="alert flash-' . $key . '">' . $message . "</div>\n";
+                    echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
                 }
 
                 $form = $this->beginWidget('CActiveForm', array(
