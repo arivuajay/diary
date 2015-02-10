@@ -52,15 +52,47 @@
                         <div class="form-group">
                             <label class="col-lg-3 col-sm-2 control-label">Old Image</label>
                             <div class="col-lg-9">
-                                <?php
-                                $banner = Banner::model()->findByPk($model->banner_id);
-                                echo CHtml::image(
-                                        $this->createUrl("/themes/site/image/banners/" . $banner->banner_path . $banner->banner_image), 
-                                        $banner->banner_title
-                                        );
-                                ?>
+                                <div id="gallery" class="media-gal">
+                                    <div class="images item " >
+                                        <a href="#myModal" data-toggle="modal">
+                                        <?php
+                                            $banner = Banner::model()->findByPk($model->banner_id);
+                                            echo CHtml::image(
+                                                    $this->createUrl("/themes/site/image/banners/" . $banner->banner_path . $banner->banner_image), 
+                                                    $banner->banner_title
+                                                    );
+                                            ?>
+                                            </a>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
+                    
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title"><?php echo $banner->banner_title?></h4>
+                                    </div>
+
+                                    <div class="modal-body row">
+
+                                        <div class="col-md-12 img-modal">
+                                                <?php 
+                                                echo CHtml::image(
+                                                    $this->createUrl("/themes/site/image/banners/" . $banner->banner_path . $banner->banner_image), 
+                                                    $banner->banner_title
+                                                    );
+                                                ?>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    
                     <?php } ?>
                     <div class="form-group">
                         <?php echo $form->labelEx($model, 'banner_status', array('class' => 'col-lg-3 col-sm-2 control-label')); ?>

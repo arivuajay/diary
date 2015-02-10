@@ -122,10 +122,34 @@ $themeUrl = Yii::app()->theme->baseUrl;
             <!-- // Mainheader Menu Section -->
         </div>
         <div id="boxgallery" class="boxgallery" data-effect="effect-2">
-            <div class="panel"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/2.jpg" alt="image 2"/></div>
-            <div class="panel"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/3.jpg" alt="image 3"/></div>
-            <div class="panel"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/4.jpg" alt="image 4"/></div>
-            <div class="panel"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/5.jpg" alt="image 5"/></div>
+                <?php
+                $banners = Myclass::getBannerImages('home', 'top', '1170*660');
+                if (!empty($banners)) {
+                    foreach ($banners as $key => $banner) { ?>
+                    <div class="panel">
+                         <?php
+                            echo CHtml::image(
+                                    $this->createUrl("/themes/site/image/banners/" . $banner->banner_path . $banner->banner_image), 
+                                    $banner->banner_title
+                            );
+//                            echo CHtml::link(
+//                                    CHtml::image(
+//                                            $this->createUrl("/themes/site/image/banners/" . $banner->banner_path . $banner->banner_image), 
+//                                            $banner->banner_title 
+//                                    ), 
+//                                    $banner->banner_url,
+//                                    array(
+//                                        'target' => '_blank',
+//                                        'title' => $banner->banner_title
+//                                    )
+//                                )
+                            ?>
+                    </div>
+                    <?php 
+                    } 
+                }?>
+
+            
         </div>
     </div>
 </div>
