@@ -9,7 +9,7 @@ $myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->fi
 <div id="topbar">
     <div class="topbar-left">
         <ol class="breadcrumb">
-            <li class="crumb-active"><a href="#">Dashboard</a></li>
+            <li class="crumb-active">Dashboard</li>
         </ol>
     </div>
     <div class="topbar-right pt30">

@@ -98,7 +98,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         <?php echo $form->error($model, 'diary_user_mood_id'); ?>
                     </div>
                     <div class="form-group">
-                        <a href="#" id="add-new-file" class="btn btn-success">Add Files</a>
+                        <a href="#" id="add-new-file" class="btn btn-success">Upload Files</a>
                         <ul id="image_preview_list">
                             <?php
                             if (!$model->isNewRecord && $model->diaryImages):

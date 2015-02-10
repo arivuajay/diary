@@ -56,6 +56,7 @@
 
 .breadcrumb li.crumb-active{
     display: block !important;
+    font-size: 18px;
 }
 @font-face {
     font-family: "Oswald";
@@ -150,7 +151,7 @@
 }
 
 .events_highlight_new{
-    background: #F99587; 
+    background: #AEC8DF; 
 }
  
 .table-striped .name{

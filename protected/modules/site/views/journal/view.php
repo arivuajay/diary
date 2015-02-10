@@ -40,7 +40,7 @@
 <div id="topbar">
     <div class="topbar-left">
         <ol class="breadcrumb">
-            <li class="crumb-active"><a href="#">View Journal</a></li>
+            <li class="crumb-active">View Journal</li>
   <!--          <li class="crumb-link"><a href="<?php // echo $baseUrl; ?>">Home</a></li>
             <li class="crumb-trail"><?php //  echo $model->heading; ?></li>-->
         </ol>
@@ -65,34 +65,37 @@
                                                 'attributes' => array(
                                         //            'diary_id',
                                         //            'diary_user_id',
-                                                    'diary_title',
-                                                    array(
-                                                        'name' => $model->getAttributeLabel('diary_description'),
+                                                     array(
+                                                        'name' => 'Selected Mood',
                                                         'type' => 'raw',
-                                                        'value' => $model->diary_description
+                                                        'value' => CHtml::image($this->createUrl("/themes/site/image/mood_type/{$model->diaryUserMood->mood_image}"))
                                                     ),
-                                                    array(
+                                                    'diary_title',
+                                                     array(
                                                         'name' => $model->getAttributeLabel('diary_category_id'),
                                                         'type' => 'raw',
                                                         'value' => $model->diaryCategory->category_name
                                                     ),
-                                                    'diary_tags',
+                                                  'diary_tags',
                                                     array(
                                                         'name' => $model->getAttributeLabel('diary_current_date'),
                                                         'type' => 'raw',
                                                         'value' => date('Y-m-d', strtotime($model->diary_current_date))
                                                     ),
                                                     array(
+                                                        'name' => $model->getAttributeLabel('diary_description'),
+                                                        'type' => 'raw',
+                                                        'value' => $model->diary_description
+                                                    ),
+                                                    
+                                                    
+                                                    array(
                                                         'name' => 'Uploaded',
                                                         'type' => 'raw',
                                                         // 'value' => CHtml::image($this->createUrl("/".JOURNAL_IMG_PATH.$model->diary_upload))
                                                         'value' => Myclass::getUserDiaryImages($model->diary_id)
                                                     ),
-                                                    array(
-                                                        'name' => 'Selected Mood',
-                                                        'type' => 'raw',
-                                                        'value' => CHtml::image($this->createUrl("/themes/site/image/mood_type/{$model->diaryUserMood->mood_image}"))
-                                                    ),
+                                                   
                                                 //'created',
                                                 //'modified',
                                                 ),
