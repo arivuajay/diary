@@ -83,26 +83,36 @@ class MoodactivityController extends Controller {
                     'mood_activity_mood_id' => $mood_type->mood_id,
                 ));
                 $mail_users[$user_email->mood_activity_email][$mood_type->mood_type] = $count;
-                echo $mood_type->mood_type . '-----' . $count . '----';
+              //  echo $mood_type->mood_type . '-----' . $count . '----';
             }
         }
-        echo '<pre>';
-        print_r($mail_users);
-
-        exit;
-        if (!empty($mail_users)):
-//            $loginlink = Yii::app()->createAbsoluteUrl('/site/default/login');
-            $mail = new Sendmail;
-            $trans_array = array(
-                "{SITENAME}" => SITENAME,
-                "{USERNAME}" => $model->user_name,
-                "{EMAIL_ID}" => $model->user_email,
-                "{NEXTSTEPURL}" => $confirmationlink,
-            );
-            $message = $mail->getMessage('registration', $trans_array);
-            $Subject = $mail->translate('Confirmation Mail From {SITENAME}');
-            $mail->send($model->user_email, $Subject, $message);
-        endif;
+//        echo '<pre>';
+//        print_r($mail_users);
+        foreach ($mail_users as $key => $data) {
+            //   echo $key;
+            $user = Users::model()->findByAttributes(array('user_email' => $key));
+            if(isset($user->user_name)) {
+                $user_name = $user->user_name;
+            } else {
+                $user_name = 'users';
+            }
+            $report_table= '';
+//            echo '<pre>';
+//            print_r($data);
+            if (!empty($mail_users)):
+//                $loginlink = Yii::app()->createAbsoluteUrl('/site/default/login');
+                $mail = new Sendmail;
+                $trans_array = array(
+                    "{SITENAME}" => SITENAME,
+                    "{USERNAME}" => $user_name,
+                    "{EMAIL_ID}" => $key,
+//                    "{NEXTSTEPURL}" => $confirmationlink,
+                );
+                $message = $mail->getMessage('daily_mood_report', $trans_array);
+                $Subject = $mail->translate('Daily Report From {SITENAME}');
+                $mail->send($key, $Subject, $message);
+            endif;
+        }
 
 
 //        $report_status = CHtml::listData(AdminSetting::model()->findAllByAttributes(array('setting_name' => 'mood_report_mail')), 'setting_name', 'status');

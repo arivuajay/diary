@@ -446,16 +446,20 @@ class UsersController extends Controller {
         ));
     }
 
-    public function actionReminder($key) {
+    public function actionReminder($key = null) {
         if ($key == 'vZu3G6Ewy') {
             $users = Users::model()->isActive()->findAll();
 
             foreach ($users as $user) {
-                $mail = new Sendmail;
-                $message = '<p>Dear ' . $user->user_name . ',</p>';
-                $message .= '<p>Its time to write your journal</p>';
-                $Subject = CHtml::encode(Yii::app()->name) . ': Reminder';
-                $mail->send($user->user_email, $Subject, $message);
+            $mail = new Sendmail;
+            $trans_array = array(
+                "{SITENAME}" => SITENAME,
+                "{USERNAME}" => $user->user_name,
+                "{EMAIL_ID}" => $user->user_email,
+            );
+            $message = $mail->getMessage('reminder', $trans_array);
+            $Subject = $mail->translate('{SITENAME}: : Reminder');
+            $mail->send($user->user_email, $Subject, $message);
             }
         }
         Yii::app()->end();

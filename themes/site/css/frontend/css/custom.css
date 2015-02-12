@@ -150,9 +150,9 @@
     font-weight: bold;
 }
 
-.events_highlight_new{
+/*.events_highlight_new{
     background: #AEC8DF; 
-}
+}*/
  
 .table-striped .name{
     width: 35%;
@@ -169,3 +169,6 @@
     cursor: default;
 }
 
+.mood-submit {
+    width: 136px !important;
+}

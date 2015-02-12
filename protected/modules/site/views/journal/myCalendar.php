@@ -31,7 +31,7 @@ $myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->fi
                         'right' => 'month,agendaWeek,agendaDay'
                     ),
                     //uncomment if you want to show events
-//                        'events'=>$this->createUrl('journal/calendarevents'),
+                        'events'=>$this->createUrl('journal/calendarevents'),
                     'lazyFetching' => false,
                     'dayClick' => new CJavaScriptExpression("js:function(date, allDay, jsEvent, view) {
                             newdate = $.format.date(date, 'yyyy-MM-dd');
@@ -47,7 +47,7 @@ $myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->fi
                             newdate = $.format.date(date, ""+"yyyy-MM-dd");
 //                            console.log(avail_dates);
 //                            console.log(newdate);
-                            console.log(cell);
+//                            console.log(cell);
                             html_cont = cell.html();
                             if(jQuery.inArray( newdate, avail_dates ) > -1){
                                 cell.addClass("events_highlight_new");
