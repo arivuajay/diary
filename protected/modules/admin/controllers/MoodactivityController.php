@@ -73,60 +73,40 @@ class MoodactivityController extends Controller {
             'distinct' => true,
         ));
         $all_moods = MoodType::model()->findAll();
-        
-         
-        foreach($user_email_dis as $user_email)
-        {
-            echo $user_email->mood_activity_email.'-----';
-            foreach($all_moods as $mood_type){
-        // $count = MoodActivity::Model()->count("mood_activity_mood_id=:mood_activity_mood_id", array("mood_activity_mood_id" => $mood_type->mood_id));
-        $count=MoodActivity::model()->countByAttributes(array(
-                        'mood_activity_email'=>$user_email->mood_activity_email,
-                        'mood_activity_mood_id'=>$mood_type->mood_id,
+
+        $mail_users = array();
+        foreach ($user_email_dis as $user_email) {
+            echo $user_email->mood_activity_email . '-----';
+            foreach ($all_moods as $mood_type) {
+                $count = MoodActivity::model()->countByAttributes(array(
+                    'mood_activity_email' => $user_email->mood_activity_email,
+                    'mood_activity_mood_id' => $mood_type->mood_id,
                 ));
-                echo $mood_type->mood_id.'----'.$count.'----';
+                $mail_users[$user_email->mood_activity_email][$mood_type->mood_type] = $count;
+                echo $mood_type->mood_type . '-----' . $count . '----';
+            }
         }
-           
-        }
-//        echo '<pre>';
-//        print_r($user_email_dis);
+        echo '<pre>';
+        print_r($mail_users);
 
-//        $mail_users = array();
-//        $all_moods = MoodType::model()->findAll();
-//        foreach ($all_mood_genrated as $mood_genrated) {
-//            if(!isset($mail_users[$mood_genrated->mood_activity_email])){$mail_users[$mood_genrated->mood_activity_email] = '';}
-//            foreach ($all_moods as $mood) {
-//                if ($mood_genrated->mood_activity_mood_id == $mood->mood_id) {
-//                    echo $mood->mood_type.'-----';
-//                    if(isset($mail_users[$mood_genrated->mood_activity_email][$mood->mood_type])) {
-//                      $mail_users[$mood_genrated->mood_activity_email][$mood->mood_type] = $mail_users[$mood_genrated->mood_activity_email][$mood->mood_type]+1;
-//                    } else {
-//                        $mail_users[$mood_genrated->mood_activity_email] = array($mood->mood_type => 1 );
-//                    }
-//                }
-//            }
-//        }
-//        echo '<pre>';
-//        print_r($mail_users);
-//        echo '<pre>';
-//        print_r($all_mood_genrated);
         exit;
-//        $report_status = CHtml::listData(AdminSetting::model()->findAllByAttributes(array('setting_name' => 'mood_report_mail')), 'setting_name', 'status');
-//        if ($report_status['mood_report_mail'] == 1) {
+        if (!empty($mail_users)):
+//            $loginlink = Yii::app()->createAbsoluteUrl('/site/default/login');
+            $mail = new Sendmail;
+            $trans_array = array(
+                "{SITENAME}" => SITENAME,
+                "{USERNAME}" => $model->user_name,
+                "{EMAIL_ID}" => $model->user_email,
+                "{NEXTSTEPURL}" => $confirmationlink,
+            );
+            $message = $mail->getMessage('registration', $trans_array);
+            $Subject = $mail->translate('Confirmation Mail From {SITENAME}');
+            $mail->send($model->user_email, $Subject, $message);
+        endif;
 
-            //if (!empty($model->user_email)):
-            //$loginlink = Yii::app()->createAbsoluteUrl('/site/default/login');
-//            $mail = new Sendmail;
-//            $trans_array = array(
-//                "{SITENAME}" => SITENAME,
-//                "{USERNAME}" => $model->user_name,
-//                "{EMAIL_ID}" => $model->user_email,
-//                "{NEXTSTEPURL}" => $confirmationlink,
-//            );
-//            $message = $mail->getMessage('registration', $trans_array);
-//            $Subject = $mail->translate('Confirmation Mail From {SITENAME}');
-//            $mail->send($model->user_email, $Subject, $message);
-            // endif;
+
+//        $report_status = CHtml::listData(AdminSetting::model()->findAllByAttributes(array('setting_name' => 'mood_report_mail')), 'setting_name', 'status');
+//          if ($report_status['mood_report_mail'] == 1) {
 //        }
     }
 
