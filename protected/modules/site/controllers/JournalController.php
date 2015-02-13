@@ -19,22 +19,21 @@ class JournalController extends Controller {
             'postOnly + delete', // we only allow deletion via POST request
         );
     }
-    
-    public function actions()
-     {
-          return array(
-              'compressor' => array(
-                    'class' => 'TinyMceCompressorAction',
-                    'settings' => array(
-                       'compress' => true,
-                            'disk_cache' => true,
-                        )
-                    ),
-                    'spellchecker' => array(
-                        'class' => 'TinyMceSpellcheckerAction',
-               ),
-          );
-      }
+
+    public function actions() {
+        return array(
+            'compressor' => array(
+                'class' => 'TinyMceCompressorAction',
+                'settings' => array(
+                    'compress' => true,
+                    'disk_cache' => true,
+                )
+            ),
+            'spellchecker' => array(
+                'class' => 'TinyMceSpellcheckerAction',
+            ),
+        );
+    }
 
     /**
      * Specifies the access control rules.
@@ -48,7 +47,7 @@ class JournalController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'dashboard', 'calendarevents', 'listjournal', 'adddiaryimage', 'addFile', 'view'),
+                'actions' => array('create', 'update', 'dashboard', 'calendarevents', 'listjournal', 'adddiaryimage', 'addFile', 'view', 'search'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -71,12 +70,12 @@ class JournalController extends Controller {
      */
     public function actionView($id) {
         $model = $this->loadModel($id);
-        
-        if(empty($model) || $model->diary_user_id != Yii::app()->user->id){
+
+        if (empty($model) || $model->diary_user_id != Yii::app()->user->id) {
             Yii::app()->user->setFlash('danger', "Wrong url");
             $this->redirect(array('dashboard'));
         }
-            
+
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -100,7 +99,7 @@ class JournalController extends Controller {
             }
             !isset($_POST['Diary']['diary_description']) ? $_POST['Diary']['diary_description'] = '' : '';
             !isset($_POST['Diary']['diary_user_mood_id']) ? $_POST['Diary']['diary_user_mood_id'] = '' : '';
-            
+
             $model->attributes = $_POST['Diary'];
 
             if ($model->validate()) {
@@ -150,7 +149,7 @@ class JournalController extends Controller {
         $model->setScenario('update');
 
         // Uncomment the following line if AJAX validation is needed
-         $this->performAjaxValidation($model);
+        $this->performAjaxValidation($model);
 
         if (isset($_POST['Diary'])) {
             $new_category = ($_POST['Diary']['diary_category_id'] == 'others');
@@ -256,24 +255,24 @@ class JournalController extends Controller {
     }
 
     public function actionCalendarevents() {
-        $myDiary = Diary::model()->mine()->findAll(array('order'=>'created DESC'));
+        $myDiary = Diary::model()->mine()->findAll(array('order' => 'created DESC'));
         $limit = 2;
         $date = array();
         foreach ($myDiary as $diary) {
-            if(isset($date[strtotime($diary->diary_current_date)])){
+            if (isset($date[strtotime($diary->diary_current_date)])) {
                 $date[strtotime($diary->diary_current_date)] = $date[strtotime($diary->diary_current_date)] + 1;
-            }else{
+            } else {
                 $date[strtotime($diary->diary_current_date)] = 1;
             }
-            
-            if($date[strtotime($diary->diary_current_date)] <= $limit){
+
+            if ($date[strtotime($diary->diary_current_date)] <= $limit) {
                 $items[] = array(
                     'state' => 'TRUE',
                     'title' => $diary->diary_title,
                     'start' => date('Y-m-d', strtotime($diary->diary_current_date)),
                     'color' => '#A0D65A',
-    //                'start' => $diary->diary_current_date,
-                    'url' => $this->createUrl('/site/journal/listjournal', array('date' => date('Y-m-d',  strtotime($diary->diary_current_date))))
+                    //                'start' => $diary->diary_current_date,
+                    'url' => $this->createUrl('/site/journal/listjournal', array('date' => date('Y-m-d', strtotime($diary->diary_current_date))))
                 );
             }
         }
@@ -370,6 +369,21 @@ class JournalController extends Controller {
                 throw new CHttpException(500, "Could not upload file");
             }
         }
+    }
+
+    public function actionSearch() {
+
+        $model = new Diary('search');
+//        echo '<pre>';
+//        print_r($_GET);exit;
+        if (isset($_GET['search']))
+            $model->attributes = $_GET['search'];
+             
+        //send model object for search
+        $this->render('index', array(
+            'dataProvider' => $model->search(),
+            'model' => $model)
+        );
     }
 
 }

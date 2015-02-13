@@ -29,8 +29,30 @@
                 ?>
             </div>
             <div class="navbar-right">
+                <?php if(!(Yii::app()->user->isGuest)):?>
                 <div class="navbar-search" style="border: none;">
-                    <input type="text" id="HeaderSearch" placeholder="Search..." value="Search...">
+                    <form method="get" id="searchform" action="<?php echo $baseUrl; ?>/site/journal/search">
+                        <input type="text" name="search" id="HeaderSearch"  placeholder="Search..." >
+                    </form>
+                </div>
+                
+                <?php endif;?>
+                <div class="navbar-menus">
+                    <div class="btn-group" id="alert_menu">
+                        <button type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicons glyphicons-bell"></span> <b>3</b> </button>
+                        <ul class="dropdown-menu media-list" role="menu">
+                            <li class="dropdown-header">Recent Messages<span class="pull-right glyphicons glyphicons-bell"></span></li>
+                            <li class="p15 pb10">
+                                <ul class="list-unstyled">
+                                    <li><span class="glyphicons glyphicons-bell text-orange2 fs16 mr15"></span><b>CEO</b> lunch meeting Tuesday</li>
+                                    <li class="pt10"><span class="glyphicons glyphicons-facebook text-blue2 fs16 mr15"></span>Facebook likes are at <b>4,100</b></li>
+                                    <li class="pt10"><span class="glyphicons glyphicons-paperclip text-teal2 fs16 mr15"></span>Mark <b>uploaded</b> 3 new Docs</li>
+                                    <li class="pt10"><span class="glyphicons glyphicons-gift text-purple2 fs16 mr15"></span>It's <b>Marks</b> 34th Birthday</li>
+                                    <li class="pt10"><span class="glyphicons glyphicons-cup text-red2 fs16 mr15"></span>Best new employee awarded to <b>Jessica</b></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>      
                 </div>
             </div>
         </header>

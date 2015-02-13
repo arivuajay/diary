@@ -62,6 +62,13 @@
                        
                     ),
                 ),
+                array('label' => '<i class="fa fa-tasks"></i><span>Notification</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
+                    'submenuOptions' => array('class' => 'sub'),
+                    'items' => array(
+                        array('label' => 'Manage Notification', 'url' => array('/admin/notification/index')),
+                        array('label' => 'Add Notification', 'url' => array('/admin/notification/create')),
+                    ),
+                ),
             ),
             'htmlOptions' => array('class' => 'sidebar-menu', "id" => "nav-accordion")
         ));

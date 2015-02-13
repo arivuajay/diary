@@ -67,7 +67,7 @@ class MoodactivityController extends Controller {
     }
 
     public function actionDailymoodreport() {
-        $all_mood_genrated = MoodActivity::model()->findAll();
+//        $all_mood_genrated = MoodActivity::model()->findAll();
         $user_email_dis = MoodActivity::model()->findAll(array(
             'select' => 't.mood_activity_email',
             'distinct' => true,

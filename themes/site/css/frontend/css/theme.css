@@ -368,8 +368,7 @@ hr.tall {
   right: 0;
   top: 15px;
   height: 32px;
-/*  border-right: 1px solid #ebebeb; */
-}
+  border-right: 1px solid #ebebeb; }
 
 .navbar-search input {
   outline: none;

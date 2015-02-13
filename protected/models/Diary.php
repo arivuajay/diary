@@ -62,20 +62,21 @@ class Diary extends CActiveRecord {
 //            array('diary_upload', 'file', 'types' => $this->_allowTypes, 'allowEmpty' => true, 'maxSize' => 1024 * 1024 * $this->_maxSize, 'tooLarge' => "File has to be larger than {$this->_maxSize}MB", 'on' => 'create'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('diary_id, diary_user_id, diary_title, diary_description, diary_category_id, diary_tags, diary_current_date, diary_user_mood_id,  created, modified', 'safe', 'on' => 'search'),
+//            array('diary_id, diary_user_id, diary_title, diary_description, diary_category_id, diary_tags, diary_current_date, diary_user_mood_id,  created, modified', 'safe', 'on' => 'search'),
+            array('diary_title, diary_description, diary_current_date, ,  created, modified', 'safe', 'on' => 'search'),
             array('diary_category', 'catCheck', 'on' => 'create'),
         );
     }
 
     public function catCheck($attribute, $params) {
         if ($this->diary_category_id == 'others') {
-            if($this->$attribute == ''){
+            if ($this->$attribute == '') {
                 $this->addError($attribute, 'New category Name cannot be blank');
-            }else{
+            } else {
                 $criteria = new CDbCriteria;
-                $criteria->addCondition('category_name = "'.$this->$attribute.'"');
+                $criteria->addCondition('category_name = "' . $this->$attribute . '"');
                 $cat = Category::model()->find($criteria);
-                if(!empty($cat)){
+                if (!empty($cat)) {
                     $this->addError($attribute, 'This Category Name already exists');
                 }
             }
@@ -141,7 +142,7 @@ class Diary extends CActiveRecord {
         $criteria->compare('diary_category_id', $this->diary_category_id, true);
         $criteria->compare('diary_tags', $this->diary_tags, true);
         $criteria->compare('diary_current_date', $this->diary_current_date, true);
-        $criteria->compare('diary_user_mood_id', $this->diary_user_mood_id, true);
+//        $criteria->compare('diary_user_mood_id', $this->diary_user_mood_id, true);
 //        $criteria->compare('diary_upload', $this->diary_upload, true);
         $criteria->compare('created', $this->created, true);
         $criteria->compare('modified', $this->modified, true);
