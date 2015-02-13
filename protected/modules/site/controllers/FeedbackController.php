@@ -6,7 +6,7 @@ class FeedbackController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='//layouts/frontinner';
 
 	/**
 	 * @return array action filters
@@ -70,8 +70,19 @@ class FeedbackController extends Controller
 		if(isset($_POST['Feedback']))
 		{
 			$model->attributes=$_POST['Feedback'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->feedback_id));
+			if($model->save()){
+                $mail = new Sendmail;
+                $trans_array = array(
+                    "{SITENAME}" => SITENAME,
+                    "{USERNAME}" => $model->feedback_name,
+                    "{EMAIL_ID}" => $model->feedback_email,
+                );
+                $message = $mail->getMessage('contact', $trans_array);
+                $Subject = $mail->translate('{SITENAME}: Your Feedback Received');
+                $mail->send($model->feedback_email, $Subject, $message);
+                Yii::app()->user->setFlash('success', "Your Feedback Submitted Successfully.");
+                $this->redirect(array('/site/journal/dashboard'));
+            }
 		}
 
 		$this->render('create',array(
