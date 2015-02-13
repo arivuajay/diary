@@ -377,10 +377,15 @@ class JournalController extends Controller {
 //        echo '<pre>';
 //        print_r($_GET);exit;
         if (isset($_GET['search']))
-            $model->attributes = $_GET['search'];
-             
+            
+//            $model->attributes = $_GET['search'];
+            $model->diary_user_id = $_GET['search'];
+             $model->diary_title = $_GET['search'];
+            
+//             echo '<pre>';
+//        print_r($model->attributes);exit;
         //send model object for search
-        $this->render('index', array(
+        $this->render('search_view', array(
             'dataProvider' => $model->search(),
             'model' => $model)
         );

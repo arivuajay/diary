@@ -31,9 +31,16 @@
             <div class="navbar-right">
                 <?php if(!(Yii::app()->user->isGuest)):?>
                 <div class="navbar-search" style="border: none;">
-                    <form method="get" id="searchform" action="<?php echo $baseUrl; ?>/site/journal/search">
+                    <?php $form=$this->beginWidget('CActiveForm', array(
+        'action'=>$baseUrl.'/site/journal/search',
+        'method'=>'get',
+)); ?>
+
+                    <!--<form method="get" id="searchform" action="<?php echo $baseUrl; ?>/site/journal/search">-->
                         <input type="text" name="search" id="HeaderSearch"  placeholder="Search..." >
-                    </form>
+                    <!--</form>-->
+                    <?php $this->endWidget(); ?>
+
                 </div>
                 
                 <?php endif;?>
