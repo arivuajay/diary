@@ -217,6 +217,7 @@ class UsersController extends Controller {
             } else {
                 $return['sts'] = 'fail';
                 $return['text'] = 'Failed to delete this user: ' . $user->user_name;
+                echo json_encode($return);
                 exit;
             }
         }

@@ -62,13 +62,25 @@
                        
                     ),
                 ),
-                array('label' => '<i class="fa fa-tasks"></i><span>Notification</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
+                array('label' => '<i class="fa fa-phone"></i><span>Contact</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
                     'submenuOptions' => array('class' => 'sub'),
                     'items' => array(
-                        array('label' => 'Manage Notification', 'url' => array('/admin/notification/index')),
-                        array('label' => 'Add Notification', 'url' => array('/admin/notification/create')),
+                        array('label' => 'Manage Contact', 'url' => array('/admin/contact/index')),
                     ),
                 ),
+                array('label' => '<i class="fa fa-info"></i><span>Feedback</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
+                    'submenuOptions' => array('class' => 'sub'),
+                    'items' => array(
+                        array('label' => 'Manage Feedback', 'url' => array('/admin/feedback/index')),
+                    ),
+                ),
+//                array('label' => '<i class="fa fa-tasks"></i><span>Notification</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
+//                    'submenuOptions' => array('class' => 'sub'),
+//                    'items' => array(
+//                        array('label' => 'Manage Notification', 'url' => array('/admin/notification/index')),
+//                        array('label' => 'Add Notification', 'url' => array('/admin/notification/create')),
+//                    ),
+//                ),
             ),
             'htmlOptions' => array('class' => 'sidebar-menu', "id" => "nav-accordion")
         ));
