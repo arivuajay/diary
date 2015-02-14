@@ -44,8 +44,9 @@ class Sendmail {
     public function getMessage($body, &$translate) {
        
         if (EMAILLAYOUT == 'file'):
+         
             $msg_header = file_get_contents(SITEURL . EMAILTEMPLATE . 'header.html');
-            $msg_footer = file_get_contents(SITEURL . EMAILTEMPLATE . 'footer.html');
+            $msg_footer = file_get_contents(SITEURL . EMAILTEMPLATE . 'footer.html');  
             $msg_body = file_get_contents(SITEURL . EMAILTEMPLATE . $body . '.html');
 
             $message_dub = $msg_header . $msg_body . $msg_footer;

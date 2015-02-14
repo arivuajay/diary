@@ -24,6 +24,8 @@
               array('label' => '<span class="glyphicons glyphicons-inbox"></span><span class="sidebar-title">About us</span>', 'url' => Myclass::getPageUrl(1)),
              */
             array('label' => '<span class="glyphicons glyphicons-inbox"></span><span class="sidebar-title">Privacy</span>', 'url' => Myclass::getPageUrl(2)),
+            array('label' => '<span class="glyphicons glyphicons-inbox"></span><span class="sidebar-title">Contact Us</span>', 'url' =>array('/site/contact/create')),
+            array('label' => '<span class="glyphicons glyphicons-inbox"></span><span class="sidebar-title">Feedback</span>', 'url' =>array('/site/feedback/create')),
             array('label' => '<span class="glyphicons glyphicons-search"></span><span class="sidebar-title">All Your Needs</span>', 'url' => Myclass::getPageUrl(4)),
         ),
         'htmlOptions' => array('class' => 'nav sidebar-nav'),

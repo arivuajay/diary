@@ -58,10 +58,10 @@ class Feedback extends CActiveRecord
 	{
 		return array(
 			'feedback_id' => 'Feedback',
-			'feedback_name' => 'Feedback Name',
-			'feedback_email' => 'Feedback Email',
-			'feedback_phone' => 'Feedback Phone',
-			'feedback_message' => 'Feedback Message',
+			'feedback_name' => 'Name',
+			'feedback_email' => 'Email',
+			'feedback_phone' => 'Phone',
+			'feedback_message' => 'Message',
 			'created' => 'Created',
 			'modified' => 'Modified',
 		);

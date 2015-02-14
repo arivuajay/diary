@@ -58,10 +58,10 @@ class Contact extends CActiveRecord
 	{
 		return array(
 			'contact_id' => 'Contact',
-			'contact_name' => 'Contact Name',
-			'contact_email' => 'Contact Email',
-			'contact_phone' => 'Contact Phone',
-			'contact_message' => 'Contact Message',
+			'contact_name' => 'Name',
+			'contact_email' => 'Email',
+			'contact_phone' => 'Phone',
+			'contact_message' => 'Message',
 			'created' => 'Created',
 			'modified' => 'Modified',
 		);

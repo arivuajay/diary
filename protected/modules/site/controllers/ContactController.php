@@ -26,11 +26,11 @@ class ContactController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
+                'actions' => array('index', 'view', 'create'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
+                'actions' => array('update'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -59,7 +59,8 @@ class ContactController extends Controller {
      */
     public function actionCreate() {
         $model = new Contact;
-
+        $adminmodel = Admin::model()->find();
+//        echo $adminmodel->admin_username;exit;
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
@@ -75,6 +76,21 @@ class ContactController extends Controller {
                 $message = $mail->getMessage('contact', $trans_array);
                 $Subject = $mail->translate('{SITENAME}: Your Contact Received');
                 $mail->send($model->contact_email, $Subject, $message);
+
+                $adminmail = new Sendmail;
+                $admintrans_array = array(
+                    "{SITENAME}" => SITENAME,
+                    "{USERNAME}" => $model->contact_name,
+                    "{ADMINNAME}" => $adminmodel->admin_username,
+                    "{EMAIL_ID}" => $model->contact_email,
+                    "{PHONE}" => $model->contact_phone,
+                    "{FORM}" => 'Contact',
+                    "{MESSAGE}" => $model->contact_message,
+                );
+
+                $adminmessage = $adminmail->getMessage('contact_admin', $admintrans_array);
+                $adminSubject = $adminmail->translate('{SITENAME}: User Contact Received');
+                $adminmail->send($adminmodel->admin_email, $adminSubject, $adminmessage);
                 Yii::app()->user->setFlash('success', "Your Contact Submitted Successfully.");
                 $this->redirect(array('/site/journal/dashboard'));
             }
