@@ -38,59 +38,112 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     <?php echo CHtml::link(CHtml::image("$themeUrl/css/home/assets/img/google_play_button.png", 'PlayStore', array("border" => "0")), 'https://play.google.com/store/apps/details?id=com.express.splash&hl=en', array('target' => '_blank')) ?>
                 </div>
             </div>
+            <!--            <div class="container">
+            <?php
+            foreach ($this->flashMessages as $key => $message) {
+                echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
+            }
+
+            $form = $this->beginWidget('CActiveForm', array(
+                'id' => 'hcontact_form',
+                'enableAjaxValidation' => true,
+                'clientOptions' => array(
+                    'validateOnSubmit' => true,
+                ),
+                'method' => 'POST',
+                'htmlOptions' => array('role' => 'form')
+            ));
+            $moodTypes = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_image');
+            ?>
+                            <div class="clearfix hcont_form pad_top20">
+                                <div class="row hmerow">
+            <?php
+            echo $form->emailField($model, 'email', array('class' => 'textbox1', 'placeholder' => $model->getAttributeLabel('email')));
+            echo $form->error($model, 'email');
+            ?>
+                                </div>
+            
+                                <div class="row hmoodlist hmerow">
+                                    <p class="mood_label"><?php echo $model->getAttributeLabel('moodtype') ?></p>
+            <?php
+            $i = 0;
+            foreach ($moodTypes as $key => $mood):
+                ?>
+                                                <label class="radio-inline mr10 <?php if ($i == 0) echo "selected"; ?> ">
+                                                    <input type="radio" name="QuickCreate[moodtype]" class="mood_type_id" <?php if ($i == 0) echo "checked='checked'"; ?>  value="<?php echo $key; ?>">
+                <?php echo CHtml::image("$themeUrl/image/mood_type/$mood", $mood, array('class' => 'mood_type_smiley')); ?>
+                                                </label>
+                <?php
+                $i++;
+            endforeach;
+            ?>
+                                </div>
+                                <div class="row hmerow">
+                                    <div class="col-xs-12 col-sm-3 col-md-3">
+            <?php echo CHtml::submitButton('Write an Entry', array('class' => 'submitBtn', 'name' => 'submit', 'id' => 'hcontactsubmitBtn1')); ?>
+                                    </div>
+                                    <div class="col-xs-6 col-md-4">
+            <?php echo CHtml::submitButton('Submit', array('class' => 'submitBtn', 'name' => 'submit', 'id' => 'hcontactsubmitBtn1')); ?>
+                                    </div>
+            
+            
+                                </div>
+                            </div>
+            <?php $this->endWidget(); ?>
+                        </div>-->
+
+
             <div class="container">
+
                 <?php
                 foreach ($this->flashMessages as $key => $message) {
                     echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
                 }
 
                 $form = $this->beginWidget('CActiveForm', array(
-                    'id' => 'hcontact_form',
+                    'id' => 'signup',
                     'enableAjaxValidation' => true,
                     'clientOptions' => array(
                         'validateOnSubmit' => true,
                     ),
                     'method' => 'POST',
-                    'htmlOptions' => array('role' => 'form')
+                    'htmlOptions' => array('role' => 'form','novalidate'=>true)
                 ));
                 $moodTypes = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_image');
                 ?>
-                <div class="clearfix hcont_form pad_top20">
-                    <div class="row hmerow">
-                        <?php
-                        echo $form->emailField($model, 'email', array('class' => 'textbox1', 'placeholder' => $model->getAttributeLabel('email')));
-                        echo $form->error($model, 'email');
-                        ?>
-                    </div>
-
-                    <div class="row hmoodlist hmerow">
-                        <p class="mood_label"><?php echo $model->getAttributeLabel('moodtype') ?></p>
-                        <?php
-                        $i = 0;
-                        foreach ($moodTypes as $key => $mood): 
-                            ?>
-                            <label class="radio-inline mr10 <?php if ($i == 0) echo "selected"; ?> ">
-                                <input type="radio" name="QuickCreate[moodtype]" class="mood_type_id" <?php if ($i == 0) echo "checked='checked'"; ?>  value="<?php echo $key; ?>">
-                                <?php echo CHtml::image("$themeUrl/image/mood_type/$mood", $mood, array('class' => 'mood_type_smiley')); ?>
-                            </label>
-                            <?php
-                            $i++;
-                        endforeach;
-                        ?>
-                    </div>
-                    <div class="row hmerow">
-                          <div class="col-xs-12 col-sm-3 col-md-3">
-                          <?php echo CHtml::submitButton('Write an Entry', array('class' => 'submitBtn','name'=>'submit', 'id' => 'hcontactsubmitBtn1')); ?>
-                          </div>
-                        <div class="col-xs-6 col-md-4">
-                            <?php echo CHtml::submitButton('Submit', array('class' => 'submitBtn', 'name'=>'submit','id' => 'hcontactsubmitBtn1')); ?>
-                        </div>
-                        
-                         
-                    </div>
-                </div>
+<!--<input type="email" placeholder="Type Your Mailid" required="">-->
+                <?php
+                echo $form->emailField($model, 'email', array('placeholder' => 'Type Your Mailid','required'=>true));
+                echo $form->error($model, 'email');
+                ?>
+                <br>
+                <?php echo $model->getAttributeLabel('moodtype') ?>
+                <br>
+                <?php
+                $i = 0;
+                foreach ($moodTypes as $key => $mood):
+                    ?>
+                <label for="<?php echo "smiley_lbl_$i"?>" style="position: relative; cursor: pointer;">
+                    <?php echo CHtml::image("$themeUrl/image/mood_type/$mood", $mood, array("width"=>"35", "height"=>"34","for"=>"smiley_lbl_$i",'class'=> ($i == 0) ? "selected" : '')); ?>
+                <input class="mood_radio signup" id="<?php echo "smiley_lbl_$i"?>" type="radio" name="QuickCreate[moodtype]" <?php if ($i == 0) echo "checked='checked'"; ?>  value="<?php echo $key; ?>">
+                </label>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <?php
+                    $i++;
+                endforeach;
+                ?>
+<!--                <img src="assets/img/smiley-img.png" width="35" height="34"> <input type="radio" name="group2" value="Water">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="assets/img/smiley-img1.png" width="35" height="34"> <input type="radio" class="signup" name="group2" value="Water">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="assets/img/smiley-img2.png" width="35" height="34"> <input type="radio" class="signup" name="group2" value="Water">-->
+                <br>
+                <?php echo CHtml::htmlButton('WRITE AN ENTRY', array('class' => 'submitBtn','type'=>'submit', 'name' => 'submit', 'id' => 'hcontactsubmitBtn1')); ?>&nbsp;&nbsp;
+                <?php echo CHtml::htmlButton('Submit', array('class' => 'submitBtn','type'=>'submit', 'name' => 'submit','value'=>'Submit', 'id' => 'hcontactsubmitBtn1')); ?>
                 <?php $this->endWidget(); ?>
+
             </div>
+
+
+
             <!-- Mainheader Menu Section -->
             <div class="mainheaderslide" id="slide">
                 <div id="mainheader" class="header">
@@ -122,16 +175,16 @@ $themeUrl = Yii::app()->theme->baseUrl;
             <!-- // Mainheader Menu Section -->
         </div>
         <div id="boxgallery" class="boxgallery" data-effect="effect-2">
-                <?php
-                $banners = Myclass::getBannerImages('home', 'top', '1170*660');
-                if (!empty($banners)) {
-                    foreach ($banners as $key => $banner) { ?>
+            <?php
+            $banners = Myclass::getBannerImages('home', 'top', '1170*660');
+            if (!empty($banners)) {
+                foreach ($banners as $key => $banner) {
+                    ?>
                     <div class="panel">
-                         <?php
-                            echo CHtml::image(
-                                    $this->createUrl("/themes/site/image/banners/" . $banner->banner_path . $banner->banner_image), 
-                                    $banner->banner_title
-                            );
+                        <?php
+                        echo CHtml::image(
+                                $this->createUrl("/themes/site/image/banners/" . $banner->banner_path . $banner->banner_image), $banner->banner_title
+                        );
 //                            echo CHtml::link(
 //                                    CHtml::image(
 //                                            $this->createUrl("/themes/site/image/banners/" . $banner->banner_path . $banner->banner_image), 
@@ -143,13 +196,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
 //                                        'title' => $banner->banner_title
 //                                    )
 //                                )
-                            ?>
+                        ?>
                     </div>
-                    <?php 
-                    } 
-                }?>
+                    <?php
+                }
+            }
+            ?>
 
-            
+
         </div>
     </div>
 </div>
@@ -194,6 +248,13 @@ $themeUrl = Yii::app()->theme->baseUrl;
 </div>
 <script type="text/javascript">
     $(function () {
+        $('.mood_radio').on('click', function () {
+            $('#signup img').removeClass('selected');
+            $('.mood_radio').removeAttr('checked', 'checked');
+            $(this).prev('img').addClass('selected');
+            $(this).attr('checked', 'checked');
+        });
+        
         $('.mood_type_smiley').on('click', function () {
             $('.hmoodlist label').removeClass('selected');
             $('.mood_type_id').removeAttr('checked', 'checked');
@@ -201,8 +262,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
             $(this).prev('input[type="radio"]').attr('checked', 'checked');
         });
     })
-</script>
-<script>
+
     function underDevelopment() {
         alert("Under Development");
     }

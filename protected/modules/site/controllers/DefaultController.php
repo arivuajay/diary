@@ -12,7 +12,7 @@ class DefaultController extends Controller {
             $mood_submit_model->mood_activity_mood_id = $_POST['QuickCreate']['moodtype'];
             if ($mood_submit_model->save())
                 Yii::app()->user->setFlash('success', "Your Mood Activity Submitted");
-                $this->redirect(array('index'));
+            $this->redirect(array('index'));
             exit;
         } else {
             if (isset($_POST['QuickCreate'])) {
@@ -30,7 +30,7 @@ class DefaultController extends Controller {
     }
 
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'hcontact_form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'signup') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
