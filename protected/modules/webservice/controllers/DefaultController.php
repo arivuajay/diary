@@ -54,15 +54,14 @@ class DefaultController extends Controller {
         } else {
             $result['success'] = 1;
             $record = array();
-            foreach ($model as $data) {
-                $record = $data->attributes;
-                $record['diary_images'] = array_values(CHtml::listData($data->diaryImages, 'diary_img_id', 'diary_image'));
+            foreach ($model as $i => $data) {
+                $record[$i] =  (array) $data->attributes;
+                $record[$i]['diary_images'] = array_values(CHtml::listData($data->diaryImages, 'diary_img_id', 'diary_image'));
             }
             $result['message'] = $record;
         }
 
-        print_r($result);
-
+        echo CJSON::encode($result);
         Yii::app()->end();
     }
 
