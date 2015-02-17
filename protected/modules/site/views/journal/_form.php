@@ -129,7 +129,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         $editMe = $this->widget('ext.editMe.widgets.ExtEditMe', array(
                             'attribute' => 'diary_description',
                             'model' => $model,
-                            'height' => 305,//
+                            'height' => 305, //
                             'toolbar' => array(
                                 array('SpellChecker', 'Scayt'),
                                 array(
@@ -143,7 +143,8 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                     'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'
                                 ),
                                 array(
-                                    'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'
+//                                    'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe','Maximize'
+                                    'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe','Maximize'
                                 ),
                             )
                         ));
@@ -255,4 +256,5 @@ Yii::app()->clientScript->registerScript('_journal_form', $js);
 
 <script>
 //$('ul#image_preview_list li a').find('data-url="'+_imgURL+'"').closet("li").remove();
+
 </script>

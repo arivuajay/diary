@@ -2318,5 +2318,7 @@ mobile
   margin-right: 20px;
 }
 }
-        
+.cke_bottom{
+    display:none;
+} 
    

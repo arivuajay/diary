@@ -121,6 +121,7 @@ class JournalController extends Controller {
                     endforeach;
                 endif;
                 unset($_SESSION['diary_images']);
+                $_SESSION['back'] =1;
                 Yii::app()->user->setFlash('success', "Your Journal added Successfully.");
                 $this->redirect(array('view', 'id' => $model->diary_id));
             }
@@ -177,6 +178,7 @@ class JournalController extends Controller {
                     endforeach;
                 endif;
                 unset($_SESSION['diary_images']);
+                 $_SESSION['back'] =1;
                 $this->redirect(array('view', 'id' => $model->diary_id));
             }
         } else {
