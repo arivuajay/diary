@@ -65,7 +65,11 @@ class Myclass extends CController {
     }
 
     public static function getCategorywithOthers() {
-        $mood = CHtml::listData(Category::model()->findAll(), 'category_id', 'category_name');
+        $user_id = Yii::app()->user->id;
+        $criteria = new CDbCriteria();
+        $criteria->addInCondition('user_id',array(0,$user_id));
+        $cat_results = Category::model()->findAll($criteria);
+        $mood = CHtml::listData($cat_results, 'category_id', 'category_name');
         $mood['others'] = 'Others';
         return $mood;
     }
@@ -377,8 +381,9 @@ class Myclass extends CController {
             $ext = $img_arr[1];
             $type = in_array($ext, array('jpg', 'jpeg', 'gif', 'png')) ? 'picture' : 'file';
             $content .= '<span class="glyphicon glyphicon-' . $type . '">  ';
+            $dImg = substr($image->diary_image, strpos($image->diary_image,"_")+1);
             $content .= CHtml::link(
-                            $image->diary_image, Yii::app()->createUrl('uploads/journal/' . $image->diary_image), array('target' => '_blank'));
+                            $dImg, Yii::app()->createUrl('uploads/journal/' . $image->diary_image), array('target' => '_blank'));
             $content .= '<br /><br />';
         }
         return $content;

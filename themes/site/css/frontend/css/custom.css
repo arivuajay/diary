@@ -153,7 +153,7 @@
 /*.events_highlight_new{
     background: #AEC8DF; 
 }*/
-
+ 
 .table-striped .name{
     width: 35%;
 }
@@ -172,9 +172,7 @@
 .mood-submit {
     width: 136px !important;
 }
-.cke_path{
-    display:none !important;
-} 
-.top-marin {
-    margin: 21px 8px 0 0;
+
+.fc-button-month, .fc-button-agendaWeek, .fc-button-agendaDay{
+    text-transform: uppercase;
 }

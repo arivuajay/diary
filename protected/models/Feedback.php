@@ -30,7 +30,7 @@ class Feedback extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('feedback_name, feedback_email', 'required'),
+			array('feedback_name, feedback_email, feedback_message', 'required'),
 			array('feedback_name, feedback_email', 'length', 'max'=>256),
 			array('feedback_phone', 'length', 'max'=>15),
 			array('feedback_message, created, modified', 'safe'),

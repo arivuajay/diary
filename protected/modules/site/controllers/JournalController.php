@@ -106,6 +106,7 @@ class JournalController extends Controller {
                 if ($new_category == true) {
                     $catmodel = new Category();
                     $catmodel->setAttribute('category_name', $_POST['Diary']['diary_category']);
+                    $catmodel->setAttribute('user_id', Yii::app()->user->id);
                     $catmodel->save(false);
                     $model->setAttribute('diary_category_id', $catmodel->category_id);
                 }
@@ -163,6 +164,7 @@ class JournalController extends Controller {
                 if ($new_category == true) {
                     $catmodel = new Category();
                     $catmodel->setAttribute('category_name', $_POST['Diary']['diary_category']);
+                    $catmodel->setAttribute('user_id', Yii::app()->user->id);
                     $catmodel->save(false);
                     $model->setAttribute('diary_category_id', $catmodel->category_id);
                 }
@@ -325,8 +327,10 @@ class JournalController extends Controller {
                 $model->mime_type = $model->file->getType();
                 $model->size = $model->file->getSize();
                 $model->name = $model->file->getName();
+                $fname = $model->name;
+                $fn = explode('.', $fname);
                 //(optional) Generate a random name for our file
-                $filename = md5(Yii::app()->user->id . microtime() . $model->name);
+                $filename = md5(Yii::app()->user->id . microtime()).'_'.$fn[0];
                 $filename .= "." . $model->file->getExtensionName();
                 if ($model->validate()) {
                     //Move our file to our temporary dir

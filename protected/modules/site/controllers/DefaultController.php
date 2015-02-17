@@ -28,6 +28,11 @@ class DefaultController extends Controller {
         }
         $this->render('index', compact('model'));
     }
+    
+    public function actionUnderdevelopment() {
+        $this->layout = '//layouts/frontinner';
+        $this->render('underdevelopment');
+    }
 
     protected function performAjaxValidation($model) {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'signup') {

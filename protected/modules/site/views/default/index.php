@@ -32,7 +32,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
             <div class="container">
                 <div class="header_icons accura-header-block accura-hidden-2xs">
                     <a href="<?php echo SITEURL; ?>"><img src="<?php echo $themeUrl; ?>/css/home/assets/img/logo-png.png" border="0"></a>
-                    <div class="your-own">YOUR OWN PERSONAL DIARY/JOURNAL</div>
+                    <div class="your-own">YOUR OWN PERSONAL DIARY / JOURNAL</div>
                 </div>
                 <div class="call">
                     <?php echo CHtml::link(CHtml::image("$themeUrl/css/home/assets/img/google_play_button.png", 'PlayStore', array("border" => "0")), 'https://play.google.com/store/apps/details?id=com.express.splash&hl=en', array('target' => '_blank')) ?>
@@ -231,10 +231,10 @@ $themeUrl = Yii::app()->theme->baseUrl;
         <div class="brand pull-right">
             <div class="header_icons accura-header-block accura-hidden-2xs">
                 <ul class="accura-social-icons accura-stacked accura-jump accura-full-height accura-bordered accura-small accura-colored-bg clearFix">
-                    <li id="1"><a href="http://www.facebook.com" target="_blank" class="accura-social-icon-facebook circle"><i class="fa fa-facebook"></i></a></li>
-                    <li id="2"><a href="http://www.twitter.com" target="_blank" class="accura-social-icon-twitter circle"><i class="fa fa-twitter"></i></a></li>
-                    <li id="3"><a href="http://www.googleplus.com" target="_blank" class="accura-social-icon-gplus circle"><i class="fa fa-google-plus"></i></a></li>
-                    <li id="4"><a href="https://www.pinterest.com/login/" target="_blank" class="accura-social-icon-pinterest circle"><i class="fa fa-pinterest"></i></a></li>
+                    <li id="1"><a href="#" target="_blank" class="accura-social-icon-facebook circle"><i class="fa fa-facebook"></i></a></li>
+                    <li id="2"><a href="#" target="_blank" class="accura-social-icon-twitter circle"><i class="fa fa-twitter"></i></a></li>
+                    <li id="3"><a href="#" target="_blank" class="accura-social-icon-gplus circle"><i class="fa fa-google-plus"></i></a></li>
+                    <li id="4"><a href="#" target="_blank" class="accura-social-icon-pinterest circle"><i class="fa fa-pinterest"></i></a></li>
 <!--						<li id="5"><a href="https://www.linkedin.com/uas/login" target="_blank" class="accura-social-icon-linkedin circle"><i class="fa fa-linkedin"></i></a></li>
                     -->					  </ul>
             </div>

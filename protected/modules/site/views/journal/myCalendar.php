@@ -28,7 +28,7 @@ $myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->fi
                     'header' => array(
                         'left' => 'prev,next today',
                         'center' => 'title',
-                        'right' => 'month,agendaWeek,agendaDay'
+                        'right' => 'year,month,agendaWeek,agendaDay'
                     ),
                     //uncomment if you want to show events
                         'events'=>$this->createUrl('journal/calendarevents'),

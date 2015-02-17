@@ -116,16 +116,16 @@
                         <div class="col-xs-4">
                             <?php echo CHtml::link('<span class="glyphicons glyphicons-inbox fs22 text-orange2"></span><h5 class="fs11">Write a journal</h5>', array('/site/journal/create')); ?>
                         </div>
-                        <div class="col-xs-4"> <a href="#"> <span class="glyphicons glyphicons-bell fs22 text-purple2"></span>
-                                <h5 class="fs11">Mood report</h5>
-                            </a> </div>
+                        <div class="col-xs-4"> 
+                            <?php echo CHtml::link('<span class="glyphicons glyphicons-bell fs22 text-purple2"></span><h5 class="fs11">Mood report</h5>', array('/site/default/underdevelopment')); ?>
+                        </div>
                     </div>
                 </div>
                 <?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
             </aside>
             <!-- End: Sidebar -->
             <section id="content_wrapper">
-                <?php if (isset($this->flashMessages)): ?>
+                <?php if (isset($this->flashMessages) && !empty($this->flashMessages)): ?>
                     <div style="padding: 10px;">
                         <?php foreach ($this->flashMessages as $key => $message) { ?>
                             <div class="alert alert-<?php echo $key; ?> fade in" style="margin-bottom: 0px;">

@@ -30,7 +30,7 @@ class Contact extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('contact_name, contact_email', 'required'),
+			array('contact_name, contact_email, contact_message', 'required'),
 			array('contact_name, contact_email', 'length', 'max'=>256),
 			array('contact_phone', 'length', 'max'=>15),
 			array('contact_message, created, modified', 'safe'),
