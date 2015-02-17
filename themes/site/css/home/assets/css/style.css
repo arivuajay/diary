@@ -2292,7 +2292,7 @@ mobile
                 
                 #signup label {
   display: inline-block;
-  float: left;
+/*  float: left;*/
   font-weight: bold;
   margin-bottom: 5px;
   margin-right: 21px;
@@ -2301,7 +2301,7 @@ mobile
 @media (max-width: 767px) {
 #signup label {
   display: inline-block;
-  float: left;
+/*  float: left;*/
   font-weight: bold;
   margin-bottom: 5px;
   margin-right: 20px;
@@ -2312,7 +2312,7 @@ mobile
 @media (min-width: 768px) and (max-width: 991px) {
     #signup label {
   display: inline-block;
-  float: left;
+/*  float: left;*/
   font-weight: bold;
   margin-bottom: 5px;
   margin-right: 20px;
