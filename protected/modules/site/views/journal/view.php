@@ -45,12 +45,12 @@
             <li class="crumb-trail"><?php //  echo $model->heading;   ?></li>-->
         </ol>
     </div>
-    
+    <div class="topbar-right top-button-margin">
         <?php $back_id =  date('Y-m-d',strtotime($model->diary_current_date));?>
         <?php if($_SESSION['back'] != 1){ echo CHtml::Button('Back', array('submit'=>array('journal/listjournal/date/'.$back_id),'class' => 'submit btn bg-purple pull-right top-marin'));}unset($_SESSION['back']) ?>
         <?php echo CHtml::Button('Edit', array('submit'=>array('journal/update/id/'.$model->diary_id),'class' => 'submit btn bg-purple pull-right top-marin')); ?>
         <?php echo CHtml::Button('Write a Journal', array('submit'=>array('journal/create'),'class' => 'submit btn bg-purple pull-right top-marin')); ?>
-    
+    </div>
 </div>
 
 <div id="content">

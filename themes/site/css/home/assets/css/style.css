@@ -2120,7 +2120,7 @@ mobile
 }
 
 .your-own{
-    font-size: 13px;
+    font-size: 20px;
     color: #F52A2A;
     margin: 0px;
 }
@@ -2318,7 +2318,4 @@ mobile
   margin-right: 20px;
 }
 }
-.cke_bottom{
-    display:none;
-} 
-   
+ 

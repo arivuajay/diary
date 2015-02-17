@@ -176,3 +176,9 @@
 .fc-button-month, .fc-button-agendaWeek, .fc-button-agendaDay{
     text-transform: uppercase;
 }
+.cke_path{
+    display:none !important;
+} 
+.top-marin {
+    margin: 21px 8px 0 0 !important;
+}
