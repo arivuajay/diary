@@ -1,6 +1,7 @@
 <!-- The file upload form used as target for the file upload widget -->
 <?php if ($this->showForm) echo CHtml::beginForm($this->url, 'post', $this->htmlOptions); ?>
 <div class="row fileupload-buttonbar">
+  
     <div class="span7">
         <!-- The fileinput-button span is used to style the file input field as button -->
         <span class="btn btn-success fileinput-button">
@@ -30,6 +31,10 @@
             <input type="checkbox" class="toggle">
         <?php } ?>
     </div>
+      <div class="span5">
+       All kind of files can be uploaded EXCEPT exe. File size should be 1 byte to 1Gb.
+    </div>
+    
     <div class="span5">
         <!-- The global progress bar -->
         <div class="progress progress-success progress-striped active fade">

@@ -144,7 +144,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                                 ),
                                 array(
 //                                    'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe','Maximize'
-                                    'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe','Maximize'
+                                    'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe', 'Maximize'
                                 ),
                             )
                         ));
@@ -167,18 +167,21 @@ $themeUrl = Yii::app()->theme->baseUrl;
         <div class="modal-content">
             <div class="modal-header">
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                <h4 id="editName" class="modal-title">Add images to your diary</h4>
+                <h4 id="editName" class="modal-title">Add images / file to your diary / journal</h4>
             </div>
             <div class="modal-body">
                 <?php
                 Yii::import("ext.xupload.models.XUploadForm");
                 $imgModel = new XUploadForm;
                 $this->widget('xupload.XUpload', array(
-                    'url' => Yii::app()->createUrl("/site/journal/adddiaryimage"),
-                    'model' => $imgModel,
-                    'attribute' => 'file',
-                    'multiple' => true,
-                    'htmlOptions' => array('id' => 'image-form')
+                'url' => Yii::app()->createUrl("/site/journal/adddiaryimage"),
+                'model' => $imgModel,
+                'attribute' => 'file',
+                'multiple' => true,
+                'htmlOptions' => array('id' => 'image-form'),
+                'options' => array(
+                'maxFileSize' => '1000000000',
+                ),
                 ));
                 ?>
             </div>
