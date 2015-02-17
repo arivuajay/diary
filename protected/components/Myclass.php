@@ -178,10 +178,9 @@ class Myclass extends CController {
 //        $Subject = CHtml::encode(Yii::app()->name) . ': Reset Password';
 //        $mail->send($user->user_email, $Subject, $message);
 //        }
-        
-              ///////////////////////
-       $time_valid =  date('Y-m-d H:i:s');
-        $resetlink =Yii::app()->createAbsoluteUrl( '/site/users/reset?str=' . $user->reset_password_string . '&id=' . $user->user_id) ;
+        ///////////////////////
+        $time_valid = date('Y-m-d H:i:s');
+        $resetlink = Yii::app()->createAbsoluteUrl('/site/users/reset?str=' . $user->reset_password_string . '&id=' . $user->user_id);
         if (!empty($user->user_email)):
             //$loginlink = Yii::app()->createAbsoluteUrl('/site/default/login');
             $mail = new Sendmail;
@@ -215,7 +214,13 @@ class Myclass extends CController {
             $user = Users::model()->findByAttributes(array('user_email' => $param['mail']));
         }
 
-        $model = new Diary('webservice');
+        if (isset($param['diary_id'])) {
+            $model = Diary::model()->findByPk($param['diary_id']);
+        }
+        if (!$model)
+            $model = new Diary();
+
+        $model->setScenario('webservice');
         $model->diary_title = $param['title'];
         $model->diary_description = $param['text'];
         $mood_array = array('1' => "Happy", "Sad", "Excited");

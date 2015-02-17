@@ -18,18 +18,11 @@ class DefaultController extends Controller {
         Yii::app()->end();
     }
 
-//    'diary_images'
-//        0 
-//            image_data
-//            image_type
-
     public function actionWriteentry() {
         $params = $_REQUEST;
-       var_dump(CJSON::decode($params['diary_images']));
-        echo 'hi';
-       exit;
-        if (!empty($params['diary_images']))
-            $params['journal_images'] = $this->Uploadjournalimg($params['diary_images']);
+        if (!empty($_FILES['image']))
+            $params['journal_images'] = $this->Uploadjournalimg($_FILES['image']);
+
         $result = Myclass::addEntry($params);
         echo CJSON::encode($result);
 
@@ -45,10 +38,6 @@ class DefaultController extends Controller {
     }
 
     public function actionListentries() {
-        $array = array(0=>array('image'=>'fgfgfg.jpg','type'=>'.jpg'),array('image'=>'fgfgfg.jpg','type'=>'.jpg'));
-        var_dump($encode = CJSON::encode($array)); 
-        var_dump($decode = CJSON::decode($encode)); 
-        exit;
         $criteria = new CDbCriteria();
         $criteria->select = array('t.*');
         $criteria->order = 'diary_id DESC';
@@ -71,7 +60,8 @@ class DefaultController extends Controller {
             }
             $result['message'] = $record;
         }
-        echo CJSON::encode($result);
+
+        print_r($result);
 
         Yii::app()->end();
     }
@@ -142,21 +132,56 @@ class DefaultController extends Controller {
 
     public function Uploadjournalimg($diary_images) {
         $result = array();
-//        $params['image_data'], $params['image_type']
-        foreach ($diary_images as $image):
-            $base64_encode = $image['image_data'];
-            $file_type = $image['image_type'];
-            if (!empty($base64_encode) && !empty($file_type)):
-                $base64_decode = base64_decode($base64_encode);
-                $newfile = uniqid() . $file_type;
-                $success = file_put_contents(JOURNAL_IMG_PATH . $newfile, $base64_decode);
-                if ($success) {
-                    $result[] = $newfile;
+        $target_path = JOURNAL_IMG_PATH;
+        $log = array();
+        for($i=0; $i < count($diary_images['name']); $i++):
+            if (isset($diary_images['name'][$i])) {
+                $filename = md5(microtime()) . basename($diary_images['name'][$i]);
+                try {
+                    // Throws exception incase file is not being moved
+                    if (!move_uploaded_file($diary_images['tmp_name'][$i], $target_path . $filename)) {
+                        $log[$k]['error'] = true;
+                        $log[$k]['message'] = 'Could not move the file!';
+                        $log[$k]['tmp_name'] = $diary_images['tmp_name'][$i];
+
+                    }
+
+                    $result[] = $filename;
+                    // File successfully uploaded
+                    $log[$k]['message'] = 'File uploaded successfully!';
+                    $log[$k]['error'] = false;
+                    $log[$k]['file_path'] = $filename;
+                } catch (Exception $e) {
+                    $log[$k]['error'] = true;
+                    $log[$k]['message'] = $e->getMessage();
                 }
-            endif;
-        endforeach;
+            } else {
+                // File parameter is missing
+                $log[$k]['error'] = true;
+                $log[$k]['error'] = $diary_images['name'][$i];
+                $log[$k]['message'] = 'Not received any file!F';
+            }
+        endfor;
 
         return $result;
     }
 
+//    public function Uploadjournalimg($diary_images) {
+//        $result = array();
+////        $params['image_data'], $params['image_type']
+//        foreach ($diary_images as $image):
+//            $base64_encode = $image['image_data'];
+//            $file_type = $image['image_type'];
+//            if (!empty($base64_encode) && !empty($file_type)):
+//                $base64_decode = base64_decode($base64_encode);
+//                $newfile = uniqid() . $file_type;
+//                $success = file_put_contents(JOURNAL_IMG_PATH . $newfile, $base64_decode);
+//                if ($success) {
+//                    $result[] = $newfile;
+//                }
+//            endif;
+//        endforeach;
+//
+//        return $result;
+//    }
 }
