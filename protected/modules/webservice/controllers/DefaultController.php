@@ -55,7 +55,7 @@ class DefaultController extends Controller {
             $result['success'] = 1;
             $record = array();
             foreach ($model as $i => $data) {
-                $record[$i] =  (array) $data->attributes;
+                $record[$i] = (array) $data->attributes;
                 $record[$i]['diary_images'] = array_values(CHtml::listData($data->diaryImages, 'diary_img_id', 'diary_image'));
             }
             $result['message'] = $record;
@@ -97,9 +97,11 @@ class DefaultController extends Controller {
             $result['message'] = 'No entries found!!!';
         } else {
             $result['success'] = 1;
-            $result['message'] = $model;
+            $record = (array) $model->attributes;
+            $record['diary_images'] = array_values(CHtml::listData($model->diaryImages, 'diary_img_id', 'diary_image'));
+            $result['message'] = $record;
         }
-        echo CJSON::encode($result);
+        echo CJSON::encode($result); 
 
         Yii::app()->end();
     }
@@ -133,7 +135,7 @@ class DefaultController extends Controller {
         $result = array();
         $target_path = JOURNAL_IMG_PATH;
         $log = array();
-        for($i=0; $i < count($diary_images['name']); $i++):
+        for ($i = 0; $i < count($diary_images['name']); $i++):
             if (isset($diary_images['name'][$i])) {
                 $filename = md5(microtime()) . basename($diary_images['name'][$i]);
                 try {
@@ -142,7 +144,6 @@ class DefaultController extends Controller {
                         $log[$k]['error'] = true;
                         $log[$k]['message'] = 'Could not move the file!';
                         $log[$k]['tmp_name'] = $diary_images['tmp_name'][$i];
-
                     }
 
                     $result[] = $filename;
