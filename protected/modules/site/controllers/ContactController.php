@@ -92,7 +92,7 @@ class ContactController extends Controller {
                 $adminSubject = $adminmail->translate('{SITENAME}: User Contact Received');
                 $adminmail->send($adminmodel->admin_email, $adminSubject, $adminmessage);
                 Yii::app()->user->setFlash('success', "Your Contact Submitted Successfully.");
-                $this->redirect(array('/site/journal/dashboard'));
+                $this->redirect(array('/site/contact/create'));
             }
         }
         $this->render('create', array(

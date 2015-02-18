@@ -93,7 +93,7 @@ class FeedbackController extends Controller {
                 $adminSubject = $adminmail->translate('{SITENAME}: User Feedback Received');
                 $adminmail->send($adminmodel->admin_email, $adminSubject, $adminmessage);
                 Yii::app()->user->setFlash('success', "Your Feedback Submitted Successfully.");
-                $this->redirect(array('/site/journal/dashboard'));
+                $this->redirect(array('/site/feedback/create'));
             }
         }
 
