@@ -184,23 +184,30 @@ class DefaultController extends Controller {
 //
 //        return $result;
 //    }
-    
-       public function actionSearchresult() {
-        $model = Diary::model()->findByPk($_REQUEST['diary_id']);
+
+    public function actionSearchresult() {
+        $criteria = new CDbCriteria();
+        $criteria->select = array('t.*');
+        $criteria->with = array('diaryCategory');
+        $criteria->addCondition("t.diary_user_id = '" . $_REQUEST['user_id'] . "'");
+        $criteria->addCondition("t.diary_title = '" . $_REQUEST['searchdata'] . "'  OR t.diary_tags = '" . $_REQUEST['searchdata'] . "'  OR t.diary_current_date = '" . $_REQUEST['searchdata'] . "' OR diaryCategory.category_name = '" . $_REQUEST['searchdata'] . "'");
+        $model = Diary::model()->findAll($criteria);
         if (!$model) {
             $result['success'] = 0;
             $result['message'] = 'No entries found!!!';
         } else {
             $result['success'] = 1;
-            $record[0] = (array) $model->attributes;
-            $record[0]['diary_images'] = array_values(CHtml::listData($model->diaryImages, 'diary_img_id', 'diary_image'));
-            $result['message'] = $record;
+            foreach($model as $i => $data ){
+            $result['message'][$i] = $data->attributes;
+            }
         }
         echo CJSON::encode($result);
+        
 
         Yii::app()->end();
     }
-       public function actionGetcms() {
+
+    public function actionGetcms() {
         $model = Cms::model()->findByPk($_REQUEST['cms_id']);
         if (!$model) {
             $result['success'] = 0;
@@ -216,4 +223,5 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
+
 }

@@ -384,23 +384,6 @@ class JournalController extends Controller {
 //        print_r($_GET);exit;
         if (isset($_GET['search']))
 
-//            $model->attributes = $_GET['search'];
-//            $user_id = Yii::app()->user->id;
-//          $model->diary_user_id = Yii::app()->user->id;
-//          $model->diary_title = $_GET['search'];
-
-//        $criteria = new CDbCriteria();
-//        $criteria->select = array('t.*');
-////        $criteria->with = array('diaryUser');
-//        $criteria->addCondition("t.diary_user_id = '" . $user_id . "' AND t.diary_title = '" . $_GET['search'] . "'");
-////        if (isset($_REQUEST['pref_date']))
-////            $criteria->addCondition("DATE(t.diary_current_date) = '" . $_REQUEST['pref_date'] . "'");
-////        $criteria->limit = 10;
-//
-//        $model = Diary::model()->findAll($criteria);
-
-//             echo '<pre>';
-//        print_r($model->attributes);exit;
         //send model object for search
         $this->render('search_view', array(
 //            'dataProvider' => $model->customsearch(),
