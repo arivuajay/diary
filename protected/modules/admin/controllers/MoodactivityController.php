@@ -72,7 +72,7 @@ class MoodactivityController extends Controller {
             'select' => 't.mood_activity_email',
             'distinct' => true,
         ));
-        $all_moods = MoodType::model()->findAll();
+        $all_moods = MoodType::model()->findAll('');
 
         $mail_users = array();
         foreach ($user_email_dis as $user_email) {
