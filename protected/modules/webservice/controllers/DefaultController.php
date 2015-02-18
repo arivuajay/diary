@@ -97,11 +97,11 @@ class DefaultController extends Controller {
             $result['message'] = 'No entries found!!!';
         } else {
             $result['success'] = 1;
-            $record = (array) $model->attributes;
-            $record['diary_images'] = array_values(CHtml::listData($model->diaryImages, 'diary_img_id', 'diary_image'));
+            $record[0] = (array) $model->attributes;
+            $record[0]['diary_images'] = array_values(CHtml::listData($model->diaryImages, 'diary_img_id', 'diary_image'));
             $result['message'] = $record;
         }
-        echo CJSON::encode($result); 
+        echo CJSON::encode($result);
 
         Yii::app()->end();
     }
