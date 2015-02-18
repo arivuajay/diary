@@ -152,6 +152,24 @@ class Diary extends CActiveRecord {
         ));
     }
 
+    public function customsearch() {
+        // @todo Please modify the following code to remove attributes that should not be searched.
+
+        $criteria = new CDbCriteria();
+        $criteria->select = array('t.*');
+        $criteria->with = array('diaryCategory');
+        $criteria->addCondition("t.diary_user_id = '" . Yii::app()->user->id. "'");
+        $criteria->addCondition("t.diary_title = '" . $_GET['search'] . "'  OR t.diary_tags = '" . $_GET['search'] . "'  OR t.diary_current_date = '" . $_GET['search'] . "' OR diaryCategory.category_name = '" . $_GET['search'] . "'");
+//        if (isset($_REQUEST['pref_date']))
+//            $criteria->addCondition("DATE(t.diary_current_date) = '" . $_REQUEST['pref_date'] . "'");
+//        $criteria->limit = 10;
+        
+//        return new CActiveDataProvider($this, array(
+//            'criteria' => $criteria,
+//        ));
+        return Diary::model()->findAll($criteria);
+    }
+
     /**
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!

@@ -173,7 +173,7 @@
     width: 136px !important;
 }
 
-.fc-button-month, .fc-button-agendaWeek, .fc-button-agendaDay{
+.fc-button-month, .fc-button-agendaWeek, .fc-button-agendaDay,  .fc-button-today{
     text-transform: uppercase;
 }
 .cke_path{

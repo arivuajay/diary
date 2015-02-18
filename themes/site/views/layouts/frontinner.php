@@ -37,7 +37,7 @@
 )); ?>
 
                     <!--<form method="get" id="searchform" action="<?php echo $baseUrl; ?>/site/journal/search">-->
-                        <input type="text" name="search" id="HeaderSearch"  placeholder="Search..." >
+                    <input type="text" name="search" id="HeaderSearch" value="<?php echo isset($_GET['search'])? $_GET['search']:''?>"  placeholder="Search..." >
                     <!--</form>-->
                     <?php $this->endWidget(); ?>
 
@@ -51,11 +51,11 @@
                             <li class="dropdown-header">Recent Messages<span class="pull-right glyphicons glyphicons-bell"></span></li>
                             <li class="p15 pb10">
                                 <ul class="list-unstyled">
-                                    <li><span class="glyphicons glyphicons-bell text-orange2 fs16 mr15"></span><b>CEO</b> lunch meeting Tuesday</li>
-                                    <li class="pt10"><span class="glyphicons glyphicons-facebook text-blue2 fs16 mr15"></span>Facebook likes are at <b>4,100</b></li>
-                                    <li class="pt10"><span class="glyphicons glyphicons-paperclip text-teal2 fs16 mr15"></span>Mark <b>uploaded</b> 3 new Docs</li>
-                                    <li class="pt10"><span class="glyphicons glyphicons-gift text-purple2 fs16 mr15"></span>It's <b>Marks</b> 34th Birthday</li>
-                                    <li class="pt10"><span class="glyphicons glyphicons-cup text-red2 fs16 mr15"></span>Best new employee awarded to <b>Jessica</b></li>
+                                    <li><span class="glyphicons glyphicons-bell text-orange2 fs16 mr15"></span></li>
+                                    <!--<li class="pt10"><span class="glyphicons glyphicons-facebook text-blue2 fs16 mr15"></span></b></li>-->
+                                    <li class="pt10"><span class="glyphicons glyphicons-paperclip text-teal2 fs16 mr15"></span></li>
+                                    <li class="pt10"><span class="glyphicons glyphicons-gift text-purple2 fs16 mr15"></span></li>
+                                    <li class="pt10"><span class="glyphicons glyphicons-cup text-red2 fs16 mr15"></span></b></li>
                                 </ul>
                             </li>
                         </ul>

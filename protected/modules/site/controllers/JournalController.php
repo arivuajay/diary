@@ -122,7 +122,7 @@ class JournalController extends Controller {
                     endforeach;
                 endif;
                 unset($_SESSION['diary_images']);
-                $_SESSION['back'] =1;
+                $_SESSION['back'] = 1;
                 Yii::app()->user->setFlash('success', "Your Journal added Successfully.");
                 $this->redirect(array('view', 'id' => $model->diary_id));
             }
@@ -180,7 +180,7 @@ class JournalController extends Controller {
                     endforeach;
                 endif;
                 unset($_SESSION['diary_images']);
-                 $_SESSION['back'] =1;
+                $_SESSION['back'] = 1;
                 $this->redirect(array('view', 'id' => $model->diary_id));
             }
         } else {
@@ -330,7 +330,7 @@ class JournalController extends Controller {
                 $fname = $model->name;
                 $fn = explode('.', $fname);
                 //(optional) Generate a random name for our file
-                $filename = md5(Yii::app()->user->id . microtime()).'_'.$fn[0];
+                $filename = md5(Yii::app()->user->id . microtime()) . '_' . $fn[0];
                 $filename .= "." . $model->file->getExtensionName();
                 if ($model->validate()) {
                     //Move our file to our temporary dir
@@ -383,17 +383,28 @@ class JournalController extends Controller {
 //        echo '<pre>';
 //        print_r($_GET);exit;
         if (isset($_GET['search']))
-            
+
 //            $model->attributes = $_GET['search'];
-            $model->diary_user_id = $_GET['search'];
-             $model->diary_title = $_GET['search'];
-            
+//            $user_id = Yii::app()->user->id;
+//          $model->diary_user_id = Yii::app()->user->id;
+//          $model->diary_title = $_GET['search'];
+
+//        $criteria = new CDbCriteria();
+//        $criteria->select = array('t.*');
+////        $criteria->with = array('diaryUser');
+//        $criteria->addCondition("t.diary_user_id = '" . $user_id . "' AND t.diary_title = '" . $_GET['search'] . "'");
+////        if (isset($_REQUEST['pref_date']))
+////            $criteria->addCondition("DATE(t.diary_current_date) = '" . $_REQUEST['pref_date'] . "'");
+////        $criteria->limit = 10;
+//
+//        $model = Diary::model()->findAll($criteria);
+
 //             echo '<pre>';
 //        print_r($model->attributes);exit;
         //send model object for search
         $this->render('search_view', array(
-            'dataProvider' => $model->search(),
-            'model' => $model)
+//            'dataProvider' => $model->customsearch(),
+            'model' => $model->customsearch())
         );
     }
 
