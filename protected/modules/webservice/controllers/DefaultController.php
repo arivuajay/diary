@@ -184,4 +184,36 @@ class DefaultController extends Controller {
 //
 //        return $result;
 //    }
+    
+       public function actionSearchresult() {
+        $model = Diary::model()->findByPk($_REQUEST['diary_id']);
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No entries found!!!';
+        } else {
+            $result['success'] = 1;
+            $record[0] = (array) $model->attributes;
+            $record[0]['diary_images'] = array_values(CHtml::listData($model->diaryImages, 'diary_img_id', 'diary_image'));
+            $result['message'] = $record;
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+       public function actionGetcms() {
+        $model = Cms::model()->findByPk($_REQUEST['cms_id']);
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No entries found!!!';
+        } else {
+            $result['success'] = 1;
+            $record = $model->attributes;
+            $record['body'] = strip_tags($record['body']);
+
+            $result['message'] = $model->attributes;
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
 }
