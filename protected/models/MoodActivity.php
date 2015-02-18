@@ -15,7 +15,10 @@
  */
 class MoodActivity extends CActiveRecord
 {
-	/**
+       public $dist_user;
+       public $created;
+       public $mood_activity_mood_id;
+        /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -107,12 +110,12 @@ class MoodActivity extends CActiveRecord
 	}
         
         public function beforeSave() {
-        if ($this->isNewRecord):
-            $this->created = date('Y-m-d H:i:s');
-            $this->modified = date('Y-m-d H:i:s');
-        endif;
+            if ($this->isNewRecord):
+                $this->created = date('Y-m-d H:i:s');
+                $this->modified = date('Y-m-d H:i:s');
+            endif;
 
-        return parent::beforeSave();
+            return parent::beforeSave();
     }
 
 }

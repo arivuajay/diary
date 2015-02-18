@@ -25,7 +25,7 @@ class MoodactivityController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'Report_status', 'Dailymoodreport'),
+                'actions' => array('index', 'view', 'report_status', 'dailymoodreport'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
