@@ -74,7 +74,7 @@
                         array('label' => 'Manage Feedback', 'url' => array('/admin/feedback/index')),
                     ),
                 ),
-//                array('label' => '<i class="fa fa-tasks"></i><span>Notification</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
+//                array('label' => '<i class="fa fa-bell-o"></i><span>Notification</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
 //                    'submenuOptions' => array('class' => 'sub'),
 //                    'items' => array(
 //                        array('label' => 'Manage Notification', 'url' => array('/admin/notification/index')),
