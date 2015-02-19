@@ -397,7 +397,6 @@ class Myclass extends CController {
     public static function addContact($model) {
         $response = null;
         $webserve = false;
-
         if (!is_object($model)) {
             $webserve = true;
             $param = $model;
@@ -433,6 +432,51 @@ class Myclass extends CController {
 
             $adminmessage = $adminmail->getMessage('contact_admin', $admintrans_array);
             $adminSubject = $adminmail->translate('{SITENAME}: User Contact Received');
+            $adminmail->send($adminmodel->admin_email, $adminSubject, $adminmessage);
+            $response['success'] = 1;
+            $response['message'] = "Contact Successfully sent.";
+        }
+        return $response;
+    }
+
+    public static function addFeedback($model) {
+        $response = null;
+        $webserve = false;
+        if (!is_object($model)) {
+            $webserve = true;
+            $param = $model;
+
+            $model = new Feedback('webservice');
+            $model->feedback_name = $param['feedback_name'];
+            $model->feedback_email = $param['feedback_mail'];
+            $model->feedback_phone = $param['feedback_mobile'];
+            $model->feedback_message = $param['feedback_message'];
+        }
+        if ($model->save()) {
+            $adminmodel = Admin::model()->find();
+            $mail = new Sendmail;
+            $trans_array = array(
+                "{SITENAME}" => SITENAME,
+                "{USERNAME}" => $model->feedback_name,
+                "{EMAIL_ID}" => $model->feedback_email,
+            );
+            $message = $mail->getMessage('contact', $trans_array);
+            $Subject = $mail->translate('{SITENAME}: Your Feedback Received');
+            $mail->send($model->feedback_email, $Subject, $message);
+
+            $adminmail = new Sendmail;
+            $admintrans_array = array(
+                "{SITENAME}" => SITENAME,
+                "{USERNAME}" => $model->feedback_name,
+                "{ADMINNAME}" => $adminmodel->admin_username,
+                "{EMAIL_ID}" => $model->feedback_email,
+                "{PHONE}" => $model->feedback_phone,
+                "{FORM}" => 'Feedback',
+                "{MESSAGE}" => $model->feedback_message,
+            );
+
+            $adminmessage = $adminmail->getMessage('contact_admin', $admintrans_array);
+            $adminSubject = $adminmail->translate('{SITENAME}: User Feedback Received');
             $adminmail->send($adminmodel->admin_email, $adminSubject, $adminmessage);
             $response['success'] = 1;
             $response['message'] = "Contact Successfully sent.";

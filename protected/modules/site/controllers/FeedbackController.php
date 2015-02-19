@@ -58,7 +58,7 @@ class FeedbackController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new Feedback;
+        $model = new Feedback('normal');
         $adminmodel = Admin::model()->find();
 
 
@@ -67,34 +67,10 @@ class FeedbackController extends Controller {
 
         if (isset($_POST['Feedback'])) {
             $model->attributes = $_POST['Feedback'];
-            if ($model->save()) {
-                $mail = new Sendmail;
-                $trans_array = array(
-                    "{SITENAME}" => SITENAME,
-                    "{USERNAME}" => $model->feedback_name,
-                    "{EMAIL_ID}" => $model->feedback_email,
-                );
-                $message = $mail->getMessage('contact', $trans_array);
-                $Subject = $mail->translate('{SITENAME}: Your Feedback Received');
-                $mail->send($model->feedback_email, $Subject, $message);
-
-                $adminmail = new Sendmail;
-                $admintrans_array = array(
-                    "{SITENAME}" => SITENAME,
-                    "{USERNAME}" => $model->feedback_name,
-                    "{ADMINNAME}" => $adminmodel->admin_username,
-                    "{EMAIL_ID}" => $model->feedback_email,
-                    "{PHONE}" => $model->feedback_phone,
-                    "{FORM}" => 'Feedback',
-                    "{MESSAGE}" => $model->feedback_message,
-                );
-
-                $adminmessage = $adminmail->getMessage('contact_admin', $admintrans_array);
-                $adminSubject = $adminmail->translate('{SITENAME}: User Feedback Received');
-                $adminmail->send($adminmodel->admin_email, $adminSubject, $adminmessage);
-                Yii::app()->user->setFlash('success', "Your Feedback Submitted Successfully.");
-                $this->redirect(array('/site/feedback/create'));
-            }
+            Myclass::addFeedback($model);
+           
+            Yii::app()->user->setFlash('success', "Your Feedback Submitted Successfully.");
+            $this->redirect(array('/site/feedback/create'));
         }
 
         $this->render('create', array(

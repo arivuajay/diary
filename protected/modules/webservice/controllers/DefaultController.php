@@ -197,12 +197,12 @@ class DefaultController extends Controller {
             $result['message'] = 'No entries found!!!';
         } else {
             $result['success'] = 1;
-            foreach($model as $i => $data ){
-            $result['message'][$i] = $data->attributes;
+            foreach ($model as $i => $data) {
+                $result['message'][$i] = $data->attributes;
             }
         }
         echo CJSON::encode($result);
-        
+
 
         Yii::app()->end();
     }
@@ -223,7 +223,7 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
-    
+
     public function actionContact() {
         $params = $_REQUEST;
         $result = Myclass::addContact($params);
@@ -231,5 +231,13 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
-    
+
+    public function actionFeedback() {
+        $params = $_REQUEST;
+        $result = Myclass::addContact($params);
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+
 }
