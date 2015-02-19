@@ -460,7 +460,7 @@ class Myclass extends CController {
                 "{USERNAME}" => $model->feedback_name,
                 "{EMAIL_ID}" => $model->feedback_email,
             );
-            $message = $mail->getMessage('contact', $trans_array);
+            $message = $mail->getMessage('feedback', $trans_array);
             $Subject = $mail->translate('{SITENAME}: Your Feedback Received');
             $mail->send($model->feedback_email, $Subject, $message);
 
@@ -479,7 +479,7 @@ class Myclass extends CController {
             $adminSubject = $adminmail->translate('{SITENAME}: User Feedback Received');
             $adminmail->send($adminmodel->admin_email, $adminSubject, $adminmessage);
             $response['success'] = 1;
-            $response['message'] = "Contact Successfully sent.";
+            $response['message'] = "Feedback Successfully sent.";
         }
         return $response;
     }
