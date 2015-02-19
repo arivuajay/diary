@@ -58,42 +58,18 @@ class ContactController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new Contact;
-        $adminmodel = Admin::model()->find();
+        $model = new Contact('normal');
 //        echo $adminmodel->admin_username;exit;
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Contact'])) {
             $model->attributes = $_POST['Contact'];
-            if ($model->save()) {
-                $mail = new Sendmail;
-                $trans_array = array(
-                    "{SITENAME}" => SITENAME,
-                    "{USERNAME}" => $model->contact_name,
-                    "{EMAIL_ID}" => $model->contact_email,
-                );
-                $message = $mail->getMessage('contact', $trans_array);
-                $Subject = $mail->translate('{SITENAME}: Your Contact Received');
-                $mail->send($model->contact_email, $Subject, $message);
+            Myclass::addContact($model);
 
-                $adminmail = new Sendmail;
-                $admintrans_array = array(
-                    "{SITENAME}" => SITENAME,
-                    "{USERNAME}" => $model->contact_name,
-                    "{ADMINNAME}" => $adminmodel->admin_username,
-                    "{EMAIL_ID}" => $model->contact_email,
-                    "{PHONE}" => $model->contact_phone,
-                    "{FORM}" => 'Contact',
-                    "{MESSAGE}" => $model->contact_message,
-                );
-
-                $adminmessage = $adminmail->getMessage('contact_admin', $admintrans_array);
-                $adminSubject = $adminmail->translate('{SITENAME}: User Contact Received');
-                $adminmail->send($adminmodel->admin_email, $adminSubject, $adminmessage);
-                Yii::app()->user->setFlash('success', "Your Contact Submitted Successfully.");
-                $this->redirect(array('/site/contact/create'));
-            }
+           
+            Yii::app()->user->setFlash('success', "Your Contact Submitted Successfully.");
+            $this->redirect(array('/site/contact/create'));
         }
         $this->render('create', array(
             'model' => $model,

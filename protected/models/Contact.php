@@ -30,7 +30,8 @@ class Contact extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('contact_name, contact_email, contact_message', 'required'),
+			array('contact_name, contact_email, contact_message', 'required','on' => 'normal'),
+                        array('contact_name, contact_email, contact_message', 'required','on' => 'webservice'),
 			array('contact_name, contact_email', 'length', 'max'=>256),
 			array('contact_phone', 'length', 'max'=>15),
 			array('contact_message, created, modified', 'safe'),
@@ -108,4 +109,13 @@ class Contact extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+          public function beforeSave() {
+        if ($this->isNewRecord):
+            $this->created = date('Y-m-d H:i:s');
+            $this->modified = date('Y-m-d H:i:s');
+        endif;
+
+        return parent::beforeSave();
+    }
 }

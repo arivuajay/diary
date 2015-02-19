@@ -67,7 +67,7 @@ class Myclass extends CController {
     public static function getCategorywithOthers() {
         $user_id = Yii::app()->user->id;
         $criteria = new CDbCriteria();
-        $criteria->addInCondition('user_id',array(0,$user_id));
+        $criteria->addInCondition('user_id', array(0, $user_id));
         $cat_results = Category::model()->findAll($criteria);
         $mood = CHtml::listData($cat_results, 'category_id', 'category_name');
         $mood['others'] = 'Others';
@@ -386,12 +386,58 @@ class Myclass extends CController {
             $ext = $img_arr[1];
             $type = in_array($ext, array('jpg', 'jpeg', 'gif', 'png')) ? 'picture' : 'file';
             $content .= '<span class="glyphicon glyphicon-' . $type . '">  ';
-            $dImg = substr($image->diary_image, strpos($image->diary_image,"_")+1);
+            $dImg = substr($image->diary_image, strpos($image->diary_image, "_") + 1);
             $content .= CHtml::link(
                             $dImg, Yii::app()->createUrl('uploads/journal/' . $image->diary_image), array('target' => '_blank'));
             $content .= '<br /><br />';
         }
         return $content;
+    }
+
+    public static function addContact($model) {
+        $response = null;
+        $webserve = false;
+
+        if (!is_object($model)) {
+            $webserve = true;
+            $param = $model;
+
+            $model = new Contact('webservice');
+            $model->contact_name = $param['contact_name'];
+            $model->contact_email = $param['contact_mail'];
+            $model->contact_phone = $param['contact_mobile'];
+            $model->contact_message = $param['contact_message'];
+        }
+        if ($model->save()) {
+            $adminmodel = Admin::model()->find();
+            $mail = new Sendmail;
+            $trans_array = array(
+                "{SITENAME}" => SITENAME,
+                "{USERNAME}" => $model->contact_name,
+                "{EMAIL_ID}" => $model->contact_email,
+            );
+            $message = $mail->getMessage('contact', $trans_array);
+            $Subject = $mail->translate('{SITENAME}: Your Contact Received');
+            $mail->send($model->contact_email, $Subject, $message);
+
+            $adminmail = new Sendmail;
+            $admintrans_array = array(
+                "{SITENAME}" => SITENAME,
+                "{USERNAME}" => $model->contact_name,
+                "{ADMINNAME}" => $adminmodel->admin_username,
+                "{EMAIL_ID}" => $model->contact_email,
+                "{PHONE}" => $model->contact_phone,
+                "{FORM}" => 'Contact',
+                "{MESSAGE}" => $model->contact_message,
+            );
+
+            $adminmessage = $adminmail->getMessage('contact_admin', $admintrans_array);
+            $adminSubject = $adminmail->translate('{SITENAME}: User Contact Received');
+            $adminmail->send($adminmodel->admin_email, $adminSubject, $adminmessage);
+            $response['success'] = 1;
+            $response['message'] = "Contact Successfully sent.";
+        }
+        return $response;
     }
 
 }

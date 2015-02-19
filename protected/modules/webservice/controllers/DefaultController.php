@@ -223,5 +223,13 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
+    
+    public function actionContact() {
+        $params = $_REQUEST;
+        $result = Myclass::addContact($params);
+        echo CJSON::encode($result);
 
+        Yii::app()->end();
+    }
+    
 }
