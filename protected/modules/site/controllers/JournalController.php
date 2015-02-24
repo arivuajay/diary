@@ -260,7 +260,7 @@ class JournalController extends Controller {
 
     public function actionCalendarevents() {
         $myDiary = Diary::model()->mine()->findAll(array('order' => 'created DESC'));
-        $limit = 2;
+        $limit = 10;
         $date = array();
         foreach ($myDiary as $diary) {
             if (isset($date[strtotime($diary->diary_current_date)])) {
@@ -274,7 +274,7 @@ class JournalController extends Controller {
                     'state' => 'TRUE',
                     'title' => $diary->diary_title,
                     'start' => date('Y-m-d', strtotime($diary->diary_current_date)),
-                    'color' => '#A0D65A',
+                    'color' => '#95e5e7',
                     //                'start' => $diary->diary_current_date,
                     'url' => $this->createUrl('/site/journal/listjournal', array('date' => date('Y-m-d', strtotime($diary->diary_current_date))))
                 );

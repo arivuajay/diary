@@ -59,9 +59,6 @@ class FeedbackController extends Controller {
      */
     public function actionCreate() {
         $model = new Feedback('normal');
-        $adminmodel = Admin::model()->find();
-
-
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 

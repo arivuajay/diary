@@ -1,9 +1,14 @@
-/*!
- * FullCalendar v1.6.4 Google Calendar Plugin
- * Docs & License: http://arshaw.com/fullcalendar/
- * (c) 2013 Adam Shaw
+/*
+ * FullCalendar v1.5 Google Calendar Plugin
+ *
+ * Copyright (c) 2011 Adam Shaw
+ * Dual licensed under the MIT and GPL licenses, located in
+ * MIT-LICENSE.txt and GPL-LICENSE.txt respectively.
+ *
+ * Date: Sat Mar 19 18:59:37 2011 -0700
+ *
  */
-
+ 
 (function($) {
 
 
@@ -42,7 +47,7 @@ function transformOptions(sourceOptions, start, end) {
 		'singleevents': true,
 		'max-results': 9999
 	});
-
+	
 	var ctz = sourceOptions.currentTimezone;
 	if (ctz) {
 		data.ctz = ctz = ctz.replace(' ', '_');
@@ -94,7 +99,7 @@ function transformOptions(sourceOptions, start, end) {
 			return events;
 		}
 	});
-
+	
 }
 
 

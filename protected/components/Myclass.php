@@ -97,7 +97,7 @@ class Myclass extends CController {
             $model = new Users('webservice');
             $model->user_name = $param['user_name'];
             $model->user_email = $param['user_email'];
-            if ($param['user_password'] == 'FB'):
+            if ($param['user_password'] == 'FB' || $param['user_password'] == 'GP'):
                 $param['user_password'] = Myclass::getRandomString(6);
             endif;
             $model->user_password = $param['user_password'];
@@ -223,10 +223,19 @@ class Myclass extends CController {
         $model->setScenario('webservice');
         $model->diary_title = $param['title'];
         $model->diary_description = $param['text'];
-        $mood_array = array('1' => "Happy", "Sad", "Excited");
-        $cat_array = array('1' => "Family", "Friends", "Business");
-        $model->diary_category_id = array_search($param['category'], $cat_array);
-        $model->diary_user_mood_id = array_search($param['mood'], $mood_array);
+
+        if (isset($param['others'])) {
+            $catmodel = new Category();
+            $catmodel->category_name = $param['others'];
+            $catmodel->user_id = $user->user_id;
+            $catmodel->save(false);
+            $model->diary_category_id = $catmodel->category_id;
+        } else {
+            $model->diary_category_id = $param['category'];
+        }
+        
+        $model->diary_user_mood_id = $param['mood'];
+
         $bind_time = trim("{$param['month']} {$param['date']} {$param['year']} {$param['time']}");
 
         $model->diary_current_date = date('Y-m-d H:i:s', strtotime($bind_time));
@@ -480,6 +489,23 @@ class Myclass extends CController {
             $adminmail->send($adminmodel->admin_email, $adminSubject, $adminmessage);
             $response['success'] = 1;
             $response['message'] = "Feedback Successfully sent.";
+        }
+        return $response;
+    }
+
+    public static function addSubmitmood($model) {
+        $response = null;
+        $mood_submit_model = new MoodActivity();
+        if (!empty($model['QuickCreate'])) {
+            $mood_submit_model->mood_activity_email = $model['QuickCreate']['email'];
+            $mood_submit_model->mood_activity_mood_id = $model['QuickCreate']['moodtype'];
+            $mood_submit_model->save();
+        } else {
+            $mood_submit_model->mood_activity_email = $model['mail'];
+            $mood_submit_model->mood_activity_mood_id = $model['mood'];
+            $mood_submit_model->save();
+            $response['success'] = 1;
+            $response['message'] = "Mood Activity Successfully Saved.";
         }
         return $response;
     }

@@ -22,7 +22,7 @@ class DefaultController extends Controller {
         $params = $_REQUEST;
         if (!empty($_FILES['image']))
             $params['journal_images'] = $this->Uploadjournalimg($_FILES['image']);
-
+        
         $result = Myclass::addEntry($params);
         echo CJSON::encode($result);
 
@@ -234,7 +234,53 @@ class DefaultController extends Controller {
 
     public function actionFeedback() {
         $params = $_REQUEST;
-        $result = Myclass::addContact($params);
+        $result = Myclass::addFeedback($params);
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+
+    public function actionGetmood() {
+
+        $result['success'] = 1;
+        $record[0] = (array) $model->attributes;
+        $record[0]['mood_ids'] = array_values(CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_id'));
+        $record[0]['mood_name'] = array_values(CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_type'));
+        $record[0]['mood_img_name'] = array_values(CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_image'));
+        $result['message'] = $record;
+
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+
+    public function actionGetcategories() {
+
+        $model = Users::model()->findByAttributes(array('user_email' => $_REQUEST['user_id']));
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No entries found!!!';
+        } else {
+            $result['success'] = 1;
+            $user_id = $model->user_id;
+            $criteria = new CDbCriteria();
+            $criteria->addInCondition('user_id', array(0, $user_id));
+            $cat_results = Category::model()->findAll($criteria);
+            $record[0]['cat_ids'] = array_values(CHtml::listData($cat_results, 'category_id', 'category_id'));
+            $record[0]['cat_name'] = array_values(CHtml::listData($cat_results, 'category_id', 'category_name'));
+
+            $result['message'] = $record;
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+
+    public function actionSubmitmood() {
+
+        $params = $_REQUEST;
+
+        $result = Myclass::addSubmitmood($params);
         echo CJSON::encode($result);
 
         Yii::app()->end();
