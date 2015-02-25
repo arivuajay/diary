@@ -173,7 +173,7 @@
     width: 136px !important;
 }
 
-.fc-button-month, .fc-button-agendaWeek, .fc-button-agendaDay,  .fc-button-today{
+.fc-button-year,.fc-button-month, .fc-button-agendaWeek, .fc-button-agendaDay,  .fc-button-today{
     text-transform: uppercase;
 }
 .cke_path{
@@ -181,4 +181,22 @@
 } 
 .top-marin {
     margin: 21px 8px 0 0 !important;
+}
+
+/*year view*/
+.fc-year-main-table {
+    border-spacing: 5px !important;
+}
+.fc-year-monthly-td {
+    border: thin solid #0f0f0f !important;
+}
+.fc-year-monthly-header {
+    border: thin solid #f0f0f0 !important;
+}
+.fc-year-have-event {
+    background: none repeat scroll 0 0 #9cf !important;
+}
+
+.fc-view-year .fc-grid .fc-day-number{
+    padding: 5px 10px !important;
 }

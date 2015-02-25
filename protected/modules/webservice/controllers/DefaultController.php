@@ -275,6 +275,21 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
+    
+    public function actionGetfaq() {
+
+        $model = Faq::model()->findAll();
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No Faq found!!!';
+        } else {
+            $result['success'] = 1;
+            $result['message'] = $model;
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
 
     public function actionSubmitmood() {
 

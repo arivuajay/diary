@@ -3438,6 +3438,8 @@ table.fc-header {
     font-weight: 400;
     color: #AAA;
     padding: 5px 11px; }
+.fc-grid.fc-view-year .fc-day-number {
+    padding: 5px 10px; }
 
 /* ================================================
    X. PAGES - In Order

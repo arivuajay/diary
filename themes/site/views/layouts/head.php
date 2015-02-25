@@ -52,7 +52,7 @@
     $cs->registerScriptFile($themeUrl . '/css/frontend/js/custom.js', $cs_pos_end);
 
 
-    $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/calendar/fullcalendar.min.js', $cs_pos_end);
+    //$cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/calendar/fullcalendar.min.js', $cs_pos_end);
     $cs->registerScriptFile($themeUrl . '/css/frontend/vendor/plugins/calendar/gcal.js', $cs_pos_end);
     $cs->registerScriptFile($themeUrl . '/css/frontend/js/jquery.tmpl.min.js', $cs_pos_end);
     //$cs->registerScriptFile($themeUrl . '/css/frontend/vendor/editors/ckeditor/ckeditor.js',$cs_pos_end);
@@ -83,7 +83,12 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?php echo $themeUrl; ?>/css/frontend/img/favicon.ico">
-
+    <script>
+        $("a[href='#top']").click(function() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+        });
+</script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

@@ -9,6 +9,8 @@
 
 //  Place custom scripts below this line 
 ///////////////////////////////////////
-
-
-
+$(document).ready(function(){
+    $('td.fc-year-have-event').click(function(event){
+       alert('Haoi');
+    });
+});

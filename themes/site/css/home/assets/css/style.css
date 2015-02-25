@@ -2122,7 +2122,7 @@ mobile
 .your-own{
     font-size: 20px;
     color: #F52A2A;
-    margin: 0px;
+   margin: 0 0 0 -50px;
 }
 
 .header_icons.accura-header-block.accura-hidden-2xs img {
@@ -2218,6 +2218,7 @@ mobile
 			-moz-border-radius: 3px;
 			-webkit-border-radius: 3px;
 			border-radius: 3px;	
+                        font-family: arial;
 		}
 		
 		.signup{
