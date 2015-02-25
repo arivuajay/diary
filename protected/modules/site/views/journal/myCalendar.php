@@ -59,3 +59,18 @@ $myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->fi
         </div>
     </div>
 </div>
+<?php
+Yii::app()->clientScript->registerScript('year_trigger', "
+    $(document).on('click', '.fc-view-year td', function(e) {
+        var _the = $(this);
+        var _newData = _the.data('day');
+        if(_newData != undefined && _newData != ''){
+            if(_the.hasClass('fc-year-have-event')){
+                window.location = '" . $this->createUrl('/site/journal/listjournal') . "?date='+_newData;
+            }else{
+                window.location = '" . $this->createUrl('/site/journal/create') . "?date='+_newData;
+            }
+        }
+    });
+");
+?>

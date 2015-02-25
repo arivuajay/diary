@@ -151,9 +151,9 @@
 }
 
 /*.events_highlight_new{
-    background: #AEC8DF; 
+    background: #AEC8DF;
 }*/
- 
+
 .table-striped .name{
     width: 35%;
 }
@@ -178,7 +178,7 @@
 }
 .cke_path{
     display:none !important;
-} 
+}
 .top-marin {
     margin: 21px 8px 0 0 !important;
 }
@@ -188,11 +188,14 @@
     border-spacing: 5px !important;
 }
 .fc-year-monthly-td {
-    border: thin solid #0f0f0f !important;
+    border: thin solid #ddd !important;
 }
-.fc-year-monthly-header {
-    border: thin solid #f0f0f0 !important;
+.fc-year-monthly-td table thead{
+    background-color: #f5f5f5 !important;
 }
+/*.fc-year-monthly-header {
+    border: thin solid #ddd !important;
+}*/
 .fc-year-have-event {
     background: none repeat scroll 0 0 #9cf !important;
 }
