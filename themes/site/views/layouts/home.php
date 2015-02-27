@@ -36,8 +36,8 @@
         $cs->registerCssFile($themeUrl . '/css/home/assets/css/colors/color1.css');
 
 //        $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery-1.11.1.min.js');
-//        $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery-migrate-1.2.1.js');
-//        $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery-ui.min.js');
+        $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery-migrate-1.2.1.js');
+        $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery-ui.min.js');
         $cs->registerScriptFile($themeUrl . '/css/home/assets/js/modernizr.custom.js');
         ?>
 
@@ -75,9 +75,9 @@
         <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.validate.min.js', $cs_pos_end); ?>
         
         <!-- Form Validation End-->
-        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/bootstrap-datetimepicker.min.js', $cs_pos_end); ?>
-        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.scrollTo.min.js', $cs_pos_end); ?>
-        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.fitvids.js', $cs_pos_end); ?>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/bootstrap-datetimepicker.min.js', $cs_pos_end); ?>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.scrollTo.min.js', $cs_pos_end); ?>
+        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.fitvids.js', $cs_pos_end); ?>
         <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
 
 

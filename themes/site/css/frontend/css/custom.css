@@ -203,3 +203,7 @@
 .fc-view-year .fc-grid .fc-day-number{
     padding: 5px 10px !important;
 }
+
+#scroll-top-arrow{
+    cursor: pointer;
+}
