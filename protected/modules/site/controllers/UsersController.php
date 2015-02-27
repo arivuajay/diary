@@ -349,10 +349,13 @@ class UsersController extends Controller {
             Yii::app()->user->setFlash('error', "Not a valid Reset Link");
             $this->redirect(array('/site/users/login'));
         } else {
-            $time1 = new DateTime(date('H:i:s'));
-            $time2 = new DateTime(date('H:i:s', strtotime($model->modified)));
-            $interval = $time1->diff($time2);
-            $minutes = $interval->format('%i');
+            $start = strtotime(date('Y-m-d H:i:s', strtotime($model->modified)));
+            $end = strtotime(date('Y-m-d H:i:s'));
+            $seconds = $end - $start;
+            $days    = floor($seconds / 86400);
+            $hours   = floor(($seconds - ($days * 86400)) / 3600);
+            $minutes = floor(($seconds - ($days * 86400) - ($hours * 3600))/60);
+
             if ($minutes > 5) {
                 Yii::app()->user->setFlash('error', "This Reset Link Expired. Please Try again.");
                 $this->redirect(array('/site/users/forgot'));

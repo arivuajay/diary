@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Notification <?php echo $model->notification_id; ?></h1>
+<!--<h1>Update Notification <?php echo $model->notification_id; ?></h1>-->
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

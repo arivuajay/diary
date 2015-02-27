@@ -60,6 +60,7 @@ $this->breadcrumbs = array(
 </div>
 <script type="text/javascript">
     CKEDITOR.replace( 'editor1', {
+        enterMode : Number(2),
          filebrowserBrowseUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/browse.php?type=files',
          filebrowserImageBrowseUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/browse.php?type=images',
          filebrowserFlashBrowseUrl: '<?php echo Yii::app()->baseUrl; ?>/kcfinder/browse.php?type=flash',

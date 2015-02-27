@@ -1,5 +1,6 @@
 <div class="sidebar-menu">
     <?php
+    $is_login = Yii::app()->user->isGuest ? false : true;
     $test = array('/site/cms/view', 'slug' => 'about-us');
     $this->widget('zii.widgets.CMenu', array(
         'activateParents' => true,
@@ -18,7 +19,7 @@
             array('label' => '<span class="glyphicon glyphicon-th"></span><span class="sidebar-title">Feedback</span>', 'url' =>array('/site/feedback/create')),
             array('label' => '<span class="glyphicon glyphicon-earphone"></span><span class="sidebar-title">Contact</span>', 'url' =>array('/site/contact/create')),
             
-            array('label' => '<span class="glyphicon glyphicon-tasks"></span><span class="sidebar-title">Categories</span>', 'url' => array('/site/category/index')),
+            $is_login ? array('label' => '<span class="glyphicon glyphicon-tasks"></span><span class="sidebar-title">Categories</span>', 'url' => array('/site/category/index')) : $is_login,
             array('label' => '<span class="glyphicons glyphicons-pencil"></span><span class="sidebar-title">Writing Tips</span>', 'url' => array('/site/default/underdevelopment')/*Myclass::getPageUrl(3)*/),
             array('label' => '<span class="glyphicon glyphicon-question-sign"></span><span class="sidebar-title">FAQ</span>', 'url' => array('/site/faq/')),
             array('label' => '<span class="glyphicon glyphicon-lock"></span><span class="sidebar-title">Privacy</span>', 'url' => Myclass::getPageUrl(2)),

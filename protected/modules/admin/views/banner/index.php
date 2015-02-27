@@ -2,27 +2,31 @@
 /* @var $this BannerController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Banners',
+$this->breadcrumbs = array(
+    'Banners',
 );
-
 ?>
 
 <div class="row">
     <div class="col-sm-12">
         <section class="panel">
-            <header class="panel-heading">Manage Banners</header>
+            <header class="panel-heading">
+                Manage Banners
+                <span class="pull-right">
+                    <?php echo CHtml::link('+ Add Banner', array('/admin/banner/create'), array('class' => 'label label-success')); ?>
+                </span>
+            </header>
             <div class="panel-body">
                 <div class="adv-table">
-                    
+
                     <table  class="display table table-bordered table-striped" id="dynamic-table2">
                         <thead>
                             <tr>
-                                <th><?php echo Banner::model()->getAttributeLabel('banner_title')?></th>
-                                <th><?php echo Banner::model()->getAttributeLabel('banner_layout_id')?></th>
-                                <th><?php echo Banner::model()->getAttributeLabel('banner_image')?></th>
-                                <th><?php echo Banner::model()->getAttributeLabel('banner_url')?></th>
-                                <th><?php echo Banner::model()->getAttributeLabel('banner_status')?></th>
+                                <th><?php echo Banner::model()->getAttributeLabel('banner_title') ?></th>
+                                <th><?php echo Banner::model()->getAttributeLabel('banner_layout_id') ?></th>
+                                <th><?php echo Banner::model()->getAttributeLabel('banner_image') ?></th>
+                                <th><?php echo Banner::model()->getAttributeLabel('banner_url') ?></th>
+                                <th><?php echo Banner::model()->getAttributeLabel('banner_status') ?></th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -31,14 +35,14 @@ $this->breadcrumbs=array(
                                 <tr>
                                     <td><?php echo $banner->banner_title ?></td>
                                     <td><?php echo $banner->bannerLayout->banner_layout_name ?></td>
-                                    <td><?php echo CHtml::image(
-                                            $this->createUrl("/themes/site/image/banners/".$banner->banner_path.$banner->banner_image),
-                                            $banner->banner_title,
-                                            array(
-                                                'width' => '230',
-                                                'height' => '30'
-                                            ));?></td>
-                                    <td><?php echo $banner->banner_url?></td>
+                                    <td><a href="#myModal<?php echo $banner->banner_id ?>" data-toggle="modal"><?php
+                                echo CHtml::image(
+                                        $this->createUrl("/themes/site/image/banners/" . $banner->banner_path . $banner->banner_image), $banner->banner_title, array(
+                                    'width' => '230',
+                                    'height' => '30'
+                                ));
+                                ?></a></td>
+                                    <td><?php echo $banner->banner_url ?></td>
                                     <td>
                                         <input type="checkbox" <?php echo $banner->banner_status == '1' ? 'checked' : '' ?>
                                                data-on="success"
@@ -54,7 +58,31 @@ $this->breadcrumbs=array(
                                         ?>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
+
+                            <div class="modal fade" id="myModal<?php echo $banner->banner_id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title"><?php echo ucfirst($banner->banner_title) ?></h4>
+                                        </div>
+
+                                        <div class="modal-body row">
+
+                                            <div class="col-md-12 img-modal">
+                                                <?php
+                                                echo CHtml::image(
+                                                        $this->createUrl("/themes/site/image/banners/" . $banner->banner_path . $banner->banner_image), $banner->banner_title
+                                                );
+                                                ?>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+<?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

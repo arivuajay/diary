@@ -38,60 +38,6 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     <?php echo CHtml::link(CHtml::image("$themeUrl/css/home/assets/img/google_play_button.png", 'PlayStore', array("border" => "0")), 'https://play.google.com/store/apps/details?id=com.express.splash&hl=en', array('target' => '_blank')) ?>
                 </div>
             </div>
-            <!--            <div class="container">
-            <?php
-            foreach ($this->flashMessages as $key => $message) {
-                echo '<div class="flash-' . $key . '">' . $message . "</div>\n";
-            }
-
-            $form = $this->beginWidget('CActiveForm', array(
-                'id' => 'hcontact_form',
-                'enableAjaxValidation' => true,
-                'clientOptions' => array(
-                    'validateOnSubmit' => true,
-                ),
-                'method' => 'POST',
-                'htmlOptions' => array('role' => 'form')
-            ));
-            $moodTypes = CHtml::listData(MoodType::model()->findAll(), 'mood_id', 'mood_image');
-            ?>
-                            <div class="clearfix hcont_form pad_top20">
-                                <div class="row hmerow">
-            <?php
-            echo $form->emailField($model, 'email', array('class' => 'textbox1', 'placeholder' => $model->getAttributeLabel('email')));
-            echo $form->error($model, 'email');
-            ?>
-                                </div>
-            
-                                <div class="row hmoodlist hmerow">
-                                    <p class="mood_label"><?php echo $model->getAttributeLabel('moodtype') ?></p>
-            <?php
-            $i = 0;
-            foreach ($moodTypes as $key => $mood):
-                ?>
-                                                <label class="radio-inline mr10 <?php if ($i == 0) echo "selected"; ?> ">
-                                                    <input type="radio" name="QuickCreate[moodtype]" class="mood_type_id" <?php if ($i == 0) echo "checked='checked'"; ?>  value="<?php echo $key; ?>">
-                <?php echo CHtml::image("$themeUrl/image/mood_type/$mood", $mood, array('class' => 'mood_type_smiley')); ?>
-                                                </label>
-                <?php
-                $i++;
-            endforeach;
-            ?>
-                                </div>
-                                <div class="row hmerow">
-                                    <div class="col-xs-12 col-sm-3 col-md-3">
-            <?php echo CHtml::submitButton('Write an Entry', array('class' => 'submitBtn', 'name' => 'submit', 'id' => 'hcontactsubmitBtn1')); ?>
-                                    </div>
-                                    <div class="col-xs-6 col-md-4">
-            <?php echo CHtml::submitButton('Submit', array('class' => 'submitBtn', 'name' => 'submit', 'id' => 'hcontactsubmitBtn1')); ?>
-                                    </div>
-            
-            
-                                </div>
-                            </div>
-            <?php $this->endWidget(); ?>
-                        </div>-->
-
 
             <div class="container">
 
@@ -174,6 +120,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
             </div>
             <!-- // Mainheader Menu Section -->
         </div>
+        
         <div id="boxgallery" class="boxgallery" data-effect="effect-2">
             <?php
             $banners = Myclass::getBannerImages('home', 'top', '1170*660');
@@ -185,26 +132,14 @@ $themeUrl = Yii::app()->theme->baseUrl;
                         echo CHtml::image(
                                 $this->createUrl("/themes/site/image/banners/" . $banner->banner_path . $banner->banner_image), $banner->banner_title
                         );
-//                            echo CHtml::link(
-//                                    CHtml::image(
-//                                            $this->createUrl("/themes/site/image/banners/" . $banner->banner_path . $banner->banner_image), 
-//                                            $banner->banner_title 
-//                                    ), 
-//                                    $banner->banner_url,
-//                                    array(
-//                                        'target' => '_blank',
-//                                        'title' => $banner->banner_title
-//                                    )
-//                                )
                         ?>
                     </div>
                     <?php
                 }
             }
             ?>
-
-
         </div>
+        
     </div>
 </div>
 <!-- // Home Page

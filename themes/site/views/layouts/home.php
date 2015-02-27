@@ -72,27 +72,27 @@
         <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/bootstrap.min.js', $cs_pos_end); ?>
         <!-- Form Validation-->
         
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.validate.min.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.validate.min.js', $cs_pos_end); ?>
         
         <!-- Form Validation End-->
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/bootstrap-datetimepicker.min.js', $cs_pos_end); ?>
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.scrollTo.min.js', $cs_pos_end); ?>
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.fitvids.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/bootstrap-datetimepicker.min.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.scrollTo.min.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.fitvids.js', $cs_pos_end); ?>
         <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
 
 
         <!-- SlickNavigation For Mobile Device-->
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.slicknav.min.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.slicknav.min.js', $cs_pos_end); ?>
         <!-- SlickNavigation For Mobile Device Ends-->
 
         <!-- Content NiceScroll -->
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.nicescroll.min.js', $cs_pos_end); ?>
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.mousewheel.min.js', $cs_pos_end); ?>
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.easing.1.3.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.nicescroll.min.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.mousewheel.min.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.easing.1.3.js', $cs_pos_end); ?>
         <!-- Content NiceScroll End-->
 
         <!-- include retina js -->
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/retina-1.1.0.min.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/retina-1.1.0.min.js', $cs_pos_end); ?>
         <!-- include retina js Ends-->
 
         <!-- Optional Scripts Starts -->
@@ -102,8 +102,8 @@
         <!-- Preloader End -->
 
         <!-- Cycle Slider Gallery Starts-->
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.cycle.all.js', $cs_pos_end); ?>
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.cycle2.caption2.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.cycle.all.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.cycle2.caption2.js', $cs_pos_end); ?>
         <!-- Cycle Slider Gallery End-->
 
         <!--SuperSized Gallery-->
@@ -113,8 +113,8 @@
         <!--SuperSized Gallery End-->
 
         <!-- Filter Gallery And PrettyPhoto-->
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.prettyPhoto.js', $cs_pos_end); ?>
-        <?php $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.mixitup.min.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.prettyPhoto.js', $cs_pos_end); ?>
+        <?php // $cs->registerScriptFile($themeUrl . '/css/home/assets/js/jquery.mixitup.min.js', $cs_pos_end); ?>
         <!-- Filter Gallery And PrettyPhoto End-->
 
 

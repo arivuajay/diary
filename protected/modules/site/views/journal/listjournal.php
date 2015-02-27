@@ -16,7 +16,7 @@
             <tbody>
                 <tr>
                     <td class="fc-header-left"></td>
-                    <td class="fc-header-center"><span class="fc-header-title"><h2><?php echo isset($journalList[0]->diary_current_date)? date('d F y', strtotime($journalList[0]->diary_current_date)):'' ?></h2></span></td>
+                    <td class="fc-header-center"><span class="fc-header-title"><h2><?php echo isset($journalList[0]->diary_current_date)? date('d F Y', strtotime($journalList[0]->diary_current_date)):'' ?></h2></span></td>
                     <td class="fc-header-right"></td>
                 </tr>
             </tbody>

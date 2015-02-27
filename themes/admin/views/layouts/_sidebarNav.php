@@ -52,7 +52,7 @@
                     'submenuOptions' => array('class' => 'sub'),
                     'items' => array(
                         array('label' => 'Manage Banner', 'url' => array('/admin/banner/index')),
-//                        array('label' => 'Add Banner', 'url' => array('/admin/banner/create')),
+                        array('label' => 'Add Banner', 'url' => array('/admin/banner/create')),
                     ),
                 ),
                 array('label' => '<i class="fa fa-user"></i><span>Mood Activity Management</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   

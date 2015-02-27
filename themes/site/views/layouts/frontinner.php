@@ -50,18 +50,45 @@
                 $Criteria = new CDbCriteria();
                 $Criteria->order = 'notification_id DESC';
                 $notifications = Notification::model()->findAll($Criteria);
+                $notification_count = count($notifications);
+                
+                $log_count = 0;
+                if(!Yii::app()->user->isGuest){
+                    $log_count = NotificationLog::model()->countByAttributes(
+                                                    array(
+                                                        'log_user_id' => Yii::app()->user->id
+                                                    ));
+                }
+                $not_count = $notification_count - $log_count;
                 ?>
                 <div class="navbar-menus">
                     <div class="btn-group" id="alert_menu">
-                        <button type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicons glyphicons-bell"></span> <b>3</b> </button>
+                        <button type="button" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicons glyphicons-bell"></span>
+                            <?php if($not_count > 0){?>
+                            <b><?php echo $notification_count - $log_count?></b> 
+                            <?php }?>
+                        </button>
                         <ul class="dropdown-menu media-list" role="menu">
-                            <li class="dropdown-header">Recent Messages<span class="pull-right glyphicons glyphicons-bell"></span></li>
+                            <li class="dropdown-header">Recent Messages</li>
                             <li class="p15 pb10">
                                 <ul class="list-unstyled">
-                                    <?php foreach($notifications as $notification): ?>
-                                   
-                                 <?php   echo CHtml::link(' <li><span class="glyphicons glyphicons-bell text-orange2 fs16 mr15"></span> '.$notification->notification_title.'</li>', array('/site/notification/view/', 'id' => $notification->notification_id), array('id' => 'tooltip1')) ?>
-                                    <?php endforeach; ?>                                   
+                                    <?php foreach($notifications as $notification):
+                                        $count = 0;
+                                        if(!Yii::app()->user->isGuest){
+                                            $count = NotificationLog::model()->countByAttributes(
+                                                    array(
+                                                        'log_user_id' => Yii::app()->user->id,
+                                                        'log_notification_id' => $notification->notification_id
+                                                    ));
+                                        }
+                                        
+                                        echo $count == 0 ? '<b>' : '';
+                                        echo CHtml::link('<li><span class="glyphicons glyphicons-bell text-orange2 fs16 mr15"></span> '.$notification->notification_title.'</li>', 
+                                                array('/site/notification/view/', 'id' => $notification->notification_id), 
+                                                array('id' => 'tooltip1', 'style' => 'text-decoration:none'));
+                                        echo $count == 0 ? '</b>' : '';
+                                        endforeach; ?>                                   
  <!--<li class="pt10"><span class="glyphicons glyphicons-facebook text-blue2 fs16 mr15"></span></b></li>-->
 <!--                                    <li class="pt10"><span class="glyphicons glyphicons-paperclip text-teal2 fs16 mr15"></span></li>
                                     <li class="pt10"><span class="glyphicons glyphicons-gift text-purple2 fs16 mr15"></span></li>

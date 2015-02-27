@@ -173,21 +173,21 @@ var hash_fullname= "#" + hash;
 	Animation("#mainheader","fadinUp","200");
 	}
 
-		$('#wrapper').scrollTo(hash_fullname, 2000, {easing:'easeInOutExpo', axis:'x', onAfter:function(){ // scrollto callback  function
-			if(hash_fullname=="#home")
-			{ // for home page animation
-			Homepage_Animation();
-			}
-			else
-			{ // sub page animation
-				if ( $('#header').is(':hidden')){ // if header is hidden then do animation
-					Subpage_animation();
-				}
-			}
-
-				} // scrollto callback function close
-
-		});//	scrollto close
+//		$('#wrapper').scrollTo(hash_fullname, 2000, {easing:'easeInOutExpo', axis:'x', onAfter:function(){ // scrollto callback  function
+//			if(hash_fullname=="#home")
+//			{ // for home page animation
+//			Homepage_Animation();
+//			}
+//			else
+//			{ // sub page animation
+//				if ( $('#header').is(':hidden')){ // if header is hidden then do animation
+//					Subpage_animation();
+//				}
+//			}
+//
+//				} // scrollto callback function close
+//
+//		});//	scrollto close
 
 }// hash!="" close
 
@@ -222,14 +222,14 @@ window.location.href = name;
 });
 
 
-$(function(){
-	$('#sub-nav').slicknav({
-	label: '',
-	duration: 1000,
-	easingOpen: "easeOutQuint", //available with jQuery UI
-	closeOnClick:true
-});
-});
+//$(function(){
+//	$('#sub-nav').slicknav({
+//	label: '',
+//	duration: 1000,
+//	easingOpen: "easeOutQuint", //available with jQuery UI
+//	closeOnClick:true
+//});
+//});
 
 
 
@@ -320,7 +320,7 @@ function resizePanel() {
 
 	$('#wrapper, .item').css({width: width, height: height});
 	$('#mask').css({width: mask_width, height: height});
-	$('#wrapper').scrollTo($('a.selected').attr('href'), 0);
+//	$('#wrapper').scrollTo($('a.selected').attr('href'), 0);
 
 }
 
@@ -357,47 +357,47 @@ $(window).load(function() {
 // ******************************************************************************************
 // Reservation Form Start
 // ******************************************************************************************
-jQuery(document).ready(function($){
-"use strict";
-  $('#reservation_form').validate(
-    {
-    rules: {
-    name: {
-    minlength: 2,
-    required: true
-    },
-	phone: {
-    required: true,
-    },
-    email: {
-    required: true,
-    email: true
-    },
-    subject: {
-    minlength: 2,
-    required: true
-    },
-    message: {
-    minlength: 2,
-    required: true
-    }
-    },
-    highlight: function(element) {
-    $(element).closest('.control-group').removeClass('success').addClass('error');
-    },
-    success: function(element) {
-    element
-    .text('OK!').addClass('valid')
-    .closest('.control-group').removeClass('error').addClass('success');
-    },
-	submitHandler: function(form) {
-					// do other stuff for a valid form
-					$.post('reservation_form.php', $("#reservation_form").serialize(), function(data) { // action file is here
-						$('#reservation_form').html(data);
-					});
-				}
-    });
-    }); // end document.ready
+//jQuery(document).ready(function($){
+//"use strict";
+//  $('#reservation_form').validate(
+//    {
+//    rules: {
+//    name: {
+//    minlength: 2,
+//    required: true
+//    },
+//	phone: {
+//    required: true,
+//    },
+//    email: {
+//    required: true,
+//    email: true
+//    },
+//    subject: {
+//    minlength: 2,
+//    required: true
+//    },
+//    message: {
+//    minlength: 2,
+//    required: true
+//    }
+//    },
+//    highlight: function(element) {
+//    $(element).closest('.control-group').removeClass('success').addClass('error');
+//    },
+//    success: function(element) {
+//    element
+//    .text('OK!').addClass('valid')
+//    .closest('.control-group').removeClass('error').addClass('success');
+//    },
+//	submitHandler: function(form) {
+//					// do other stuff for a valid form
+//					$.post('reservation_form.php', $("#reservation_form").serialize(), function(data) { // action file is here
+//						$('#reservation_form').html(data);
+//					});
+//				}
+//    });
+//    }); // end document.ready
 
 
 //Reservation Form END
@@ -405,47 +405,47 @@ jQuery(document).ready(function($){
 // ******************************************************************************************
 // Contact Form Start
 // ******************************************************************************************
-jQuery(document).ready(function($){
-"use strict";
-  $('#contact_form').validate(
-    {
-    rules: {
-    name: {
-    minlength: 2,
-    required: true
-    },
-	phone: {
-    required: true,
-    },
-    email: {
-    required: true,
-    email: true
-    },
-    subject: {
-    minlength: 2,
-    required: true
-    },
-    message: {
-    minlength: 2,
-    required: true
-    }
-    },
-    highlight: function(element) {
-    $(element).closest('.control-group').removeClass('success').addClass('error');
-    },
-    success: function(element) {
-    element
-    .text('OK!').addClass('valid')
-    .closest('.control-group').removeClass('error').addClass('success');
-    },
-	submitHandler: function(form) {
-					// do other stuff for a valid form
-					$.post('contact_form.php', $("#contact_form").serialize(), function(data) { // action file is here
-						$('#contact_form').html(data);
-					});
-				}
-    });
-    }); // end document.ready
+//jQuery(document).ready(function($){
+//"use strict";
+//  $('#contact_form').validate(
+//    {
+//    rules: {
+//    name: {
+//    minlength: 2,
+//    required: true
+//    },
+//	phone: {
+//    required: true,
+//    },
+//    email: {
+//    required: true,
+//    email: true
+//    },
+//    subject: {
+//    minlength: 2,
+//    required: true
+//    },
+//    message: {
+//    minlength: 2,
+//    required: true
+//    }
+//    },
+//    highlight: function(element) {
+//    $(element).closest('.control-group').removeClass('success').addClass('error');
+//    },
+//    success: function(element) {
+//    element
+//    .text('OK!').addClass('valid')
+//    .closest('.control-group').removeClass('error').addClass('success');
+//    },
+//	submitHandler: function(form) {
+//					// do other stuff for a valid form
+//					$.post('contact_form.php', $("#contact_form").serialize(), function(data) { // action file is here
+//						$('#contact_form').html(data);
+//					});
+//				}
+//    });
+//    }); // end document.ready
 
 
 //Contact Form END
@@ -596,21 +596,21 @@ jQuery(document).ready(function($){
 //****************************************************************************
 		  		//Reservation page Date picker
 //****************************************************************************
-jQuery(document).ready(function($){
-		 "use strict";
-/* Date Picker */
-  $('.form_datetime').datetimepicker({
-        language:  'en',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-        showMeridian:0,
-		pickerPosition: "bottom-left"
-    });
-  });
+//jQuery(document).ready(function($){
+//		 "use strict";
+///* Date Picker */
+//  $('.form_datetime').datetimepicker({
+//        language:  'en',
+//        weekStart: 1,
+//        todayBtn:  1,
+//		autoclose: 1,
+//		todayHighlight: 1,
+//		startView: 2,
+//		forceParse: 0,
+//        showMeridian:0,
+//		pickerPosition: "bottom-left"
+//    });
+//  });
 
 /* // Date Picker */
 
@@ -736,35 +736,35 @@ $(document).ready(function() {
 
 
 // niceScroll Bar options
-  $(document).ready(function() {
-	"use strict";
-	$(".contentscroll").niceScroll({
-	cursorcolor:niceScrollcursorcolor,
-	touchbehavior:true,
-	scrollspeed:160,
-	mousescrollstep:90,
-	smoothscroll:true,
-	cursorwidth:"6px",
-	cursorborder:"0",
-	cursordragontouch: true
-});
-
-	$("#menutop").niceScroll({
-	cursorcolor:niceScrollcursorcolor,
-	touchbehavior:true,
-	scrollspeed:140,
-	mousescrollstep:90,
-	smoothscroll:true,
-	cursorwidth:"6px",
-	cursorborder:"0",
-	cursordragontouch: true
-});
-
-$(".contentscroll").mouseover(function() {
-$(".contentscroll").getNiceScroll().resize();
-});
-
-});
+//  $(document).ready(function() {
+//	"use strict";
+//	$(".contentscroll").niceScroll({
+//	cursorcolor:niceScrollcursorcolor,
+//	touchbehavior:true,
+//	scrollspeed:160,
+//	mousescrollstep:90,
+//	smoothscroll:true,
+//	cursorwidth:"6px",
+//	cursorborder:"0",
+//	cursordragontouch: true
+//});
+//
+//	$("#menutop").niceScroll({
+//	cursorcolor:niceScrollcursorcolor,
+//	touchbehavior:true,
+//	scrollspeed:140,
+//	mousescrollstep:90,
+//	smoothscroll:true,
+//	cursorwidth:"6px",
+//	cursorborder:"0",
+//	cursordragontouch: true
+//});
+//
+//$(".contentscroll").mouseover(function() {
+//$(".contentscroll").getNiceScroll().resize();
+//});
+//
+//});
 // niceScroll Bar options end
 
 
@@ -787,7 +787,7 @@ $("body").jpreLoader(
 
 
 /* Video Containers */
-$(".video_containers").fitVids();
+//$(".video_containers").fitVids();
 /* //Video Containers */
 
 
@@ -795,29 +795,29 @@ $(".video_containers").fitVids();
 		  		   // Portfolio on mouseover opactiy
 ***************************************************/
 
-jQuery(document).ready(function($){
-"use strict";
-
-		jQuery("area[data-rel^='prettyPhoto']").prettyPhoto();
-		jQuery("#portfolio-grid:first a[data-rel^='prettyPhoto']").prettyPhoto({animation_speed:'normal',theme:'pp_default',slideshow:3000, autoplay_slideshow: true,deeplinking:false});
-		jQuery(".portfolio-grid:gt(0) a[data-rel^='prettyPhoto']").prettyPhoto({animation_speed:'normal',slideshow:3000, deeplinking:false});
-		jQuery("#custom_content a[data-rel^='prettyPhoto']:first").prettyPhoto({
-		custom_markup: '<div id="map_canvas" style="width:260px; height:265px"></div>',
-		changepicturecallback: function(){ initialize(); }
-		});
-		jQuery("#custom_content a[data-rel^='prettyPhoto']:last").prettyPhoto({
-		custom_markup: '<div id="bsap_1259344" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div><div id="bsap_1237859" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6" style="height:260px"></div><div id="bsap_1251710" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div>',
-		changepicturecallback: function(){ _bsap.exec(); }
-		});
-});
+//jQuery(document).ready(function($){
+//"use strict";
+//
+//		jQuery("area[data-rel^='prettyPhoto']").prettyPhoto();
+//		jQuery("#portfolio-grid:first a[data-rel^='prettyPhoto']").prettyPhoto({animation_speed:'normal',theme:'pp_default',slideshow:3000, autoplay_slideshow: true,deeplinking:false});
+//		jQuery(".portfolio-grid:gt(0) a[data-rel^='prettyPhoto']").prettyPhoto({animation_speed:'normal',slideshow:3000, deeplinking:false});
+//		jQuery("#custom_content a[data-rel^='prettyPhoto']:first").prettyPhoto({
+//		custom_markup: '<div id="map_canvas" style="width:260px; height:265px"></div>',
+//		changepicturecallback: function(){ initialize(); }
+//		});
+//		jQuery("#custom_content a[data-rel^='prettyPhoto']:last").prettyPhoto({
+//		custom_markup: '<div id="bsap_1259344" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div><div id="bsap_1237859" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6" style="height:260px"></div><div id="bsap_1251710" class="bsarocks bsap_d49a0984d0f377271ccbf01a33f2b6d6"></div>',
+//		changepicturecallback: function(){ _bsap.exec(); }
+//		});
+//});
 //prettyPhoto END
 
 
  //mixitup Portfolio filters
-  $('#portfolio-grid').mixitup({
-    effects: ['fade','scale'],
-    easing: 'snap'
-  });
+//  $('#portfolio-grid').mixitup({
+//    effects: ['fade','scale'],
+//    easing: 'snap'
+//  });
 //mixitup Portfolio END
 
 
