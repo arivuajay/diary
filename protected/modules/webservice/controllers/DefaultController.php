@@ -22,7 +22,7 @@ class DefaultController extends Controller {
         $params = $_REQUEST;
         if (!empty($_FILES['image']))
             $params['journal_images'] = $this->Uploadjournalimg($_FILES['image']);
-        
+
         $result = Myclass::addEntry($params);
         echo CJSON::encode($result);
 
@@ -275,7 +275,7 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
-    
+
     public function actionGetfaq() {
 
         $model = Faq::model()->findAll();
@@ -298,6 +298,22 @@ class DefaultController extends Controller {
         $result = Myclass::addSubmitmood($params);
         echo CJSON::encode($result);
 
+        Yii::app()->end();
+    }
+
+     public function actionCheckuser() {
+
+        $params = $_REQUEST;
+        $count = Users::model()->count("user_email = '{$params['email']}'");
+        if($count){
+            $result['success'] = 1;
+            $result['message'] = 'Registered';
+        }else{
+            $result['success'] = 0;
+            $result['message'] = 'Guest';
+        }
+
+        echo CJSON::encode($result);
         Yii::app()->end();
     }
 
