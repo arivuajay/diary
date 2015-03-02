@@ -189,7 +189,7 @@ class DefaultController extends Controller {
         $criteria = new CDbCriteria();
         $criteria->select = array('t.*');
         $criteria->with = array('diaryCategory');
-        $criteria->addCondition("t.diary_user_id = '" . $_REQUEST['user_id'] . "'");
+        $criteria->addCondition("t.diary_user_email = '" . $_REQUEST['user_email'] . "'");
         $criteria->addCondition("t.diary_title = '" . $_REQUEST['searchdata'] . "'  OR t.diary_tags = '" . $_REQUEST['searchdata'] . "'  OR t.diary_current_date = '" . $_REQUEST['searchdata'] . "' OR diaryCategory.category_name = '" . $_REQUEST['searchdata'] . "'");
         $model = Diary::model()->findAll($criteria);
         if (!$model) {
