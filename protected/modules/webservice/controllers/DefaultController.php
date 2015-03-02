@@ -216,11 +216,18 @@ class DefaultController extends Controller {
         } else {
             $result['success'] = 1;
             $record = $model->attributes;
-            $record['body'] = strip_tags($record['body']);
-            $remove = array("<\/p>","\r","\n","<\/strong>");
-            $record['body'] = str_replace($remove, "",$record['body']);
+//            Remove trim char
+            $content = trim(strip_tags($record['body']));
+//            Remove &nbsp; & &amp; html entity
+            $content = preg_replace("/&#?[a-z0-9]{2,8};/i","",$content);
+//            Remove \r\n
+            $content = str_replace("\r\n","",$content);
 
-            $result['message'] = $model->attributes;
+             $record['body'] = $content;
+
+
+
+            $result['message'] = $record;
         }
         echo CJSON::encode($result);
 
