@@ -217,6 +217,8 @@ class DefaultController extends Controller {
             $result['success'] = 1;
             $record = $model->attributes;
             $record['body'] = strip_tags($record['body']);
+            $remove = array("<\/p>","\r","\n","<\/strong>");
+            $record['body'] = str_replace($remove, "",$record['body']);
 
             $result['message'] = $model->attributes;
         }
