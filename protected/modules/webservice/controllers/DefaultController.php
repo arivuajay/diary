@@ -186,7 +186,7 @@ class DefaultController extends Controller {
 //    }
 
     public function actionSearchresult() {
-        $search_user_id = Users::model()->findByAttributes(array('user_email'=>$_REQUEST['user_email']));
+        $search_user_id = Users::model()->findByAttributes(array('user_email' => $_REQUEST['user_email']));
         $criteria = new CDbCriteria();
         $criteria->select = array('t.*');
         $criteria->with = array('diaryCategory');
@@ -219,13 +219,11 @@ class DefaultController extends Controller {
 //            Remove trim char
             $content = trim(strip_tags($record['body']));
 //            Remove &nbsp; & &amp; html entity
-            $content = preg_replace("/&#?[a-z0-9]{2,8};/i","",$content);
+            $content = preg_replace("/&#?[a-z0-9]{2,8};/i", "", $content);
 //            Remove \r\n
-            $content = str_replace("\r\n","",$content);
+            $content = str_replace("\r\n", "", $content);
 
-             $record['body'] = $content;
-
-
+            $record['body'] = $content;
 
             $result['message'] = $record;
         }
@@ -311,14 +309,14 @@ class DefaultController extends Controller {
         Yii::app()->end();
     }
 
-     public function actionCheckuser() {
+    public function actionCheckuser() {
 
         $params = $_REQUEST;
         $count = Users::model()->count("user_email = '{$params['email']}'");
-        if($count){
+        if ($count) {
             $result['success'] = 1;
             $result['message'] = 'Registered';
-        }else{
+        } else {
             $result['success'] = 0;
             $result['message'] = 'Guest';
         }
