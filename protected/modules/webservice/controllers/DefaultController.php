@@ -354,4 +354,19 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
+    
+     public function actionUpdatepassword() {
+
+        $model = Users::model()->findAllByAttributes(array('user_email'=>$_REQUEST['email']));
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No User found!!!';
+        } else {
+            $result['success'] = 1;
+            $result['message'] = $model;
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
 }
