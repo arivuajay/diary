@@ -324,5 +324,34 @@ class DefaultController extends Controller {
         echo CJSON::encode($result);
         Yii::app()->end();
     }
+    
+    public function actionMyprofile() {
 
+        $model = Users::model()->findAllByAttributes(array('user_email'=>$_REQUEST['email']));
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No User found!!!';
+        } else {
+            $result['success'] = 1;
+            $result['message'] = $model;
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+    
+    public function actionUpdateprofile() {
+
+        $model = Users::model()->findAllByAttributes(array('user_email'=>$_REQUEST['email']));
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No User found!!!';
+        } else {
+            $result['success'] = 1;
+            $result['message'] = $model;
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
 }
