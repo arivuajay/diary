@@ -454,15 +454,18 @@ class UsersController extends Controller {
             $users = Users::model()->isActive()->findAll();
 
             foreach ($users as $user) {
-            $mail = new Sendmail;
-            $trans_array = array(
-                "{SITENAME}" => SITENAME,
-                "{USERNAME}" => $user->user_name,
-                "{EMAIL_ID}" => $user->user_email,
-            );
-            $message = $mail->getMessage('reminder', $trans_array);
-            $Subject = $mail->translate('{SITENAME}: : Reminder');
-            $mail->send($user->user_email, $Subject, $message);
+                $jnl_count = Diary::model()->countByAttributes(array('diary_user_id' => $user->user_id, 'diary_current_date' => date('Y-m-d')));
+                if($jnl_count == 0){
+                    $mail = new Sendmail;
+                    $trans_array = array(
+                        "{SITENAME}" => SITENAME,
+                        "{USERNAME}" => $user->user_name,
+                        "{EMAIL_ID}" => $user->user_email,
+                    );
+                    $message = $mail->getMessage('reminder', $trans_array);
+                    $Subject = $mail->translate('{SITENAME}: : Reminder');
+                    $mail->send($user->user_email, $Subject, $message);
+                }
             }
         }
         Yii::app()->end();
