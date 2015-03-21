@@ -84,7 +84,8 @@
                                         }
                                         
                                         echo $count == 0 ? '<b>' : '';
-                                        echo CHtml::link('<li><span class="glyphicons glyphicons-bell text-orange2 fs16 mr15"></span> '.$notification->notification_title.'</li>', 
+                                        $bell_color = $count == 0 ? 'text-purple2' : 'text-orange2';
+                                        echo CHtml::link('<li><span class="glyphicons glyphicons-bell '.$bell_color.' fs16 mr15"></span> '.$notification->notification_title.'</li>', 
                                                 array('/site/notification/view/', 'id' => $notification->notification_id), 
                                                 array('id' => 'tooltip1', 'style' => 'text-decoration:none'));
                                         echo $count == 0 ? '</b>' : '';
