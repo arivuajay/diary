@@ -158,12 +158,26 @@ class Diary extends CActiveRecord {
         $criteria = new CDbCriteria();
         $criteria->select = array('t.*');
         $criteria->with = array('diaryCategory');
-        $criteria->addCondition("t.diary_user_id = '" . Yii::app()->user->id. "'");
-        $criteria->addCondition("t.diary_title = '" . $_GET['search'] . "'  OR t.diary_tags = '" . $_GET['search'] . "'  OR t.diary_current_date = '" . $_GET['search'] . "' OR diaryCategory.category_name = '" . $_GET['search'] . "'");
+        $criteria->addCondition("t.diary_user_id = '" . Yii::app()->user->id . "'");
+//        echo $_GET['using']; exit;
+        if ($_GET['using'] == '') {
+            $criteria->addCondition("t.diary_title = '" . $_GET['search'] . "'  OR t.diary_tags = '" . $_GET['search'] . "'  OR t.diary_current_date = '" . $_GET['search'] . "' OR diaryCategory.category_name = '" . $_GET['search'] . "'");
+        } else {
+             if ($_GET['using'] == 'category') {
+                 $search_key = 'diaryCategory.category_name';
+             }
+             if ($_GET['using'] == 'title') {
+                 $search_key = 't.diary_title';
+             }
+             if ($_GET['using'] == 'date') {
+                 $search_key = 't.diary_current_date';
+             }
+              $criteria->addCondition($search_key." = '" . $_GET['search'] ."'");
+//            $criteria->addCondition("t.diary_title = '" . $_GET['search'] . "'  OR t.diary_tags = '" . $_GET['search'] . "'  OR t.diary_current_date = '" . $_GET['search'] . "' OR diaryCategory.category_name = '" . $_GET['search'] . "'");
+        }
 //        if (isset($_REQUEST['pref_date']))
 //            $criteria->addCondition("DATE(t.diary_current_date) = '" . $_REQUEST['pref_date'] . "'");
 //        $criteria->limit = 10;
-        
 //        return new CActiveDataProvider($this, array(
 //            'criteria' => $criteria,
 //        ));

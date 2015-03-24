@@ -52,8 +52,8 @@ $this->breadcrumbs=array(
                                         <td><?php echo $category->category_name; ?></td>
                                         <td><?php echo $category->created; ?></td>
                                         <td>
-                                            <?php echo CHtml::link('Edit', array('/site/category/update', 'id' => $category->category_id)) . ' /' ?>
-                                            <?php echo CHtml::link('Delete', array('/site/category/delete', 'id' => $category->category_id), array('onClick' => 'return confirm("Are you sure to delete ?")')) ?>
+                                            <?php echo CHtml::link('Edit', array('/site/category/update', 'id' => $category->category_id))  ?>
+                                            <?php //echo CHtml::link('Delete', array('/site/category/delete', 'id' => $category->category_id), array('onClick' => 'return confirm("Are you sure to delete ?")')) ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

@@ -38,26 +38,33 @@
                         ));
                         ?>
 
-                            <!--<form method="get" id="searchform" action="<?php echo $baseUrl; ?>/site/journal/search">-->
+                                    <!--<form method="get" id="searchform" action="<?php echo $baseUrl; ?>/site/journal/search">-->
                         <input type="text" name="search" id="HeaderSearch" value="<?php echo isset($_GET['search']) ? $_GET['search'] : '' ?>"  placeholder="Search..." >
                         <!--</form>-->
-                        <?php $this->endWidget(); ?>
-
+                   
                     </div>
-
+                 <div class="navbar-search" style="border: none;">
+                      <select name="using" onchange="this.form.submit()">
+                            <option value="">Search using</option>
+                            <option value="title" <?php  if($_GET['using'] == 'title') {echo 'selected';} ?>>Title</option>
+                            <option value="category" <?php  if($_GET['using'] == 'category') {echo 'selected';} ?>>Category</option>
+                            <option value="date" <?php  if($_GET['using'] == 'date') {echo 'selected';} ?>>Date</option>
+                        </select> 
+                 </div>
+                <?php $this->endWidget(); ?>
                 <?php endif; ?>
                 <?php
                 $Criteria = new CDbCriteria();
                 $Criteria->order = 'notification_id DESC';
                 $notifications = Notification::model()->findAll($Criteria);
                 $notification_count = count($notifications);
-                
+
                 $log_count = 0;
-                if(!Yii::app()->user->isGuest){
+                if (!Yii::app()->user->isGuest) {
                     $log_count = NotificationLog::model()->countByAttributes(
-                                                    array(
-                                                        'log_user_id' => Yii::app()->user->id
-                                                    ));
+                            array(
+                                'log_user_id' => Yii::app()->user->id
+                    ));
                 }
                 $not_count = $notification_count - $log_count;
                 ?>
@@ -65,31 +72,35 @@
                     <div class="btn-group" id="alert_menu">
                         <button type="button" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="glyphicons glyphicons-bell"></span>
-                            <?php if($not_count > 0){?>
-                            <b><?php echo $notification_count - $log_count?></b> 
-                            <?php }?>
+                            <?php if ($not_count > 0) { ?>
+                                <b><?php echo $notification_count - $log_count ?></b> 
+                            <?php } ?>
                         </button>
                         <ul class="dropdown-menu media-list" role="menu">
                             <li class="dropdown-header">Recent Messages</li>
                             <li class="p15 pb10">
                                 <ul class="list-unstyled">
-                                    <?php foreach($notifications as $notification):
+                                    <?php
+                                    foreach ($notifications as $notification):
                                         $count = 0;
-                                        if(!Yii::app()->user->isGuest){
+                                        if (!Yii::app()->user->isGuest) {
                                             $count = NotificationLog::model()->countByAttributes(
                                                     array(
                                                         'log_user_id' => Yii::app()->user->id,
                                                         'log_notification_id' => $notification->notification_id
-                                                    ));
+                                            ));
                                         }
-                                        
+
                                         echo $count == 0 ? '<b>' : '';
+
                                         $bell_color = $count == 0 ? 'text-purple2' : 'text-orange2';
                                         echo CHtml::link('<li><span class="glyphicons glyphicons-bell '.$bell_color.' fs16 mr15"></span> '.$notification->notification_title.'</li>', 
                                                 array('/site/notification/view/', 'id' => $notification->notification_id), 
                                                 array('id' => 'tooltip1', 'style' => 'text-decoration:none'));
+
                                         echo $count == 0 ? '</b>' : '';
-                                        endforeach; ?>                                   
+                                    endforeach;
+                                    ?>                                   
  <!--<li class="pt10"><span class="glyphicons glyphicons-facebook text-blue2 fs16 mr15"></span></b></li>-->
 <!--                                    <li class="pt10"><span class="glyphicons glyphicons-paperclip text-teal2 fs16 mr15"></span></li>
                                     <li class="pt10"><span class="glyphicons glyphicons-gift text-purple2 fs16 mr15"></span></li>

@@ -35,7 +35,21 @@
 //		'modified',
 //	),
 //));
+$themeUrl = Yii::app()->theme->baseUrl;
 ?>
+
+  
+<script type="text/javascript">
+
+    function printContent(el)
+    {
+        var restorepage = document.body.innerHTML;
+        var printcontent = document.getElementById(el).innerHTML;
+       // mywindow.document.write('<link rel="stylesheet" href="<?php echo $themeUrl ?>/css/frontend/css/theme.css" type="text/css" />');
+        document.body.innerHTML = printcontent; window.print();
+        document.body.innerHTML = restorepage;
+    }
+</script>
 
 <div id="topbar">
     <div class="topbar-left">
@@ -47,6 +61,7 @@
     </div>
     <div class="topbar-right top-button-margin">
         <?php $back_id =  date('Y-m-d',strtotime($model->diary_current_date));?>
+        <?php echo CHtml::Button('Print', array('onclick' => "js:printContent('div1')",'class' => 'submit btn bg-purple pull-right top-marin')); ?>
         <?php if($_SESSION['back'] != 1){ echo CHtml::Button('Back', array('submit'=>array('journal/listjournal/date/'.$back_id),'class' => 'submit btn bg-purple pull-right top-marin'));}unset($_SESSION['back']) ?>
         <?php echo CHtml::Button('Edit', array('submit'=>array('journal/update/id/'.$model->diary_id),'class' => 'submit btn bg-purple pull-right top-marin')); ?>
         <?php echo CHtml::Button('Write a Journal', array('submit'=>array('journal/create'),'class' => 'submit btn bg-purple pull-right top-marin')); ?>
@@ -64,7 +79,7 @@
                             <div class="panel-group accordion mta25" id="accordion1">
                                 <div class="panel">
                                     <div id="accord1_1" class="panel-collapse collapse in">
-                                        <div class="panel-body">
+                                        <div id="div1" class="panel-body">
                                             <?php
                                             $this->widget('zii.widgets.CDetailView', array(
                                                 'data' => $model,
@@ -116,3 +131,4 @@
         </div>
     </div>
 </div>
+

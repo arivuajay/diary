@@ -283,7 +283,48 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
+    
+      public function actionUsercategories() {
 
+        $model = Users::model()->findByAttributes(array('user_id' => $_REQUEST['user_id']));
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No entries found!!!';
+        } else {
+            $result['success'] = 1;
+            $user_id = $model->user_id;
+            $criteria = new CDbCriteria();
+            $criteria->addInCondition('user_id', array( $user_id));
+            $cat_results = Category::model()->findAll($criteria);
+            $record[0]['cat_ids'] = array_values(CHtml::listData($cat_results, 'category_id', 'category_id'));
+            $record[0]['cat_name'] = array_values(CHtml::listData($cat_results, 'category_id', 'category_name'));
+
+            $result['message'] = $record;
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+    
+    
+    public function actionEditcategory() {
+        $model = Category::model()->findByPk($_REQUEST['category_id']);
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No entries found!!!';
+        } else {
+            $result['success'] = 1;
+            $model->category_name = $_REQUEST['category_name'];
+            $model->save();
+            $result['message'] = 'Succesfully Updated.';
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+    
+    
+    
     public function actionGetfaq() {
 
         $model = Faq::model()->findAll();
@@ -324,10 +365,10 @@ class DefaultController extends Controller {
         echo CJSON::encode($result);
         Yii::app()->end();
     }
-    
+
     public function actionMyprofile() {
 
-        $model = Users::model()->findAllByAttributes(array('user_email'=>$_REQUEST['email']));
+        $model = Users::model()->findAllByAttributes(array('user_email' => $_REQUEST['email']));
         if (!$model) {
             $result['success'] = 0;
             $result['message'] = 'No User found!!!';
@@ -339,34 +380,63 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
-    
+
     public function actionUpdateprofile() {
+        
 
-        $model = Users::model()->findAllByAttributes(array('user_email'=>$_REQUEST['email']));
+        $model = Users::model()->findByPk($_REQUEST[user_id]);
+        $old_name = $model->user_prof_image;
+        
+        $path = realpath(Yii::app()->getBasePath() . "/../") . "/themes/site/image/prof_img/";
+        if (!empty($model)) {
+            $model->user_name = $_REQUEST[profileName];
+            $model->user_email = $_REQUEST[profileMail];
+        }
+ 
+        if (!empty($_FILES['image']))
+            $model->user_prof_image = CUploadedFile::getInstanceByName('image');
+        
+        if (!empty($model->user_prof_image)) {
+            $name = $model->user_prof_image->getName();
+            $filename = time() . '_' . $_REQUEST[user_id] . '_' . $name;
+            $model->user_prof_image->saveAs($path . $filename);
+            if (!empty($old_name)) {
+                unlink($path . $old_name);
+            }
+            $model->user_prof_image = $filename;
+        } else {
+            $model->user_prof_image = $old_name;
+        }
+        $result = Myclass::updateUser($model);
+        
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+
+    public function actionUpdatepassword() {
+
+        $model = Users::model()->findByAttributes(array('user_email' => $_REQUEST['email']));
         if (!$model) {
             $result['success'] = 0;
             $result['message'] = 'No User found!!!';
         } else {
-            $result['success'] = 1;
-            $result['message'] = $model;
+            $old_password = Myclass::encrypt($_REQUEST['old_password']);
+            if ($old_password == $model->user_password) {
+
+                $new_password = Myclass::encrypt($_REQUEST['new_password']);
+                $model->user_password = $new_password;
+                $model->save(false);
+                $result['success'] = 1;
+                $result['message'] = 'Your password updated succesfully';
+            } else {
+                $result['success'] = 0;
+                $result['message'] = 'Your old password does not match!!!';
+            }
         }
         echo CJSON::encode($result);
 
         Yii::app()->end();
     }
-    
-     public function actionUpdatepassword() {
 
-        $model = Users::model()->findAllByAttributes(array('user_email'=>$_REQUEST['email']));
-        if (!$model) {
-            $result['success'] = 0;
-            $result['message'] = 'No User found!!!';
-        } else {
-            $result['success'] = 1;
-            $result['message'] = $model;
-        }
-        echo CJSON::encode($result);
-
-        Yii::app()->end();
-    }
 }
