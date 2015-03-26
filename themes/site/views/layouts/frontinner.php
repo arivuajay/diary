@@ -115,6 +115,7 @@
         <!-- End: Header -->
         <!-- Start: Main -->
         <div id="main">
+<!--            <div class='sidebar'><a href="">To Do List</a></div>-->
             <!-- Start: Sidebar -->
             <aside id="sidebar_left">
                 <div class="user-info">

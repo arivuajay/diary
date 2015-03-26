@@ -52,10 +52,12 @@ class CmsController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($slug)
-	{    //echo $slug;
+	public function actionView($slug=null)
+	{    
+//            echo $slug;exit;
                 
-                $data = Cms::model()->findByAttributes(
+
+            $data = Cms::model()->findByAttributes(
                 array('slug'=>$slug)
                 );
                 $this->pageDescription = $data->metaDescription;

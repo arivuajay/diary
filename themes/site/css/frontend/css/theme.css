@@ -9138,3 +9138,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #Diary_diary_user_mood_id > img {
     margin-right: 15px;
 }
+.sidebar {
+   width: 45px;
+   height: 90px;
+   position: fixed;
+   right: 0px;
+   top: 200px;
+   border: 1px solid black;
+   z-index: 9999;
+}
