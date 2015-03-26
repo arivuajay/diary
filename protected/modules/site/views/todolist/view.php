@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Todolists'=>array('index'),
-	$model->name,
+	$model->id,
 );
 
 $this->menu=array(
@@ -16,8 +16,15 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Todolist <?php echo $model->name; ?></h1>
+<h1>View Todolist #<?php echo $model->id; ?></h1>
 
-<?php $this->renderPartial('_view', array(
-  'data'=>$model,
+<?php $this->widget('zii.widgets.CDetailView', array(
+	'data'=>$model,
+	'attributes'=>array(
+		'id',
+		'message',
+		'reminder_time',
+		'status',
+		'user_id',
+	),
 )); ?>

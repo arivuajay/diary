@@ -32,8 +32,12 @@ class TodolistController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array(),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -117,20 +121,11 @@ class TodolistController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{	
-    $criteria=new CDbCriteria(array(
-      'with'=>'author',
-    ));  
-    $dataProvider=new CActiveDataProvider('Todolist', array(
-      'pagination'=>array(
-          'pageSize'=>5,
-      ),        
-      'criteria' => $criteria,
-    ));
- 
-    $this->render('index',array(
-        'dataProvider'=>$dataProvider,
-    ));
+	{
+		$dataProvider=new CActiveDataProvider('Todolist');
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
 	}
 
 	/**
@@ -148,11 +143,12 @@ class TodolistController extends Controller
 		));
 	}
 
-  private $_model;
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
+	 * @param integer $id the ID of the model to be loaded
+	 * @return Todolist the loaded model
+	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
@@ -160,27 +156,11 @@ class TodolistController extends Controller
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
-    
-    if($this->_model===null)
-    {
-      if(isset($_GET['id']))
-      {
-        if(Yii::app()->user->isGuest)
-          $condition='status='.Todolist::STATUS_DRAFT
-                .' OR status='.Todolist::STATUS_COMPLETED;
-        else
-          $condition='';
-        $this->_model=Todolist::model('Todolist')->findByPk($_GET['id'], $condition, array('with'=>array('author')));
-      }
-      if($this->_model===null)
-        throw new CHttpException(404,'The requested page does not exist.');
-    }
-    return $model;
 	}
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
+	 * @param Todolist $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{

@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('todolist-grid', {
+	$('#todolist-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -45,16 +45,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		array(
-      'name'=>'name',
-      'type'=>'raw',
-      'value'=>'CHtml::link(CHtml::encode($data->name), $data->url)'
-    ),
-    array(
-      'name'=>'status',
-      'value'=>'Lookup::item("TodolistStatus",$data->status)',
-      'filter'=>Lookup::items('TodolistStatus'),
-    ),
+		'id',
+		'message',
+		'reminder_time',
+		'status',
+		'user_id',
 		array(
 			'class'=>'CButtonColumn',
 		),
