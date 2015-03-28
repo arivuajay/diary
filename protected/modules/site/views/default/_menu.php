@@ -1,4 +1,4 @@
-<?php
+<?php 
 $this->widget('zii.widgets.CMenu', array(
     'activeCssClass' => 'selected',
     'activateParents' => true,
@@ -20,7 +20,8 @@ $this->widget('zii.widgets.CMenu', array(
         array('label' => 'Feedback', 'url' =>array('/site/feedback/create'), 'linkOptions' => array('class' => 'nav-link')),
         array('label' => 'Contact', 'url' => array('/site/contact/create'), 'linkOptions' => array('class' => 'nav-link')),
         //array('label' => 'Connect with IMAGE  Consultant', 'url' => array('/site/default/underdevelopment'), 'linkOptions' => array('class' => 'nav-link')),
-        array('label' => 'Login / Register', 'url' => array('/site/users/login'), 'linkOptions' => array('class' => 'nav-link', 'visible' => Yii::app()->user->isGuest)),
+        array('label' => 'Login / Register', 'url' => array('/site/users/login'),'visible' => Yii::app()->user->isGuest, 'linkOptions' => array('class' => 'nav-link')),
+        array('label' => 'My Account', 'url' => array('/profile'), 'visible' => !(Yii::app()->user->isGuest),'linkOptions' => array('class' => 'nav-link')),
 //                                                array('label' => 'Register', 'url' => array('/site/users/register'), 'linkOptions' => array('class' => 'nav-link','visible'=>Yii::app()->user->isGuest)),
     ),
     'htmlOptions' => array('class' => 'nav', "id" => "sub-nav"),

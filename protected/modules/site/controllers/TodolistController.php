@@ -6,7 +6,7 @@ class TodolistController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='//layouts/frontinner';
 
 	/**
 	 * @return array action filters
@@ -28,7 +28,7 @@ class TodolistController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('manage','view'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -66,12 +66,14 @@ class TodolistController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+                
 		if(isset($_POST['Todolist']))
 		{
 			$model->attributes=$_POST['Todolist'];
+                        $model->user_id = Yii::app()->user->id;
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                            $this->redirect(array('manage'));
+//				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -95,7 +97,7 @@ class TodolistController extends Controller
 		{
 			$model->attributes=$_POST['Todolist'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('manage'));
 		}
 
 		$this->render('update',array(
@@ -120,11 +122,13 @@ class TodolistController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
-	{
+	public function actionManage()
+	{ 
+            $todomodel = Todolist::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->id));
 		$dataProvider=new CActiveDataProvider('Todolist');
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'todomodel'=>$todomodel,
+                        '$dataProvider'=>$dataProvider,
 		));
 	}
 

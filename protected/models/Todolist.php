@@ -31,7 +31,7 @@ class Todolist extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('message, reminder_time, user_id', 'required'),
+			array('message, reminder_time', 'required'),
 			array('message', 'length', 'max'=>128),
 			array('status', 'length', 'max'=>1),
 			array('user_id', 'length', 'max'=>20),

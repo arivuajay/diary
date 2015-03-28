@@ -23,6 +23,8 @@
             array('label' => '<span class="glyphicons glyphicons-pencil"></span><span class="sidebar-title">Writing Tips</span>', 'url' => array('/site/default/underdevelopment')/*Myclass::getPageUrl(3)*/),
             array('label' => '<span class="glyphicon glyphicon-question-sign"></span><span class="sidebar-title">FAQ</span>', 'url' => array('/site/faq/')),
             array('label' => '<span class="glyphicon glyphicon-lock"></span><span class="sidebar-title">Privacy</span>', 'url' => Myclass::getPageUrl(2)),
+            $is_login ? array('label' => '<span class="glyphicon glyphicon-paperclip"></span><span class="sidebar-title">Todo list</span>', 'url' => array('/site/todolist/manage')): $is_login,
+
             /*          array('label' => '<span class="glyphicons glyphicons-calendar"></span><span class="sidebar-title">Careers</span>', 'url' => array('/site/carriers/')),
               array('label' => '<span class="glyphicons glyphicons-globe"></span><span class="sidebar-title">Contact us</span>', 'url' => array('/site/default/underdevelopment')),
               array('label' => '<span class="glyphicons glyphicons-settings"></span><span class="sidebar-title">All your needs</span>', 'url' => array('/site/default/underdevelopment')),

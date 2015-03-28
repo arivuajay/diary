@@ -15,41 +15,20 @@
 //	array('label'=>'Manage Diary', 'url'=>array('admin')),
 //);
 ?>
+<style type=”text/css” media=”print”>
 
-<!--<h1>View Diary #<?php echo $model->diary_id; ?></h1>-->
+@media print{
 
-<?php
-//$this->widget('zii.widgets.CDetailView', array(
-//	'data'=>$model,
-//	'attributes'=>array(
-//		'diary_id',
-//		'diary_user_id',
-//		'diary_title',
-//		'diary_description',
-//		'diary_category_id',
-//		'diary_tags',
-//		'diary_current_date',
-//		'diary_user_mood_id',
-//		'diary_upload',
-//		'created',
-//		'modified',
-//	),
-//));
-$themeUrl = Yii::app()->theme->baseUrl;
-?>
+body *{ visibility: hidden; }
 
-  
-<script type="text/javascript">
+#div1 * {visibility: visible !important; }
 
-    function printContent(el)
-    {
-        var restorepage = document.body.innerHTML;
-        var printcontent = document.getElementById(el).innerHTML;
-       // mywindow.document.write('<link rel="stylesheet" href="<?php echo $themeUrl ?>/css/frontend/css/theme.css" type="text/css" />');
-        document.body.innerHTML = printcontent; window.print();
-        document.body.innerHTML = restorepage;
-    }
-</script>
+#div1 {position :absolute; top:40px; left:40px; }
+
+}
+
+</style>
+
 
 <div id="topbar">
     <div class="topbar-left">
@@ -131,4 +110,19 @@ $themeUrl = Yii::app()->theme->baseUrl;
         </div>
     </div>
 </div>
+  
+<script type="text/javascript">
+
+    function printContent(el)
+    {
+        var restorepage = document.body.innerHTML;
+        var printcontent = document.getElementById(el).innerHTML;
+     // mywindow.document.write("<link rel="stylesheet" href=<?php echo $themeUrl ?>/css/frontend/css/theme.css" type=\"text/css\" media=\"print\"/>");
+//        document.createStyleSheet("<?php echo $themeUrl?>/css/frontend/css/theme.css");
+//        mywindow.document.write( "<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\" media=\"print\"/>" );
+
+        document.body.innerHTML = printcontent; window.print();
+        document.body.innerHTML = restorepage;
+    }
+</script>
 

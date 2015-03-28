@@ -44,7 +44,7 @@
                    
                     </div>
                  <div class="navbar-search" style="border: none;">
-                      <select name="using" onchange="this.form.submit()">
+                     <select class="form-control" name="using" onchange="this.form.submit()">
                             <option value="">Search using</option>
                             <option value="title" <?php  if($_GET['using'] == 'title') {echo 'selected';} ?>>Title</option>
                             <option value="category" <?php  if($_GET['using'] == 'category') {echo 'selected';} ?>>Category</option>

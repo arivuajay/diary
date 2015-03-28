@@ -18,4 +18,7 @@ return array(
     'faq' => '/site/faq',
     'write-journal' => '/site/journal/create',
     'profile' => '/site/users/myprofile',
+    'todolist/manage' => 'site/todolist/manage',
+    'todolist/create' => 'site/todolist/create',
+    'updatetodolist_<id:\w+>' => '/site/todolist/update',
 );
