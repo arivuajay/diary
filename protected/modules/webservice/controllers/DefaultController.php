@@ -283,8 +283,8 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
-    
-      public function actionUsercategories() {
+
+    public function actionUsercategories() {
 
         $model = Users::model()->findByAttributes(array('user_id' => $_REQUEST['user_id']));
         if (!$model) {
@@ -294,7 +294,7 @@ class DefaultController extends Controller {
             $result['success'] = 1;
             $user_id = $model->user_id;
             $criteria = new CDbCriteria();
-            $criteria->addInCondition('user_id', array( $user_id));
+            $criteria->addInCondition('user_id', array($user_id));
             $cat_results = Category::model()->findAll($criteria);
             $record[0]['cat_ids'] = array_values(CHtml::listData($cat_results, 'category_id', 'category_id'));
             $record[0]['cat_name'] = array_values(CHtml::listData($cat_results, 'category_id', 'category_name'));
@@ -305,8 +305,7 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
-    
-    
+
     public function actionEditcategory() {
         $model = Category::model()->findByPk($_REQUEST['category_id']);
         if (!$model) {
@@ -322,9 +321,7 @@ class DefaultController extends Controller {
 
         Yii::app()->end();
     }
-    
-    
-    
+
     public function actionGetfaq() {
 
         $model = Faq::model()->findAll();
@@ -382,20 +379,20 @@ class DefaultController extends Controller {
     }
 
     public function actionUpdateprofile() {
-        
+
 
         $model = Users::model()->findByPk($_REQUEST[user_id]);
         $old_name = $model->user_prof_image;
-        
+
         $path = realpath(Yii::app()->getBasePath() . "/../") . "/themes/site/image/prof_img/";
         if (!empty($model)) {
             $model->user_name = $_REQUEST[profileName];
             $model->user_email = $_REQUEST[profileMail];
         }
- 
+
         if (!empty($_FILES['image']))
             $model->user_prof_image = CUploadedFile::getInstanceByName('image');
-        
+
         if (!empty($model->user_prof_image)) {
             $name = $model->user_prof_image->getName();
             $filename = time() . '_' . $_REQUEST[user_id] . '_' . $name;
@@ -408,7 +405,7 @@ class DefaultController extends Controller {
             $model->user_prof_image = $old_name;
         }
         $result = Myclass::updateUser($model);
-        
+
         echo CJSON::encode($result);
 
         Yii::app()->end();
@@ -433,6 +430,100 @@ class DefaultController extends Controller {
                 $result['success'] = 0;
                 $result['message'] = 'Your old password does not match!!!';
             }
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+
+    /*
+     * Parametes
+     * @date
+     * @time
+     * @mail
+     * @message
+     */
+
+    public function actionAddtodo() {
+        $result = array();
+        $params = $_REQUEST;
+
+        if ($params['todo_id']) {
+            $model = Todolist::model()->findByPk($params['todo_id']);
+        } elseif (!$model) {
+            $model = new Todolist;
+        }
+        
+        $params['reminder_time'] = "{$params['date']} {$params['time']}";
+        $params['user_id'] = Users::model()->findByAttributes(array('user_email' => $params['mail']))->user_id;
+
+        if ($params['user_id']) {
+            $model->attributes = $params;
+            $model->save(false);
+
+            $result['success'] = 1;
+            $result['pref_date'] = date('Y-m-d', strtotime($model->reminder_time));
+            $result['message'] = 'Successfully added.';
+        } else {
+            $result['success'] = 0;
+            $result['message'] = 'Error !!!';
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+
+    public function actionGettodo() {
+        $todo_date = trim($_REQUEST['pref_date']);
+        $todo_mail = trim($_REQUEST['mail']);
+
+        $criteria = new CDbCriteria();
+        $criteria->select = array('t.*');
+        $criteria->order = 't.id ASC';
+        $criteria->with = array('user');
+        $criteria->addCondition("user.user_email = '{$todo_mail}'");
+        if (isset($_REQUEST['pref_date']))
+            $criteria->addCondition("DATE(t.reminder_time) = '{$todo_date}'");
+
+        $criteria->limit = 50;
+
+        $model = Todolist::model()->findAll($criteria);
+
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No todo"s found!!!';
+        } else {
+            $result['success'] = 1;
+            $record = array();
+            foreach ($model as $i => $data) {
+                $record[$i] = (array) $data->attributes;
+            }
+            $result['message'] = $record;
+        }
+
+        echo CJSON::encode($result);
+        Yii::app()->end();
+    }
+
+    public function actionDeletetodo() {
+        $todo_id = trim($_REQUEST['todo_id']);
+        $todo_mail = trim($_REQUEST['mail']);
+
+        $criteria = new CDbCriteria();
+        $criteria->select = array('t.*');
+        $criteria->with = array('user');
+        $criteria->addCondition("user.user_email = '$todo_mail'");
+        $criteria->addCondition("t.id = '$todo_id'");
+
+        $model = Todolist::model()->find($criteria);
+
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No todo"s found!!!';
+        } else {
+            $model->delete();
+            $result['success'] = 1;
+            $result['message'] = 'Succesfully deleted.';
         }
         echo CJSON::encode($result);
 
