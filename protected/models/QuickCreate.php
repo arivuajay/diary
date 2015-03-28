@@ -18,7 +18,7 @@ class QuickCreate extends CFormModel {
     public function rules() {
         return array(
             // username and password are required
-            array('email, moodtype', 'required','length', 'max' => 255),
+            array('email, moodtype', 'required'),
             array('email', 'email'),
         );
     }
