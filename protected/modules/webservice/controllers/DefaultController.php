@@ -453,8 +453,8 @@ class DefaultController extends Controller {
         } elseif (!$model) {
             $model = new Todolist;
         }
-        
-        $params['reminder_time'] = "{$params['date']} {$params['time']}";
+
+        $params['reminder_time'] = date("Y-m-d H:i:s",strtotime("{$params['date']} {$params['time']}"));
         $params['user_id'] = Users::model()->findByAttributes(array('user_email' => $params['mail']))->user_id;
 
         if ($params['user_id']) {
