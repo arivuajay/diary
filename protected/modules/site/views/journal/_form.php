@@ -100,7 +100,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     <div class="form-group">
                         <a href="#" id="add-new-file" class="btn btn-success">Upload Files</a>
                         <br>
-                        note : upload time depends on file size
+                        Note : Upload time depends on file size
                         <ul id="image_preview_list">
                             <?php
                             if (!$model->isNewRecord && $model->diaryImages):

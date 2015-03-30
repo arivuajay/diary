@@ -349,16 +349,17 @@ hr.tall {
 /* Right Navbar Container */
 .navbar-right {
     float: right;
-    width: 525px;
-    margin-top:25px; }
+    width: 400px;
+/*    margin-top:25px; */
+}
 
 /* Header Search Area */
 .navbar-search {
     position: relative;
     float: left;
     overflow: hidden;
-    width: 230px;
-    height: 60px;
+    width: 300px;
+/*    height: 60px;*/
     padding: 15px;
     padding-right: 25px; }
 
@@ -368,7 +369,7 @@ hr.tall {
     right: 0;
     top: 15px;
     height: 32px;
-    border-right: 1px solid #ebebeb; }
+    border-right: 1px solid #ebebeb !important; }
 
 .navbar-search input {
     outline: none;
@@ -379,7 +380,11 @@ hr.tall {
     border: 1px solid #DDD;
     border-radius: 15px;
     padding: 1px 13px;
-    width: 100%; }
+    width: 75%; }
+
+.navbar-search .radio-search{
+    line-height: 5px;
+}
 
 /* Navbar Menus */
 .navbar-menus {
@@ -9146,4 +9151,29 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
    top: 200px;
    border: 1px solid black;
    z-index: 9999;
+}
+.navbar-search input[type="radio"]
+{
+  width: 0;
+}
+.search-marin{
+       /*margin: -33px 8px 0 0;*/
+       top:15px;
+       position: absolute;
+       right: 25px;
+}
+
+.radio-search
+{
+    margin-top: 5px;
+}
+
+.radio-search input
+{
+    margin-right: 4px;
+}
+
+.radio-search label
+{
+    margin-right: 10px;
 }

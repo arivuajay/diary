@@ -50,7 +50,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     'id' => 'signup',
                     'enableAjaxValidation' => true,
                     'clientOptions' => array(
-                        'validateOnSubmit' => true,
+                    'validateOnSubmit' => true,
                     ),
                     'method' => 'POST',
                     'htmlOptions' => array('role' => 'form','novalidate'=>true)

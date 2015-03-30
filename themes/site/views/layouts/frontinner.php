@@ -6,6 +6,19 @@
     $baseUrl = Yii::app()->baseUrl;
     $themeUrl = Yii::app()->theme->baseUrl;
     ?>
+
+    <script>
+
+        function opendate(d) {
+            document.getElementById('search').style.display = "none";
+            document.getElementById(d).style.display = 'inline';
+        }
+        function closedate(d) {
+            document.getElementById('datepicker2').style.display = "none";
+            document.getElementById(d).style.display = 'inline';
+        }
+    </script>
+
     <body class="forms-page">
         <!-- Start: Header -->
         <header class="navbar navbar-fixed-top">
@@ -30,7 +43,7 @@
             </div>
             <div class="navbar-right">
                 <?php if (!(Yii::app()->user->isGuest)): ?>
-                    <div class="navbar-search" style="border: none;">
+                    <div class="navbar-search">
                         <?php
                         $form = $this->beginWidget('CActiveForm', array(
                             'action' => $baseUrl . '/site/journal/search',
@@ -38,20 +51,91 @@
                         ));
                         ?>
 
-                                    <!--<form method="get" id="searchform" action="<?php echo $baseUrl; ?>/site/journal/search">-->
-                        <input type="text" name="search" id="HeaderSearch" value="<?php echo isset($_GET['search']) ? $_GET['search'] : '' ?>"  placeholder="Search..." >
-                        <!--</form>-->
-                   
+                        <div class="" style="border: none;">
+
+
+                                                        <!--<form method="get" id="searchform" action="<?php echo $baseUrl; ?>/site/journal/search">-->
+                            <?php
+                            $show = 'display:block;';
+                            if ($_GET['using'] == 'date') {
+                                $show = 'display:none;';
+                            }
+                            ?>
+                            <?php
+                            $advance_show = 'display:none;';
+                            if (($_GET['using'] != '') || ($_GET['date'] != '')) {
+                                $advance_show = 'display:block;';
+                            }
+                            ?>                            
+
+                            <?php
+                            $date_value = '';
+                            if ($_GET['using'] == 'date') {
+                                $date_value = $_GET['date'];
+                            }
+                            ?>
+                            <input id="search" style="<?php echo $show; ?>" type="text" name="search"  value="<?php echo isset($_GET['search']) ? $_GET['search'] : '' ?>"  placeholder="Search..." >
+
+         <!--<input id="search_date" style="display:none;" type="text" name="search"  value="<?php echo isset($_GET['search']) ? $_GET['search'] : '' ?>"  placeholder="Search..." >-->
+                            <?php
+                            $showclass = 'display:none;';
+                            if ($_GET['using'] == 'date') {
+                                $showclass = 'display:block;';
+                            }
+                            ?>
+                            <?php
+                            $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                                'id' => '',
+                                'name' => 'date',
+                                'value' => $date_value,
+//                                    'model' => $model,
+//                                    'attribute' => 'using',
+                                'options' => array(
+                                    'dateFormat' => JS_SHORT_DATE_FORMAT,
+                                    'altFormat' => JS_SHORT_DATE_FORMAT,
+                                    'constrainInput' => 'true',
+                                ),
+                                'htmlOptions' => array(
+                                    'id' => 'datepicker2',
+                                    'placeholder' => 'Select date',
+                                    'style' => $showclass,
+                                    'size' => '10', // textField size
+                                    'maxlength' => '10', // textField maxlength
+                                ),
+                            ));
+                            ?>
+
+                            <button class="submit btn bg-purple pull-right search-marin" type="submit" value="">Go</button>
+
+
+
+                            <!--</form>-->
+
+                        </div>
+                        <div class="radio-search" style="">
+                            <a href="#" onclick="javascript:$('.advanced-field').toggle();" >Advanced Search</a>
+                            <div class="advanced-field" style="<?php echo $advance_show?>" >
+                                <input type="radio" name="using" onclick="javascript:closedate('search')" value="title" <?php
+                                if ($_GET['using'] == 'title') {
+                                    echo 'checked=checked';
+                                }
+                                ?> ><label>Title</label>
+                                <input type="radio" name="using" onclick="javascript:closedate('search')" value="category" <?php
+                                if ($_GET['using'] == 'category') {
+                                    echo 'checked=checked';
+                                }
+                                ?> ><label>Category</label>
+                                <input type="radio" name="using" onclick="javascript:opendate('datepicker2')" value="date"  <?php
+                                if ($_GET['using'] == 'date') {
+                                    echo 'checked=checked';
+                                }
+                                ?> ><label>Date</label>
+                            </div>
+                        </div>
+    <?php $this->endWidget(); ?>
+
                     </div>
-                 <div class="navbar-search" style="border: none;">
-                     <select class="form-control" name="using" onchange="this.form.submit()">
-                            <option value="">Search using</option>
-                            <option value="title" <?php  if($_GET['using'] == 'title') {echo 'selected';} ?>>Title</option>
-                            <option value="category" <?php  if($_GET['using'] == 'category') {echo 'selected';} ?>>Category</option>
-                            <option value="date" <?php  if($_GET['using'] == 'date') {echo 'selected';} ?>>Date</option>
-                        </select> 
-                 </div>
-                <?php $this->endWidget(); ?>
+
                 <?php endif; ?>
                 <?php
                 $Criteria = new CDbCriteria();
@@ -74,7 +158,7 @@
                             <span class="glyphicons glyphicons-bell"></span>
                             <?php if ($not_count > 0) { ?>
                                 <b><?php echo $notification_count - $log_count ?></b> 
-                            <?php } ?>
+<?php } ?>
                         </button>
                         <ul class="dropdown-menu media-list" role="menu">
                             <li class="dropdown-header">Recent Messages</li>
@@ -94,9 +178,7 @@
                                         echo $count == 0 ? '<b>' : '';
 
                                         $bell_color = $count == 0 ? 'text-purple2' : 'text-orange2';
-                                        echo CHtml::link('<li><span class="glyphicons glyphicons-bell '.$bell_color.' fs16 mr15"></span> '.$notification->notification_title.'</li>', 
-                                                array('/site/notification/view/', 'id' => $notification->notification_id), 
-                                                array('id' => 'tooltip1', 'style' => 'text-decoration:none'));
+                                        echo CHtml::link('<li><span class="glyphicons glyphicons-bell ' . $bell_color . ' fs16 mr15"></span> ' . $notification->notification_title . '</li>', array('/site/notification/view/', 'id' => $notification->notification_id), array('id' => 'tooltip1', 'style' => 'text-decoration:none'));
 
                                         echo $count == 0 ? '</b>' : '';
                                     endforeach;
@@ -115,7 +197,7 @@
         <!-- End: Header -->
         <!-- Start: Main -->
         <div id="main">
-<!--            <div class='sidebar'><a href="">To Do List</a></div>-->
+            <!--            <div class='sidebar'><a href="">To Do List</a></div>-->
             <!-- Start: Sidebar -->
             <aside id="sidebar_left">
                 <div class="user-info">
@@ -131,7 +213,7 @@
 
                             <div class="media-object border border-purple br64 bw2 p2">
                                 <!--<img class="br64" src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/5.jpg" alt="...">-->
-                                <?php echo $prof_image; ?>
+<?php echo $prof_image; ?>
                             </div>
                         </a>
                         <div class="mobile-link"> <span class="glyphicons glyphicons-show_big_thumbnails"></span> </div>
@@ -150,7 +232,7 @@
                                     <a href="<?php echo $baseUrl; ?>/site/users/login">Sign In</a>
                                 <?php else: ?>
                                     <a href="<?php echo $baseUrl; ?>/site/users/logout">Sign Out</a>
-                                <?php endif; ?>
+<?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -167,28 +249,28 @@
                             <?php echo CHtml::link('<span class="glyphicons glyphicons-inbox fs22 text-orange2"></span><h5 class="fs11">Write a journal</h5>', array('/site/journal/create')); ?>
                         </div>
                         <div class="col-xs-4"> 
-                            <?php echo CHtml::link('<span class="glyphicons glyphicons-bell fs22 text-purple2"></span><h5 class="fs11">Mood report</h5>', array('/site/default/underdevelopment')); ?>
+<?php echo CHtml::link('<span class="glyphicons glyphicons-bell fs22 text-purple2"></span><h5 class="fs11">Mood report</h5>', array('/site/default/underdevelopment')); ?>
                         </div>
                     </div>
                 </div>
-                <?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
+<?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
             </aside>
             <!-- End: Sidebar -->
             <section id="content_wrapper">
-                <?php if (isset($this->flashMessages) && !empty($this->flashMessages)): ?>
+                    <?php if (isset($this->flashMessages) && !empty($this->flashMessages)): ?>
                     <div style="padding: 10px;">
-                        <?php foreach ($this->flashMessages as $key => $message) { ?>
+    <?php foreach ($this->flashMessages as $key => $message) { ?>
                             <div class="alert alert-<?php echo $key; ?> fade in" style="margin-bottom: 0px;">
                                 <button type="button" class="close close-sm" data-dismiss="alert">
                                     <i class="fa fa-times"></i>
                                 </button>
-                                <?php echo $message; ?>
+                            <?php echo $message; ?>
                             </div>
-                        <?php } ?>
+                    <?php } ?>
                     </div>
                 <?php endif ?>
                 <!-- Start: Content -->
-                <?php echo $content; ?>
+<?php echo $content; ?>
                 <!-- End: Content -->
             </section>
 
@@ -293,6 +375,11 @@
         ));
         ?>
         <!-- End: Main -->
+        <script>
+            $(function () {
+                $("#datepicker,#datepicker2").datepicker({'dateFormat': 'yy-mm-dd'});
+            });
+        </script>
     </body>
 </html>
 <?php $this->endContent(); ?>
