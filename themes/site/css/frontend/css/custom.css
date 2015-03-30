@@ -177,7 +177,7 @@
     text-transform: uppercase;
 }
 .cke_path{
-    display:none !important;
+    visibility: hidden !important;
 }
 .top-marin {
     margin: 21px 8px 0 0 !important;

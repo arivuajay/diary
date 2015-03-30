@@ -454,7 +454,7 @@ class DefaultController extends Controller {
             $model = new Todolist;
         }
 
-        $params['reminder_time'] = date("Y-m-d H:i:s",strtotime("{$params['date']} {$params['time']}"));
+        $params['reminder_time'] = date("Y-m-d H:i:s", strtotime("{$params['date']} {$params['time']}"));
         $params['user_id'] = Users::model()->findByAttributes(array('user_email' => $params['mail']))->user_id;
 
         if ($params['user_id']) {
@@ -479,7 +479,6 @@ class DefaultController extends Controller {
 
         $criteria = new CDbCriteria();
         $criteria->select = array('t.*');
-        $criteria->order = 't.id ASC';
         $criteria->with = array('user');
         $criteria->addCondition("user.user_email = '{$todo_mail}'");
         if (isset($_REQUEST['pref_date']))
@@ -487,18 +486,31 @@ class DefaultController extends Controller {
 
         $criteria->limit = 50;
 
-        $model = Todolist::model()->findAll($criteria);
+        $criteria2 = $criteria;
 
-        if (!$model) {
+        $criteria->addCondition("t.status = 1");
+        $criteria->order = 't.reminder_time ASC';
+        $activeModel = Todolist::model()->findAll($criteria);
+
+        $criteria2->addCondition("t.status = 2");
+        $criteria2->order = 't.reminder_time DESC';
+        $completeModel = Todolist::model()->findAll($criteria2);
+
+        if (!$activeModel && !$completeModel) {
             $result['success'] = 0;
             $result['message'] = 'No todo"s found!!!';
         } else {
             $result['success'] = 1;
             $record = array();
-            foreach ($model as $i => $data) {
+            foreach ($activeModel as $i => $data) {
                 $record[$i] = (array) $data->attributes;
             }
-            $result['message'] = $record;
+            $recordCmplte = array();
+            foreach ($completeModel as $i => $data) {
+                $recordCmplte[$i] = (array) $data->attributes;
+            }
+            $result['active_todo'] = $record;
+            $result['complete_todo'] = $recordCmplte;
         }
 
         echo CJSON::encode($result);
@@ -516,12 +528,12 @@ class DefaultController extends Controller {
         $criteria->addCondition("t.id = '$todo_id'");
 
         $model = Todolist::model()->find($criteria);
-
+        $result = array();
         if (!$model) {
             $result['success'] = 0;
             $result['message'] = 'No todo"s found!!!';
         } else {
-            $model->delete();
+            $model->delete(false);
             $result['success'] = 1;
             $result['message'] = 'Succesfully deleted.';
         }
