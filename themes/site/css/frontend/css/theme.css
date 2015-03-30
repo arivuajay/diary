@@ -9177,3 +9177,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 {
     margin-right: 10px;
 }
+.advanced-field {
+    padding-top: 5px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+    .navbar-search input[type="radio"] {
+  width: 12px;
+}
+}
