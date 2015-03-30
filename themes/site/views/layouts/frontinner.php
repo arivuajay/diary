@@ -52,44 +52,35 @@
                         ?>
 
                         <div class="" style="border: none;">
-
-
-                                                        <!--<form method="get" id="searchform" action="<?php echo $baseUrl; ?>/site/journal/search">-->
                             <?php
                             $show = 'display:block;';
                             if ($_GET['using'] == 'date') {
                                 $show = 'display:none;';
                             }
-                            ?>
-                            <?php
+
                             $advance_show = 'display:none;';
+                            $advance_label = '+';
                             if (($_GET['using'] != '') || ($_GET['date'] != '')) {
                                 $advance_show = 'display:block;';
+                                $advance_label = '-';
                             }
-                            ?>                            
 
-                            <?php
                             $date_value = '';
                             if ($_GET['using'] == 'date') {
                                 $date_value = $_GET['date'];
                             }
                             ?>
                             <input id="search" style="<?php echo $show; ?>" type="text" name="search"  value="<?php echo isset($_GET['search']) ? $_GET['search'] : '' ?>"  placeholder="Search..." >
-
-         <!--<input id="search_date" style="display:none;" type="text" name="search"  value="<?php echo isset($_GET['search']) ? $_GET['search'] : '' ?>"  placeholder="Search..." >-->
                             <?php
                             $showclass = 'display:none;';
                             if ($_GET['using'] == 'date') {
                                 $showclass = 'display:block;';
                             }
-                            ?>
-                            <?php
+
                             $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                                 'id' => '',
                                 'name' => 'date',
                                 'value' => $date_value,
-//                                    'model' => $model,
-//                                    'attribute' => 'using',
                                 'options' => array(
                                     'dateFormat' => JS_SHORT_DATE_FORMAT,
                                     'altFormat' => JS_SHORT_DATE_FORMAT,
@@ -104,35 +95,38 @@
                                 ),
                             ));
                             ?>
-
                             <button class="submit btn bg-purple pull-right search-marin" type="submit" value="">Go</button>
-
-
-
-                            <!--</form>-->
-
                         </div>
-                        <div class="radio-search" style="">
-                            <a href="#" onclick="javascript:$('.advanced-field').toggle();" >Advanced Search</a>
-                            <div class="advanced-field" style="<?php echo $advance_show?>" >
-                                <input type="radio" name="using" onclick="javascript:closedate('search')" value="title" <?php
+                        <div class="radio-search">
+                            <?php
+                            Yii::app()->clientScript->registerScript('adv_search', "
+$('#toggle-search').click(function(){
+    var text = $('#lbl_search').text();
+    $('#lbl_search').text(text == '+' ? '-' : '+');
+    $('.advanced-field').slideToggle('fast');
+});
+");
+                            ?>
+                            <a id="toggle-search" class="pull-right text-purple2" href="javascript:void(0);"><span id="lbl_search"><?php echo $advance_label; ?></span> Advanced Search</a>
+                            <div class="advanced-field  pull-left" style="<?php echo $advance_show ?>" >
+                                <input id="adv_title" type="radio" name="using" onclick="javascript:closedate('search')" value="title" <?php
                                 if ($_GET['using'] == 'title') {
                                     echo 'checked=checked';
                                 }
-                                ?> ><label>Title</label>
-                                <input type="radio" name="using" onclick="javascript:closedate('search')" value="category" <?php
+                                ?> ><label for="adv_title">Title</label>
+                                <input id="adv_category" type="radio" name="using" onclick="javascript:closedate('search')" value="category" <?php
                                 if ($_GET['using'] == 'category') {
                                     echo 'checked=checked';
                                 }
-                                ?> ><label>Category</label>
-                                <input type="radio" name="using" onclick="javascript:opendate('datepicker2')" value="date"  <?php
+                                ?> ><label for="adv_category">Category</label>
+                                <input id="adv_date" type="radio" name="using" onclick="javascript:opendate('datepicker2')" value="date"  <?php
                                 if ($_GET['using'] == 'date') {
                                     echo 'checked=checked';
                                 }
-                                ?> ><label>Date</label>
+                                ?> ><label for="adv_date">Date</label>
                             </div>
                         </div>
-    <?php $this->endWidget(); ?>
+                        <?php $this->endWidget(); ?>
 
                     </div>
 
@@ -157,8 +151,8 @@
                         <button type="button" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="glyphicons glyphicons-bell"></span>
                             <?php if ($not_count > 0) { ?>
-                                <b><?php echo $notification_count - $log_count ?></b> 
-<?php } ?>
+                                <b><?php echo $notification_count - $log_count ?></b>
+                            <?php } ?>
                         </button>
                         <ul class="dropdown-menu media-list" role="menu">
                             <li class="dropdown-header">Recent Messages</li>
@@ -182,15 +176,11 @@
 
                                         echo $count == 0 ? '</b>' : '';
                                     endforeach;
-                                    ?>                                   
- <!--<li class="pt10"><span class="glyphicons glyphicons-facebook text-blue2 fs16 mr15"></span></b></li>-->
-<!--                                    <li class="pt10"><span class="glyphicons glyphicons-paperclip text-teal2 fs16 mr15"></span></li>
-                                    <li class="pt10"><span class="glyphicons glyphicons-gift text-purple2 fs16 mr15"></span></li>
-                                    <li class="pt10"><span class="glyphicons glyphicons-cup text-red2 fs16 mr15"></span></b></li>-->
+                                    ?>
                                 </ul>
                             </li>
                         </ul>
-                    </div>      
+                    </div>
                 </div>
             </div>
         </header>
@@ -213,7 +203,7 @@
 
                             <div class="media-object border border-purple br64 bw2 p2">
                                 <!--<img class="br64" src="<?php echo $themeUrl; ?>/css/frontend/img/avatars/5.jpg" alt="...">-->
-<?php echo $prof_image; ?>
+                                <?php echo $prof_image; ?>
                             </div>
                         </a>
                         <div class="mobile-link"> <span class="glyphicons glyphicons-show_big_thumbnails"></span> </div>
@@ -232,7 +222,7 @@
                                     <a href="<?php echo $baseUrl; ?>/site/users/login">Sign In</a>
                                 <?php else: ?>
                                     <a href="<?php echo $baseUrl; ?>/site/users/logout">Sign Out</a>
-<?php endif; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -248,29 +238,29 @@
                         <div class="col-xs-4">
                             <?php echo CHtml::link('<span class="glyphicons glyphicons-inbox fs22 text-orange2"></span><h5 class="fs11">Write a journal</h5>', array('/site/journal/create')); ?>
                         </div>
-                        <div class="col-xs-4"> 
-<?php echo CHtml::link('<span class="glyphicons glyphicons-bell fs22 text-purple2"></span><h5 class="fs11">Mood report</h5>', array('/site/default/underdevelopment')); ?>
+                        <div class="col-xs-4">
+                            <?php echo CHtml::link('<span class="glyphicons glyphicons-bell fs22 text-purple2"></span><h5 class="fs11">Mood report</h5>', array('/site/default/underdevelopment')); ?>
                         </div>
                     </div>
                 </div>
-<?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
+                <?php echo $this->renderPartial('//layouts/_sidebarNav'); ?>
             </aside>
             <!-- End: Sidebar -->
             <section id="content_wrapper">
-                    <?php if (isset($this->flashMessages) && !empty($this->flashMessages)): ?>
+                <?php if (isset($this->flashMessages) && !empty($this->flashMessages)): ?>
                     <div style="padding: 10px;">
-    <?php foreach ($this->flashMessages as $key => $message) { ?>
+                        <?php foreach ($this->flashMessages as $key => $message) { ?>
                             <div class="alert alert-<?php echo $key; ?> fade in" style="margin-bottom: 0px;">
                                 <button type="button" class="close close-sm" data-dismiss="alert">
                                     <i class="fa fa-times"></i>
                                 </button>
-                            <?php echo $message; ?>
+                                <?php echo $message; ?>
                             </div>
-                    <?php } ?>
+                        <?php } ?>
                     </div>
                 <?php endif ?>
                 <!-- Start: Content -->
-<?php echo $content; ?>
+                <?php echo $content; ?>
                 <!-- End: Content -->
             </section>
 
@@ -376,7 +366,7 @@
         ?>
         <!-- End: Main -->
         <script>
-            $(function () {
+            $(function() {
                 $("#datepicker,#datepicker2").datepicker({'dateFormat': 'yy-mm-dd'});
             });
         </script>

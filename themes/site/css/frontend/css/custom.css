@@ -207,3 +207,10 @@
 #scroll-top-arrow{
     cursor: pointer;
 }
+#toggle-search {
+  display: inline-block;
+  font-size: 11px;
+  line-height: 10px;
+  text-decoration: none;
+  width: 63%;
+}
