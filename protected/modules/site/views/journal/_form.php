@@ -83,7 +83,7 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     </div>
 
                     <div class="form-group">
-                        <?php echo $form->labelEx($model, 'diary_user_mood_id', array('class' => 'col-md-6 control-label')); ?>
+                        <?php echo $form->labelEx($model, 'diary_user_mood_id'); ?>
 
                         <div class="col-md-12">
                             <?php
@@ -99,7 +99,8 @@ $themeUrl = Yii::app()->theme->baseUrl;
                     </div>
                     <div class="form-group">
                         <a href="#" id="add-new-file" class="btn btn-success">Upload Files</a>
-                        <br>
+                        <br />
+                        <br />
                         Note : Upload time depends on file size
                         <ul id="image_preview_list">
                             <?php
