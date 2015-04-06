@@ -263,11 +263,10 @@ class DefaultController extends Controller {
     }
 
     public function actionGetcategories() {
-
         $model = Users::model()->findByAttributes(array('user_email' => $_REQUEST['user_id']));
         if (!$model) {
             $result['success'] = 0;
-            $result['message'] = 'No entries found!!!';
+            $result['message'] = 'No categories found!!!';
         } else {
             $result['success'] = 1;
             $user_id = $model->user_id;
@@ -285,7 +284,6 @@ class DefaultController extends Controller {
     }
 
     public function actionUsercategories() {
-
         $model = Users::model()->findByAttributes(array('user_id' => $_REQUEST['user_id']));
         if (!$model) {
             $result['success'] = 0;
@@ -316,6 +314,26 @@ class DefaultController extends Controller {
             $model->category_name = $_REQUEST['category_name'];
             $model->save();
             $result['message'] = 'Succesfully Updated.';
+        }
+        echo CJSON::encode($result);
+
+        Yii::app()->end();
+    }
+
+    public function actionDeletecategory() {
+        $criteria = new CDbCriteria();
+        $criteria->with = array('catUser');
+        $criteria->addCondition("catUser.user_email = '" . $_REQUEST['user_id'] . "'");
+        $criteria->addCondition("t.category_id = '" . $_REQUEST['category_id'] . "'");
+        $model = Category::model()->find($criteria);
+
+        if (!$model) {
+            $result['success'] = 0;
+            $result['message'] = 'No entries found!!!';
+        } else {
+            $model->delete();
+            $result['success'] = 1;
+            $result['message'] = 'Succesfully deleted.';
         }
         echo CJSON::encode($result);
 
@@ -486,7 +504,7 @@ class DefaultController extends Controller {
 
         $criteria->limit = 50;
 
-        $criteria2 = $criteria;
+        $criteria2 = clone $criteria;
 
         $criteria->addCondition("t.status = 1");
         $criteria->order = 't.reminder_time ASC';
@@ -495,7 +513,6 @@ class DefaultController extends Controller {
         $criteria2->addCondition("t.status = 2");
         $criteria2->order = 't.reminder_time DESC';
         $completeModel = Todolist::model()->findAll($criteria2);
-
         if (!$activeModel && !$completeModel) {
             $result['success'] = 0;
             $result['message'] = 'No todo"s found!!!';
@@ -505,12 +522,12 @@ class DefaultController extends Controller {
             foreach ($activeModel as $i => $data) {
                 $record[$i] = (array) $data->attributes;
             }
-            $recordCmplte = array();
+            $recordComplte = array();
             foreach ($completeModel as $i => $data) {
-                $recordCmplte[$i] = (array) $data->attributes;
+                $recordComplte[$i] = (array) $data->attributes;
             }
             $result['active_todo'] = $record;
-            $result['complete_todo'] = $recordCmplte;
+            $result['complete_todo'] = $recordComplte;
         }
 
         echo CJSON::encode($result);
