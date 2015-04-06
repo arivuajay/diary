@@ -329,7 +329,7 @@ class DefaultController extends Controller {
 
         if (!$model) {
             $result['success'] = 0;
-            $result['message'] = 'No entries found!!!';
+            $result['message'] = 'No categories found!!!';
         } else {
             $model->delete();
             $result['success'] = 1;
