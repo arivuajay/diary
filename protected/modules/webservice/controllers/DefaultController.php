@@ -20,8 +20,9 @@ class DefaultController extends Controller {
 
     public function actionWriteentry() {
         $params = $_REQUEST;
-        if (!empty($_FILES['image']))
+        if (!empty($_FILES['image'])){
             $params['journal_images'] = $this->Uploadjournalimg($_FILES['image']);
+        }
 
         $result = Myclass::addEntry($params);
         echo CJSON::encode($result);
@@ -321,17 +322,13 @@ class DefaultController extends Controller {
     }
 
     public function actionDeletecategory() {
-        $criteria = new CDbCriteria();
-        $criteria->with = array('catUser');
-        $criteria->addCondition("catUser.user_email = '" . $_REQUEST['user_id'] . "'");
-        $criteria->addCondition("t.category_id = '" . $_REQUEST['category_id'] . "'");
-        $model = Category::model()->find($criteria);
-
+        $model = Category::model()->find("user_id = '{$_REQUEST['user_id']}' AND category_id = '{$_REQUEST['category_id']}' ");
         if (!$model) {
             $result['success'] = 0;
             $result['message'] = 'No categories found!!!';
         } else {
-            $model->delete();
+            Diary::model()->deleteAll("diary_user_id = '{$_REQUEST['user_id']}' AND diary_category_id = '{$_REQUEST['category_id']}' ");
+            $model->delete(false);
             $result['success'] = 1;
             $result['message'] = 'Succesfully deleted.';
         }

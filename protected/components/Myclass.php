@@ -216,6 +216,7 @@ class Myclass extends CController {
 
         if (isset($param['diary_id'])) {
             $model = Diary::model()->findByPk($param['diary_id']);
+            DiaryImage::model()->deleteAll("diary_id = '".$param['diary_id']."'");
         }
         if (!$model)
             $model = new Diary();
@@ -233,7 +234,7 @@ class Myclass extends CController {
         } else {
             $model->diary_category_id = $param['category'];
         }
-        
+
         $model->diary_user_mood_id = $param['mood'];
 
         $bind_time = trim("{$param['month']} {$param['date']} {$param['year']} {$param['time']}");
