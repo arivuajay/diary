@@ -20,7 +20,7 @@ class DefaultController extends Controller {
 
     public function actionWriteentry() {
         $params = $_REQUEST;
-        if (!empty($_FILES['image'])){
+        if (!empty($_FILES['image'])) {
             $params['journal_images'] = $this->Uploadjournalimg($_FILES['image']);
         }
 
@@ -553,6 +553,65 @@ class DefaultController extends Controller {
         }
         echo CJSON::encode($result);
 
+        Yii::app()->end();
+    }
+
+    public function actionNotifications() {
+        $result = array();
+        $uid = Users::model()->find("user_email = '{$_REQUEST['uid']}'")->user_id;
+
+        $criteria = new CDbCriteria();
+        $criteria->order = 'notification_id DESC';
+        $criteria->limit = 10;
+        $notifications = Notification::model()->findAll($criteria);
+        $result['success'] = 1;
+
+        $record = array();
+        foreach ($notifications as $i => $data) {
+            $record[$i] = (array) $data->attributes;
+
+            $content = trim(strip_tags($data->notification_message));
+            $content = preg_replace("/&#?[a-z0-9]{2,8};/i", "", $content);
+            $content = str_replace("\r\n", "", $content);
+
+            $record[$i]['notification_message'] = $content;
+
+            $notification_count = NotificationLog::model()->count("log_user_id = '{$uid}' AND  log_notification_id = '$data->notification_id'");
+            if ($notification_count == 0) {
+                $log_model = new NotificationLog;
+                $log_model->setAttributes(
+                        array(
+                            'log_user_id' => $uid,
+                            'log_notification_id' => $data->notification_id,
+                            'created' => date('Y-m-d H:i:s'),
+                            'modified' => date('Y-m-d H:i:s')
+                ));
+                $log_model->save(false);
+            }
+        }
+
+        $result['message'] = $record;
+
+        echo CJSON::encode($result);
+        Yii::app()->end();
+    }
+
+    public function actionNotificationcount() {
+        $result = array();
+        $log_count = 0;
+        $uid = trim($_REQUEST['uid']);
+
+        $criteria = new CDbCriteria();
+        $criteria->with = array('logUser');
+        $criteria->addCondition("logUser.user_email = '{$uid}'");
+
+        $notification_count = Notification::model()->count();
+        $log_count = NotificationLog::model()->count($criteria);
+
+        $result['success'] = 1;
+        $result['message'] = $notification_count - $log_count;
+
+        echo CJSON::encode($result);
         Yii::app()->end();
     }
 
