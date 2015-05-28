@@ -133,14 +133,14 @@ class UsersDetails extends CActiveRecord
 			'user_adventure_activity' => 'User Adventure Activity',
 			'user_fav_color' => 'User Fav Color',
 			'user_fav_place' => 'User Fav Place',
-			'user_no_best_friend' => 'User No Best Friend',
-			'user_no_friend' => 'User No Friend',
-			'user_hangout' => 'User Hangout',
+			'user_no_best_friend' => 'Number of Best Friends',
+			'user_no_friend' => 'Number of Friends',
+			'user_hangout' => 'You like to hangout with',
 			'user_like_travel' => 'User Like Travel',
-			'user_stress_buster' => 'User Stress Buster',
-			'user_free_time' => 'User Free Time',
-			'user_desc_urself' => 'User Desc Urself',
-			'user_personality' => 'User Personality',
+			'user_stress_buster' => 'What are your stress busters',
+			'user_free_time' => 'What do you do in your free time',
+			'user_desc_urself' => 'How do you describe yourself',
+			'user_personality' => 'What kind of personality you are',
 			'user_fav_animal' => 'User Fav Animal',
 			'user_fav_fruit' => 'User Fav Friut',
 			'user_anniversary' => 'User Anniversary',
@@ -163,7 +163,7 @@ class UsersDetails extends CActiveRecord
 			'user_kid_detail' => 'User Kid Detail',
                         'user_parents_detail' => 'Parents Detail',
                         'user_spouse_detail' => 'Spouse Detail',
-                    
+
 		);
 	}
 

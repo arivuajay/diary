@@ -415,7 +415,7 @@ class UsersController extends Controller {
         );
         if (empty($user_det_model)) {
             $user_det_model = new UsersDetails();
-        }  
+        }
 
         if (isset($_POST['update'])) {
             $model->setScenario('update');
@@ -429,7 +429,7 @@ class UsersController extends Controller {
                     $filename = time() . '_' . Yii::app()->user->id . '_' . $name;
                     $model->user_prof_image->saveAs($path . $filename);
                     if (!empty($old_name)) {
-                        unlink($path . $old_name);
+                        @unlink($path . $old_name);
                     }
                     $model->user_prof_image = $filename;
                 } else {
@@ -450,7 +450,7 @@ class UsersController extends Controller {
                 $this->refresh();
             }
         } elseif (isset($_POST['profile-details'])) {
-            
+
 
             $user_det_model->setScenario('profile-details');
             $user_det_model->attributes = $_POST['UsersDetails'];
@@ -459,7 +459,7 @@ class UsersController extends Controller {
             $user_det_model->save(false);
             Yii::app()->user->setFlash('success', 'Profile details update successfully');
             $this->refresh();
-        }elseif (isset($_POST['contact-details'])) {
+        } elseif (isset($_POST['contact-details'])) {
 
             $user_det_model->setScenario('contact-details');
             $user_det_model->attributes = $_POST['UsersDetails'];
@@ -468,9 +468,7 @@ class UsersController extends Controller {
             $user_det_model->save(false);
             Yii::app()->user->setFlash('success', 'Contact details update successfully');
             $this->refresh();
-        }elseif (isset($_POST['reminder-details'])) {
-            
-
+        } elseif (isset($_POST['reminder-details'])) {
             $user_det_model->setScenario('reminder-details');
             $user_det_model->attributes = $_POST['UsersDetails'];
             $user_det_model->user_id = Yii::app()->user->id;
@@ -478,8 +476,7 @@ class UsersController extends Controller {
             $user_det_model->save(false);
             Yii::app()->user->setFlash('success', 'Reminder details update successfully');
             $this->refresh();
-        }elseif (isset($_POST['family-details'])) {
-            
+        } elseif (isset($_POST['family-details'])) {
             $user_det_model->setScenario('family-details');
             $user_det_model->attributes = $_POST['UsersDetails'];
             $user_det_model->user_id = Yii::app()->user->id;
@@ -487,13 +484,7 @@ class UsersController extends Controller {
             $user_det_model->save(false);
             Yii::app()->user->setFlash('success', 'Family details update successfully');
             $this->refresh();
-        }elseif (isset($_POST['hobbies-details'])) {
-            
-//                        echo 'hi';
-//                     print_r($user_det_model);    
-//            print_r($_POST['UsersDetails']);
-//            exit;
-
+        } elseif (isset($_POST['hobbies-details'])) {
             $user_det_model->setScenario('family-details');
             $user_det_model->attributes = $_POST['UsersDetails'];
             $user_det_model->user_id = Yii::app()->user->id;
@@ -501,11 +492,15 @@ class UsersController extends Controller {
             $user_det_model->save(false);
             Yii::app()->user->setFlash('success', 'Interest and hobbies details update successfully');
             $this->refresh();
+        } elseif (isset($_POST['others-details'])) {
+            $user_det_model->setScenario('others-details');
+            $user_det_model->attributes = $_POST['UsersDetails'];
+            $user_det_model->user_id = Yii::app()->user->id;
+
+            $user_det_model->save(false);
+            Yii::app()->user->setFlash('success', 'Other details update successfully');
+            $this->refresh();
         }
-        
-
-
-
 
 
         $this->render('update_profile', array(
