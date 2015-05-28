@@ -155,15 +155,9 @@ $form = $this->beginWidget('CActiveForm', array(
                     <div class="form-group">
                         <label> Gender </label>
 
-                        <label class="radio-inline mr10">
-<?php echo $form->radioButtonList($user_det_model, 'user_gender', array('1' => 'Male', '2' => 'Female')); ?>
-    <!--                      <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Male
-
-
-                        <label class="radio-inline mr10">
-                          <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option1"> Female-->
-                    </div>
+<?php echo $form->radioButtonList($user_det_model, 'user_gender', array('1' => 'Male', '2' => 'Female'),array('template'=>'{beginLabel}{input}{labelTitle}{endLabel}','separator'=>'','labelOptions'=>array('class'=>'radio-inline mr10'))); ?>
 <?php echo $form->error($user_det_model, 'user_gender'); ?>
+                    </div>
 
                     <div class="form-group">
                         <label> Country </label>
@@ -181,13 +175,7 @@ $form = $this->beginWidget('CActiveForm', array(
                     <div class="form-group">
                         <label>Marital Status </label>
 
-                        <label class="radio-inline mr10">
-<?php echo $form->radioButtonList($user_det_model, 'user_martial_status', array('1' => ' Married ', '2' => 'Unmarried ')); ?>
-                    <!--    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Married
-
-
-                     <label class="radio-inline mr10">
-                       <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option1"> Unmarried-->
+<?php echo $form->radioButtonList($user_det_model, 'user_martial_status', array('1' => ' Married ', '2' => 'Unmarried '),array('template'=>'{beginLabel}{input}{labelTitle}{endLabel}','separator'=>'','labelOptions'=>array('class'=>'radio-inline mr10'))); ?>
                     </div>
 <?php echo $form->error($user_det_model, 'user_martial_status'); ?>
 

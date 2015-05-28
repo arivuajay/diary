@@ -38,6 +38,7 @@ class Users extends CActiveRecord {
             'isActive' => array('condition' => "$alias.user_status = '1'"),
         );
     }
+
     /**
      * @return array validation rules for model attributes.
      */
@@ -54,7 +55,7 @@ class Users extends CActiveRecord {
             array('user_email', 'unique', 'message' => "user email already exists"),
             array('user_email', 'email',),
             array('user_status', 'length', 'max' => 1),
-            array('user_last_login, created, modified, user_sec_email','safe'),
+            array('user_last_login, created, modified, user_sec_email', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('user_id, user_email, user_password, user_status, user_activation_key, user_last_login, user_login_ip, created, modified, reset_password_string', 'safe', 'on' => 'search'),
@@ -97,6 +98,11 @@ class Users extends CActiveRecord {
             'diaries' => array(self::HAS_MANY, 'Diary', 'diary_user_id'),
             'moodReports' => array(self::HAS_MANY, 'MoodReport', 'mood_report_user_id'),
             'tmpDiaries' => array(self::HAS_MANY, 'TmpDiary', 'temp_activation_key'),
+            'studentDiaries' => array(self::HAS_MANY, 'StudentDiary', 'diary_user_id'),
+            'studentDiaryClasses' => array(self::HAS_MANY, 'StudentDiaryClass', 'user_id'),
+            'studentDiarySubjects' => array(self::HAS_MANY, 'StudentDiarySubject', 'user_id'),
+            'todolists' => array(self::HAS_MANY, 'Todolist', 'user_id'),
+            'usersDetails' => array(self::HAS_ONE, 'UsersDetails', 'user_id'),
         );
     }
 
@@ -119,7 +125,6 @@ class Users extends CActiveRecord {
             'new_password' => 'New Password',
             'reset_password_string' => 'Password Reset String',
             'user_sec_email' => 'User Secondary Email',
-            
         );
     }
 
