@@ -73,7 +73,37 @@ class Myclass extends CController {
         $mood['others'] = 'Others';
         return $mood;
     }
+    
+    
+    public static function getCountry($key = NULL){
+        $countries = array(
+            'India' => 'India',
+            'Japan' => 'Japan',
+            'Pakistan' => 'Pakistan',
+            
+        );
+        if(isset($key) && $key != NULL)
+            return $countries[$key];
+        
+        return $countries;
+    }
+    
+     public static function getTravel($key = NULL){
+        $travels = array(
+            'Party' => 'Party',
+            'Read' => 'Read',
+            'Watch movie' => 'Watch movie',
+            'Adventure Sports' => 'Adventure Sports',
+            'Shopping' => 'Shopping',
+            
+        );
+        if(isset($key) && $key != NULL)
+            return $travels[$key];
+        
+        return $travels;
+    }
 
+    
     public static function rememberMeAdmin($username, $check) {
         if ($check > 0) {
             $time = time();     // Gets the current server time

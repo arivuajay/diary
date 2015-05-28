@@ -367,7 +367,7 @@ $('#toggle-search').click(function(){
         <!-- End: Main -->
         <script>
             $(function() {
-                $("#datepicker,#datepicker2").datepicker({'dateFormat': 'yy-mm-dd'});
+                $("#datepicker,#datepicker2,#datepicker3,#datepicker4,#datepicker5,#datepicker6,#datepicker7,#datepicker8,#datepicker9").datepicker({'dateFormat': 'yy-mm-dd'});
             });
         </script>
     </body>

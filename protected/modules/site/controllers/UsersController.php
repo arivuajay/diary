@@ -250,19 +250,19 @@ class UsersController extends Controller {
 //            $mail->send($user->user_email, $Subject, $message);
             ///////////////////////////
             if (!empty($user->user_email)):
-            $mail = new Sendmail;
-            $loginlink = Yii::app()->createAbsoluteUrl('/site/users/login');
-            $trans_array = array(
-                "{SITENAME}" => SITENAME,
-                "{USERNAME}" => $user->user_name,
-                "{EMAIL_ID}" => $user->user_email,
-                "{NEXTSTEPURL}" => $loginlink,
-            );
-            $message = $mail->getMessage('activation', $trans_array);
-            $Subject = $mail->translate('{SITENAME}: Email Verfied');
-            $mail->send($user->user_email, $Subject, $message);
-        endif;
-        /////////////////////////
+                $mail = new Sendmail;
+                $loginlink = Yii::app()->createAbsoluteUrl('/site/users/login');
+                $trans_array = array(
+                    "{SITENAME}" => SITENAME,
+                    "{USERNAME}" => $user->user_name,
+                    "{EMAIL_ID}" => $user->user_email,
+                    "{NEXTSTEPURL}" => $loginlink,
+                );
+                $message = $mail->getMessage('activation', $trans_array);
+                $Subject = $mail->translate('{SITENAME}: Email Verfied');
+                $mail->send($user->user_email, $Subject, $message);
+            endif;
+            /////////////////////////
 
             Yii::app()->user->setFlash('success', "Your Email account verified. you can login");
             $this->redirect(array('/site/users/login'));
@@ -352,9 +352,9 @@ class UsersController extends Controller {
             $start = strtotime(date('Y-m-d H:i:s', strtotime($model->modified)));
             $end = strtotime(date('Y-m-d H:i:s'));
             $seconds = $end - $start;
-            $days    = floor($seconds / 86400);
-            $hours   = floor(($seconds - ($days * 86400)) / 3600);
-            $minutes = floor(($seconds - ($days * 86400) - ($hours * 3600))/60);
+            $days = floor($seconds / 86400);
+            $hours = floor(($seconds - ($days * 86400)) / 3600);
+            $minutes = floor(($seconds - ($days * 86400) - ($hours * 3600)) / 60);
 
             if ($minutes > 5) {
                 Yii::app()->user->setFlash('error', "This Reset Link Expired. Please Try again.");
@@ -410,6 +410,13 @@ class UsersController extends Controller {
         $this->layout = '//layouts/frontinner';
         $path = realpath(Yii::app()->getBasePath() . "/../") . "/themes/site/image/prof_img/";
         $model = Users::model()->findByPk(Yii::app()->user->id);
+        $user_det_model = UsersDetails::model()->findByAttributes(array(
+            'user_id' => Yii::app()->user->id)
+        );
+        if (empty($user_det_model)) {
+            $user_det_model = new UsersDetails();
+        }  
+
         if (isset($_POST['update'])) {
             $model->setScenario('update');
             $old_name = $model->user_prof_image;
@@ -442,10 +449,68 @@ class UsersController extends Controller {
                 Yii::app()->user->setFlash('success', 'Password has been reset successfully');
                 $this->refresh();
             }
+        } elseif (isset($_POST['profile-details'])) {
+            
+
+            $user_det_model->setScenario('profile-details');
+            $user_det_model->attributes = $_POST['UsersDetails'];
+            $user_det_model->user_id = Yii::app()->user->id;
+
+            $user_det_model->save(false);
+            Yii::app()->user->setFlash('success', 'Profile details update successfully');
+            $this->refresh();
+        }elseif (isset($_POST['contact-details'])) {
+
+            $user_det_model->setScenario('contact-details');
+            $user_det_model->attributes = $_POST['UsersDetails'];
+            $user_det_model->user_id = Yii::app()->user->id;
+
+            $user_det_model->save(false);
+            Yii::app()->user->setFlash('success', 'Contact details update successfully');
+            $this->refresh();
+        }elseif (isset($_POST['reminder-details'])) {
+            
+
+            $user_det_model->setScenario('reminder-details');
+            $user_det_model->attributes = $_POST['UsersDetails'];
+            $user_det_model->user_id = Yii::app()->user->id;
+
+            $user_det_model->save(false);
+            Yii::app()->user->setFlash('success', 'Reminder details update successfully');
+            $this->refresh();
+        }elseif (isset($_POST['family-details'])) {
+            
+            $user_det_model->setScenario('family-details');
+            $user_det_model->attributes = $_POST['UsersDetails'];
+            $user_det_model->user_id = Yii::app()->user->id;
+
+            $user_det_model->save(false);
+            Yii::app()->user->setFlash('success', 'Family details update successfully');
+            $this->refresh();
+        }elseif (isset($_POST['hobbies-details'])) {
+            
+//                        echo 'hi';
+//                     print_r($user_det_model);    
+//            print_r($_POST['UsersDetails']);
+//            exit;
+
+            $user_det_model->setScenario('family-details');
+            $user_det_model->attributes = $_POST['UsersDetails'];
+            $user_det_model->user_id = Yii::app()->user->id;
+
+            $user_det_model->save(false);
+            Yii::app()->user->setFlash('success', 'Interest and hobbies details update successfully');
+            $this->refresh();
         }
+        
+
+
+
+
 
         $this->render('update_profile', array(
             'model' => $model,
+            'user_det_model' => $user_det_model,
         ));
     }
 
@@ -455,7 +520,7 @@ class UsersController extends Controller {
 
             foreach ($users as $user) {
                 $jnl_count = Diary::model()->countByAttributes(array('diary_user_id' => $user->user_id, 'diary_current_date' => date('Y-m-d')));
-                if($jnl_count == 0){
+                if ($jnl_count == 0) {
                     $mail = new Sendmail;
                     $trans_array = array(
                         "{SITENAME}" => SITENAME,
