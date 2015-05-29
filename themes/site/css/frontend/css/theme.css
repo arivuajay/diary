@@ -686,7 +686,7 @@ hr.tall {
     overflow: hidden;
     position: relative;
     display: block;
-    height: 80px;
+    height: 95px;
     width: 100%;
     padding: 14px 22px;
     border-top: 1px solid transparent;
@@ -9181,7 +9181,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     padding-top: 5px;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
     .navbar-search input[type="radio"] {
   width: 12px;
 }

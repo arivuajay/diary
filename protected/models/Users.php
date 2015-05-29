@@ -52,8 +52,8 @@ class Users extends CActiveRecord {
             array('user_email, user_password, user_activation_key, user_login_ip', 'length', 'max' => 250),
             array('user_password', 'compare', 'compareAttribute' => 'confirm_password', 'on' => 'register'),
             array('user_name, user_email', 'required', 'on' => 'update'),
-            array('user_email', 'unique', 'message' => "user email already exists"),
-            array('user_email', 'email',),
+            array('user_email,user_sec_email', 'unique', 'message' => "user email already exists"),
+            array('user_email,user_sec_email', 'email'),
             array('user_status', 'length', 'max' => 1),
             array('user_last_login, created, modified, user_sec_email', 'safe'),
             // The following rule is used by search().

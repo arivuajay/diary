@@ -76,6 +76,7 @@ class UsersDetails extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('user_phone,user_landline', 'numerical', 'integerOnly'=>true),
 			array('user_no_best_friend, user_no_friend', 'numerical', 'integerOnly'=>true),
 			array('user_detail_id, user_id', 'length', 'max'=>20),
 			array('user_prefix, user_gender', 'length', 'max'=>10),

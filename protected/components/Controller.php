@@ -24,17 +24,29 @@ class Controller extends CController {
      */
     public $breadcrumbs = array();
     public $flashMessages = array();
-    
+
     public function init() {
         CHtml::$errorSummaryCss = 'alert alert-danger';
 
         $this->flashMessages = Yii::app()->user->getFlashes();
+
+        if (Yii::app()->request->cookies['diary_mode'] == ''):
+            Yii::app()->request->cookies['diary_mode'] = new CHttpCookie('diary_mode','1');
+        endif;
+
+        if (Yii::app()->getRequest()->getParam('diary_mode')) {
+            $diary_mode = Yii::app()->getRequest()->getParam('diary_mode');
+            Yii::app()->request->cookies['diary_mode'] = new CHttpCookie('diary_mode',$diary_mode);
+
+            $this->redirect(Yii::app()->request->urlReferrer);
+        }
+
         parent::init();
     }
-    
+
     public function mailsend($to,$from,$subject,$message){
         $mail=Yii::app()->Smtpmail;
-        
+
         $mail->SetFrom($from, 'From NAme');
         $mail->Subject    = $subject;
         $mail->MsgHTML($message);

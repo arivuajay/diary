@@ -224,6 +224,15 @@ $('#toggle-search').click(function(){
                                     <a href="<?php echo $baseUrl; ?>/site/users/logout">Sign Out</a>
                                 <?php endif; ?>
                             </div>
+                            <div class="">
+                                <?php
+                                echo CHtml::dropDownList("diary_mode", $_COOKIE['diary_mode'], array(
+                                    '1' => "Personal Diary",
+                                    '2' => "Student Diary"
+                                        )
+                                );
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -367,10 +376,15 @@ $('#toggle-search').click(function(){
         <!-- End: Main -->
         <script>
             $(function() {
-                $("#datepicker,#datepicker2,#datepicker3,#datepicker4,#datepicker5,#datepicker6,#datepicker7,#datepicker8,#datepicker9").datepicker({
+                $("#datepicker,#datepicker2,#datepicker3,#datepicker4,#datepicker5,#datepicker6,#datepicker7,#datepicker8,#datepicker9,#from-range,#to-range").datepicker({
                     'dateFormat': 'yy-mm-dd',
                     changeMonth: true,
                     changeYear: true
+                });
+
+                $('#diary_mode').change(function() {
+                    var strSel = $(this).val();
+                    window.location.href = "<?php echo Yii::app()->createUrl('/site/journal/dashboard'); ?>?diary_mode=" + strSel;
                 });
             });
         </script>

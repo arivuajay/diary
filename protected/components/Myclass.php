@@ -73,37 +73,33 @@ class Myclass extends CController {
         $mood['others'] = 'Others';
         return $mood;
     }
-    
-    
-    public static function getCountry($key = NULL){
+
+    public static function getCountry($key = NULL) {
         $countries = array(
             'India' => 'India',
             'Japan' => 'Japan',
             'Pakistan' => 'Pakistan',
-            
         );
-        if(isset($key) && $key != NULL)
+        if (isset($key) && $key != NULL)
             return $countries[$key];
-        
+
         return $countries;
     }
-    
-     public static function getTravel($key = NULL){
+
+    public static function getTravel($key = NULL) {
         $travels = array(
             'Party' => 'Party',
             'Read' => 'Read',
             'Watch movie' => 'Watch movie',
             'Adventure Sports' => 'Adventure Sports',
             'Shopping' => 'Shopping',
-            
         );
-        if(isset($key) && $key != NULL)
+        if (isset($key) && $key != NULL)
             return $travels[$key];
-        
+
         return $travels;
     }
 
-    
     public static function rememberMeAdmin($username, $check) {
         if ($check > 0) {
             $time = time();     // Gets the current server time
@@ -246,7 +242,7 @@ class Myclass extends CController {
 
         if (isset($param['diary_id'])) {
             $model = Diary::model()->findByPk($param['diary_id']);
-            DiaryImage::model()->deleteAll("diary_id = '".$param['diary_id']."'");
+            DiaryImage::model()->deleteAll("diary_id = '" . $param['diary_id'] . "'");
         }
         if (!$model)
             $model = new Diary();
@@ -539,6 +535,12 @@ class Myclass extends CController {
             $response['message'] = "Mood Activity Successfully Saved.";
         }
         return $response;
+    }
+
+    public static function getUserClasses($uid) {
+        $classes = CHtml::listData(StudentDiaryClass::model()->findAll("user_id = '$uid'"), 'class_id', 'class_name');
+
+        return $classes;
     }
 
 }

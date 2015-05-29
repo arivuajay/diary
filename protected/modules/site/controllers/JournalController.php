@@ -47,7 +47,7 @@ class JournalController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'dashboard', 'calendarevents', 'listjournal', 'adddiaryimage', 'addFile', 'view', 'search'),
+                'actions' => array('create', 'update', 'dashboard', 'calendarevents', 'listjournal', 'liststudentjournal', 'adddiaryimage', 'addFile', 'view', 'search', 'getsubjects'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -86,7 +86,11 @@ class JournalController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate($date = null) {
-        $model = new Diary('create');
+        if (@$_COOKIE['diary_mode'] == '2'):
+            $model = new StudentDiary('create');
+        else:
+            $model = new Diary('create');
+        endif;
 
         // Uncomment the following line if AJAX validation is needed
         $this->performAjaxValidation($model);
@@ -125,6 +129,43 @@ class JournalController extends Controller {
                 $_SESSION['back'] = 1;
                 Yii::app()->user->setFlash('success', "Your Journal added Successfully.");
                 $this->redirect(array('view', 'id' => $model->diary_id));
+            }
+        } else if (isset($_POST['StudentDiary'])) {
+            $model->attributes = $_POST['StudentDiary'];
+            if ($model->validate()) {
+                if (!is_numeric($model->diary_class_id)) {
+                    $catmodel = new StudentDiaryClass();
+                    $catmodel->class_name = ($model->diary_class_id == 'others') ? $model->diary_class : $model->diary_class_id;
+                    $catmodel->user_id = Yii::app()->user->id;
+                    $catmodel->save(false);
+                    $model->diary_class_id = $catmodel->class_id;
+                }
+
+                if (!is_numeric($model->diary_subject_id)) {
+                    $submodel = new StudentDiarySubject();
+                    $submodel->subject_name =  ($model->diary_subject_id == 'others') ? $model->diary_subject : $model->diary_subject_id;
+                    $submodel->class_id = $model->diary_class_id;
+                    $submodel->user_id = Yii::app()->user->id;
+                    $submodel->save(false);
+                    $model->diary_subject_id = $submodel->subject_id;
+                }
+
+                $model->save(false);
+
+                $diary_images = $_SESSION['diary_images'];
+                if (!empty($diary_images)):
+                    foreach ($diary_images as $image):
+                        $imgModel = new StudentDiaryImage();
+                        $imgModel->diary_id = $model->diary_id;
+                        $imgModel->diary_image = $image;
+                        $imgModel->save(false);
+                    endforeach;
+                endif;
+
+                unset($_SESSION['diary_images']);
+                $_SESSION['back'] = 1;
+                Yii::app()->user->setFlash('success', "Your Journal added Successfully.");
+                $this->redirect(array('/site/journal/liststudentjournal'));
             }
         } else {
             unset($_SESSION['diary_images']);
@@ -385,10 +426,29 @@ class JournalController extends Controller {
         if (isset($_GET['search']))
 
         //send model object for search
-        $this->render('search_view', array(
+            $this->render('search_view', array(
 //            'dataProvider' => $model->customsearch(),
-            'model' => $model->customsearch())
-        );
+                'model' => $model->customsearch())
+            );
+    }
+
+    public function actionGetsubjects() {
+        $class = $_REQUEST['class'];
+        $uid = Yii::app()->user->id;
+        $result = array();
+        $data = StudentDiarySubject::model()->findAll("class_id = '$class' AND user_id = '$uid'");
+        if ($data) {
+            $result = CHtml::listData($data, 'subject_id', 'subject_name');
+            $result['others'] = 'Others';
+        }
+
+        echo CJSON::encode($result);
+        Yii::app()->end();
+    }
+
+    public function actionListstudentjournal() {
+        $journalList = StudentDiary::model()->mine()->findAll();
+        $this->render('liststudentjournal', compact('journalList'));
     }
 
 }
