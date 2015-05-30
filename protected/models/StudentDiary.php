@@ -114,7 +114,7 @@ class StudentDiary extends CActiveRecord {
             'diaryUserMood' => array(self::BELONGS_TO, 'MoodType', 'diary_user_mood_id'),
             'diarySubject' => array(self::BELONGS_TO, 'StudentDiarySubject', 'diary_subject_id'),
             'diaryUser' => array(self::BELONGS_TO, 'Users', 'diary_user_id'),
-            'studentDiaryImages' => array(self::HAS_MANY, 'StudentDiaryImage', 'diary_id'),
+            'diaryImages' => array(self::HAS_MANY, 'StudentDiaryImage', 'diary_id'),
         );
     }
 
@@ -124,14 +124,14 @@ class StudentDiary extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'diary_id' => 'Diary',
-            'diary_user_id' => 'Diary User',
-            'diary_title' => 'Diary Title',
+            'diary_user_id' => 'User',
+            'diary_title' => 'Title',
             'diary_description' => 'Diary Description',
-            'diary_class_id' => 'Diary Class',
-            'diary_subject_id' => 'Diary Subject',
+            'diary_class_id' => 'Class',
+            'diary_subject_id' => 'Subject',
             'diary_tags' => 'Diary Tags',
-            'diary_current_date' => 'Diary Current Date',
-            'diary_user_mood_id' => 'Diary User Mood',
+            'diary_current_date' => 'Date',
+            'diary_user_mood_id' => 'Selected Mood',
             'diary_upload' => 'Diary Upload',
             'created' => 'Created',
             'modified' => 'Modified',

@@ -241,7 +241,11 @@ $('#toggle-search').click(function(){
                     <div class="row text-center mb15">
                         <div class="col-xs-4">
                             <?php
-                            echo CHtml::link('<span class="glyphicons glyphicons-home fs22 text-blue2"></span><h5 class="fs11">Manage Journal</h5>', array('/site/journal/dashboard'));
+                            if (@$_COOKIE['diary_mode'] == '2'):
+                                echo CHtml::link('<span class="glyphicons glyphicons-home fs22 text-blue2"></span><h5 class="fs11">Manage Journal</h5>', array('/site/journal/liststudentjournal'));
+                            else:
+                                echo CHtml::link('<span class="glyphicons glyphicons-home fs22 text-blue2"></span><h5 class="fs11">Manage Journal</h5>', array('/site/journal/dashboard'));
+                            endif;
                             ?>
                         </div>
                         <div class="col-xs-4">

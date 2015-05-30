@@ -56,20 +56,33 @@ $classes = Myclass::getUserClasses(Yii::app()->user->id);
                             <?php echo $form->error($model, 'diary_class_id'); ?>
                         </div>
                     <?php endif; ?>
-                    <div class="form-group">
-                        <?php echo $form->labelEx($model, 'diary_subject_id'); ?>
-                        <?php
-                        echo $form->textField($model, 'diary_subject_id', array('class' => 'form-control', 'size' => 60, 'maxlength' => 250));
-                        echo '<div id="div_subject"></div>';
-                        echo $form->error($model, 'diary_subject_id');
-                        ?>
-                    </div>
+                    <?php if ($model->isNewRecord): ?>
+                        <div class="form-group">
+                            <?php echo $form->labelEx($model, 'diary_subject_id'); ?>
+                            <?php
+                            echo $form->textField($model, 'diary_subject_id', array('class' => 'form-control', 'size' => 60, 'maxlength' => 250));
+                            echo '<div id="div_subject"></div>';
+                            echo $form->error($model, 'diary_subject_id');
+                            ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="form-group">
+                            <?php echo $form->labelEx($model, 'diary_subject_id'); ?>
+                            <?php
+                            $subjects = CHtml::listData(Myclass::getSubjectsArray(Yii::app()->user->id, $model->diary_class_id),'subject_id','subject_name');
+                            $subjects['others'] = 'Others';
+                            echo $form->dropDownList($model, 'diary_subject_id', $subjects, array('type' => 'text', 'empty' => '--Select Your Subject--', 'class' => 'form-control '));
+                            echo $form->error($model, 'diary_subject_id');
+                            ?>
+                        </div>
+                    <?php endif; ?>
+
 
                     <div class="form-group hidden" id="div_subject_area">
-                            <?php echo $form->labelEx($model, 'diary_subject'); ?>
-                            <?php echo $form->textField($model, 'diary_subject', array('class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
-                            <?php echo $form->error($model, 'diary_subject'); ?>
-                        </div>
+                        <?php echo $form->labelEx($model, 'diary_subject'); ?>
+                        <?php echo $form->textField($model, 'diary_subject', array('class' => 'form-control', 'size' => 60, 'maxlength' => 250)); ?>
+                        <?php echo $form->error($model, 'diary_subject'); ?>
+                    </div>
 
                     <div class="form-group">
                         <?php echo $form->labelEx($model, 'diary_tags'); ?>
@@ -339,8 +352,3 @@ EOD;
 
 Yii::app()->clientScript->registerScript('_journal_form', $js);
 ?>
-
-<script>
-//$('ul#image_preview_list li a').find('data-url="'+_imgURL+'"').closet("li").remove();
-
-</script>

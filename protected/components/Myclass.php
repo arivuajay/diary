@@ -415,7 +415,12 @@ class Myclass extends CController {
     }
 
     public static function getUserDiaryImages($id) {
-        $images = DiaryImage::model()->findAllByAttributes(array('diary_id' => $id));
+        if (@$_COOKIE['diary_mode'] == '2'):
+            $images = StudentDiaryImage::model()->findAllByAttributes(array('diary_id' => $id));
+        else:
+            $images = StudentDiaryImage::model()->findAllByAttributes(array('diary_id' => $id));
+        endif;
+        
         $content = '';
         foreach ($images as $image) {
             $img_arr = explode('.', $image->diary_image);
@@ -541,6 +546,11 @@ class Myclass extends CController {
         $classes = CHtml::listData(StudentDiaryClass::model()->findAll("user_id = '$uid'"), 'class_id', 'class_name');
 
         return $classes;
+    }
+
+    public static function getSubjectsArray($uid, $cls) {
+        $data = StudentDiarySubject::model()->findAll("class_id = '$cls' AND user_id = '$uid'");
+        return $data;
     }
 
 }

@@ -16,4 +16,9 @@ $this->menu=array(
 );
 ?>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php
+if (@$_COOKIE['diary_mode'] == '2'):
+    $this->renderPartial('_student_form', array('model' => $model));
+else:
+    $this->renderPartial('_form', array('model'=>$model));
+endif;
