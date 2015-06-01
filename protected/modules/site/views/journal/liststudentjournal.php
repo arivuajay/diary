@@ -34,6 +34,7 @@
                             <?php echo CHtml::textField('from', $_REQUEST['from'], array('id' => 'from-range', 'placeholder' => 'From', 'class' => 'form-control datepicker')); ?>
                             <?php echo CHtml::textField('to', $_REQUEST['to'], array('id' => 'to-range', 'placeholder' => 'To', 'class' => 'form-control datepicker')); ?>
                             <?php echo CHtml::submitButton('Filter', array('class' => 'btn btn-success btn-sm')); ?>
+                            <?php echo CHtml::link('Reset', array('/site/journal/liststudentjournal'), array('class' => 'submit btn bg-purple btn-sm')); ?>
                         </td>
                     </tr>
                 </tbody>

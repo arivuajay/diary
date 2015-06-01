@@ -39,17 +39,16 @@
                         <?php echo $form->textField($model, 'category_name', array('placeholder' => 'Name :', 'class' => 'form-control', 'size' => 60, 'maxlength' => 256)); ?>
                         <?php echo $form->error($model, 'category_name'); ?>
                     </div>
-                    
+
                     <div class="form-group">
                         <?php echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Save', array('class' => 'submit btn bg-purple pull-left')); ?>
                     </div>
 
                 </div>
-                
-            </div>                
-            <?php $this->endWidget(); ?><br><br>
-        </div>
-    </div>                 
 
+            </div>
+            <?php $this->endWidget(); ?>
+        </div>
+    </div>
 </div>
 </div>
