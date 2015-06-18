@@ -24,6 +24,7 @@ return array(
     'profile' => '/site/users/myprofile',
     'todolist/manage' => 'site/todolist/manage',
     'todolist/create' => 'site/todolist/create',
+    'todolist/delete' => 'site/todolist/delete',
     'updatetodolist_<id:\w+>' => '/site/todolist/update',
     'liststudentjournal' => '/site/journal/liststudentjournal',
 );

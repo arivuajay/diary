@@ -214,3 +214,7 @@
   text-decoration: none;
   width: 63%;
 }
+
+ul.diary_mode{
+    margin-left: 20px;
+}

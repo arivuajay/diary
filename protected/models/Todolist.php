@@ -8,6 +8,7 @@
  * @property string $message
  * @property string $reminder_time
  * @property string $status
+ * @property string $remind_me
  * @property string $user_id
  *
  * The followings are the available model relations:
@@ -34,10 +35,11 @@ class Todolist extends CActiveRecord
 			array('message, reminder_time', 'required'),
 			array('message', 'length', 'max'=>128),
 			array('status', 'length', 'max'=>1),
+			array('remind_me', 'length', 'max'=>1),
 			array('user_id', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, message, reminder_time, status, user_id', 'safe', 'on'=>'search'),
+			array('id, message, reminder_time, status, remind_me, user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,6 +65,7 @@ class Todolist extends CActiveRecord
 			'message' => 'Message',
 			'reminder_time' => 'Reminder Time',
 			'status' => 'Status',
+			'remind_me' => 'Remind Me',
 			'user_id' => 'User',
 		);
 	}
@@ -89,6 +92,7 @@ class Todolist extends CActiveRecord
 		$criteria->compare('message',$this->message,true);
 		$criteria->compare('reminder_time',$this->reminder_time,true);
 		$criteria->compare('status',$this->status,true);
+		$criteria->compare('remind_me',$this->remind_me,true);
 		$criteria->compare('user_id',$this->user_id,true);
 
 		return new CActiveDataProvider($this, array(

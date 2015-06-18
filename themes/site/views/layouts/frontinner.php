@@ -224,15 +224,15 @@ $('#toggle-search').click(function(){
                                     <a href="<?php echo $baseUrl; ?>/site/users/logout">Sign Out</a>
                                 <?php endif; ?>
                             </div>
-                            <div class="">
+<!--                            <div class="">
                                 <?php
-                                echo CHtml::dropDownList("diary_mode", $_COOKIE['diary_mode'], array(
-                                    '1' => "Personal Diary",
-                                    '2' => "Student Diary"
-                                        )
-                                );
+//                                echo CHtml::dropDownList("diary_mode", $_COOKIE['diary_mode'], array(
+//                                    '1' => "Personal Diary",
+//                                    '2' => "Student Diary"
+//                                        )
+//                                );
                                 ?>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -386,10 +386,10 @@ $('#toggle-search').click(function(){
                     changeYear: true
                 });
 
-                $('#diary_mode').change(function() {
-                    var strSel = $(this).val();
-                    window.location.href = "<?php echo Yii::app()->createUrl('/site/journal/dashboard'); ?>?diary_mode=" + strSel;
-                });
+//                $('#diary_mode').change(function() {
+//                    var strSel = $(this).val();
+//                    window.location.href = "<?php echo Yii::app()->createUrl('/site/journal/dashboard'); ?>?diary_mode=" + strSel;
+//                });
             });
         </script>
     </body>

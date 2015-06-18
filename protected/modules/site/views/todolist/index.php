@@ -2,19 +2,19 @@
 /* @var $this TodolistController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Todolists',
+$this->breadcrumbs = array(
+    'Todolists',
 );
 
-$this->menu=array(
-	array('label'=>'Create Todolist', 'url'=>array('create')),
-	array('label'=>'Manage Todolist', 'url'=>array('admin')),
+$this->menu = array(
+    array('label' => 'Create Todolist', 'url' => array('create')),
+    array('label' => 'Manage Todolist', 'url' => array('admin')),
 );
 ?>
 
 <!--<h1>Todolists</h1>-->
 
-<?php 
+<?php
 //$this->widget('zii.widgets.CListView', array(
 //	'dataProvider'=>$dataProvider,
 //        'todomodel'=>$todomodel,
@@ -34,9 +34,9 @@ $this->menu=array(
 </div>
 <div id="content">
     <div class="row">
-    <div class="col-md-12">
+        <div class="col-md-12">
 
-    </div>
+        </div>
         <div class="col-md-12">
             <div class="panel">
                 <div class="panel-body">
@@ -47,6 +47,7 @@ $this->menu=array(
                                 <th>Message</th>
                                 <th>Reminder Time</th>
                                 <th>Status</th>
+                                <th>Remind Me</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -57,10 +58,19 @@ $this->menu=array(
                                     <td><?php echo $k + 1; ?></td>
                                     <td><?php echo $todo->message; ?></td>
                                     <td><?php echo $todo->reminder_time; ?></td>
-                                    <td><?php if($todo->status == 1){echo 'Active';}if($todo->status == 2){echo 'Completed';} ?></td>
+                                    <td><?php
+                                        if ($todo->status == 1) {
+                                            echo 'Active';
+                                        }if ($todo->status == 2) {
+                                            echo 'Completed';
+                                        }
+                                        ?></td>
                                     <td>
-                                        <?php echo CHtml::link('Edit', array('/site/todolist/update', 'id' => $todo->id))  ?>
-                                        <?php //echo CHtml::link('View', array('/site/journal/view', 'id' => $journal->diary_id)) ?>
+                                        <input type="checkbox" value="<?php echo $todo->remind_me ?>" <?php echo($todo->remind_me == 1) ? 'checked' : '' ?> onclick="changeRemindMe(<?php echo $todo->id ?>)">
+                                    </td>
+                                    <td>
+                                        <?php echo CHtml::link('Edit', array('/site/todolist/update', 'id' => $todo->id)) ?>&nbsp;
+                                        <?php echo CHtml::link('Delete', array('/site/todolist/delete', 'id' => $todo->id), array('confirm' => 'Are you sure?')) ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -72,3 +82,16 @@ $this->menu=array(
         </div>
     </div>
 </div>
+
+<script>
+    function changeRemindMe(todoID) {
+        $.ajax({
+            method: "POST",
+            url: "<?php echo Yii::app()->baseUrl ?>/site/todolist/changeremindme",
+            data: {todoID: todoID}
+        })
+                .done(function(msg) {
+                    alert(msg);
+                });
+    }
+</script>
