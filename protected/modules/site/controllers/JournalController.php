@@ -47,7 +47,7 @@ class JournalController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'dashboard', 'calendarevents', 'listjournal', 'liststudentjournal', 'adddiaryimage', 'addFile', 'view', 'search', 'getsubjects'),
+                'actions' => array('create', 'update', 'dashboard', 'calendarevents', 'listjournal', 'liststudentjournal', 'adddiaryimage', 'addFile', 'view', 'search', 'getsubjects', 'studentcalendarevents'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -384,6 +384,33 @@ class JournalController extends Controller {
         Yii::app()->end();
     }
 
+    public function actionStudentcalendarevents() {
+        $myDiary = StudentDiary::model()->mine()->findAll(array('order' => 'created DESC'));
+        $limit = 10;
+        $date = array();
+        foreach ($myDiary as $diary) {
+            if (isset($date[strtotime($diary->diary_current_date)])) {
+                $date[strtotime($diary->diary_current_date)] = $date[strtotime($diary->diary_current_date)] + 1;
+            } else {
+                $date[strtotime($diary->diary_current_date)] = 1;
+            }
+
+            if ($date[strtotime($diary->diary_current_date)] <= $limit) {
+                $items[] = array(
+                    'state' => 'TRUE',
+                    'title' => $diary->diary_title,
+                    'start' => date('Y-m-d', strtotime($diary->diary_current_date)),
+                    'color' => '#95e5e7',
+                    //                'start' => $diary->diary_current_date,
+                    'url' => $this->createUrl('/site/journal/liststudentjournal', array('from' => date('Y-m-d', strtotime($diary->diary_current_date))))
+                );
+            }
+        }
+
+        echo CJSON::encode($items);
+        Yii::app()->end();
+    }
+
     public function actionListjournal($date = null) {
         $journalList = Diary::model()->mine()->findAll("DATE(diary_current_date) = '$date'");
         $this->render('listjournal', compact('journalList'));
@@ -516,6 +543,8 @@ class JournalController extends Controller {
         }
         if (!empty($_REQUEST['from']) && !empty($_REQUEST['to'])) {
             $criteria->addBetweenCondition("diary_current_date", $_REQUEST['from'], $_REQUEST['to']);
+        } elseif (!empty($_REQUEST['from'])) {
+            $criteria->addCondition("DATE(diary_current_date) = '{$_REQUEST['from']}'");
         }
 
         $journalList = StudentDiary::model()->mine()->findAll($criteria);

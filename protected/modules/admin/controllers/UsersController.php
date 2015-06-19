@@ -29,7 +29,7 @@ class UsersController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
+                'actions' => array('create', 'update', 'importCSV'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -59,8 +59,8 @@ class UsersController extends Controller {
     public function actionCreate() {
         $model = new User('admin_register');
         $profModel = new PatientProfile('admin_register');
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
             $profModel->attributes = $_POST['PatientProfile'];
@@ -132,7 +132,7 @@ class UsersController extends Controller {
         Entry::model()->deleteAll("temp_activation_key = '$user->user_activation_key'");
         $user->delete();
         Yii::app()->user->setFlash('success', 'You have deleted successfully');
-        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
 //        }else{
@@ -222,6 +222,34 @@ class UsersController extends Controller {
             }
         }
         echo json_encode($return);
+    }
+
+    public function actionImportCSV() {
+        $model = new Users;
+        if (isset($_POST['Users'])) {
+            $model->attributes = $_POST['Users'];
+            if ($model->validate()) {
+                if (!empty($_FILES['Users']['tmp_name']['file'])) {
+                    $file = CUploadedFile::getInstance($model, 'file');
+                    $handle = fopen($file->tempName, 'r');
+                    if ($handle) {
+                        $i = 0;
+                        while (($line = fgetcsv($handle, 1000, ",")) != FALSE) {
+                            if ($i > 0) {
+                                $insertmodel = new Users;
+                                $insertmodel->user_name = $line[0];
+                                $insertmodel->user_email = $line[1];
+                                $insertmodel->user_password = $line[2];
+                                $insertmodel->user_status = 1;
+                                $insertmodel->save();
+                            }
+                            $i++;
+                        }
+                    }
+                }
+            }
+        }
+        $this->render('importcsv', array('model' => $model));
     }
 
 }

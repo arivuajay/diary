@@ -1,5 +1,11 @@
 <?php
-$myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->findAll(), 'dist_date', 'dist_date'));
+if (@$_COOKIE['diary_mode'] == '2'){
+    $myDiary = array_values(CHtml::listData(StudentDiary::model()->mine()->uniqueDays()->findAll(), 'dist_date', 'dist_date'));
+    $event_url = $this->createUrl('journal/studentcalendarevents');
+} else {
+    $myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->findAll(), 'dist_date', 'dist_date'));
+    $event_url = $this->createUrl('journal/calendarevents');
+}
 ?>
 <script type="text/javascript">
     var avail_dates = <?php echo CJSON::encode($myDiary); ?>;
@@ -31,7 +37,7 @@ $myDiary = array_values(CHtml::listData(Diary::model()->mine()->uniqueDays()->fi
                         'right' => 'year,month,agendaWeek,agendaDay'
                     ),
                     //uncomment if you want to show events
-                        'events'=>$this->createUrl('journal/calendarevents'),
+                        'events'=>$event_url,
                     'lazyFetching' => false,
                     'dayClick' => new CJavaScriptExpression("js:function(date, allDay, jsEvent, view) {
                             newdate = $.format.date(date, 'yyyy-MM-dd');

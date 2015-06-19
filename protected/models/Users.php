@@ -24,6 +24,7 @@ class Users extends CActiveRecord {
     public $currentpassword;
     public $new_password;
     public $confirm_password;
+    public $file;
 
     /**
      * @return string the associated database table name
@@ -63,7 +64,13 @@ class Users extends CActiveRecord {
             array('new_password, confirm_password', 'required', 'on' => 'reset'),
             array('currentpassword,new_password,confirm_password', 'required', 'on' => 'changepassword'),
             array('currentpassword', 'equalPasswords', 'on' => 'changepassword'),
-            array('confirm_password', 'compare', 'compareAttribute' => 'new_password', 'message' => 'RepeatPassword does not match', 'on' => 'changepassword')
+            array('confirm_password', 'compare', 'compareAttribute' => 'new_password', 'message' => 'RepeatPassword does not match', 'on' => 'changepassword'),
+            array('file', 'file',
+                'types' => 'csv',
+                'maxSize' => 1024 * 1024 * 50, // 50MB
+                'tooLarge' => 'The file was larger than 50MB. Please upload a smaller file.',
+                'allowEmpty' => false
+            ),
         );
     }
 
@@ -125,6 +132,7 @@ class Users extends CActiveRecord {
             'new_password' => 'New Password',
             'reset_password_string' => 'Password Reset String',
             'user_sec_email' => 'User Secondary Email',
+            'file' => 'Select file',
         );
     }
 

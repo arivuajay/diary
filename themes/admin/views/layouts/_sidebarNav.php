@@ -10,7 +10,7 @@
                     'submenuOptions' => array('class' => 'sub'),
                     'items' => array(
                         array('label' => 'Users', 'url' => array('/admin/users/index')),
-//                        array('label' => 'Add User', 'url' => '#')
+                        array('label' => 'Import Users', 'url' => array('/admin/users/importCSV'))
                     ),
                 ),
                 array('label' => '<i class="fa fa-book"></i><span>CMS</span>', 'url' => '#', 'itemOptions' => array('class' => 'sub-menu'),                   
