@@ -31,7 +31,7 @@ $this->breadcrumbs = array(
                         <?php echo $form->labelEx($model, 'file'); ?>
                         <?php echo $form->fileField($model, 'file'); ?>
                         <?php echo $form->error($model, 'file'); ?><br>
-                        NOTE: Upload CSV files only, File Size Should be below 50MB.
+                        NOTE: Upload CSV files only, File Size Should be below <?php echo Users::CSV_SIZE; ?>MB.
                     </div>
                     <?php echo CHtml::submitButton('Submit', array('class' => 'btn btn-primary')); ?>
                     <?php $this->endWidget(); ?>

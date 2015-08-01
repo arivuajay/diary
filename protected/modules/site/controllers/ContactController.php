@@ -61,7 +61,7 @@ class ContactController extends Controller {
         $model = new Contact('normal');
 //        echo $adminmodel->admin_username;exit;
         // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+         $this->performAjaxValidation($model);
 
         if (isset($_POST['Contact'])) {
             $model->attributes = $_POST['Contact'];
@@ -85,7 +85,7 @@ class ContactController extends Controller {
         $model = $this->loadModel($id);
 
         // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+         $this->performAjaxValidation($model);
 
         if (isset($_POST['Contact'])) {
             $model->attributes = $_POST['Contact'];

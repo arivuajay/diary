@@ -25,6 +25,8 @@ class Users extends CActiveRecord {
     public $new_password;
     public $confirm_password;
     public $file;
+    
+    const CSV_SIZE = 50;
 
     /**
      * @return string the associated database table name
@@ -67,9 +69,10 @@ class Users extends CActiveRecord {
             array('confirm_password', 'compare', 'compareAttribute' => 'new_password', 'message' => 'RepeatPassword does not match', 'on' => 'changepassword'),
             array('file', 'file',
                 'types' => 'csv',
-                'maxSize' => 1024 * 1024 * 50, // 50MB
+                'maxSize' => 1024 * 1024 * self::CSV_SIZE, // 50MB
                 'tooLarge' => 'The file was larger than 50MB. Please upload a smaller file.',
-                'allowEmpty' => false
+                'allowEmpty' => false,
+                'on' => 'importcsv'
             ),
         );
     }

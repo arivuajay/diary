@@ -225,7 +225,7 @@ class UsersController extends Controller {
     }
 
     public function actionImportCSV() {
-        $model = new Users;
+        $model = new Users('importcsv');
         if (isset($_POST['Users'])) {
             $model->attributes = $_POST['Users'];
             if ($model->validate()) {

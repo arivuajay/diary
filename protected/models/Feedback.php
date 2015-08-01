@@ -32,6 +32,8 @@ class Feedback extends CActiveRecord {
             array('feedback_name, feedback_email, feedback_message', 'required', 'on' => 'webservice'),
             array('feedback_name, feedback_email', 'length', 'max' => 256),
             array('feedback_phone', 'length', 'max' => 15),
+            array('feedback_email', 'email'),
+            array('feedback_message', 'length', 'min' => 10),
             array('feedback_message, created, modified', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.

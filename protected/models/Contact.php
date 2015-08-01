@@ -34,6 +34,7 @@ class Contact extends CActiveRecord
                         array('contact_name, contact_email, contact_message', 'required','on' => 'webservice'),
 			array('contact_name, contact_email', 'length', 'max'=>256),
 			array('contact_phone', 'length', 'max'=>15),
+			array('contact_message', 'length', 'min'=>10),
 			array('contact_message, created, modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

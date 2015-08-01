@@ -86,7 +86,10 @@ $form = $this->beginWidget('CActiveForm', array(
                         // controller action is handling ajax validation correctly.
                         // There is a call to performAjaxValidation() commented in generated controller code.
                         // See class documentation of CActiveForm for details on this.
-                        'enableAjaxValidation' => false,
+                        'clientOptions' => array(
+                            'validateOnSubmit' => true,
+                        ),
+                        'enableAjaxValidation' => true,
                     ));
                     ?>
 
@@ -98,20 +101,22 @@ $form = $this->beginWidget('CActiveForm', array(
                     <div class="form-group">
                         <?php echo $form->labelEx($model, 'contact_name'); ?>
                         <?php echo $form->textField($model, 'contact_name', array('placeholder' => 'Name ', 'class' => 'form-control', 'size' => 60, 'maxlength' => 256,
-                            'value' => Yii::app()->user->isGuest ? '' : Yii::app()->user->getState('user_name'))); ?>
-                        <?php echo $form->error($model, 'contact_name'); ?>
+                            'value' => Yii::app()->user->isGuest ? '' : Yii::app()->user->getState('user_name')));
+                        ?>
+<?php echo $form->error($model, 'contact_name'); ?>
                     </div>
                     <div class="form-group">
                         <?php echo $form->labelEx($model, 'contact_email'); ?>
                         <?php echo $form->textField($model, 'contact_email', array('placeholder' => 'Email ', 'class' => 'form-control', 'size' => 60, 'maxlength' => 256,
-                            'value' => Yii::app()->user->isGuest ? '' : Yii::app()->user->getState('user_email'))); ?>
-                        <?php echo $form->error($model, 'contact_email'); ?>
+                            'value' => Yii::app()->user->isGuest ? '' : Yii::app()->user->getState('user_email')));
+                        ?>
+<?php echo $form->error($model, 'contact_email'); ?>
 
                     </div>
                     <div class="form-group">
                         <?php echo $form->labelEx($model, 'contact_phone'); ?>
-                        <?php echo $form->textField($model, 'contact_phone', array('placeholder' => 'Phone ', 'class' => 'form-control', 'size' => 60, 'maxlength' => 256)); ?>
-                        <?php echo $form->error($model, 'contact_phone'); ?>
+<?php echo $form->textField($model, 'contact_phone', array('placeholder' => 'Phone ', 'class' => 'form-control', 'size' => 60, 'maxlength' => 256)); ?>
+<?php echo $form->error($model, 'contact_phone'); ?>
                     </div>                
 
 
@@ -120,27 +125,27 @@ $form = $this->beginWidget('CActiveForm', array(
 
                     <div class="form-group">
                         <?php echo $form->labelEx($model, 'contact_message'); ?>
-                        <?php echo $form->textArea($model, 'contact_message', array('placeholder' => 'Message ', 'class' => 'form-control', 'maxlength' => 300, 'rows' => 6, 'cols' => 50)); ?>
-                        <?php echo $form->error($model, 'contact_message'); ?>
+<?php echo $form->textArea($model, 'contact_message', array('placeholder' => 'Message ', 'class' => 'form-control', 'maxlength' => 300, 'rows' => 6, 'cols' => 50)); ?>
+<?php echo $form->error($model, 'contact_message'); ?>
                     </div>
 
 
 
                     <div class="form-group">
-                        <?php echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Save', array('class' => 'submit btn bg-purple pull-left')); ?>
+<?php echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Save', array('class' => 'submit btn bg-purple pull-left')); ?>
                     </div>
 
                 </div>
                 <div class="panel-body">
 <!--                    I Authorise <a href="#"><span style="color:#FF0000;">express2help.com</span></a> to contact me.<br>
                     Email Id - <a href="mailto:info@express2help.com"><span style="color:#FF0000;">info@express2help.com</span></a>-->
-You authorize express2help team to contact you with / for resolution / more details
+                    You authorize express2help team to contact you with / for resolution / more details
                 </div>
-                    
+
                 <br>
 
             </div>                
-            <?php $this->endWidget(); ?><br><br>
+<?php $this->endWidget(); ?><br><br>
         </div>
     </div>                 
 
